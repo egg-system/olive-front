@@ -1,5 +1,6 @@
 <template>
   <section class="container">
+    <Header />
     <div>
       <logo/>
       <h1 class="title">
@@ -22,15 +23,20 @@
         </div>
       </div>
     </div>
+    <Footer />
   </section>
 </template>
 
 <script>
 import Logo from '~/components/Logo.vue'
+import Footer from '~/components/Footer.vue'
+import Header from '~/components/Header.vue'
 
 export default {
   components: {
-    Logo
+    Logo,
+    Footer,
+    Header
   }
 }
 </script>

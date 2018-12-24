@@ -1,0 +1,9 @@
+<template>
+  <div>
+    <v-toolbar
+      fixed
+      app>
+      <v-toolbar-title>Application</v-toolbar-title>
+    </v-toolbar>
+  </div>
+</template>
