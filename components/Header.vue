@@ -4,7 +4,7 @@
       fixed
       app
     >
-      <v-toolbar-title>Application</v-toolbar-title>
+      <v-toolbar-title>olive</v-toolbar-title>
     </v-toolbar>
   </div>
 </template>
