@@ -2,7 +2,8 @@
   <div>
     <v-toolbar
       fixed
-      app>
+      app
+    >
       <v-toolbar-title>Application</v-toolbar-title>
     </v-toolbar>
   </div>
