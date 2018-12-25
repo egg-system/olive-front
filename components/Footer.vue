@@ -2,7 +2,17 @@
   <v-footer fixed>
     <v-flex
       text-xs-center>
-      &copy;2018 — <strong>olive</strong>
+      &copy;{{ date }} — <strong>olive</strong>
     </v-flex>
   </v-footer>
 </template>
+
+<script>
+export default {
+  data: function() {
+    return {
+      date: new Date().getFullYear()
+    }
+  }
+}
+</script>
