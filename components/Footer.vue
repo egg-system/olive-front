@@ -9,10 +9,8 @@
 
 <script>
 export default {
-  data: function() {
-    return {
-      date: new Date().getFullYear()
-    }
-  }
+  data: () => ({
+    date: new Date().getFullYear()
+  })
 }
 </script>
