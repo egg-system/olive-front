@@ -1,7 +1,5 @@
 # olive
 
-> My peachy Nuxt.js project
-
 ## Build Setup
 
 ``` bash
@@ -19,4 +17,8 @@ $ npm start
 $ npm run generate
 ```
 
-For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
+## ドキュメント
+* アプリケーションフレームワーク
+  * [Nuxt.js](https://ja.nuxtjs.org/)
+* UI/コンポーネントフレームワーク
+  * [Vuetify](https://vuetifyjs.com/ja/)
