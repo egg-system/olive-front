@@ -1,10 +1,8 @@
 <template>
-  <v-footer
-    fixed
-  >
-    <v-spacer/>
-    <v-card-text class="black--text">
+  <v-footer fixed>
+    <v-flex
+      text-xs-center>
       &copy;2018 — <strong>olive</strong>
-    </v-card-text>
+    </v-flex>
   </v-footer>
 </template>
