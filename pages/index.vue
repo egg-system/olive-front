@@ -1,6 +1,5 @@
 <template>
   <section class="container">
-    <Header />
     <div>
       <logo/>
       <h1 class="mainTitle">
@@ -51,7 +50,6 @@
         </v-chip>
       </div>
     </div>
-    <Footer />
   </section>
 </template>
 

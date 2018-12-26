@@ -1,9 +1,15 @@
 <template>
   <section class="container">
-    confirm
+    <div>
+      <h1>confirm</h1>
+      <div class="text-xs-center">
+        <nuxt-link to="/complete">
+          確定
+        </nuxt-link>
+      </div>
+    </div>
   </section>
 </template>
-
 <style>
 .container {
   min-height: 100vh;
