@@ -17,3 +17,14 @@ export default {
   }
 }
 </script>
+
+<style>
+/* 全ページ共通のcss */
+.container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+</style>
