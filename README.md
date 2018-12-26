@@ -22,3 +22,6 @@ $ npm run generate
   * [Nuxt.js](https://ja.nuxtjs.org/)
 * UI/コンポーネントフレームワーク
   * [Vuetify](https://vuetifyjs.com/ja/)
+* コード整形
+  * [ESLint](https://eslint.org/)
+  * [Prettier](https://prettier.io/)
