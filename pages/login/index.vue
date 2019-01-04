@@ -7,6 +7,48 @@
           新規登録
         </nuxt-link>
       </div>
+      <v-form
+        ref="form"
+      >
+        <v-flex>
+          <v-text-field
+            v-model="userName"
+            label="user name"
+            clearable
+          />
+        </v-flex>
+        <v-flex>
+          <v-text-field
+            v-model="password"
+            :append-icon="show ? 'visibility_off' : 'visibility'"
+            :type="show ? 'text' : 'password'"
+            label="password"
+            @click:append="show = !show"
+          />
+        </v-flex>
+        <v-btn
+          @click="validate"
+        >
+          ログイン
+        </v-btn>
+      </v-form>
     </div>
   </section>
 </template>
+
+
+<script>
+export default {
+  data: () => ({
+    show: false,
+    userName: '',
+    password: ''
+  }),
+  methods: {
+    validate() {
+      console.log(`userName:${this.userName}`)
+      console.log(`password:${this.password}`)
+    }
+  }
+}
+</script>

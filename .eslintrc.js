@@ -26,7 +26,8 @@ module.exports = {
     'multiline': {
       'max': 3,
       'allowFirstLine': true
-    }
+    },
+    'no-console': 'off'
   }]
   }
 }
