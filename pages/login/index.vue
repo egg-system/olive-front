@@ -27,7 +27,7 @@
           />
         </v-flex>
         <v-btn
-          @click="validate"
+          @click="login"
         >
           ログイン
         </v-btn>
@@ -45,9 +45,11 @@ export default {
     password: ''
   }),
   methods: {
-    validate() {
+    login() {
       console.log(`userName:${this.userName}`)
       console.log(`password:${this.password}`)
+      // 画面遷移
+      this.$router.push('/registration')
     }
   }
 }
