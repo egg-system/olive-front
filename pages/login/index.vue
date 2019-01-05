@@ -7,9 +7,7 @@
           新規登録
         </nuxt-link>
       </div>
-      <v-form
-        ref="form"
-      >
+      <v-form ref="form">
         <v-flex>
           <v-text-field
             v-model="userName"
@@ -27,8 +25,8 @@
           />
         </v-flex>
         <v-btn
-          @click="login"
-        >
+          :disabled="!canLogin"
+          @click="login">
           ログイン
         </v-btn>
       </v-form>
@@ -44,6 +42,11 @@ export default {
     userName: '',
     password: ''
   }),
+  computed: {
+    canLogin() {
+      return this.userName !== '' && this.password !== ''
+    }
+  },
   methods: {
     login() {
       console.log(`userName:${this.userName}`)
