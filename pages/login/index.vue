@@ -36,6 +36,8 @@
 
 
 <script>
+import { mapActions, mapState } from 'vuex'
+
 export default {
   data: () => ({
     show: false,
@@ -47,13 +49,21 @@ export default {
       return this.userName !== '' && this.password !== ''
     }
   },
+  mounted() {
+    this.getLogin()
+    console.log(this.$store)
+  },
   methods: {
     login() {
       console.log(`userName:${this.userName}`)
       console.log(`password:${this.password}`)
       // 画面遷移
-      this.$router.push('/registration')
-    }
+      // this.$router.push('/registration')
+      console.log(this.$store.state.login.login)
+    },
+    ...mapActions({
+      getLogin: 'login/getLogin'
+    })
   }
 }
 </script>
