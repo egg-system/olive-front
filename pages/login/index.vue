@@ -7,7 +7,13 @@
           新規登録
         </nuxt-link>
       </div>
-      <v-form ref="form">
+      <div v-if="data.isLogin === true">
+        <v-avatar>
+          <img src="https://image.freepik.com/free-icon/no-translate-detected_318-10541.jpg">
+        </v-avatar>
+        {{ data.userName }}
+      </div>
+      <v-form v-if="data.isLogin === false" ref="form">
         <v-flex>
           <v-text-field
             v-model="userName"
@@ -47,22 +53,20 @@ export default {
   computed: {
     canLogin() {
       return this.userName !== '' && this.password !== ''
-    }
-  },
-  mounted() {
-    this.getLogin()
-    console.log(this.$store)
+    },
+    ...mapState({ data: 'login' })
   },
   methods: {
+    // ログインボタンを押した時の動き
     login() {
-      console.log(`userName:${this.userName}`)
-      console.log(`password:${this.password}`)
+      // ログインチェック
+      this.checkLogin({ userName: this.userName, password: this.password })
+
       // 画面遷移
       // this.$router.push('/registration')
-      console.log(this.$store.state.login.login)
     },
     ...mapActions({
-      getLogin: 'login/getLogin'
+      checkLogin: 'login/checkLogin'
     })
   }
 }
