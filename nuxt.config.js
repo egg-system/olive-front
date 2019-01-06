@@ -50,6 +50,7 @@ module.exports = {
   ** vuetify
   */
   vuetify: {
+    /*
     theme: {
       primary: '#FFC0CB',
       secondary: '#ffd7cb',
@@ -59,6 +60,7 @@ module.exports = {
       info: '#00BCD4',
       success: '#4caf50'
     }
+    */
   },
 
   /*
