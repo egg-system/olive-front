@@ -32,3 +32,5 @@ $ npm run generate
 * 静的ページ確認
   * [netlify](https://www.netlify.com/)
   * [netlify app](https://app.netlify.com/)
+* 開発用のAPIモック作成
+ * [myjson](http://myjson.com/)
