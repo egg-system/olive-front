@@ -8,7 +8,7 @@
       <div>
         <v-btn
           color="warning"
-          @click="logout"
+          @click="logoutBtn"
         >
           ログアウト
         </v-btn>
@@ -82,6 +82,12 @@ export default {
 
       // 画面遷移
       // this.$router.push('/registration')
+    },
+    logoutBtn() {
+      // フォームの値をクリアする
+      this.userName = ''
+      this.password = ''
+      this.logout()
     },
     ...mapActions({
       checkLogin: 'login/checkLogin'
