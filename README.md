@@ -33,4 +33,4 @@ $ npm run generate
   * [netlify](https://www.netlify.com/)
   * [netlify app](https://app.netlify.com/)
 * 開発用のAPIモック作成
- * [myjson](http://myjson.com/)
+  * [myjson](http://myjson.com/)
