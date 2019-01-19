@@ -23,12 +23,15 @@ $ npm run generate
 
 ## ドキュメント
 * アプリケーションフレームワーク
+  * [Vue.js](https://jp.vuejs.org/index.html)
   * [Nuxt.js](https://ja.nuxtjs.org/)
 * UI/コンポーネントフレームワーク
   * [Vuetify](https://vuetifyjs.com/ja/)
 * コード整形
   * [ESLint](https://eslint.org/)
   * [Prettier](https://prettier.io/)
+* テスト
+  * [jest](https://vue-test-utils.vuejs.org/ja/guides/testing-single-file-components-with-jest.html)
 * 静的ページ確認
   * [netlify](https://www.netlify.com/)
   * [netlify app](https://app.netlify.com/)
