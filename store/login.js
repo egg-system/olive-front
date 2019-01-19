@@ -32,14 +32,12 @@ export const mutations = {
 /* actions */
 export const actions = {
   // ログインチェック
-  async checkLogin({ commit }, payload) {
+  async checkLogin({ commit }, { userName, password }) {
     // 一度エラーはリセットする
     commit('setIsError', false)
 
     // TODO:インターフェースは仮なのであとで修正する
     const res = await this.$axios.$get(config.api.login1)
-    const userName = payload.userName
-    const password = payload.password
 
     // ユーザーの入力値と一致していたらログイン状態をセット
     if (userName === res.userName && password === res.password) {
