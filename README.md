@@ -33,6 +33,8 @@ $ npm run generate
 * テスト
   * [jest](https://vue-test-utils.vuejs.org/ja/guides/testing-single-file-components-with-jest.html)
   * [vue-test-utils](https://vue-test-utils.vuejs.org/ja/)
+* CI
+  * [CircleCI](https://circleci.com/gh/egg-system/olive-front)
 * 静的ページ確認
   * [netlify](https://www.netlify.com/)
   * [netlify app](https://app.netlify.com/)
