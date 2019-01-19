@@ -1,14 +1,40 @@
-import { mount, createLocalVue } from '@vue/test-utils'
+import {
+  mount,
+  shallowMount,
+  RouterLinkStub,
+  createLocalVue
+} from '@vue/test-utils'
 import Vuex from 'vuex'
-import Login from '../../../pages/login/index.vue'
+import Login from '~/pages/login/index.vue'
+import Form from '~/pages/login/Form.vue'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
 
 describe('Login', () => {
-  test('ログイン画面のテスト', () => {
-    // const wrapper = mount(Login)
-    // expect(wrapper.isVueInstance()).toBeTruthy()
-    expect(1).toBe(1)
+  let actions
+  let store
+  let wrapper
+
+  beforeEach(() => {
+    store = new Vuex.Store({
+      state: {},
+      actions
+    })
+
+    wrapper = shallowMount(Login, {
+      store,
+      localVue,
+      stubs: {
+        NuxtLink: RouterLinkStub
+      }
+    })
+  })
+
+  test('login page test', () => {
+    expect(wrapper.isVueInstance()).toBeTruthy()
+  })
+  test('Form test', () => {
+    expect(wrapper.find(Form).is(Form)).toBeTruthy()
   })
 })
