@@ -8,6 +8,11 @@ export const state = () => ({
   userName: ''
 })
 
+/* getters */
+export const getters = {
+  isLogin: state => state.isLogin
+}
+
 /* mutations */
 export const mutations = {
   setIsLogin(state, isLogin) {
