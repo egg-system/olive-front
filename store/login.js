@@ -1,5 +1,5 @@
 import axios from 'axios'
-import config from '../config/constant.json'
+import config from '~/config/constant.json'
 
 /* state */
 export const state = () => ({
@@ -37,13 +37,13 @@ export const actions = {
     commit('setIsError', false)
 
     // TODO:インターフェースは仮なのであとで修正する
-    const res = await this.$axios.$get(config.api.login1)
+    const res = await axios.get(config.api.login1)
 
     // ユーザーの入力値と一致していたらログイン状態をセット
-    if (userName === res.userName && password === res.password) {
+    if (userName === res.data.userName && password === res.data.password) {
       commit('setIsLogin', true)
       commit('setIsError', false)
-      commit('setUserName', res.userName)
+      commit('setUserName', res.data.userName)
     } else {
       commit('setIsError', true)
     }

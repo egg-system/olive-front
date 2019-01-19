@@ -1,7 +1,6 @@
 import Vuex from 'vuex'
 import { state, getters, mutations, actions } from '~/store/login.js'
 import { createLocalVue } from '@vue/test-utils'
-// import cloneDeep from 'lodash.clonedeep'
 
 describe('store/login.js', () => {
   let store
@@ -13,11 +12,28 @@ describe('store/login.js', () => {
   })
 
   describe('mutations', () => {
-    test('logoutミューテーションがコミットされるとlogout状態になる)', () => {
+    test('logout test', () => {
       expect(store.state.isLogin).toBe(false)
       store.commit('logout')
       expect(store.state.isLogin).toBe(false)
-      // expect(store.getters['isLogin']).toBe(false)
+    })
+  })
+
+  describe('actions', () => {
+    test('checkLogin failed', async () => {
+      await store.dispatch('checkLogin', {
+        userName: 'aaaa',
+        password: 'aaaa'
+      })
+      expect(store.state.isLogin).toBe(false)
+    })
+
+    test('checkLogin success', async () => {
+      await store.dispatch('checkLogin', {
+        userName: 'test1',
+        password: 'test1'
+      })
+      expect(store.state.isLogin).toBe(true)
     })
   })
 })
