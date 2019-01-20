@@ -1,6 +1,8 @@
 {
   "api": {
     "login1" : "https://api.myjson.com/bins/ynv40",
-    "login2" : "https://api.myjson.com/bins/1617kw"
+    "login2" : "https://api.myjson.com/bins/1617kw",
+    "menu": "https://api.myjson.com/bins/eew7k",
+    "store": "https://api.myjson.com/bins/1b3lbk"
   }
 }
