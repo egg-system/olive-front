@@ -1,15 +1,27 @@
 <template>
   <section class="container">
     <div>
-      <h1>login</h1>
-      <div class="text-xs-center">
+      <div>
+        <h2>会員の方はログインしてください</h2>
+        <Form />
         <nuxt-link to="/registration">
-          新規登録
+          パスワードを忘れた方はこちら
         </nuxt-link>
       </div>
-      <Form />
-    </div>
-  </section>
+
+      <div class="not">
+        <h4>ログインIDをお持ちでない方はこちらから</h4>
+        <div>
+          <v-btn color="warning">
+            新規会員登録へ
+          </v-btn>
+          <v-btn color="warning">
+            会員登録せずに予約へ進む
+          </v-btn>
+        </div>
+
+      </div>
+  </div></section>
 </template>
 
 
@@ -22,3 +34,12 @@ export default {
   }
 }
 </script>
+
+<style>
+.not {
+  padding-top: 50px;
+}
+.v-btn {
+  width: 200px;
+}
+</style>
