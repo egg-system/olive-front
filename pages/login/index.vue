@@ -12,10 +12,10 @@
       <div class="not">
         <h4>ログインIDをお持ちでない方はこちらから</h4>
         <div>
-          <v-btn color="warning">
+          <v-btn color="warning" @click="resisterBtn">
             新規会員登録へ
           </v-btn>
-          <v-btn color="warning">
+          <v-btn color="warning" @click="skipBtn">
             会員登録せずに予約へ進む
           </v-btn>
         </div>
@@ -31,6 +31,14 @@ import Form from './Form.vue'
 export default {
   components: {
     Form
+  },
+  methods: {
+    resisterBtn() {
+      this.$router.push('/registration')
+    },
+    skipBtn() {
+      this.$router.push('/registration')
+    }
   }
 }
 </script>
