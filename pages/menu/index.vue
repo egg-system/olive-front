@@ -45,7 +45,7 @@ h2 {
 </style>
 
 <template>
-  <section class="container">
+  <section v-if="0 < menuCategories.length" class="container">
     <div class="menu-contents">
       <h1>{{ storeName }}</h1>
       <section class="content-section">
