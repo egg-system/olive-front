@@ -5,7 +5,7 @@ import config from '~/config/constant.json'
 export const state = () => ({
   storeName: '',
   menuCategories: [],
-  selectedCategoryIds: []
+  selectedMenuIds: []
 })
 
 /* mutations */
@@ -14,10 +14,10 @@ export const mutations = {
     state.menuCategories = menuCategories
   },
   addSelectedMenu(id) {
-    state.selectedCategoryIds.push(id)
+    state.selectedMenuIds.push(id)
   },
   clearSelectedMenus() {
-    state.selectedCategoryIds = []
+    state.selectedMenuIds = []
   }
 }
 
