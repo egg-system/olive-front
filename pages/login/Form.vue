@@ -19,7 +19,7 @@
         v-model="userName"
         :rules="nameRules"
         type="text"
-        label="user name"
+        label="メールアドレス"
         clearable
       />
       <v-text-field
@@ -27,7 +27,7 @@
         :rules="passwordRules"
         :append-icon="show ? 'visibility_off' : 'visibility'"
         :type="show ? 'text' : 'password'"
-        label="password"
+        label="パスワード"
         @click:append="show = !show"
       />
       <v-alert v-if="data.isError"
@@ -36,7 +36,7 @@
                icon="warning"
                outline
       >
-        user name or password is invalid
+        メールアドレスもしくはパスワードが違います。
       </v-alert>
       <v-btn
         :disabled="!canLogin"
@@ -59,13 +59,13 @@ export default {
     userName: '',
     password: '',
     nameRules: [
-      v => !!v || 'user name is required',
+      v => !!v || 'メールアドレスは必須入力です',
       v =>
-        (!!v && v.length <= 30) || 'user name must be less than 30 characters'
+        (!!v && v.length <= 100) || 'メールアドレスは100文字以内でお願いします'
     ],
     passwordRules: [
-      v => !!v || 'password is required',
-      v => (!!v && v.length <= 30) || 'password must be less than 30 characters'
+      v => !!v || 'パスワードは必須入力です',
+      v => (!!v && v.length <= 30) || 'パスワードは30文字以内でお願いします'
     ]
   }),
   computed: {
@@ -102,12 +102,12 @@ export default {
 <style>
 @media screen and (min-width: 350px) {
   .inputText {
-    width: 300px;
+    width: 340px;
   }
 }
 @media screen and (min-width: 500px) {
   .inputText {
-    width: 400px;
+    width: 450px;
   }
 }
 </style>
