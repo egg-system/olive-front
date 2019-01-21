@@ -1,12 +1,4 @@
 <style lang="scss">
-h2 {
-  background: #f4cccd;
-  display: block;
-  font-size: 18px;
-  padding: 5px 15px;
-  text-align: left;
-}
-
 .menu-contents {
   max-width: 500px;
   width: 100%;
