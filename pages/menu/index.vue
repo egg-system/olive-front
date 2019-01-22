@@ -50,7 +50,7 @@
       </section>
       <section v-for="menuCategory in menuCategories" :key="'menuHead'+menuCategory.id" :id="'menuHead'+menuCategory.id" class="content-section">
         <h2>{{ menuCategory.name }}</h2>
-        <div v-for="menu in menuCategory.menus" :key="'menu'+menu.id" class="menu-item">
+        <div v-for="menu in menuCategory.menus" v-if="!menu.option_flg" :key="'menu'+menu.id" class="menu-item">
           <div class="menu-info">
             <span class="menu-name">{{ menu.name }}</span>
             <span class="menu-price">{{ menu.price_without_tax }}円（税抜き）</span>
