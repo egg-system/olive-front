@@ -5,28 +5,21 @@
         <v-flex align-self-baseline>
           <div>オリーヴボディーケア　◯◯店</div>
         </v-flex>
-
         <Menu />
-
-        <v-layout column wrap>
-          <v-flex>
-            <v-card dark color="red lighten-2">
-              <v-card-text class="menu"><h3>お客様情報</h3></v-card-text>
-            </v-card>
-          </v-flex>
-        </v-layout>
+        <UserInfo />
       </v-layout>
-
     </v-container>
   </section>
 </template>
 
 <script>
 import Menu from './Menu.vue'
+import UserInfo from './UserInfo.vue'
 
 export default {
   components: {
-    Menu
+    Menu,
+    UserInfo
   }
 }
 </script>

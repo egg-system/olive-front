@@ -15,13 +15,13 @@
           <v-icon left>label</v-icon>整体・マッサージ
         </v-chip>
       </v-flex>
-      <v-flex>
+      <v-flex xs3>
         <div>通常整体コース</div>
       </v-flex>
-      <v-flex>
+      <v-flex xs3>
         <div>¥6,000（税抜）</div>
       </v-flex>
-      <v-flex>
+      <v-flex xs3>
         <div>60分</div>
       </v-flex>
     </v-layout>
@@ -32,13 +32,13 @@
           <v-icon left>label</v-icon>整体・マッサージ
         </v-chip>
       </v-flex>
-      <v-flex>
+      <v-flex xs3>
         <div>足つぼ</div>
       </v-flex>
-      <v-flex>
+      <v-flex xs3>
         <div>¥2,000（税抜）</div>
       </v-flex>
-      <v-flex>
+      <v-flex xs3>
         <div>0分</div>
       </v-flex>
     </v-layout>
