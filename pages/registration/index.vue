@@ -7,6 +7,10 @@
         </v-flex>
         <Menu />
         <UserInfo />
+        <LoginInfo />
+        <ConfirmInfo />
+        <Request />
+        <ConfirmBtn />
       </v-layout>
     </v-container>
   </section>
@@ -15,20 +19,24 @@
 <script>
 import Menu from './Menu.vue'
 import UserInfo from './UserInfo.vue'
+import LoginInfo from './LoginInfo.vue'
+import ConfirmInfo from './ConfirmInfo.vue'
+import Request from './Request.vue'
+import ConfirmBtn from './ConfirmBtn.vue'
 
 export default {
   components: {
     Menu,
-    UserInfo
+    UserInfo,
+    LoginInfo,
+    ConfirmInfo,
+    Request,
+    ConfirmBtn
   }
 }
 </script>
 
-
 <style>
-.menu {
-  text-align: left;
-}
 .v-card__text {
   padding: 7px;
 }

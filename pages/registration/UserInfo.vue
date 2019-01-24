@@ -95,9 +95,50 @@
     <v-layout row>
       <v-flex xs3>初めてのご利用ですか？<span class="must">(必須)</span></v-flex>
       <v-flex>
-        <v-radio-group v-model="radios" :mandatory="false">
-          <v-radio label="初めてです(初診料 ¥1,000)" value="radio-1"/>
-          <v-radio label="いいえ、2回目以降です" value="radio-2"/>
+        <v-radio-group v-model="use" :mandatory="false" class="inputTop">
+          <v-radio label="初めてです(初診料 ¥1,000)" value="yes"/>
+          <v-radio label="いいえ、2回目以降です" value="no"/>
+        </v-radio-group>
+      </v-flex>
+    </v-layout>
+
+    <v-layout row>
+      <v-flex xs3>回数券利用</v-flex>
+      <v-flex>
+        <v-checkbox label="利用する" value="coupon" class="inputTop"/>
+      </v-flex>
+    </v-layout>
+
+    <v-layout row>
+      <v-flex xs3>妊娠有無</v-flex>
+      <v-flex xs5>
+        <v-select
+          :items="pregnancyTerm"
+        />
+      </v-flex>
+      <v-flex xs5>
+        ※妊娠中の方は何ヶ月かご選択ください
+      </v-flex>
+    </v-layout>
+
+    <v-layout row>
+      <v-flex xs3>お子様連れ</v-flex>
+      <v-flex xs5>
+        <v-select
+          :items="children"
+        />
+      </v-flex>
+      <v-flex xs5>
+        ※お子様連れの方は人数をご選択ください
+      </v-flex>
+    </v-layout>
+
+    <v-layout row>
+      <v-flex xs3>サロンからのメッセージ受信設定</v-flex>
+      <v-flex>
+        <v-radio-group v-model="message" :mandatory="false" class="inputTop">
+          <v-radio label="受け取る" value="yes"/>
+          <v-radio label="受け取らない" value="no"/>
         </v-radio-group>
       </v-flex>
     </v-layout>
@@ -116,7 +157,20 @@ export default {
     firstNameRules: [v => !!v || '必須入力です'],
     lastNameRules: [v => !!v || '必須入力です'],
     mailRules: [v => !!v || '必須入力です'],
-    phoneNumberRules: [v => !!v || '必須入力です']
+    phoneNumberRules: [v => !!v || '必須入力です'],
+    pregnancyTerm: [
+      '妊娠なし',
+      '4ヶ月未満',
+      '5ヶ月',
+      '6ヶ月',
+      '7ヶ月',
+      '8ヶ月',
+      '9ヶ月',
+      '10ヶ月'
+    ],
+    children: ['なし', '1人', '2人', '3人', '4人'],
+    use: 'yes',
+    message: 'yes'
   })
 }
 </script>
@@ -128,5 +182,8 @@ export default {
 }
 .must {
   color: red;
+}
+.inputTop {
+  margin-top: 1px;
 }
 </style>
