@@ -13,7 +13,7 @@ export const mutations = {
   setMenuCategories(state, menuCategories) {
     state.menuCategories = menuCategories
   },
-  addSelectedMenu(id) {
+  addSelectedMenu(state, id) {
     state.selectedMenuIds.push(id)
   },
   clearSelectedMenus() {
@@ -27,11 +27,10 @@ export const actions = {
   async getMenus({ commit }, { storeId }) {
     const res = await axios.get(config.api.menu)
 
-    commit('setStoreName', res.data.store_name)
     commit('setMenuCategories', res.data.categories)
   },
-  addSelectedMenu({ commit }, { menuId }) {
-    commit('addSelectedMenus', menuId)
+  addSelectedMenu({ commit }, menuId) {
+    commit('addSelectedMenu', menuId)
   },
   clearSelectedMenus({ commit }) {
     commit('clearSelectedMenus')
