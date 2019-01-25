@@ -24,7 +24,7 @@
         <v-flex>確認のため、再度パスワードを入力してください</v-flex>
         <v-flex>
           <v-text-field
-            v-model="password"
+            v-model="password2"
             :rules="passwordRules"
             type="text"
             label="パスワード"
@@ -42,6 +42,7 @@
 export default {
   data: () => ({
     password: '',
+    password2: '',
     passwordRules: [v => !!v || '必須入力です']
   })
 }

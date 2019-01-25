@@ -34,7 +34,7 @@
       <v-flex xs3>氏名カナ<span class="must">(必須)</span></v-flex>
       <v-flex>
         <v-text-field
-          v-model="firstName"
+          v-model="firstNameKana"
           :rules="firstNameRules"
           type="text"
           label="セイ"
@@ -43,7 +43,7 @@
       </v-flex>
       <v-flex>
         <v-text-field
-          v-model="lastName"
+          v-model="lastNameKana"
           :rules="lastNameRules"
           type="text"
           label="メイ"
@@ -67,7 +67,7 @@
         <v-flex>確認のため、再度メールアドレスを入力してください</v-flex>
         <v-flex>
           <v-text-field
-            v-model="mail"
+            v-model="mail2"
             :rules="mailRules"
             type="text"
             label="メールアドレス"
@@ -152,7 +152,10 @@ export default {
   data: () => ({
     firstName: '',
     lastName: '',
+    firstNameKana: '',
+    lastNameKana: '',
     mail: '',
+    mail2: '',
     phoneNumber: '',
     firstNameRules: [v => !!v || '必須入力です'],
     lastNameRules: [v => !!v || '必須入力です'],
