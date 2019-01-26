@@ -24,11 +24,6 @@
             <td class="text-xs-right">{{ props.item.price }}</td>
             <td class="text-xs-right">{{ props.item.time }}</td>
           </template>
-          <template slot="footer">
-            <td :colspan="headers.length">
-              <strong>合計</strong>
-            </td>
-          </template>
         </v-data-table>
       </v-flex>
     </v-layout>
