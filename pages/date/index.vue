@@ -1,19 +1,66 @@
 <style lang="scss">
-td {
-  padding: 5px;
+h3,
+p {
+  margin: 10px 0;
 }
-.category-name {
-  background: #d9d9d9;
+.selected-menu {
+  text-align: left;
+  td {
+    padding: 5px;
+  }
+  .category-name {
+    background: #d9d9d9;
+  }
+}
+.calendar {
+  table {
+    border-spacing: 0px;
+  }
+  td,
+  th {
+    border: 1px rgb(0, 0, 0) solid;
+    border-spacing: 0px;
+    border-right: none;
+    border-bottom: none;
+  }
+  th {
+    padding: 5px 0;
+  }
+  .table-wrapper {
+    width: 90%;
+    margin: auto;
+    border-bottom: 1px rgb(0, 0, 0) solid;
+    table.outer-table {
+      border-right: 1px rgb(0, 0, 0) solid;
+      width: 100%;
+      td.col-data-wrapper {
+        border-left: none;
+        border-top: none;
+        table.inner-table {
+          width: 100%;
+          .holiday {
+            color: #ff4500;
+          }
+          .saturday {
+            color: darkblue;
+          }
+          td {
+            padding: 5px 0;
+          }
+        }
+      }
+    }
+  }
 }
 </style>
 <template>
   <section class="container">
     <div>
+      <h1>{{ store.name }}</h1>
       <section class="selected-menu">
-        <h1>{{ store.name }}</h1>
-        <div class="text-xs-center">
+        <div>
           <h2>日時を選択してください</h2>
-          <h3>選択済メニュー</h3>
+          <h3>■選択済メニュー</h3>
           <table>
             <tr v-for="menu in selectedMenus" :key="'menu'+menu.id">
               <td class="category-name">{{ menu.categoryName }}</td>
@@ -22,52 +69,51 @@ td {
               <td>{{ menu.duration }}分</td>
             </tr>
           </table>
-          <p>※2時間のご予約をご希望の方</p>
-          <p><input type="checkbox">2時間のご予約をご希望の方はこちらをチェックしてください。</p>
-          <h3>日時選択</h3>
+          <p><input id="two-hour-check" type="checkbox"><label for="two-hour-check">2時間のご予約をご希望の方はこちらをチェックしてください。</label></p>
+          <h3>■日時選択</h3>
         </div>
       </section>
 
       <section class="calendar">
-        <table v-for="(weekData, index) in calendar" :key="'weekData'+index">
-          <tbody>
-            <tr>
-              <td v-if="weekData.secondMonth === undefined" colspan="8">{{ weekData.firstMonth | monthFormat }}</td>
-              <td v-if="weekData.secondMonth !== undefined" :colspan="weekData.firstMonthDays + 1">{{ weekData.firstMonth | monthFormat }}</td>
-              <td v-if="weekData.secondMonth !== undefined" :colspan="7 - weekData.firstMonthDays">{{ weekData.secondMonth | monthFormat }}</td>
-            </tr>
-            <tr>
-              <td>
-                <table>
-                  <tbody>
-                    <tr><td>&nbsp;&nbsp;</td></tr>
-                    <tr><td>&nbsp;&nbsp;</td></tr>
-                    <tr v-for="time in timeSlots" :key="time+'time_title'">
-                      <td>{{ time | hourFormat }}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-              <td v-for="dateData in weekData.data" :key="'dateDate'+dateData.date">
-                <table>
-                  <tbody>
-                    <tr><td>{{ dateData.date | dateFormat }}</td></tr>
-                    <tr><td>{{ dateData.date | dayFormat }}</td></tr>
-                    <tr v-for="time in timeSlots" :key="time+'time_title'">
-                      <td v-if="dateData.disable !== undefined">-</td>
-                      <td v-else-if="dateData.date_slot.find(slot => slot.start_time.slice(-2) == time).remain == 0">×</td>
-                      <td v-else>
-                        <a @click="selectTime(time)">
+        <div class="table-wrapper">
+          <table v-for="(weekData, index) in calendar" :key="'weekData'+index" class="outer-table">
+            <tbody>
+              <tr>
+                <th v-if="weekData.secondMonth === undefined" colspan="8">{{ weekData.firstMonth | monthFormat }}</th>
+                <th v-if="weekData.secondMonth !== undefined" :colspan="weekData.firstMonthDays + 1">{{ weekData.firstMonth | monthFormat }}</th>
+                <th v-if="weekData.secondMonth !== undefined" :colspan="7 - weekData.firstMonthDays">{{ weekData.secondMonth | monthFormat }}</th>
+              </tr>
+              <tr>
+                <td class="col-data-wrapper">
+                  <table class="inner-table">
+                    <tbody>
+                      <tr><td>&nbsp;&nbsp;</td></tr>
+                      <tr><td>&nbsp;&nbsp;</td></tr>
+                      <tr v-for="time in timeSlots" :key="time+'time_title'">
+                        <td>{{ time | hourFormat }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+                <td v-for="dateData in weekData.data" :key="'dateDate'+dateData.date" class="col-data-wrapper">
+                  <table class="inner-table">
+                    <tbody>
+                      <tr><td>{{ dateData.date | dateFormat }}</td></tr>
+                      <tr><td :class="dateData.date | dayClass">{{ dateData.date | dayFormat }}</td></tr>
+                      <tr v-for="time in timeSlots" :key="time+'time_title'">
+                        <td v-if="dateData.disable !== undefined">-</td>
+                        <td v-else-if="dateData.date_slot.find(slot => slot.start_time.slice(-2) == time).remain == 0">×</td>
+                        <td v-else @click="selectTime(time)">
                           {{ dateData.date_slot.find(slot => slot.start_time.slice(-2) == time).remain | remainFormat }}
-                        </a>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
     </div>
   </section>
@@ -81,7 +127,7 @@ import { mapActions, mapState, mapMutations } from 'vuex'
 export default {
   filters: {
     monthFormat: function(value) {
-      return moment(value).format('YYYY年M月')
+      return moment(value).format('M月')
     },
     hourFormat: function(value) {
       return moment(value, 'kk').format('kk:mm')
@@ -125,6 +171,15 @@ export default {
           break
       }
       return '(' + dayDisp + ')'
+    },
+    dayClass: function(value) {
+      var day = moment(value).day()
+      if (day == 0) {
+        return 'holiday'
+      } else if (day == 6) {
+        return 'saturday'
+      }
+      return ''
     }
   },
   computed: {

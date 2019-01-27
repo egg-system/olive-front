@@ -28,6 +28,7 @@ export default {
   justify-content: center;
   align-items: center;
   text-align: center;
+  margin: 60px 0;
 }
 h2 {
   background: #f4cccd;
