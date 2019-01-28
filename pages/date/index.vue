@@ -1,4 +1,5 @@
 <style lang="scss">
+$disabledColor: #d9d9d9;
 h3,
 p {
   margin: 10px 0;
@@ -46,6 +47,9 @@ p {
           }
           td {
             padding: 5px 0;
+          }
+          td.disabled {
+            background-color: $disabledColor;
           }
         }
       }
@@ -101,8 +105,8 @@ p {
                       <tr><td>{{ dateData.date | dateFormat }}</td></tr>
                       <tr><td :class="dateData.date | dayClass">{{ dateData.date | dayFormat }}</td></tr>
                       <tr v-for="time in timeSlots" :key="time+'time_title'">
-                        <td v-if="dateData.disable !== undefined">-</td>
-                        <td v-else-if="dateData.date_slot.find(slot => slot.start_time.slice(-2) == time).remain == 0">×</td>
+                        <td v-if="dateData.disable !== undefined || $moment(dateData.date + time, 'YYYYMMDDkk').isBefore($moment())" class="disabled">-</td>
+                        <td v-else-if="dateData.date_slot.find(slot => slot.start_time.slice(-2) == time).remain == 0" class="disabled">×</td>
                         <td v-else @click="selectTime(time)">
                           {{ dateData.date_slot.find(slot => slot.start_time.slice(-2) == time).remain | remainFormat }}
                         </td>
@@ -121,8 +125,9 @@ p {
 
 
 <script>
-import moment from 'moment'
 import { mapActions, mapState, mapMutations } from 'vuex'
+
+import moment from 'moment'
 
 export default {
   filters: {
@@ -180,6 +185,11 @@ export default {
         return 'saturday'
       }
       return ''
+    },
+    isPast: function(value) {
+      var now = moment()
+      var time = moment(value)
+      return now.isAfter(time)
     }
   },
   computed: {
@@ -222,11 +232,11 @@ export default {
       var forwarPaddingDates = []
       var rewardPaddingDates = []
       if (0 < calendar.length) {
-        var startDate = moment(calendar[0].date)
-        var startDay = moment(calendar[0].date).day()
+        var startDate = this.$moment(calendar[0].date)
+        var startDay = this.$moment(calendar[0].date).day()
         if (0 < startDay) {
           for (
-            var date = moment(startDate).subtract(startDay, 'days');
+            var date = this.$moment(startDate).subtract(startDay, 'days');
             date.isBefore(startDate);
             date = date.add(1, 'days')
           ) {
@@ -236,11 +246,11 @@ export default {
             forwarPaddingDates.push(paddingDate)
           }
         }
-        var endDate = moment(calendar[calendar.length - 1].date)
-        var endDay = moment(calendar[calendar.length - 1].date).day()
+        var endDate = this.$moment(calendar[calendar.length - 1].date)
+        var endDay = this.$moment(calendar[calendar.length - 1].date).day()
         if (endDay < 6) {
           for (
-            var date = moment(endDate).add(1, 'days');
+            var date = this.$moment(endDate).add(1, 'days');
             date.day() != 0;
             date = date.add(1, 'days')
           ) {
@@ -269,7 +279,8 @@ export default {
         }
         weekArr.push(calendar[i])
         if (
-          moment(calendar[i].date).month() !== moment(firstMonth).month() &&
+          this.$moment(calendar[i].date).month() !==
+            this.$moment(firstMonth).month() &&
           secondMonth === null
         ) {
           secondMonth = calendar[i].date
@@ -298,6 +309,11 @@ export default {
     selectTime: function(time) {
       this.setSelectedTime(time)
       this.$router.push({ name: 'login' })
+    },
+    isPast: function(value) {
+      var now = this.$moment()
+      var time = this.$moment(value)
+      return now.isAfter(time)
     },
     ...mapActions({
       getCalendar: 'date/getCalendar',
