@@ -2,9 +2,7 @@
   <section class="container">
     <v-container grid-list-xl>
       <v-layout column wrap>
-        <v-flex align-self-baseline>
-          <div>オリーヴボディーケア　◯◯店</div>
-        </v-flex>
+        <ShopName />
         <Menu />
         <UserInfo />
         <LoginInfo />
@@ -17,6 +15,7 @@
 </template>
 
 <script>
+import ShopName from '~/components/ShopName.vue'
 import Menu from './Menu.vue'
 import UserInfo from './UserInfo.vue'
 import LoginInfo from './LoginInfo.vue'
@@ -26,6 +25,7 @@ import ConfirmBtn from './ConfirmBtn.vue'
 
 export default {
   components: {
+    ShopName,
     Menu,
     UserInfo,
     LoginInfo,
