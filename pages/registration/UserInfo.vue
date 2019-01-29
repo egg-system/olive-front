@@ -148,9 +148,11 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex'
+
 export default {
   data: () => ({
-    firstName: '',
+    // firstName: '',
     lastName: '',
     firstNameKana: '',
     lastNameKana: '',
@@ -174,7 +176,23 @@ export default {
     children: ['なし', '1人', '2人', '3人', '4人'],
     use: 'yes',
     message: 'yes'
-  })
+  }),
+  computed: {
+    firstName: {
+      get() {
+        return this.registration.userInfo.firstName
+      },
+      set(value) {
+        this.setFirstName(value)
+      }
+    },
+    ...mapState({ registration: 'registration' })
+  },
+  methods: {
+    ...mapMutations({
+      setFirstName: 'registration/userInfo/setFirstName'
+    })
+  }
 }
 </script>
 
