@@ -6,7 +6,7 @@
         <nuxt-link to="/complete">
           確定
         </nuxt-link>
-        {{ this.$store.state.registration.userInfo.firstName }}
+        {{ this.$store.state.common.userInfo.firstName }}
       </div>
     </div>
   </section>

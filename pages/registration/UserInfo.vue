@@ -180,17 +180,17 @@ export default {
   computed: {
     firstName: {
       get() {
-        return this.registration.userInfo.firstName
+        return this.common.userInfo.firstName
       },
       set(value) {
         this.setFirstName(value)
       }
     },
-    ...mapState({ registration: 'registration' })
+    ...mapState({ common: 'common' })
   },
   methods: {
     ...mapMutations({
-      setFirstName: 'registration/userInfo/setFirstName'
+      setFirstName: 'common/userInfo/setFirstName'
     })
   }
 }
