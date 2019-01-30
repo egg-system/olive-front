@@ -2,32 +2,32 @@
   <section class="container">
     <v-container grid-list-xl>
       <v-layout column wrap>
-        <ShopName />
-        <Menu />
-        <UserInfo />
-        <LoginInfo />
-        <ConfirmInfo />
-        <Request />
-        <ConfirmBtn />
+        <shop-name />
+        <menu />
+        <user-info />
+        <login-info />
+        <confirm-info />
+        <request />
+        <confirm-btn />
       </v-layout>
     </v-container>
   </section>
 </template>
 
 <script>
-import ShopName from '~/components/ShopName.vue'
-import Menu from './Menu.vue'
-import UserInfo from './UserInfo.vue'
-import LoginInfo from './LoginInfo.vue'
-import ConfirmInfo from './ConfirmInfo.vue'
-import Request from './Request.vue'
-import ConfirmBtn from './ConfirmBtn.vue'
+import ShopName from '~/components/pages/common/ShopName.vue'
+import UserInfo from '~/components/pages/common/UserInfo.vue'
+import Menu from '~/components/pages/registration/Menu.vue'
+import LoginInfo from '~/components/pages/registration/LoginInfo.vue'
+import ConfirmInfo from '~/components/pages/registration/ConfirmInfo.vue'
+import Request from '~/components/pages/registration/Request.vue'
+import ConfirmBtn from '~/components/pages/registration/ConfirmBtn.vue'
 
 export default {
   components: {
     ShopName,
-    Menu,
     UserInfo,
+    Menu,
     LoginInfo,
     ConfirmInfo,
     Request,

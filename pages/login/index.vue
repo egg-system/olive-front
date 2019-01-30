@@ -3,7 +3,7 @@
     <div>
       <div>
         <h2>会員の方はログインしてください</h2>
-        <Form />
+        <login-form />
         <nuxt-link to="/registration">
           パスワードを忘れた方はこちら
         </nuxt-link>
@@ -26,11 +26,11 @@
 
 
 <script>
-import Form from './Form.vue'
+import LoginForm from '~/components/pages/login/Form.vue'
 
 export default {
   components: {
-    Form
+    LoginForm
   },
   methods: {
     resisterBtn() {
