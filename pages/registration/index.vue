@@ -4,11 +4,11 @@
       <v-layout column wrap>
         <shop-name />
         <menu />
-        <user-info />
+        <registration-user-info />
         <login-info />
-        <confirm-info />
-        <request />
-        <confirm-btn />
+        <registration-confirm-info />
+        <registration-request />
+        <registration-confirm-btn />
       </v-layout>
     </v-container>
   </section>
@@ -16,22 +16,22 @@
 
 <script>
 import ShopName from '~/components/pages/common/ShopName.vue'
-import UserInfo from '~/components/pages/common/UserInfo.vue'
-import Menu from '~/components/pages/registration/Menu.vue'
 import LoginInfo from '~/components/pages/registration/LoginInfo.vue'
-import ConfirmInfo from '~/components/pages/registration/ConfirmInfo.vue'
-import Request from '~/components/pages/registration/Request.vue'
-import ConfirmBtn from '~/components/pages/registration/ConfirmBtn.vue'
+import RegistrationUserInfo from '~/components/pages/common/RegistrationUserInfo.vue'
+import RegistrationMenu from '~/components/pages/common/RegistrationMenu.vue'
+import RegistrationConfirmInfo from '~/components/pages/common/RegistrationConfirmInfo.vue'
+import RegistrationRequest from '~/components/pages/common/RegistrationRequest.vue'
+import RegistrationConfirmBtn from '~/components/pages/common/RegistrationConfirmBtn.vue'
 
 export default {
   components: {
     ShopName,
-    UserInfo,
-    Menu,
     LoginInfo,
-    ConfirmInfo,
-    Request,
-    ConfirmBtn
+    RegistrationUserInfo,
+    RegistrationMenu,
+    RegistrationConfirmInfo,
+    RegistrationRequest,
+    RegistrationConfirmBtn
   }
 }
 </script>

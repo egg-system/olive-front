@@ -35,6 +35,6 @@ export default {
 
 <style>
 .loginInfo {
-  /* text-align: left; */
+  text-align: left;
 }
 </style>
