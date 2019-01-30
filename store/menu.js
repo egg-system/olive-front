@@ -3,21 +3,13 @@ import config from '~/config/constant.json'
 
 /* state */
 export const state = () => ({
-  storeName: '',
-  menuCategories: [],
-  selectedMenuIds: []
+  menuCategories: []
 })
 
 /* mutations */
 export const mutations = {
   setMenuCategories(state, menuCategories) {
     state.menuCategories = menuCategories
-  },
-  addSelectedMenu(state, id) {
-    state.selectedMenuIds.push(id)
-  },
-  clearSelectedMenus() {
-    state.selectedMenuIds = []
   }
 }
 
@@ -28,11 +20,5 @@ export const actions = {
     const res = await axios.get(config.api.menu)
 
     commit('setMenuCategories', res.data.categories)
-  },
-  addSelectedMenu({ commit }, menuId) {
-    commit('addSelectedMenu', menuId)
-  },
-  clearSelectedMenus({ commit }) {
-    commit('clearSelectedMenus')
   }
 }

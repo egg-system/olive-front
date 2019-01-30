@@ -58,7 +58,7 @@ p {
 }
 </style>
 <template>
-  <section class="container">
+  <section v-if="0 < selectedMenus.length" class="container">
     <div>
       <h1>{{ store.name }}</h1>
       <section class="selected-menu">
@@ -197,25 +197,7 @@ export default {
       return this.$store.state.store
     },
     selectedMenus() {
-      var menuCategories = this.$store.state.menu.menuCategories
-      var selectedMenuIds = this.$store.state.menu.selectedMenuIds
-      var selectedMenus = []
-
-      for (var menuId of selectedMenuIds) {
-        for (var menuCategory of menuCategories) {
-          var selectedMenu = menuCategory.menus.find(menu => menu.id === menuId)
-          if (selectedMenu !== undefined) {
-            selectedMenus.push({
-              id: selectedMenu.id,
-              categoryName: menuCategory.name,
-              menuName: selectedMenu.name,
-              price: selectedMenu.price_without_tax,
-              duration: selectedMenu.duration_minutes
-            })
-          }
-        }
-      }
-      return selectedMenus
+      return this.$store.getters['select/getSelectedMenus']
     },
     timeSlots() {
       let store = this.$store.state.store
@@ -299,7 +281,7 @@ export default {
     }
   },
   created: function() {
-    var selectedMenuIds = this.$store.state.menu.selectedMenuIds
+    var selectedMenuIds = this.$store.state.select.selectedMenuIds
     if (selectedMenuIds.length === 0) {
       this.$router.push({ name: 'menu' })
     }

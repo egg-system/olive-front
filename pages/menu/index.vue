@@ -90,8 +90,8 @@ export default {
     ...mapActions({
       getStore: 'store/getStore',
       getMenus: 'menu/getMenus',
-      addSelectedMenu: 'menu/addSelectedMenu',
-      clearSelectedMenus: 'menu/clearSelectedMenus'
+      addSelectedMenu: 'select/addSelectedMenu',
+      clearSelectedMenus: 'select/clearSelectedMenus'
     })
   }
 }
