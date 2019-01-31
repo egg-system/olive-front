@@ -18,8 +18,11 @@ $ npm run generate
 ```
 
 ## 静的ページ確認
-* https://olive-fe.netlify.com/
-* masterにプッシュされるとnetlifyでビルドされて上記ページで動作確認できます
+* production
+  * https://olive-fe.netlify.com/
+* develop
+  * https://develop--olive-fe.netlify.com/
+* masterブランチにプッシュするとproduction環境でビルドされ、developブランチにプッシュするとdevelop環境でビルドされ上記ページで動作確認できます
 
 ## ドキュメント
 * アプリケーションフレームワーク
