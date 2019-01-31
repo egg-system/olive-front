@@ -12,7 +12,7 @@
           </div>
         </div>
         <shop-name />
-        <registration-menu />
+        <registration-menu :is-first="true" />
         <registration-user-info />
         <registration-confirm-info />
         <registration-request />
@@ -38,7 +38,6 @@ export default {
     RegistrationConfirmInfo,
     RegistrationRequest,
     RegistrationConfirmBtn
-  },
-  beforeMount() {}
+  }
 }
 </script>

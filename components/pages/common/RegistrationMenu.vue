@@ -12,7 +12,6 @@
     <v-layout row>
       <v-flex>
         <v-data-table
-          :headers="headers"
           :items="desserts"
           hide-actions
           hide-headers
@@ -34,19 +33,14 @@
 
 <script>
 export default {
+  props: {
+    isFirst: {
+      type: Boolean,
+      required: true
+    }
+  },
   data() {
     return {
-      headers: [
-        {
-          text: 'メニュー',
-          align: 'left',
-          sortable: false,
-          value: 'name'
-        },
-        { text: 'コース', value: 'course' },
-        { text: '金額', value: 'price' },
-        { text: '所要時間', value: 'time' }
-      ],
       desserts: [
         {
           name: '整体・マッサージ',
@@ -62,10 +56,12 @@ export default {
         }
       ]
     }
+  },
+  beforeMount() {
+    console.log(this.isFirst)
   }
 }
 </script>
-
 
 <style>
 .menu {

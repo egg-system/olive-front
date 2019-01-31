@@ -3,7 +3,7 @@
     <v-container grid-list-xl>
       <v-layout column wrap>
         <shop-name />
-        <menu />
+        <registration-menu :is-first="true"/>
         <registration-user-info />
         <login-info />
         <registration-confirm-info />
