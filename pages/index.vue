@@ -73,7 +73,6 @@ export default {
   color: #35495e;
   letter-spacing: 1px;
 }
-
 .links {
   padding-top: 15px;
 }
