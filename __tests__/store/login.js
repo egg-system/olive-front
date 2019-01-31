@@ -30,8 +30,8 @@ describe('store/login.js', () => {
 
     test('checkLogin success', async () => {
       await store.dispatch('checkLogin', {
-        userName: 'aefejeoaee',
-        password: 'feaoijee'
+        userName: 'test1',
+        password: 'test1'
       })
       expect(store.state.isLogin).toBe(true)
     })
