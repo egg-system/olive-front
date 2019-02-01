@@ -12,7 +12,7 @@
     <v-layout row>
       <v-flex>
         <v-data-table
-          :items="desserts"
+          :items="menu"
           hide-actions
           hide-headers
           class="elevation-1"
@@ -41,7 +41,7 @@ export default {
   },
   data() {
     return {
-      desserts: [
+      menu: [
         {
           name: '整体・マッサージ',
           course: '通常整体コース',
@@ -58,7 +58,16 @@ export default {
     }
   },
   beforeMount() {
-    console.log(this.isFirst)
+    // 初めての場合は初診料を追加
+    if (this.isFirst) {
+      const firstCharged = {
+        name: '整体・マッサージ',
+        course: '初診料',
+        price: '¥1,000（税抜）',
+        time: '0分'
+      }
+      this.menu.push(firstCharged)
+    }
   }
 }
 </script>
