@@ -6,7 +6,7 @@ import {
 } from '@vue/test-utils'
 import Vuex from 'vuex'
 import Login from '~/pages/login/index.vue'
-import Form from '~/pages/login/Form.vue'
+import Form from '~/components/pages/login/Form.vue'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)

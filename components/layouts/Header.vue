@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-toolbar fixed>
+    <v-toolbar>
       <v-toolbar-title>
         <nuxt-link
           to="/"

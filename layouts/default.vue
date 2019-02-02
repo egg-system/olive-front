@@ -1,21 +1,21 @@
 <template>
   <v-app>
     <div>
-      <Header />
-      <nuxt/>
-      <Footer />
+      <app-header />
+      <nuxt />
+      <app-footer />
     </div>
   </v-app>
 </template>
 
 <script>
-import Footer from '~/components/Footer.vue'
-import Header from '~/components/Header.vue'
+import AppFooter from '~/components/layouts/Footer.vue'
+import AppHeader from '~/components/layouts/Header.vue'
 
 export default {
   components: {
-    Footer,
-    Header
+    AppFooter,
+    AppHeader
   }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
   <section class="container">
     <div>
-      <logo/>
+      <logo />
       <h1 class="mainTitle">
         olive salon
       </h1>
@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import Logo from '~/components/layouts/Logo.vue'
 
 export default {
   components: {
@@ -73,7 +73,6 @@ export default {
   color: #35495e;
   letter-spacing: 1px;
 }
-
 .links {
   padding-top: 15px;
 }
