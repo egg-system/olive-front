@@ -13,7 +13,7 @@
         </div>
         <shop-name />
         <registration-menu :is-first="true" />
-        <registration-user-info />
+        <registration-user-info :is-confirm="true"/>
         <registration-confirm-info />
         <registration-request />
         <registration-confirm-btn />

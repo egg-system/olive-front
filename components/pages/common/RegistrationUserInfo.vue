@@ -14,18 +14,20 @@
         <v-text-field
           v-model="firstName"
           :rules="firstNameRules"
+          :disabled="isConfirm"
+          :clearable="!isConfirm"
           type="text"
           label="姓"
-          clearable
         />
       </v-flex>
       <v-flex>
         <v-text-field
           v-model="lastName"
           :rules="lastNameRules"
+          :disabled="isConfirm"
+          :clearable="!isConfirm"
           type="text"
           label="名"
-          clearable
         />
       </v-flex>
     </v-layout>
@@ -36,18 +38,20 @@
         <v-text-field
           v-model="firstNameKana"
           :rules="firstNameRules"
+          :disabled="isConfirm"
+          :clearable="!isConfirm"
           type="text"
           label="セイ"
-          clearable
         />
       </v-flex>
       <v-flex>
         <v-text-field
           v-model="lastNameKana"
           :rules="lastNameRules"
+          :disabled="isConfirm"
+          :clearable="!isConfirm"
           type="text"
           label="メイ"
-          clearable
         />
       </v-flex>
     </v-layout>
@@ -59,19 +63,20 @@
           <v-text-field
             v-model="mail"
             :rules="mailRules"
+            :disabled="isConfirm"
+            :clearable="!isConfirm"
             type="text"
             label="メールアドレス"
-            clearable
           />
         </v-flex>
-        <v-flex>確認のため、再度メールアドレスを入力してください</v-flex>
-        <v-flex>
+        <v-flex v-if="!isConfirm">確認のため、再度メールアドレスを入力してください</v-flex>
+        <v-flex v-if="!isConfirm">
           <v-text-field
             v-model="mail2"
             :rules="mailRules"
+            clearable
             type="text"
             label="メールアドレス"
-            clearable
           />
         </v-flex>
       </v-layout>
@@ -84,9 +89,10 @@
           <v-text-field
             v-model="phoneNumber"
             :rules="phoneNumberRules"
+            :disabled="isConfirm"
+            :clearable="!isConfirm"
             type="text"
             label="電話番号"
-            clearable
           />
         </v-flex>
       </v-layout>
@@ -95,7 +101,7 @@
     <v-layout row>
       <v-flex xs3>初めてのご利用ですか？<span class="must">(必須)</span></v-flex>
       <v-flex>
-        <v-radio-group v-model="use" :mandatory="false" class="inputTop">
+        <v-radio-group :disabled="isConfirm" v-model="use" :mandatory="false" class="inputTop">
           <v-radio label="初めてです(初診料 ¥1,000)" value="yes"/>
           <v-radio label="いいえ、2回目以降です" value="no"/>
         </v-radio-group>
@@ -105,7 +111,7 @@
     <v-layout row>
       <v-flex xs3>回数券利用</v-flex>
       <v-flex>
-        <v-checkbox label="利用する" value="coupon" class="inputTop"/>
+        <v-checkbox :disabled="isConfirm" label="利用する" value="coupon" class="inputTop"/>
       </v-flex>
     </v-layout>
 
@@ -114,6 +120,7 @@
       <v-flex xs5>
         <v-select
           :items="pregnancyTerm"
+          :disabled="isConfirm"
         />
       </v-flex>
       <v-flex xs5>
@@ -126,6 +133,7 @@
       <v-flex xs5>
         <v-select
           :items="children"
+          :disabled="isConfirm"
         />
       </v-flex>
       <v-flex xs5>
@@ -136,7 +144,7 @@
     <v-layout row>
       <v-flex xs3>サロンからのメッセージ受信設定</v-flex>
       <v-flex>
-        <v-radio-group v-model="message" :mandatory="false" class="inputTop">
+        <v-radio-group :disabled="isConfirm" v-model="message" :mandatory="false" class="inputTop">
           <v-radio label="受け取る" value="yes"/>
           <v-radio label="受け取らない" value="no"/>
         </v-radio-group>
@@ -151,6 +159,12 @@
 import { mapState, mapMutations } from 'vuex'
 
 export default {
+  props: {
+    isConfirm: {
+      type: Boolean,
+      default: false
+    }
+  },
   data: () => ({
     // firstName: '',
     lastName: '',
