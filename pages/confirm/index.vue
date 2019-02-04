@@ -3,13 +3,11 @@
     <v-container grid-list-xl>
       <v-layout column wrap>
         <shop-name />
-
         <v-layout row>
           <v-flex>
             <v-card-text class="notyet">まだ予約は完了していません、ご予約内容の最終確認をしてください</v-card-text>
           </v-flex>
         </v-layout>
-
         <registration-menu :is-confirm="true" />
         <registration-user-info :is-confirm="true"/>
         <registration-confirm-info />

@@ -124,7 +124,7 @@
           v-model="pregnancyTermSelected"
         />
       </v-flex>
-      <v-flex xs5>
+      <v-flex v-if="!isConfirm" xs5>
         ※妊娠中の方は何ヶ月かご選択ください
       </v-flex>
     </v-layout>
@@ -138,7 +138,7 @@
           v-model="childrenSelected"
         />
       </v-flex>
-      <v-flex xs5>
+      <v-flex v-if="!isConfirm" xs5>
         ※お子様連れの方は人数をご選択ください
       </v-flex>
     </v-layout>
