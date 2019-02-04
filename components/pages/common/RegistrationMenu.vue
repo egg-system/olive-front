@@ -53,10 +53,6 @@
 <script>
 export default {
   props: {
-    isFirst: {
-      type: Boolean,
-      required: true
-    },
     isConfirm: {
       type: Boolean,
       default: false
@@ -82,7 +78,7 @@ export default {
   },
   beforeMount() {
     // 初めての場合は初診料を追加
-    if (this.isFirst) {
+    if (this.$store.state.common.userInfo.isFirst) {
       const firstCharged = {
         name: '整体・マッサージ',
         course: '初診料',

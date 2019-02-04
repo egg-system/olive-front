@@ -12,7 +12,7 @@
           </div>
         </div>
         <shop-name />
-        <registration-menu :is-first="true" :is-confirm="true" />
+        <registration-menu :is-confirm="true" />
         <registration-user-info :is-confirm="true"/>
         <registration-confirm-info />
         <registration-request />

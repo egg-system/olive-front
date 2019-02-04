@@ -101,9 +101,9 @@
     <v-layout row>
       <v-flex xs3>初めてのご利用ですか？<span class="must">(必須)</span></v-flex>
       <v-flex>
-        <v-radio-group :disabled="isConfirm" v-model="use" :mandatory="false" class="inputTop">
-          <v-radio label="初めてです(初診料 ¥1,000)" value="yes"/>
-          <v-radio label="いいえ、2回目以降です" value="no"/>
+        <v-radio-group :disabled="isConfirm" v-model="isFirst" :mandatory="false" class="inputTop">
+          <v-radio :value="true" label="初めてです(初診料 ¥1,000)"/>
+          <v-radio :value="false" label="いいえ、2回目以降です"/>
         </v-radio-group>
       </v-flex>
     </v-layout>
@@ -111,7 +111,7 @@
     <v-layout row>
       <v-flex xs3>回数券利用</v-flex>
       <v-flex>
-        <v-checkbox :disabled="isConfirm" label="利用する" value="coupon" class="inputTop"/>
+        <v-checkbox :disabled="isConfirm" v-model="coupon" label="利用する" class="inputTop"/>
       </v-flex>
     </v-layout>
 
@@ -121,6 +121,7 @@
         <v-select
           :items="pregnancyTerm"
           :disabled="isConfirm"
+          v-model="pregnancyTermSelected"
         />
       </v-flex>
       <v-flex xs5>
@@ -134,6 +135,7 @@
         <v-select
           :items="children"
           :disabled="isConfirm"
+          v-model="childrenSelected"
         />
       </v-flex>
       <v-flex xs5>
@@ -166,17 +168,6 @@ export default {
     }
   },
   data: () => ({
-    // firstName: '',
-    lastName: '',
-    firstNameKana: '',
-    lastNameKana: '',
-    mail: '',
-    mail2: '',
-    phoneNumber: '',
-    firstNameRules: [v => !!v || '必須入力です'],
-    lastNameRules: [v => !!v || '必須入力です'],
-    mailRules: [v => !!v || '必須入力です'],
-    phoneNumberRules: [v => !!v || '必須入力です'],
     pregnancyTerm: [
       '妊娠なし',
       '4ヶ月未満',
@@ -188,8 +179,10 @@ export default {
       '10ヶ月'
     ],
     children: ['なし', '1人', '2人', '3人', '4人'],
-    use: 'yes',
-    message: 'yes'
+    firstNameRules: [v => !!v || '必須入力です'],
+    lastNameRules: [v => !!v || '必須入力です'],
+    mailRules: [v => !!v || '必須入力です'],
+    phoneNumberRules: [v => !!v || '必須入力です']
   }),
   computed: {
     firstName: {
@@ -200,11 +193,110 @@ export default {
         this.setFirstName(value)
       }
     },
+    lastName: {
+      get() {
+        return this.common.userInfo.lastName
+      },
+      set(value) {
+        this.setLastName(value)
+      }
+    },
+    firstNameKana: {
+      get() {
+        return this.common.userInfo.firstNameKana
+      },
+      set(value) {
+        this.setFirstNameKana(value)
+      }
+    },
+    lastNameKana: {
+      get() {
+        return this.common.userInfo.lastNameKana
+      },
+      set(value) {
+        this.setLastNameKana(value)
+      }
+    },
+    mail: {
+      get() {
+        return this.common.userInfo.mail
+      },
+      set(value) {
+        this.setMail(value)
+      }
+    },
+    mail2: {
+      get() {
+        return this.common.userInfo.mail2
+      },
+      set(value) {
+        this.setMail2(value)
+      }
+    },
+    phoneNumber: {
+      get() {
+        return this.common.userInfo.phoneNumber
+      },
+      set(value) {
+        this.setPhoneNumber(value)
+      }
+    },
+    coupon: {
+      get() {
+        return this.common.userInfo.coupon
+      },
+      set(value) {
+        this.setCoupon(value)
+      }
+    },
+    pregnancyTermSelected: {
+      get() {
+        return this.common.userInfo.pregnancyTermSelected
+      },
+      set(value) {
+        this.setPregnancyTermSelected(value)
+      }
+    },
+    childrenSelected: {
+      get() {
+        return this.common.userInfo.childrenSelected
+      },
+      set(value) {
+        this.setChildrenSelected(value)
+      }
+    },
+    isFirst: {
+      get() {
+        return this.common.userInfo.isFirst
+      },
+      set(value) {
+        this.setIsFirst(value)
+      }
+    },
+    message: {
+      get() {
+        return this.common.userInfo.message
+      },
+      set(value) {
+        this.setMessage(value)
+      }
+    },
     ...mapState({ common: 'common' })
   },
   methods: {
     ...mapMutations({
-      setFirstName: 'common/userInfo/setFirstName'
+      setFirstName: 'common/userInfo/setFirstName',
+      setLastName: 'common/userInfo/setLastName',
+      setFirstNameKana: 'common/userInfo/setFirstNameKana',
+      setLastNameKana: 'common/userInfo/setLastNameKana',
+      setMail: 'common/userInfo/setMail',
+      setMail2: 'common/userInfo/setMail2',
+      setPhoneNumber: 'common/userInfo/setPhoneNumber',
+      setCoupon: 'common/userInfo/setCoupon',
+      setPregnancyTermSelected: 'common/userInfo/setPregnancyTermSelected',
+      setChildrenSelected: 'common/userInfo/setChildrenSelected',
+      setIsFirst: 'common/userInfo/setIsFirst',
+      setMessage: 'common/userInfo/setMessage'
     })
   }
 }
