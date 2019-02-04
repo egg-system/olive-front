@@ -77,8 +77,8 @@ export default {
     }
   },
   beforeMount() {
-    // 初めての場合は初診料を追加
-    if (this.$store.state.common.userInfo.isFirst) {
+    // 初めての場合は確認ページで初診料を追加
+    if (this.$store.state.common.userInfo.isFirst && this.isConfirm) {
       const firstCharged = {
         name: '整体・マッサージ',
         course: '初診料',
