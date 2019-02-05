@@ -187,7 +187,7 @@ export default {
   computed: {
     firstName: {
       get() {
-        return this.common.userInfo.firstName
+        return this.$store.state.common.userInfo.firstName
       },
       set(value) {
         this.setFirstName(value)
@@ -195,7 +195,7 @@ export default {
     },
     lastName: {
       get() {
-        return this.common.userInfo.lastName
+        return this.$store.state.common.userInfo.lastName
       },
       set(value) {
         this.setLastName(value)
@@ -203,7 +203,7 @@ export default {
     },
     firstNameKana: {
       get() {
-        return this.common.userInfo.firstNameKana
+        return this.$store.state.common.userInfo.firstNameKana
       },
       set(value) {
         this.setFirstNameKana(value)
@@ -211,7 +211,7 @@ export default {
     },
     lastNameKana: {
       get() {
-        return this.common.userInfo.lastNameKana
+        return this.$store.state.common.userInfo.lastNameKana
       },
       set(value) {
         this.setLastNameKana(value)
@@ -219,7 +219,7 @@ export default {
     },
     mail: {
       get() {
-        return this.common.userInfo.mail
+        return this.$store.state.common.userInfo.mail
       },
       set(value) {
         this.setMail(value)
@@ -227,7 +227,7 @@ export default {
     },
     mail2: {
       get() {
-        return this.common.userInfo.mail2
+        return this.$store.state.common.userInfo.mail2
       },
       set(value) {
         this.setMail2(value)
@@ -235,7 +235,7 @@ export default {
     },
     phoneNumber: {
       get() {
-        return this.common.userInfo.phoneNumber
+        return this.$store.state.common.userInfo.phoneNumber
       },
       set(value) {
         this.setPhoneNumber(value)
@@ -243,7 +243,7 @@ export default {
     },
     coupon: {
       get() {
-        return this.common.userInfo.coupon
+        return this.$store.state.common.userInfo.coupon
       },
       set(value) {
         this.setCoupon(value)
@@ -251,7 +251,7 @@ export default {
     },
     pregnancyTermSelected: {
       get() {
-        return this.common.userInfo.pregnancyTermSelected
+        return this.$store.state.common.userInfo.pregnancyTermSelected
       },
       set(value) {
         this.setPregnancyTermSelected(value)
@@ -259,7 +259,7 @@ export default {
     },
     childrenSelected: {
       get() {
-        return this.common.userInfo.childrenSelected
+        return this.$store.state.common.userInfo.childrenSelected
       },
       set(value) {
         this.setChildrenSelected(value)
@@ -267,7 +267,7 @@ export default {
     },
     isFirst: {
       get() {
-        return this.common.userInfo.isFirst
+        return this.$store.state.common.userInfo.isFirst
       },
       set(value) {
         this.setIsFirst(value)
@@ -275,29 +275,28 @@ export default {
     },
     message: {
       get() {
-        return this.common.userInfo.message
+        return this.$store.state.common.userInfo.message
       },
       set(value) {
         this.setMessage(value)
       }
-    },
-    ...mapState({ common: 'common' })
+    }
   },
   methods: {
-    ...mapMutations({
-      setFirstName: 'common/userInfo/setFirstName',
-      setLastName: 'common/userInfo/setLastName',
-      setFirstNameKana: 'common/userInfo/setFirstNameKana',
-      setLastNameKana: 'common/userInfo/setLastNameKana',
-      setMail: 'common/userInfo/setMail',
-      setMail2: 'common/userInfo/setMail2',
-      setPhoneNumber: 'common/userInfo/setPhoneNumber',
-      setCoupon: 'common/userInfo/setCoupon',
-      setPregnancyTermSelected: 'common/userInfo/setPregnancyTermSelected',
-      setChildrenSelected: 'common/userInfo/setChildrenSelected',
-      setIsFirst: 'common/userInfo/setIsFirst',
-      setMessage: 'common/userInfo/setMessage'
-    })
+    ...mapMutations('common/userInfo', [
+      'setFirstName',
+      'setLastName',
+      'setFirstNameKana',
+      'setLastNameKana',
+      'setMail',
+      'setMail2',
+      'setPhoneNumber',
+      'setCoupon',
+      'setPregnancyTermSelected',
+      'setChildrenSelected',
+      'setIsFirst',
+      'setMessage'
+    ])
   }
 }
 </script>
