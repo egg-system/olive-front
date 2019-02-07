@@ -187,7 +187,7 @@ export default {
   computed: {
     firstName: {
       get() {
-        return this.$store.state.common.userInfo.firstName
+        return this.$store.state.common.registrationUserInfo.firstName
       },
       set(value) {
         this.setFirstName(value)
@@ -195,7 +195,7 @@ export default {
     },
     lastName: {
       get() {
-        return this.$store.state.common.userInfo.lastName
+        return this.$store.state.common.registrationUserInfo.lastName
       },
       set(value) {
         this.setLastName(value)
@@ -203,7 +203,7 @@ export default {
     },
     firstNameKana: {
       get() {
-        return this.$store.state.common.userInfo.firstNameKana
+        return this.$store.state.common.registrationUserInfo.firstNameKana
       },
       set(value) {
         this.setFirstNameKana(value)
@@ -211,7 +211,7 @@ export default {
     },
     lastNameKana: {
       get() {
-        return this.$store.state.common.userInfo.lastNameKana
+        return this.$store.state.common.registrationUserInfo.lastNameKana
       },
       set(value) {
         this.setLastNameKana(value)
@@ -219,7 +219,7 @@ export default {
     },
     mail: {
       get() {
-        return this.$store.state.common.userInfo.mail
+        return this.$store.state.common.registrationUserInfo.mail
       },
       set(value) {
         this.setMail(value)
@@ -227,7 +227,7 @@ export default {
     },
     mail2: {
       get() {
-        return this.$store.state.common.userInfo.mail2
+        return this.$store.state.common.registrationUserInfo.mail2
       },
       set(value) {
         this.setMail2(value)
@@ -235,7 +235,7 @@ export default {
     },
     phoneNumber: {
       get() {
-        return this.$store.state.common.userInfo.phoneNumber
+        return this.$store.state.common.registrationUserInfo.phoneNumber
       },
       set(value) {
         this.setPhoneNumber(value)
@@ -243,7 +243,7 @@ export default {
     },
     coupon: {
       get() {
-        return this.$store.state.common.userInfo.coupon
+        return this.$store.state.common.registrationUserInfo.coupon
       },
       set(value) {
         this.setCoupon(value)
@@ -251,7 +251,8 @@ export default {
     },
     pregnancyTermSelected: {
       get() {
-        return this.$store.state.common.userInfo.pregnancyTermSelected
+        return this.$store.state.common.registrationUserInfo
+          .pregnancyTermSelected
       },
       set(value) {
         this.setPregnancyTermSelected(value)
@@ -259,7 +260,7 @@ export default {
     },
     childrenSelected: {
       get() {
-        return this.$store.state.common.userInfo.childrenSelected
+        return this.$store.state.common.registrationUserInfo.childrenSelected
       },
       set(value) {
         this.setChildrenSelected(value)
@@ -267,7 +268,7 @@ export default {
     },
     isFirst: {
       get() {
-        return this.$store.state.common.userInfo.isFirst
+        return this.$store.state.common.registrationUserInfo.isFirst
       },
       set(value) {
         this.setIsFirst(value)
@@ -275,7 +276,7 @@ export default {
     },
     message: {
       get() {
-        return this.$store.state.common.userInfo.message
+        return this.$store.state.common.registrationUserInfo.message
       },
       set(value) {
         this.setMessage(value)
@@ -283,7 +284,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('common/userInfo', [
+    ...mapMutations('common/registrationUserInfo', [
       'setFirstName',
       'setLastName',
       'setFirstNameKana',
