@@ -10,7 +10,7 @@
         </v-layout>
         <registration-menu :is-confirm="true" />
         <registration-user-info :is-confirm="true"/>
-        <registration-confirm-info />
+        <registration-confirm-info :is-confirm="true"/>
         <registration-request />
         <registration-confirm-btn />
       </v-layout>
