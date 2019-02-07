@@ -16,7 +16,11 @@
       <v-flex xs3>・仮予約等での複数の予約取得行為は禁止とさせて頂きます。そのご予約は無効となる場合がございます。</v-flex>
       <v-flex xs3>・当院は法令およびプライバシーポリシーを厳守しております。しつこい営業や勧誘のメールをお届けすることは一切ありません。<nuxt-link to="/">プライバシーポリシー</nuxt-link>の内容をご確認ください。</v-flex>
       <v-flex>
-        <v-checkbox :disabled="isConfirm" class="okBtn" label="確認し、同意します" value="ok" />
+        <v-checkbox :disabled="isConfirm"
+                    v-model="isOk"
+                    class="okBtn"
+                    label="確認し、同意します"
+                    value="ok" />
       </v-flex>
     </v-layout>
 
@@ -25,6 +29,8 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
   props: {
     isConfirm: {
@@ -35,7 +41,20 @@ export default {
   data: () => ({
     password: '',
     passwordRules: [v => !!v || '必須入力です']
-  })
+  }),
+  computed: {
+    isOk: {
+      get() {
+        return this.$store.state.common.registrationConfirmInfo.isOk
+      },
+      set(value) {
+        this.setIsOk(value)
+      }
+    }
+  },
+  methods: {
+    ...mapMutations('common/registrationConfirmInfo', ['setIsOk'])
+  }
 }
 </script>
 
