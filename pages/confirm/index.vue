@@ -12,7 +12,6 @@
         <registration-user-info :is-confirm="true"/>
         <registration-confirm-info :is-confirm="true"/>
         <registration-request :is-confirm="true"/>
-        <registration-confirm-btn />
       </v-layout>
     </v-container>
   </section>
@@ -24,7 +23,6 @@ import RegistrationUserInfo from '~/components/pages/common/RegistrationUserInfo
 import RegistrationMenu from '~/components/pages/common/RegistrationMenu.vue'
 import RegistrationConfirmInfo from '~/components/pages/common/RegistrationConfirmInfo.vue'
 import RegistrationRequest from '~/components/pages/common/RegistrationRequest.vue'
-import RegistrationConfirmBtn from '~/components/pages/common/RegistrationConfirmBtn.vue'
 
 export default {
   components: {
@@ -32,8 +30,7 @@ export default {
     RegistrationUserInfo,
     RegistrationMenu,
     RegistrationConfirmInfo,
-    RegistrationRequest,
-    RegistrationConfirmBtn
+    RegistrationRequest
   }
 }
 </script>

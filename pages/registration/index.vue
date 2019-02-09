@@ -8,7 +8,7 @@
         <login-info />
         <registration-confirm-info />
         <registration-request />
-        <registration-confirm-btn />
+        <confirm-btn />
       </v-layout>
     </v-container>
   </section>
@@ -17,21 +17,21 @@
 <script>
 import ShopName from '~/components/pages/common/ShopName.vue'
 import LoginInfo from '~/components/pages/registration/LoginInfo.vue'
+import ConfirmBtn from '~/components/pages/registration/ConfirmBtn.vue'
 import RegistrationUserInfo from '~/components/pages/common/RegistrationUserInfo.vue'
 import RegistrationMenu from '~/components/pages/common/RegistrationMenu.vue'
 import RegistrationConfirmInfo from '~/components/pages/common/RegistrationConfirmInfo.vue'
 import RegistrationRequest from '~/components/pages/common/RegistrationRequest.vue'
-import RegistrationConfirmBtn from '~/components/pages/common/RegistrationConfirmBtn.vue'
 
 export default {
   components: {
     ShopName,
     LoginInfo,
+    ConfirmBtn,
     RegistrationUserInfo,
     RegistrationMenu,
     RegistrationConfirmInfo,
-    RegistrationRequest,
-    RegistrationConfirmBtn
+    RegistrationRequest
   }
 }
 </script>
