@@ -45,7 +45,7 @@ export default {
   computed: {
     isOk: {
       get() {
-        return this.$store.state.common.registrationConfirmInfo.isOk
+        return this.$store.state.registration.isOk
       },
       set(value) {
         this.setIsOk(value)
@@ -53,7 +53,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('common/registrationConfirmInfo', ['setIsOk'])
+    ...mapMutations('registration', ['setIsOk'])
   }
 }
 </script>

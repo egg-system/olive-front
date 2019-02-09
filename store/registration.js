@@ -11,7 +11,8 @@ export const state = () => ({
   pregnancyTermSelected: '',
   childrenSelected: '',
   isFirst: true,
-  message: 'yes'
+  message: 'yes',
+  isOk: ''
 })
 
 /* mutations */
@@ -51,5 +52,8 @@ export const mutations = {
   },
   setMessage(state, message) {
     state.message = message
+  },
+  setIsOk(state, isOk) {
+    state.isOk = isOk
   }
 }
