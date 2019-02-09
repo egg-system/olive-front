@@ -11,7 +11,7 @@
         <registration-menu :is-confirm="true" />
         <registration-user-info :is-confirm="true"/>
         <registration-confirm-info :is-confirm="true"/>
-        <registration-request />
+        <registration-request :is-confirm="true"/>
         <registration-confirm-btn />
       </v-layout>
     </v-container>

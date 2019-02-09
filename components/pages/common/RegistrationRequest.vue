@@ -12,6 +12,7 @@
     <v-layout column>
       <v-flex xs6>
         <v-textarea
+          :disabled="isConfirm"
           outline
           name="input-7-4"
           label="ご意見・ご要望"
@@ -26,6 +27,12 @@
 
 <script>
 export default {
+  props: {
+    isConfirm: {
+      type: Boolean,
+      default: false
+    }
+  },
   data: () => ({
     password: '',
     passwordRules: [v => !!v || '必須入力です']
