@@ -1,5 +1,5 @@
 /* state */
-export const state = () => ({
+const initialState = {
   firstName: '',
   lastName: '',
   firstNameKana: '',
@@ -14,7 +14,8 @@ export const state = () => ({
   message: 'yes',
   isOk: '',
   request: ''
-})
+}
+export const state = () => Object.assign({}, initialState)
 
 /* mutations */
 export const mutations = {
@@ -59,5 +60,8 @@ export const mutations = {
   },
   setRequest(state, request) {
     state.request = request
+  },
+  reset(state) {
+    state = Object.assign(state, initialState)
   }
 }
