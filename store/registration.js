@@ -12,7 +12,8 @@ export const state = () => ({
   childrenSelected: '',
   isFirst: true,
   message: 'yes',
-  isOk: ''
+  isOk: '',
+  request: ''
 })
 
 /* mutations */
@@ -55,5 +56,8 @@ export const mutations = {
   },
   setIsOk(state, isOk) {
     state.isOk = isOk
+  },
+  setRequest(state, request) {
+    state.request = request
   }
 }

@@ -13,6 +13,7 @@
       <v-flex xs6>
         <v-textarea
           :disabled="isConfirm"
+          v-model="request"
           outline
           name="input-7-4"
           label="ご意見・ご要望"
@@ -26,6 +27,8 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
   props: {
     isConfirm: {
@@ -36,7 +39,20 @@ export default {
   data: () => ({
     password: '',
     passwordRules: [v => !!v || '必須入力です']
-  })
+  }),
+  computed: {
+    request: {
+      get() {
+        return this.$store.state.registration.request
+      },
+      set(value) {
+        this.setRequest(value)
+      }
+    }
+  },
+  methods: {
+    ...mapMutations('registration', ['setRequest'])
+  }
 }
 </script>
 
