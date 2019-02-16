@@ -5,7 +5,9 @@ import config from '~/config/constant.json'
 export const state = () => ({
   selectedMenuIds: [],
   selectedTime: null,
-  selectedMenuIds: []
+  selectedMenuIds: [],
+  selectedMenu: null,
+  selectedOptions: []
 })
 
 /* mutations */
@@ -18,6 +20,10 @@ export const mutations = {
   },
   clearSelectedMenus() {
     state.selectedMenuIds = []
+  },
+  setSelectedMenu(state, menu, menuOptions) {
+    state.selectedMenu = menu
+    state.selectedOptions = menuOptions
   }
 }
 
@@ -26,11 +32,8 @@ export const actions = {
   selectTime({ commit }, time) {
     commit('selectTime', time)
   },
-  addSelectedMenu({ commit }, menuId) {
-    commit('addSelectedMenu', menuId)
-  },
-  clearSelectedMenus({ commit }) {
-    commit('clearSelectedMenus')
+  setSelectedMenu({ commit }, menu, menuOptions) {
+    commit('setSelectedMenu', menu, menuOptions)
   }
 }
 
@@ -46,10 +49,10 @@ export const getters = {
         if (selectedMenu !== undefined) {
           selectedMenus.push({
             id: selectedMenu.id,
-            categoryName: menuCategory.name,
-            menuName: selectedMenu.name,
+            name: menuCategory.name,
+            course: selectedMenu.name,
             price: selectedMenu.price_without_tax,
-            duration: selectedMenu.duration_minutes
+            time: selectedMenu.duration_minutes
           })
         }
       }

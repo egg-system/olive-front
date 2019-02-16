@@ -19,9 +19,8 @@
         >
           <template slot="items" slot-scope="props">
             <td>{{ props.item.name }}</td>
-            <td class="text-xs-right">{{ props.item.course }}</td>
-            <td class="text-xs-right">{{ props.item.price }}</td>
-            <td class="text-xs-right">{{ props.item.time }}</td>
+            <td class="text-xs-right">{{ props.item.price_without_tax | priceFormat }}</td>
+            <td class="text-xs-right">{{ props.item.duration_minutes | timeFormat }}</td>
           </template>
         </v-data-table>
       </v-flex>
@@ -33,41 +32,36 @@
 
 <script>
 export default {
+  filters: {
+    priceFormat: function(val) {
+      return val.toLocaleString() + '円'
+    },
+    timeFormat: function(val) {
+      return val + '分'
+    }
+  },
   props: {
     isFirst: {
       type: Boolean,
       required: true
     }
   },
-  data() {
-    return {
-      menu: [
-        {
-          name: '整体・マッサージ',
-          course: '通常整体コース',
-          price: '¥6,000（税抜）',
-          time: '60分'
-        },
-        {
-          name: '整体・マッサージ',
-          course: '足つぼ',
-          price: '¥2,000（税抜）',
-          time: '0分'
+  computed: {
+    menu() {
+      var menu = [this.$store.state.select.selectedMenu]
+      if (this.isFirst) {
+        const firstCharged = {
+          name: '初診料',
+          price_without_tax: '¥1,000（税抜）',
+          duration_minutes: '0分'
         }
-      ]
+        menu.push(firstCharged)
+      }
+      return menu
     }
   },
   beforeMount() {
     // 初めての場合は初診料を追加
-    if (this.isFirst) {
-      const firstCharged = {
-        name: '整体・マッサージ',
-        course: '初診料',
-        price: '¥1,000（税抜）',
-        time: '0分'
-      }
-      this.menu.push(firstCharged)
-    }
   }
 }
 </script>
@@ -75,9 +69,6 @@ export default {
 <style>
 .menu {
   text-align: left;
-}
-.v-card__text {
-  padding: 7px;
 }
 table.v-table tbody td:first-child {
   padding: 0px 10px;

@@ -1,9 +1,8 @@
 <style lang="scss">
 .menu-contents {
-  max-width: 500px;
-  width: 100%;
+  text-align: left;
   section.content-section {
-    margin: 20px 0;
+    margin-bottom: 20px;
     ul {
       padding-left: 0px;
     }
@@ -14,67 +13,95 @@
       border: solid 1px #000000;
       padding: 10px 0;
     }
-    .menu-item {
-      border: solid 1px #000000;
-      margin: 5px 0;
-      padding: 10px;
-      .menu-name {
-        font-weight: bold;
-      }
-      .menu-info {
-        text-align: left;
-        span {
-          margin-right: 10px;
-        }
-      }
-      p {
-        margin-top: 10px;
-        text-align: left;
+    .menu-name {
+      font-weight: bold;
+    }
+    .menu-info {
+      text-align: left;
+      span,
+      .description {
+        margin-left: 15px;
       }
     }
+    p {
+      margin-top: 10px;
+      text-align: left;
+    }
   }
+  .option-area {
+    width: 100%;
+  }
+}
+.v-input--selection-controls .v-input__control,
+.v-input--selection-controls {
+  width: 100%;
+  margin-top: 0px;
+  padding-top: 0px;
+}
+.slide-enter,
+.slide-leave-to {
+  transform: translateY(-100%);
+  opacity: 0;
 }
 </style>
 
 <template>
-  <section v-if="0 < menuCategories.length" class="container">
-    <div class="menu-contents">
-      <h1>{{ storeName }}</h1>
-      <section class="content-section">
-        <h2>メニューを選択してください</h2>
-        <ul>
-          <li v-for="menuCategory in menuCategories" :key="'categoryHead'+menuCategory.id" class="menu-category">
-            <a :href="'#menuHead'+menuCategory.id">{{ menuCategory.name }}</a>
-          </li>
-        </ul>
-      </section>
-      <section v-for="menuCategory in menuCategories" :key="'menuHead'+menuCategory.id" :id="'menuHead'+menuCategory.id" class="content-section">
-        <h2>{{ menuCategory.name }}</h2>
-        <div v-for="menu in menuCategory.menus" v-if="!menu.option_flg" :key="'menu'+menu.id" class="menu-item">
-          <div class="menu-info">
-            <span class="menu-name">{{ menu.name }}</span>
-            <span class="menu-price">{{ menu.price_without_tax }}円（税抜き）</span>
-            <span class="menu-duration">{{ menu.duration_minutes }}分</span>
-          </div>
-          <p>{{ menu.description }}</p>
-          <v-btn color="success" @click="selectMenu(menu.id)">
-            予約する
-          </v-btn>
-        </div>
-      </section>
-    </div>
+  <section v-if="0 < subStores.length" class="container">
+    <v-container grid-list-xl>
+      <v-layout column wrap class="menu-contents">
+        <shop-name />
+        <v-radio-group v-model="selectedMenu" column>
+          <section v-for="subStore in subStores" :key="'menuHead'+subStore.id" :id="'menuHead'+subStore.id" class="content-section">
+            <v-layout column wrap>
+              <v-flex>
+                <v-card dark color="red lighten-2">
+                  <v-card-text><h3>{{ subStore.name }}</h3></v-card-text>
+                </v-card>
+              </v-flex>
+              <v-flex>
+                <v-card v-for="menu in subStore.menus" :key="'menu'+menu.id">
+                  <v-card-title primary-title>
+                    <v-radio :value="menu.id" @change="selectedOptions = []">
+                      <div slot="label" class="menu-info">
+                        <span>{{ menu.name }}</span>
+                        <span class="menu-price">{{ menu.price_without_tax }}円（税抜き）</span>
+                        <span class="menu-duration">{{ menu.duration_minutes }}分</span>
+                        <div class="description">{{ menu.description }}</div>
+                      </div>
+                    </v-radio>
+                    <transition name="slide">
+                      <div v-if="menu.options != null && 0 < menu.options.length && selectedMenu==menu.id" :key="'option-area'+menu.id" class="option-area">
+                        <v-checkbox v-for="option in menu.options" v-model="selectedOptions" :key="'option'+option.id"
+                                    :value="option.id" :label="option.name"/>
+                      </div>
+                    </transition>
+                  </v-card-title>
+                </v-card>
+              </v-flex>
+            </v-layout>
+          </section>
+        </v-radio-group>
+        <reserve-btn @next="goNext"/>
+      </v-layout>
+    </v-container>
   </section>
 </template>
 
 <script>
 import { mapActions, mapState, mapMutations } from 'vuex'
+import ShopName from '~/components/pages/common/ShopName.vue'
+import ReserveBtn from '~/components/pages/menu/ReserveBtn.vue'
 export default {
+  components: {
+    ShopName,
+    ReserveBtn
+  },
+  data: function() {
+    return { selectedMenu: 0, selectedOptions: [] }
+  },
   computed: {
-    storeName() {
-      return this.$store.state.store.name
-    },
-    menuCategories() {
-      return this.$store.state.menu.menuCategories
+    subStores() {
+      return this.$store.state.menu.subStores
     }
   },
   created: function() {
@@ -82,16 +109,15 @@ export default {
     this.getMenus({ storeId: 1 })
   },
   methods: {
-    selectMenu: function(menuId) {
-      this.clearSelectedMenus()
-      this.addSelectedMenu(menuId)
+    goNext: function() {
+      var menu = this.$store.getters['menu/getMenu'](this.selectedMenu)
+      this.setSelectedMenu(menu, [])
       this.$router.push({ name: 'date' })
     },
     ...mapActions({
       getStore: 'store/getStore',
       getMenus: 'menu/getMenus',
-      addSelectedMenu: 'select/addSelectedMenu',
-      clearSelectedMenus: 'select/clearSelectedMenus'
+      setSelectedMenu: 'select/setSelectedMenu'
     })
   }
 }

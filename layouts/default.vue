@@ -28,13 +28,17 @@ export default {
   justify-content: center;
   align-items: center;
   text-align: center;
-  margin: 60px 0;
+  /*margin: 60px 0;*/
 }
-h2 {
-  background: #f4cccd;
-  display: block;
-  font-size: 18px;
-  padding: 5px 15px;
-  text-align: left;
+
+.v-card__text {
+  padding: 7px;
 }
+/*h2 {*/
+/*background: #f4cccd;*/
+/*display: block;*/
+/*font-size: 18px;*/
+/*padding: 5px 15px;*/
+/*text-align: left;*/
+/*}*/
 </style>

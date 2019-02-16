@@ -3,13 +3,13 @@ import config from '~/config/constant.json'
 
 /* state */
 export const state = () => ({
-  menuCategories: []
+  subStores: []
 })
 
 /* mutations */
 export const mutations = {
-  setMenuCategories(state, menuCategories) {
-    state.menuCategories = menuCategories
+  setMenus(state, subStores) {
+    state.subStores = subStores
   }
 }
 
@@ -19,6 +19,37 @@ export const actions = {
   async getMenus({ commit }, { storeId }) {
     const res = await axios.get(config.api.menu)
 
-    commit('setMenuCategories', res.data.categories)
+    commit('setMenus', res.data.sub_stores)
+  }
+}
+
+export const getters = {
+  getMenu(state) {
+    return function(menuId) {
+      var targetMenu = null
+      state.subStores.forEach(function(subStore) {
+        subStore.menus.forEach(function(menu) {
+          if (menu.id == menuId) {
+            targetMenu = menu
+            return true
+          }
+        })
+      })
+      return targetMenu
+    }
+  },
+  getOption(state, { optionId }) {
+    var targetOption = null
+    state.subStores.forEach(function(subStore) {
+      subStore.menus.forEach(function(menu) {
+        menu.forEach(function(option) {
+          if (option.id == optionId) {
+            targetOption = option
+            return true
+          }
+        })
+      })
+    })
+    return targetOption
   }
 }
