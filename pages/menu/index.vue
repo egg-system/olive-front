@@ -88,7 +88,7 @@
 </template>
 
 <script>
-import { mapActions, mapState, mapMutations } from 'vuex'
+import { mapActions, mapState, mapMutations, mapGetters } from 'vuex'
 import ShopName from '~/components/pages/common/ShopName.vue'
 import ReserveBtn from '~/components/pages/menu/ReserveBtn.vue'
 export default {
@@ -102,16 +102,30 @@ export default {
   computed: {
     subStores() {
       return this.$store.state.menu.subStores
-    }
+    },
+    ...mapGetters({ getMenu: 'menu/getMenu', getOption: 'menu/getOption' })
   },
   created: function() {
     this.getStore({ storeId: 1 })
     this.getMenus({ storeId: 1 })
+    var selectedMenu = this.$store.state.select.selectedMenu
+    var selectedOptions = this.$store.state.select.selectedOptions
+    if (selectedMenu !== null) {
+      this.selectedMenu = selectedMenu.id
+    }
+    selectedOptions.forEach(option => {
+      this.selectedOptions.push(option.id)
+    })
   },
   methods: {
     goNext: function() {
-      var menu = this.$store.getters['menu/getMenu'](this.selectedMenu)
-      this.setSelectedMenu(menu, [])
+      var menu = this.getMenu(this.selectedMenu)
+      var options = []
+      this.selectedOptions.forEach(optionId => {
+        var option = this.getOption(optionId)
+        options.push(option)
+      })
+      this.setSelectedMenu({ selectedMenu: menu, selectedOptions: options })
       this.$router.push({ name: 'date' })
     },
     ...mapActions({

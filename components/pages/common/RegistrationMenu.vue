@@ -37,7 +37,7 @@ export default {
       return val.toLocaleString() + '円'
     },
     timeFormat: function(val) {
-      return val + '分'
+      return val ? val + '分' : ''
     }
   },
   props: {
@@ -49,6 +49,11 @@ export default {
   computed: {
     menu() {
       var menu = [this.$store.state.select.selectedMenu]
+      if (this.$store.state.select.selectedOptions) {
+        this.$store.state.select.selectedOptions.forEach(option => {
+          menu.push(option)
+        })
+      }
       if (this.isFirst) {
         const firstCharged = {
           name: '初診料',

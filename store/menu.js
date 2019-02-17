@@ -38,18 +38,22 @@ export const getters = {
       return targetMenu
     }
   },
-  getOption(state, { optionId }) {
-    var targetOption = null
-    state.subStores.forEach(function(subStore) {
-      subStore.menus.forEach(function(menu) {
-        menu.forEach(function(option) {
-          if (option.id == optionId) {
-            targetOption = option
-            return true
+  getOption(state) {
+    return optionId => {
+      var targetOption = null
+      state.subStores.forEach(function(subStore) {
+        subStore.menus.forEach(function(menu) {
+          if (menu.options) {
+            menu.options.forEach(function(option) {
+              if (option.id == optionId) {
+                targetOption = option
+                return true
+              }
+            })
           }
         })
       })
-    })
-    return targetOption
+      return targetOption
+    }
   }
 }

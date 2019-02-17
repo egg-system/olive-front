@@ -21,9 +21,9 @@ export const mutations = {
   clearSelectedMenus() {
     state.selectedMenuIds = []
   },
-  setSelectedMenu(state, menu, menuOptions) {
-    state.selectedMenu = menu
-    state.selectedOptions = menuOptions
+  setSelectedMenu(state, { selectedMenu, selectedOptions }) {
+    state.selectedMenu = selectedMenu
+    state.selectedOptions = selectedOptions
   }
 }
 
