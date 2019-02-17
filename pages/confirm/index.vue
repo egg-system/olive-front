@@ -2,21 +2,17 @@
   <section class="container">
     <v-container grid-list-xl>
       <v-layout column wrap>
-        <div>
-          <h1>confirm</h1>
-          <div class="text-xs-center">
-            <nuxt-link to="/complete">
-              確定
-            </nuxt-link>
-            {{ this.$store.state.common.userInfo.firstName }}
-          </div>
-        </div>
         <shop-name />
-        <registration-menu :is-first="true" />
-        <registration-user-info />
-        <registration-confirm-info />
-        <registration-request />
-        <registration-confirm-btn />
+        <v-layout row>
+          <v-flex>
+            <v-card-text class="notyet">まだ予約は完了していません、ご予約内容の最終確認をしてください</v-card-text>
+          </v-flex>
+        </v-layout>
+        <registration-menu :is-confirm="true" />
+        <registration-user-info :is-confirm="true"/>
+        <registration-confirm-info :is-confirm="true"/>
+        <registration-request :is-confirm="true"/>
+        <fixed-btn />
       </v-layout>
     </v-container>
   </section>
@@ -28,7 +24,7 @@ import RegistrationUserInfo from '~/components/pages/common/RegistrationUserInfo
 import RegistrationMenu from '~/components/pages/common/RegistrationMenu.vue'
 import RegistrationConfirmInfo from '~/components/pages/common/RegistrationConfirmInfo.vue'
 import RegistrationRequest from '~/components/pages/common/RegistrationRequest.vue'
-import RegistrationConfirmBtn from '~/components/pages/common/RegistrationConfirmBtn.vue'
+import FixedBtn from '~/components/pages/confirm/FixedBtn.vue'
 
 export default {
   components: {
@@ -37,7 +33,14 @@ export default {
     RegistrationMenu,
     RegistrationConfirmInfo,
     RegistrationRequest,
-    RegistrationConfirmBtn
+    FixedBtn
   }
 }
 </script>
+
+<style>
+.notyet {
+  color: red;
+  font-weight: bolder;
+}
+</style>
