@@ -28,7 +28,7 @@
         >
           <template slot="items" slot-scope="props">
             <td>{{ props.item.name }}</td>
-            <td class="text-xs-right">¥{{ props.item.price_without_tax.toLocaleString() }}(税抜き)</td>
+            <td class="text-xs-right">{{ props.item.price_without_tax | priceFormat }}</td>
             <td class="text-xs-right">{{ props.item.duration_minutes | timeFormat }}</td>
           </template>
         </v-data-table>
@@ -51,11 +51,6 @@
 
 <script>
 export default {
-  filters: {
-    timeFormat: function(val) {
-      return val ? val + '分' : ''
-    }
-  },
   props: {
     isConfirm: {
       type: Boolean,

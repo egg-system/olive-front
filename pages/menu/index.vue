@@ -64,8 +64,8 @@
                     <v-radio :value="menu.id" @change="selectedOptions = []">
                       <div slot="label" class="menu-info">
                         <span>{{ menu.name }}</span>
-                        <span class="menu-price">{{ menu.price_without_tax }}円（税抜き）</span>
-                        <span class="menu-duration">{{ menu.duration_minutes }}分</span>
+                        <span class="menu-price">{{ menu.price_without_tax | priceFormat }}</span>
+                        <span class="menu-duration">{{ menu.duration_minutes | timeFormat }}</span>
                         <div class="description">{{ menu.description }}</div>
                       </div>
                     </v-radio>
