@@ -4,8 +4,17 @@
     <v-layout column wrap>
       <v-flex>
         <v-card dark color="red lighten-2">
-          <v-card-text><h3>選択済メニュー</h3></v-card-text>
+          <v-card-text><h3>予約内容</h3></v-card-text>
         </v-card>
+      </v-flex>
+    </v-layout>
+
+    <v-layout v-if="isConfirm" row>
+      <v-flex>
+        <v-card-text>来店日時</v-card-text>
+      </v-flex>
+      <v-flex>
+        <v-card-text>2019年1月21日（月）18:00〜</v-card-text>
       </v-flex>
     </v-layout>
 
@@ -19,12 +28,22 @@
         >
           <template slot="items" slot-scope="props">
             <td>{{ props.item.name }}</td>
-            <td class="text-xs-right">{{ props.item.price_without_tax | priceFormat }}</td>
+            <td class="text-xs-right">¥{{ props.item.price_without_tax.toLocaleString() }}(税抜き)</td>
             <td class="text-xs-right">{{ props.item.duration_minutes | timeFormat }}</td>
           </template>
         </v-data-table>
       </v-flex>
     </v-layout>
+
+    <v-layout v-if="isConfirm" row>
+      <v-flex>
+        <v-card-text>マイページからキャンセル可能期限</v-card-text>
+      </v-flex>
+      <v-flex>
+        <v-card-text>2019年1月18日（金）23:59</v-card-text>
+      </v-flex>
+    </v-layout>
+    <v-card-text v-if="isConfirm">※それ以降のキャンセルは直接サロンへご連絡ください。</v-card-text>
 
   </div>
 
@@ -33,17 +52,14 @@
 <script>
 export default {
   filters: {
-    priceFormat: function(val) {
-      return val.toLocaleString() + '円'
-    },
     timeFormat: function(val) {
       return val ? val + '分' : ''
     }
   },
   props: {
-    isFirst: {
+    isConfirm: {
       type: Boolean,
-      required: true
+      default: false
     }
   },
   computed: {
@@ -54,19 +70,36 @@ export default {
           menu.push(option)
         })
       }
-      if (this.isFirst) {
-        const firstCharged = {
-          name: '初診料',
-          price_without_tax: '¥1,000（税抜）',
-          duration_minutes: '0分'
-        }
-        menu.push(firstCharged)
-      }
       return menu
     }
   },
   beforeMount() {
-    // 初めての場合は初診料を追加
+    // 初めての場合は確認ページで初診料を追加
+    if (this.$store.state.registration.isFirst && this.isConfirm) {
+      const firstCharged = {
+        name: '整体・マッサージ',
+        course: '初診料',
+        price: 1000,
+        time: 0
+      }
+      this.menu.push(firstCharged)
+    }
+    // 確認ページでは合計を表示
+    if (this.isConfirm) {
+      let totalPrice = 0
+      let totalTime = 0
+      this.menu.forEach(obj => {
+        totalPrice += obj.price
+        totalTime += obj.time
+      })
+      const total = {
+        name: '',
+        course: '合計',
+        price: totalPrice,
+        time: totalTime
+      }
+      this.menu.push(total)
+    }
   }
 }
 </script>

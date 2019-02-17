@@ -3,7 +3,7 @@
     <v-layout column wrap>
       <v-flex>
         <v-card dark color="red lighten-2">
-          <v-card-text class="menu"><h3>お客様情報</h3></v-card-text>
+          <v-card-text><h3>お客様情報</h3></v-card-text>
         </v-card>
       </v-flex>
     </v-layout>
@@ -14,18 +14,20 @@
         <v-text-field
           v-model="firstName"
           :rules="firstNameRules"
+          :disabled="isConfirm"
+          :clearable="!isConfirm"
           type="text"
           label="姓"
-          clearable
         />
       </v-flex>
       <v-flex>
         <v-text-field
           v-model="lastName"
           :rules="lastNameRules"
+          :disabled="isConfirm"
+          :clearable="!isConfirm"
           type="text"
           label="名"
-          clearable
         />
       </v-flex>
     </v-layout>
@@ -36,18 +38,20 @@
         <v-text-field
           v-model="firstNameKana"
           :rules="firstNameRules"
+          :disabled="isConfirm"
+          :clearable="!isConfirm"
           type="text"
           label="セイ"
-          clearable
         />
       </v-flex>
       <v-flex>
         <v-text-field
           v-model="lastNameKana"
           :rules="lastNameRules"
+          :disabled="isConfirm"
+          :clearable="!isConfirm"
           type="text"
           label="メイ"
-          clearable
         />
       </v-flex>
     </v-layout>
@@ -59,19 +63,20 @@
           <v-text-field
             v-model="mail"
             :rules="mailRules"
+            :disabled="isConfirm"
+            :clearable="!isConfirm"
             type="text"
             label="メールアドレス"
-            clearable
           />
         </v-flex>
-        <v-flex>確認のため、再度メールアドレスを入力してください</v-flex>
-        <v-flex>
+        <v-flex v-if="!isConfirm">確認のため、再度メールアドレスを入力してください</v-flex>
+        <v-flex v-if="!isConfirm">
           <v-text-field
             v-model="mail2"
             :rules="mailRules"
+            clearable
             type="text"
             label="メールアドレス"
-            clearable
           />
         </v-flex>
       </v-layout>
@@ -84,9 +89,10 @@
           <v-text-field
             v-model="phoneNumber"
             :rules="phoneNumberRules"
+            :disabled="isConfirm"
+            :clearable="!isConfirm"
             type="text"
             label="電話番号"
-            clearable
           />
         </v-flex>
       </v-layout>
@@ -95,9 +101,9 @@
     <v-layout row>
       <v-flex xs3>初めてのご利用ですか？<span class="must">(必須)</span></v-flex>
       <v-flex>
-        <v-radio-group v-model="use" :mandatory="false" class="inputTop">
-          <v-radio label="初めてです(初診料 ¥1,000)" value="yes"/>
-          <v-radio label="いいえ、2回目以降です" value="no"/>
+        <v-radio-group :disabled="isConfirm" v-model="isFirst" :mandatory="false" class="inputTop">
+          <v-radio :value="true" label="初めてです(初診料 ¥1,000)"/>
+          <v-radio :value="false" label="いいえ、2回目以降です"/>
         </v-radio-group>
       </v-flex>
     </v-layout>
@@ -105,7 +111,7 @@
     <v-layout row>
       <v-flex xs3>回数券利用</v-flex>
       <v-flex>
-        <v-checkbox label="利用する" value="coupon" class="inputTop"/>
+        <v-checkbox :disabled="isConfirm" v-model="coupon" label="利用する" class="inputTop"/>
       </v-flex>
     </v-layout>
 
@@ -114,9 +120,11 @@
       <v-flex xs5>
         <v-select
           :items="pregnancyTerm"
+          :disabled="isConfirm"
+          v-model="pregnancyTermSelected"
         />
       </v-flex>
-      <v-flex xs5>
+      <v-flex v-if="!isConfirm" xs5>
         ※妊娠中の方は何ヶ月かご選択ください
       </v-flex>
     </v-layout>
@@ -126,9 +134,11 @@
       <v-flex xs5>
         <v-select
           :items="children"
+          :disabled="isConfirm"
+          v-model="childrenSelected"
         />
       </v-flex>
-      <v-flex xs5>
+      <v-flex v-if="!isConfirm" xs5>
         ※お子様連れの方は人数をご選択ください
       </v-flex>
     </v-layout>
@@ -136,7 +146,7 @@
     <v-layout row>
       <v-flex xs3>サロンからのメッセージ受信設定</v-flex>
       <v-flex>
-        <v-radio-group v-model="message" :mandatory="false" class="inputTop">
+        <v-radio-group :disabled="isConfirm" v-model="message" :mandatory="false" class="inputTop">
           <v-radio label="受け取る" value="yes"/>
           <v-radio label="受け取らない" value="no"/>
         </v-radio-group>
@@ -148,21 +158,16 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapMutations } from 'vuex'
 
 export default {
+  props: {
+    isConfirm: {
+      type: Boolean,
+      default: false
+    }
+  },
   data: () => ({
-    // firstName: '',
-    lastName: '',
-    firstNameKana: '',
-    lastNameKana: '',
-    mail: '',
-    mail2: '',
-    phoneNumber: '',
-    firstNameRules: [v => !!v || '必須入力です'],
-    lastNameRules: [v => !!v || '必須入力です'],
-    mailRules: [v => !!v || '必須入力です'],
-    phoneNumberRules: [v => !!v || '必須入力です'],
     pregnancyTerm: [
       '妊娠なし',
       '4ヶ月未満',
@@ -174,24 +179,124 @@ export default {
       '10ヶ月'
     ],
     children: ['なし', '1人', '2人', '3人', '4人'],
-    use: 'yes',
-    message: 'yes'
+    firstNameRules: [v => !!v || '必須入力です'],
+    lastNameRules: [v => !!v || '必須入力です'],
+    mailRules: [v => !!v || '必須入力です'],
+    phoneNumberRules: [v => !!v || '必須入力です']
   }),
   computed: {
     firstName: {
       get() {
-        return this.common.userInfo.firstName
+        return this.$store.state.registration.firstName
       },
       set(value) {
         this.setFirstName(value)
       }
     },
-    ...mapState({ common: 'common' })
+    lastName: {
+      get() {
+        return this.$store.state.registration.lastName
+      },
+      set(value) {
+        this.setLastName(value)
+      }
+    },
+    firstNameKana: {
+      get() {
+        return this.$store.state.registration.firstNameKana
+      },
+      set(value) {
+        this.setFirstNameKana(value)
+      }
+    },
+    lastNameKana: {
+      get() {
+        return this.$store.state.registration.lastNameKana
+      },
+      set(value) {
+        this.setLastNameKana(value)
+      }
+    },
+    mail: {
+      get() {
+        return this.$store.state.registration.mail
+      },
+      set(value) {
+        this.setMail(value)
+      }
+    },
+    mail2: {
+      get() {
+        return this.$store.state.registration.mail2
+      },
+      set(value) {
+        this.setMail2(value)
+      }
+    },
+    phoneNumber: {
+      get() {
+        return this.$store.state.registration.phoneNumber
+      },
+      set(value) {
+        this.setPhoneNumber(value)
+      }
+    },
+    coupon: {
+      get() {
+        return this.$store.state.registration.coupon
+      },
+      set(value) {
+        this.setCoupon(value)
+      }
+    },
+    pregnancyTermSelected: {
+      get() {
+        return this.$store.state.registration.pregnancyTermSelected
+      },
+      set(value) {
+        this.setPregnancyTermSelected(value)
+      }
+    },
+    childrenSelected: {
+      get() {
+        return this.$store.state.registration.childrenSelected
+      },
+      set(value) {
+        this.setChildrenSelected(value)
+      }
+    },
+    isFirst: {
+      get() {
+        return this.$store.state.registration.isFirst
+      },
+      set(value) {
+        this.setIsFirst(value)
+      }
+    },
+    message: {
+      get() {
+        return this.$store.state.registration.message
+      },
+      set(value) {
+        this.setMessage(value)
+      }
+    }
   },
   methods: {
-    ...mapMutations({
-      setFirstName: 'common/userInfo/setFirstName'
-    })
+    ...mapMutations('registration', [
+      'setFirstName',
+      'setLastName',
+      'setFirstNameKana',
+      'setLastNameKana',
+      'setMail',
+      'setMail2',
+      'setPhoneNumber',
+      'setCoupon',
+      'setPregnancyTermSelected',
+      'setChildrenSelected',
+      'setIsFirst',
+      'setMessage'
+    ])
   }
 }
 </script>
