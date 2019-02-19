@@ -119,8 +119,8 @@ export default {
   created: function() {
     this.getStore({ storeId: 1 })
     this.getMenus({ storeId: 1 })
-    var selectedMenu = this.$store.state.select.selectedMenu
-    var selectedOptions = this.$store.state.select.selectedOptions
+    let selectedMenu = this.$store.state.select.selectedMenu
+    let selectedOptions = this.$store.state.select.selectedOptions
     if (selectedMenu !== null) {
       this.selectedMenu = selectedMenu.id
     }
@@ -133,10 +133,10 @@ export default {
   },
   methods: {
     goNext: function() {
-      var menu = this.getMenu(this.selectedMenu)
-      var options = []
+      let menu = this.getMenu(this.selectedMenu)
+      let options = []
       this.selectedOptions.forEach(optionId => {
-        var option = this.getOption(optionId)
+        let option = this.getOption(optionId)
         if (this.selectedMultiNumbersOfOptions[optionId]) {
           option.multiNumber = this.selectedMultiNumbersOfOptions[optionId]
           option.price_without_tax =

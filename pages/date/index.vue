@@ -161,8 +161,8 @@ export default {
       }
     },
     dayFormat: function(value) {
-      var day = moment(value).day()
-      var dayDisp = ''
+      let day = moment(value).day()
+      let dayDisp = ''
       switch (day) {
         case 0:
           dayDisp = '日'
@@ -189,18 +189,13 @@ export default {
       return '(' + dayDisp + ')'
     },
     dayClass: function(value) {
-      var day = moment(value).day()
+      let day = moment(value).day()
       if (day == 0) {
         return 'holiday'
       } else if (day == 6) {
         return 'saturday'
       }
       return ''
-    },
-    isPast: function(value) {
-      var now = moment()
-      var time = moment(value)
-      return now.isAfter(time)
     }
   },
   data: function() {
@@ -212,7 +207,7 @@ export default {
     },
     timeSlots() {
       let store = this.$store.state.store
-      var slots = []
+      let slots = []
       for (let time = store.open_at; time < store.close_at; time++) {
         if (time < store.break_from || store.break_to <= time) {
           slots.push(time)
@@ -221,33 +216,33 @@ export default {
       return slots
     },
     calendar() {
-      var calendar = this.$store.state.date.calendar
-      var forwarPaddingDates = []
-      var rewardPaddingDates = []
+      let calendar = this.$store.state.date.calendar
+      let forwarPaddingDates = []
+      let rewardPaddingDates = []
       if (0 < calendar.length) {
-        var startDate = this.$moment(calendar[0].date)
-        var startDay = this.$moment(calendar[0].date).day()
+        let startDate = this.$moment(calendar[0].date)
+        let startDay = this.$moment(calendar[0].date).day()
         if (0 < startDay) {
           for (
-            var date = this.$moment(startDate).subtract(startDay, 'days');
+            let date = this.$moment(startDate).subtract(startDay, 'days');
             date.isBefore(startDate);
             date = date.add(1, 'days')
           ) {
-            var paddingDate = {}
+            let paddingDate = {}
             paddingDate.date = date.format('YYYYMMDD')
             paddingDate.disable = true
             forwarPaddingDates.push(paddingDate)
           }
         }
-        var endDate = this.$moment(calendar[calendar.length - 1].date)
-        var endDay = this.$moment(calendar[calendar.length - 1].date).day()
+        let endDate = this.$moment(calendar[calendar.length - 1].date)
+        let endDay = this.$moment(calendar[calendar.length - 1].date).day()
         if (endDay < 6) {
           for (
-            var date = this.$moment(endDate).add(1, 'days');
+            let date = this.$moment(endDate).add(1, 'days');
             date.day() != 0;
             date = date.add(1, 'days')
           ) {
-            var paddingDate = {}
+            let paddingDate = {}
             paddingDate.date = date.format('YYYYMMDD')
             paddingDate.disable = true
             rewardPaddingDates.push(paddingDate)
@@ -258,12 +253,12 @@ export default {
       calendar = calendar.concat(rewardPaddingDates)
 
       //一週間ごと配列にわける
-      var calendarByWeek = []
-      var weekArr = []
-      var firstMonth = ''
-      var firstMonthDays = 0
-      var secondMonth = null
-      for (var i = 0; i < calendar.length; i++) {
+      let calendarByWeek = []
+      let weekArr = []
+      let firstMonth = ''
+      let firstMonthDays = 0
+      let secondMonth = null
+      for (let i = 0; i < calendar.length; i++) {
         if (i % 7 === 0) {
           weekArr = []
           firstMonth = calendar[i].date
@@ -280,7 +275,7 @@ export default {
           firstMonthDays = i % 7
         }
         if (i % 7 === 6) {
-          var e = { data: weekArr, firstMonth: firstMonth }
+          let e = { data: weekArr, firstMonth: firstMonth }
           if (secondMonth !== null) {
             e.secondMonth = secondMonth
             e.firstMonthDays = firstMonthDays
@@ -292,7 +287,7 @@ export default {
     }
   },
   created: function() {
-    var selectedMenu = this.$store.state.select.selectedMenu
+    let selectedMenu = this.$store.state.select.selectedMenu
     if (selectedMenu === null) {
       this.$router.push({ name: 'menu' })
     }
@@ -305,11 +300,6 @@ export default {
     selectTime: function(time) {
       this.setSelectedTime(time)
       this.$router.push({ name: 'login' })
-    },
-    isPast: function(value) {
-      var now = this.$moment()
-      var time = this.$moment(value)
-      return now.isAfter(time)
     },
     ...mapActions({
       getCalendar: 'date/getCalendar',

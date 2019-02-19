@@ -26,7 +26,7 @@ export const actions = {
 export const getters = {
   getMenu(state) {
     return function(menuId) {
-      var targetMenu = null
+      let targetMenu = null
       state.subStores.forEach(function(subStore) {
         subStore.menus.forEach(function(menu) {
           if (menu.id == menuId) {
@@ -40,7 +40,7 @@ export const getters = {
   },
   getOption(state) {
     return optionId => {
-      var targetOption = null
+      let targetOption = null
       state.subStores.forEach(function(subStore) {
         subStore.menus.forEach(function(menu) {
           if (menu.options) {
