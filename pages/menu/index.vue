@@ -61,7 +61,7 @@
               <v-flex>
                 <v-card v-for="menu in subStore.menus" :key="'menu'+menu.id">
                   <v-card-title primary-title>
-                    <v-radio :value="menu.id" @change="selectedOptions = []">
+                    <v-radio :value="menu.id" @change="changeMenu">
                       <div slot="label" class="menu-info">
                         <span>{{ menu.name }}</span>
                         <span class="menu-price">{{ menu.price_without_tax | priceFormat }}</span>
@@ -71,8 +71,15 @@
                     </v-radio>
                     <transition name="slide">
                       <div v-if="menu.options != null && 0 < menu.options.length && selectedMenu==menu.id" :key="'option-area'+menu.id" class="option-area">
-                        <v-checkbox v-for="option in menu.options" v-model="selectedOptions" :key="'option'+option.id"
-                                    :value="option.id" :label="option.name"/>
+                        <div v-for="option in menu.options" :key="'option'+option.id">
+                          <v-checkbox v-model="selectedOptions" :value="option.id" @change="changeOption">
+                            <div slot="label" class="menu-info">
+                              <span>{{ option.name }}</span><span>{{ option.price_without_tax | priceFormat }}</span>
+                            </div>
+                          </v-checkbox>
+                          <v-select v-if="option.max_multi_number" :items="getCountListForSelect(option.max_multi_number, option.unit)"
+                                    v-model="selectedMultiNumbersOfOptions[option.id]" :disabled="!selectedOptions.includes(option.id)" />
+                        </div>
                       </div>
                     </transition>
                   </v-card-title>
@@ -97,7 +104,11 @@ export default {
     ReserveBtn
   },
   data: function() {
-    return { selectedMenu: 0, selectedOptions: [] }
+    return {
+      selectedMenu: 0,
+      selectedOptions: [],
+      selectedMultiNumbersOfOptions: []
+    }
   },
   computed: {
     subStores() {
@@ -115,6 +126,9 @@ export default {
     }
     selectedOptions.forEach(option => {
       this.selectedOptions.push(option.id)
+      if (option.multiNumber) {
+        this.selectedMultiNumbersOfOptions[option.id] = option.multiNumber
+      }
     })
   },
   methods: {
@@ -123,10 +137,42 @@ export default {
       var options = []
       this.selectedOptions.forEach(optionId => {
         var option = this.getOption(optionId)
+        if (this.selectedMultiNumbersOfOptions[optionId]) {
+          option.multiNumber = this.selectedMultiNumbersOfOptions[optionId]
+          option.price_without_tax =
+            option.price_without_tax * option.multiNumber
+        }
         options.push(option)
       })
       this.setSelectedMenu({ selectedMenu: menu, selectedOptions: options })
       this.$router.push({ name: 'date' })
+    },
+    getCountListForSelect: function(max, unit) {
+      let ret = []
+      for (let i = 1; i <= max; i++) {
+        ret.push({ value: i, text: i.toString() + unit })
+      }
+      return ret
+    },
+    changeOption: function(selectedOptions) {
+      let self = this
+      selectedOptions.forEach(optionId => {
+        if (!this.selectedMultiNumbersOfOptions[optionId]) {
+          this.selectedMultiNumbersOfOptions[optionId] = 1
+        }
+      })
+      console.log(self.selectedMultiNumbersOfOptions.keys())
+      let optionId
+      self.selectedMultiNumbersOfOptions.forEach((val, optionId) => {
+        console.log(optionId)
+        if (!selectedOptions.includes(optionId)) {
+          self.selectedMultiNumbersOfOptions.splice(optionId)
+        }
+      })
+    },
+    changeMenu: function(option) {
+      this.selectedOptions = []
+      this.selectedMultiNumbersOfOptions = []
     },
     ...mapActions({
       getStore: 'store/getStore',
