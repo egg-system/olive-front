@@ -74,7 +74,7 @@
                         <div v-for="option in menu.options" :key="'option'+option.id">
                           <v-checkbox v-model="selectedOptions" :value="option.id" @change="changeOption">
                             <div slot="label" class="menu-info">
-                              <span>{{ option.name }}</span><span>{{ option.price_without_tax | priceFormat }}</span>
+                              <span>{{ option.name }}</span><span>{{ option.price_without_tax | priceFormat }}</span><span v-if="option.max_multi_number">/&nbsp;{{ option.unit }}</span>
                             </div>
                           </v-checkbox>
                           <v-select v-if="option.max_multi_number" :items="getCountListForSelect(option.max_multi_number, option.unit)"
