@@ -203,10 +203,10 @@ export default {
   },
   computed: {
     store() {
-      return this.$store.state.store
+      return this.$store.state.store.store
     },
     timeSlots() {
-      let store = this.$store.state.store
+      let store = this.$store.state.store.store
       let slots = []
       for (let time = store.open_at; time < store.close_at; time++) {
         if (time < store.break_from || store.break_to <= time) {

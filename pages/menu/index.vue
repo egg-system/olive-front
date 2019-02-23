@@ -117,7 +117,6 @@ export default {
     ...mapGetters({ getMenu: 'menu/getMenu', getOption: 'menu/getOption' })
   },
   created: function() {
-    this.getStore({ storeId: 1 })
     this.getMenus({ storeId: 1 })
     let selectedMenu = this.$store.state.select.selectedMenu
     let selectedOptions = this.$store.state.select.selectedOptions

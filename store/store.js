@@ -3,21 +3,18 @@ import config from '~/config/constant.json'
 
 /* state */
 export const state = () => ({
-  name: '',
-  open_at: null,
-  close_at: null,
-  break_from: null,
-  break_to: null
+  store: null
 })
 
 /* mutations */
 export const mutations = {
   setStore(state, store) {
-    state.name = store.name
-    state.open_at = store.open_at
-    state.close_at = store.close_at
-    state.break_from = store.break_from
-    state.break_to = store.break_to
+    state.store = {}
+    state.store.name = store.name
+    state.store.open_at = store.open_at
+    state.store.close_at = store.close_at
+    state.store.break_from = store.break_from
+    state.store.break_to = store.break_to
   }
 }
 
