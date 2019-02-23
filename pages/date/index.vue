@@ -65,7 +65,7 @@ p {
         <section class="selected-menu">
           <div>
             <registration-menu :is-first="false"/>
-            <v-flex>
+            <v-flex v-if="!isTwoHourMenuSelected">
               <v-checkbox v-model="twoHoursCheck" :label="'2時間のご予約をご希望の方はこちらをチェックしてください。'"/>
             </v-flex>
           </div>
@@ -108,6 +108,9 @@ p {
                         <tr v-for="time in timeSlots" :key="time+'time_title'">
                           <td v-if="dateData.disable !== undefined || isPastTime(dateData.date + time)" class="disabled">-</td>
                           <td v-else-if="findRemainOfTime(dateData.date_slot, time) == 0" class="disabled">×</td>
+                          <td v-else-if="isTwoHour() && !isNextTimeRemaining(dateData.date_slot, time)" class="disabled">
+                            {{ findRemainOfTime(dateData.date_slot, time) | remainFormat }}
+                          </td>
                           <td v-else @click="selectTime(time)">
                             {{ findRemainOfTime(dateData.date_slot, time) | remainFormat }}
                           </td>
@@ -222,6 +225,7 @@ export default {
       if (0 < calendar.length) {
         let startDate = moment(calendar[0].date)
         let startDay = moment(calendar[0].date).day()
+        //取得したデータが週半ばの場合、空白セルを詰める
         if (0 < startDay) {
           for (
             let date = moment(startDate).subtract(startDay, 'days');
@@ -236,6 +240,7 @@ export default {
         }
         let endDate = moment(calendar[calendar.length - 1].date)
         let endDay = moment(calendar[calendar.length - 1].date).day()
+        //取得したデータが週の途中で終わる場合、空白セルを詰める
         if (endDay < 6) {
           for (
             let date = moment(endDate).add(1, 'days');
@@ -283,6 +288,10 @@ export default {
         }
       }
       return calendarByWeek
+    },
+    isTwoHourMenuSelected() {
+      let duration = this.$store.state.select.selectedMenu.duration_minutes
+      return duration == 120
     }
   },
   created: function() {
@@ -302,6 +311,22 @@ export default {
     },
     isPastTime: function(time) {
       return moment(time, 'YYYYMMDDkk').isBefore(moment())
+    },
+    isTwoHour: function() {
+      //２時間制のメニューを選択したか、この画面で２時間にチェックした場合true
+      return this.twoHoursCheck || this.isTwoHourMenuSelected
+    },
+    isNextTimeRemaining: function(dateSlot, time) {
+      let store = this.$store.state.store.store
+      let nextTime = Number(time) + 1
+      if (
+        (store.break_from <= nextTime && nextTime < store.break_to) ||
+        store.close_at <= nextTime
+      ) {
+        return false
+      }
+      let nextRemain = this.findRemainOfTime(dateSlot, nextTime.toString())
+      return 0 < nextRemain
     },
     findRemainOfTime: function(dateSlot, time) {
       return dateSlot.find(slot => slot.start_time.slice(-2) == time).remain

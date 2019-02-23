@@ -107,7 +107,7 @@ export default {
     return {
       selectedMenu: 0,
       selectedOptions: [],
-      selectedMultiNumbersOfOptions: []
+      selectedMultiNumbersOfOptions: [] //耳つぼジュエリーの個数
     }
   },
   computed: {
@@ -118,6 +118,7 @@ export default {
   },
   created: function() {
     this.getMenus({ storeId: 1 })
+    //次画面から戻ってきた場合、選択済みの値をstateから取り出し反映させる
     let selectedMenu = this.$store.state.select.selectedMenu
     let selectedOptions = this.$store.state.select.selectedOptions
     if (selectedMenu !== null) {
