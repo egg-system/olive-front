@@ -1,6 +1,6 @@
 <template>
   <v-layout row wrap>
-    <v-form v-if="!data.isLogin" ref="form" class="inputText">
+    <v-form ref="form" class="inputText">
       <v-text-field
         v-model="mail"
         :rules="nameRules"
