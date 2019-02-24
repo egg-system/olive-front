@@ -50,11 +50,14 @@ export const actions = {
         commit('setIsLogin', true)
         commit('setIsError', false)
         commit('setMail', result.data.mail)
+        return true
       } else {
         commit('setIsError', true)
+        return false
       }
     } else {
       commit('setIsError', true)
+      return false
     }
   }
 }

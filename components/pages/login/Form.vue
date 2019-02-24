@@ -1,19 +1,5 @@
 <template>
   <v-layout row wrap>
-    <div v-if="data.isLogin">
-      <v-avatar>
-        <img src="https://image.freepik.com/free-icon/no-translate-detected_318-10541.jpg">
-      </v-avatar>
-      {{ data.mail }}
-      <div>
-        <v-btn
-          color="warning"
-          @click="logoutBtn"
-        >
-          ログアウト
-        </v-btn>
-      </div>
-    </div>
     <v-form v-if="!data.isLogin" ref="form" class="inputText">
       <v-text-field
         v-model="mail"
@@ -78,10 +64,15 @@ export default {
     // ログインボタンを押した時の動き
     login() {
       // ログインチェック
-      this.checkLogin({ mail: this.mail, password: this.password })
-
-      // 画面遷移
-      // this.$router.push('/registration')
+      this.checkLogin({
+        mail: this.mail,
+        password: this.password
+      }).then(isLogin => {
+        if (isLogin) {
+          // 画面遷移
+          this.$router.push('/registration')
+        }
+      })
     },
     logoutBtn() {
       // フォームの値をクリアする
