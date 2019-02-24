@@ -205,14 +205,11 @@ export default {
     return { twoHoursCheck: false }
   },
   computed: {
-    store() {
-      return this.$store.state.store.store
-    },
     timeSlots() {
-      let store = this.$store.state.store.store
+      let shop = this.$store.state.shop
       let slots = []
-      for (let time = store.open_at; time < store.close_at; time++) {
-        if (time < store.break_from || store.break_to <= time) {
+      for (let time = shop.open_at; time < shop.close_at; time++) {
+        if (time < shop.break_from || shop.break_to <= time) {
           slots.push(time)
         }
       }
@@ -317,11 +314,11 @@ export default {
       return this.twoHoursCheck || this.isTwoHourMenuSelected
     },
     isNextTimeRemaining: function(dateSlot, time) {
-      let store = this.$store.state.store.store
+      let shop = this.$store.state.shop
       let nextTime = Number(time) + 1
       if (
-        (store.break_from <= nextTime && nextTime < store.break_to) ||
-        store.close_at <= nextTime
+        (shop.break_from <= nextTime && nextTime < shop.break_to) ||
+        shop.close_at <= nextTime
       ) {
         return false
       }

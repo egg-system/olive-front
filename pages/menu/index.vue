@@ -175,7 +175,6 @@ export default {
       this.selectedMultiNumbersOfOptions = []
     },
     ...mapActions({
-      getStore: 'store/getStore',
       getMenus: 'menu/getMenus',
       setSelectedMenu: 'select/setSelectedMenu'
     })

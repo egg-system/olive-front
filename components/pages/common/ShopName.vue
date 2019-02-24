@@ -9,17 +9,17 @@ import { mapActions } from 'vuex'
 export default {
   computed: {
     store() {
-      return this.$store.state.store.store
+      return this.$store.state.shop
     }
   },
   created: function() {
-    if (!this.$store.state.store.store) {
-      this.getStore({ storeId: 1 })
+    if (!this.$store.state.shop.id) {
+      this.getStore({ id: 1 })
     }
   },
   methods: {
     ...mapActions({
-      getStore: 'store/getStore'
+      getStore: 'shop/getShop'
     })
   }
 }
