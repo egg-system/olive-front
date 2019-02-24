@@ -5,7 +5,7 @@ import config from '~/config/constant.json'
 export const state = () => ({
   isLogin: false,
   isError: false,
-  userName: ''
+  mail: ''
 })
 
 /* getters */
@@ -21,8 +21,8 @@ export const mutations = {
   setIsError(state, error) {
     state.isError = error
   },
-  setUserName(state, userName) {
-    state.userName = userName
+  setMail(state, mail) {
+    state.mail = mail
   },
   logout(state) {
     state.isLogin = false
@@ -32,18 +32,27 @@ export const mutations = {
 /* actions */
 export const actions = {
   // ログインチェック
-  async checkLogin({ commit }, { userName, password }) {
+  async checkLogin({ commit }, { mail, password }) {
     // 一度エラーはリセットする
     commit('setIsError', false)
 
-    // TODO:インターフェースは仮なのであとで修正する
-    const res = await axios.get(config.api.login1)
-
-    // ユーザーの入力値と一致していたらログイン状態をセット
-    if (userName === res.data.userName && password === res.data.password) {
-      commit('setIsLogin', true)
-      commit('setIsError', false)
-      commit('setUserName', res.data.userName)
+    // TODO:myjsonがPOSTに対応してないので一旦GETにする
+    const result = await axios.get(config.api.login1, {
+      mail: mail,
+      password: password
+    })
+    console.log(result)
+    if (result.status === 200) {
+      // テスト用
+      if (mail === 'test1' && password === 'test1') {
+        console.log('success')
+        // ユーザーの入力値と一致していたらログイン状態をセット
+        commit('setIsLogin', true)
+        commit('setIsError', false)
+        commit('setMail', result.data.mail)
+      } else {
+        commit('setIsError', true)
+      }
     } else {
       commit('setIsError', true)
     }

@@ -4,7 +4,7 @@
       <v-avatar>
         <img src="https://image.freepik.com/free-icon/no-translate-detected_318-10541.jpg">
       </v-avatar>
-      {{ data.userName }}
+      {{ data.mail }}
       <div>
         <v-btn
           color="warning"
@@ -16,7 +16,7 @@
     </div>
     <v-form v-if="!data.isLogin" ref="form" class="inputText">
       <v-text-field
-        v-model="userName"
+        v-model="mail"
         :rules="nameRules"
         type="text"
         label="メールアドレス"
@@ -56,7 +56,7 @@ export default {
   data: () => ({
     show: false,
     isError: false,
-    userName: '',
+    mail: '',
     password: '',
     nameRules: [
       v => !!v || 'メールアドレスは必須入力です',
@@ -70,7 +70,7 @@ export default {
   }),
   computed: {
     canLogin() {
-      return this.userName !== '' && this.password !== ''
+      return this.mail !== '' && this.password !== ''
     },
     ...mapState({ data: 'login' })
   },
@@ -78,14 +78,14 @@ export default {
     // ログインボタンを押した時の動き
     login() {
       // ログインチェック
-      this.checkLogin({ userName: this.userName, password: this.password })
+      this.checkLogin({ mail: this.mail, password: this.password })
 
       // 画面遷移
       // this.$router.push('/registration')
     },
     logoutBtn() {
       // フォームの値をクリアする
-      this.userName = ''
+      this.mail = ''
       this.password = ''
       this.logout()
     },
