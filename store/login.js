@@ -41,11 +41,9 @@ export const actions = {
       mail: mail,
       password: password
     })
-    console.log(result)
     if (result.status === 200) {
       // テスト用
       if (mail === 'test1' && password === 'test1') {
-        console.log('success')
         // ユーザーの入力値と一致していたらログイン状態をセット
         commit('setIsLogin', true)
         commit('setIsError', false)
