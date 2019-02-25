@@ -3,23 +3,23 @@ import config from '~/config/constant.json'
 
 /* state */
 export const state = () => ({
-  subStores: []
+  subShops: []
 })
 
 /* mutations */
 export const mutations = {
-  setMenus(state, subStores) {
-    state.subStores = subStores
+  setMenus(state, subShops) {
+    state.subShops = subShops
   }
 }
 
 /* actions */
 export const actions = {
   // ログインチェック
-  async getMenus({ commit }, { storeId }) {
+  async getMenus({ commit }, { shopId }) {
     const res = await axios.get(config.api.menu)
 
-    commit('setMenus', res.data.sub_stores)
+    commit('setMenus', res.data.sub_shops)
   }
 }
 
@@ -27,8 +27,8 @@ export const getters = {
   getMenu(state) {
     return function(menuId) {
       let targetMenu = null
-      state.subStores.forEach(function(subStore) {
-        subStore.menus.forEach(function(menu) {
+      state.subShops.forEach(function(subShop) {
+        subShop.menus.forEach(function(menu) {
           if (menu.id == menuId) {
             targetMenu = menu
             return true
@@ -41,8 +41,8 @@ export const getters = {
   getOption(state) {
     return optionId => {
       let targetOption = null
-      state.subStores.forEach(function(subStore) {
-        subStore.menus.forEach(function(menu) {
+      state.subShops.forEach(function(subShop) {
+        subShop.menus.forEach(function(menu) {
           if (menu.options) {
             menu.options.forEach(function(option) {
               if (option.id == optionId) {

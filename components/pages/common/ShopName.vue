@@ -1,6 +1,6 @@
 <template>
   <v-flex align-self-baseline>
-    <div v-if="store">{{ store.name }}</div>
+    <div v-if="shop">{{ shop.name }}</div>
   </v-flex>
 </template>
 
@@ -8,18 +8,18 @@
 import { mapActions } from 'vuex'
 export default {
   computed: {
-    store() {
+    shop() {
       return this.$store.state.shop
     }
   },
   created: function() {
     if (!this.$store.state.shop.id) {
-      this.getStore({ id: 1 })
+      this.getShop({ id: 1 })
     }
   },
   methods: {
     ...mapActions({
-      getStore: 'shop/getShop'
+      getShop: 'shop/getShop'
     })
   }
 }

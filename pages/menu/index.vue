@@ -46,26 +46,26 @@
 </style>
 
 <template>
-  <section v-if="0 < subStores.length" class="container">
+  <section v-if="0 < subShops.length" class="container">
     <v-container grid-list-xl>
       <v-layout column wrap class="menu-contents">
         <shop-name />
         <v-radio-group v-model="selectedMenu" column>
-          <section v-for="subStore in subStores" :key="'menuHead'+subStore.id" :id="'menuHead'+subStore.id" class="content-section">
+          <section v-for="subShop in subShops" :key="'menuHead'+subShop.id" :id="'menuHead'+subShop.id" class="content-section">
             <v-layout column wrap>
               <v-flex>
                 <v-card dark color="red lighten-2">
-                  <v-card-text><h3>{{ subStore.name }}</h3></v-card-text>
+                  <v-card-text><h3>{{ subShop.name }}</h3></v-card-text>
                 </v-card>
               </v-flex>
               <v-flex>
-                <v-card v-for="menu in subStore.menus" :key="'menu'+menu.id">
+                <v-card v-for="menu in subShop.menus" :key="'menu'+menu.id">
                   <v-card-title primary-title>
                     <v-radio :value="menu.id" @change="changeMenu">
                       <div slot="label" class="menu-info">
                         <span>{{ menu.name }}</span>
-                        <span class="menu-price">{{ menu.price_without_tax | priceFormat }}</span>
-                        <span class="menu-duration">{{ menu.duration_minutes | timeFormat }}</span>
+                        <span class="menu-price">{{ menu.price | priceFormat }}</span>
+                        <span class="menu-duration">{{ menu.minutes | timeFormat }}</span>
                         <div class="description">{{ menu.description }}</div>
                       </div>
                     </v-radio>
@@ -74,10 +74,10 @@
                         <div v-for="option in menu.options" :key="'option'+option.id">
                           <v-checkbox v-model="selectedOptions" :value="option.id" @change="changeOption">
                             <div slot="label" class="menu-info">
-                              <span>{{ option.name }}</span><span>{{ option.price_without_tax | priceFormat }}</span><span v-if="option.max_multi_number">/&nbsp;{{ option.unit }}</span>
+                              <span>{{ option.name }}</span><span>{{ option.price | priceFormat }}</span><span v-if="option.max_number">/&nbsp;{{ option.unit }}</span>
                             </div>
                           </v-checkbox>
-                          <v-select v-if="option.max_multi_number" :items="getCountListForSelect(option.max_multi_number, option.unit)"
+                          <v-select v-if="option.max_number" :items="getCountListForSelect(option.max_number, option.unit)"
                                     v-model="selectedMultiNumbersOfOptions[option.id]" :disabled="!selectedOptions.includes(option.id)" />
                         </div>
                       </div>
@@ -111,8 +111,8 @@ export default {
     }
   },
   computed: {
-    subStores() {
-      return this.$store.state.menu.subStores
+    subShops() {
+      return this.$store.state.menu.subShops
     },
     ...mapGetters({ getMenu: 'menu/getMenu', getOption: 'menu/getOption' })
   },
@@ -139,8 +139,7 @@ export default {
         let option = this.getOption(optionId)
         if (this.selectedMultiNumbersOfOptions[optionId]) {
           option.multiNumber = this.selectedMultiNumbersOfOptions[optionId]
-          option.price_without_tax =
-            option.price_without_tax * option.multiNumber
+          option.price = option.price * option.multiNumber
         }
         options.push(option)
       })

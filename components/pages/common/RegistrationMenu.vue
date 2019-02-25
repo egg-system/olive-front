@@ -28,8 +28,8 @@
         >
           <template slot="items" slot-scope="props">
             <td>{{ props.item.name }}</td>
-            <td class="text-xs-right">{{ props.item.price_without_tax | priceFormat }}</td>
-            <td class="text-xs-right">{{ props.item.duration_minutes | timeFormat }}</td>
+            <td class="text-xs-right">{{ props.item.price | priceFormat }}</td>
+            <td class="text-xs-right">{{ props.item.minutes | timeFormat }}</td>
           </template>
         </v-data-table>
       </v-flex>
@@ -72,10 +72,9 @@ export default {
     // 初めての場合は確認ページで初診料を追加
     if (this.$store.state.registration.isFirst && this.isConfirm) {
       const firstCharged = {
-        name: '整体・マッサージ',
         course: '初診料',
         price: 1000,
-        time: 0
+        minutes: 0
       }
       this.menu.push(firstCharged)
     }
@@ -91,7 +90,7 @@ export default {
         name: '',
         course: '合計',
         price: totalPrice,
-        time: totalTime
+        minutes: totalTime
       }
       this.menu.push(total)
     }
