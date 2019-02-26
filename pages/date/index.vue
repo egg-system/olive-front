@@ -107,12 +107,12 @@ p {
                         <tr><td :class="dateData.date | dayClass">{{ dateData.date | dayFormat }}</td></tr>
                         <tr v-for="time in timeSlots" :key="time+'time_title'">
                           <td v-if="dateData.disable !== undefined || isPastTime(dateData.date + time)" class="disabled">-</td>
-                          <td v-else-if="findRemainOfTime(dateData.date_slot, time) == 0" class="disabled">×</td>
-                          <td v-else-if="isTwoHour() && !isNextTimeRemaining(dateData.date_slot, time)" class="disabled">
-                            {{ findRemainOfTime(dateData.date_slot, time) | remainFormat }}
+                          <td v-else-if="findRemainOfTime(dateData.time_slots, time) == 0" class="disabled">×</td>
+                          <td v-else-if="isTwoHour() && !isNextTimeRemaining(dateData.time_slots, time)" class="disabled">
+                            {{ findRemainOfTime(dateData.time_slots, time) | remainFormat }}
                           </td>
                           <td v-else @click="selectTime(time)">
-                            {{ findRemainOfTime(dateData.date_slot, time) | remainFormat }}
+                            {{ findRemainOfTime(dateData.time_slots, time) | remainFormat }}
                           </td>
                         </tr>
                       </tbody>
@@ -287,7 +287,7 @@ export default {
       return calendarByWeek
     },
     isTwoHourMenuSelected() {
-      let duration = this.$store.state.select.selectedMenu.duration_minutes
+      let duration = this.$store.state.select.selectedMenu.minutes
       return duration == 120
     }
   },
@@ -313,7 +313,7 @@ export default {
       //２時間制のメニューを選択したか、この画面で２時間にチェックした場合true
       return this.twoHoursCheck || this.isTwoHourMenuSelected
     },
-    isNextTimeRemaining: function(dateSlot, time) {
+    isNextTimeRemaining: function(timeSlots, time) {
       let shop = this.$store.state.shop
       let nextTime = Number(time) + 1
       if (
@@ -322,11 +322,11 @@ export default {
       ) {
         return false
       }
-      let nextRemain = this.findRemainOfTime(dateSlot, nextTime.toString())
+      let nextRemain = this.findRemainOfTime(timeSlots, nextTime.toString())
       return 0 < nextRemain
     },
-    findRemainOfTime: function(dateSlot, time) {
-      return dateSlot.find(slot => slot.start_time.slice(-2) == time).remain
+    findRemainOfTime: function(timeSlots, time) {
+      return timeSlots.find(slot => slot.start_time.slice(-2) == time).remain
     },
     ...mapActions({
       getCalendar: 'date/getCalendar',

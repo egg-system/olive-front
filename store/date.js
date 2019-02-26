@@ -25,6 +25,6 @@ export const actions = {
   async getCalendar({ commit }) {
     const res = await axios.get(config.api.date)
 
-    commit('setCalendar', res.data)
+    commit('setCalendar', res.data.date_slots)
   }
 }
