@@ -5,7 +5,13 @@ import config from '~/config/constant.json'
 export const state = () => ({
   isLogin: false,
   isError: false,
-  mail: ''
+  firstName: '',
+  lastName: '',
+  firstNameKana: '',
+  lastNameKana: '',
+  mail: '',
+  mail2: '',
+  phoneNumber: ''
 })
 
 /* getters */
@@ -21,8 +27,26 @@ export const mutations = {
   setIsError(state, error) {
     state.isError = error
   },
+  setFirstName(state, firstName) {
+    state.firstName = firstName
+  },
+  setLastName(state, lastName) {
+    state.lastName = lastName
+  },
+  setFirstNameKana(state, firstNameKana) {
+    state.firstNameKana = firstNameKana
+  },
+  setLastNameKana(state, lastNameKana) {
+    state.lastNameKana = lastNameKana
+  },
   setMail(state, mail) {
     state.mail = mail
+  },
+  setMail2(state, mail) {
+    state.mail2 = mail
+  },
+  setPhoneNumber(state, phoneNumber) {
+    state.phoneNumber = phoneNumber
   },
   logout(state) {
     state.isLogin = false
@@ -47,7 +71,13 @@ export const actions = {
         // ユーザーの入力値と一致していたらログイン状態をセット
         commit('setIsLogin', true)
         commit('setIsError', false)
-        commit('setMail', result.data.mail)
+        commit('setFirstName', result.data.first_name)
+        commit('setLastName', result.data.last_name)
+        commit('setFirstNameKana', result.data.first_name_kana)
+        commit('setLastNameKana', result.data.last_name_kana)
+        commit('setMail', mail)
+        commit('setMail2', mail)
+        commit('setPhoneNumber', result.data.phone_number)
         return true
       } else {
         commit('setIsError', true)

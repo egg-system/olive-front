@@ -187,7 +187,8 @@ export default {
   computed: {
     firstName: {
       get() {
-        return this.$store.state.registration.firstName
+        // return this.$store.state.registration.firstName
+        return this.$store.state.login.firstName
       },
       set(value) {
         this.setFirstName(value)
@@ -195,7 +196,8 @@ export default {
     },
     lastName: {
       get() {
-        return this.$store.state.registration.lastName
+        //return this.$store.state.registration.lastName
+        return this.$store.state.login.lastName
       },
       set(value) {
         this.setLastName(value)
@@ -203,7 +205,8 @@ export default {
     },
     firstNameKana: {
       get() {
-        return this.$store.state.registration.firstNameKana
+        //return this.$store.state.registration.firstNameKana
+        return this.$store.state.login.firstNameKana
       },
       set(value) {
         this.setFirstNameKana(value)
@@ -211,7 +214,8 @@ export default {
     },
     lastNameKana: {
       get() {
-        return this.$store.state.registration.lastNameKana
+        // return this.$store.state.registration.lastNameKana
+        return this.$store.state.login.lastNameKana
       },
       set(value) {
         this.setLastNameKana(value)
@@ -219,7 +223,8 @@ export default {
     },
     mail: {
       get() {
-        return this.$store.state.registration.mail
+        // return this.$store.state.registration.mail
+        return this.$store.state.login.mail
       },
       set(value) {
         this.setMail(value)
@@ -227,7 +232,8 @@ export default {
     },
     mail2: {
       get() {
-        return this.$store.state.registration.mail2
+        // return this.$store.state.registration.mail2
+        return this.$store.state.login.mail2
       },
       set(value) {
         this.setMail2(value)
@@ -235,7 +241,8 @@ export default {
     },
     phoneNumber: {
       get() {
-        return this.$store.state.registration.phoneNumber
+        // return this.$store.state.registration.phoneNumber
+        return this.$store.state.login.phoneNumber
       },
       set(value) {
         this.setPhoneNumber(value)
@@ -284,18 +291,27 @@ export default {
   },
   methods: {
     ...mapMutations('registration', [
+      // 'setFirstName',
+      // 'setLastName',
+      // 'setFirstNameKana',
+      // 'setLastNameKana',
+      // 'setMail',
+      // 'setMail2',
+      // 'setPhoneNumber',
+      'setCoupon',
+      'setPregnancyTermSelected',
+      'setChildrenSelected',
+      'setIsFirst',
+      'setMessage'
+    ]),
+    ...mapMutations('login', [
       'setFirstName',
       'setLastName',
       'setFirstNameKana',
       'setLastNameKana',
       'setMail',
       'setMail2',
-      'setPhoneNumber',
-      'setCoupon',
-      'setPregnancyTermSelected',
-      'setChildrenSelected',
-      'setIsFirst',
-      'setMessage'
+      'setPhoneNumber'
     ])
   }
 }

@@ -1,12 +1,5 @@
 /* state */
 const initialState = {
-  firstName: '',
-  lastName: '',
-  firstNameKana: '',
-  lastNameKana: '',
-  mail: '',
-  mail2: '',
-  phoneNumber: '',
   coupon: '',
   pregnancyTermSelected: '',
   childrenSelected: '',
@@ -19,27 +12,6 @@ export const state = () => Object.assign({}, initialState)
 
 /* mutations */
 export const mutations = {
-  setFirstName(state, firstName) {
-    state.firstName = firstName
-  },
-  setLastName(state, lastName) {
-    state.lastName = lastName
-  },
-  setFirstNameKana(state, firstNameKana) {
-    state.firstNameKana = firstNameKana
-  },
-  setLastNameKana(state, lastNameKana) {
-    state.lastNameKana = lastNameKana
-  },
-  setMail(state, mail) {
-    state.mail = mail
-  },
-  setMail2(state, mail2) {
-    state.mail2 = mail2
-  },
-  setPhoneNumber(state, phoneNumber) {
-    state.phoneNumber = phoneNumber
-  },
   setCoupon(state, coupon) {
     state.coupon = coupon
   },
