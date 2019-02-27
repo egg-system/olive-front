@@ -282,6 +282,10 @@ export default {
       }
     }
   },
+  beforeMount() {
+    // ローディングを解除
+    this.setIsLoading(false)
+  },
   methods: {
     ...mapMutations('registration', [
       'setCoupon',
@@ -297,7 +301,8 @@ export default {
       'setLastNameKana',
       'setMail',
       'setMail2',
-      'setPhoneNumber'
+      'setPhoneNumber',
+      'setIsLoading'
     ])
   }
 }

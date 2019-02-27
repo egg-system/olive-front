@@ -5,6 +5,7 @@ import config from '~/config/constant.json'
 export const state = () => ({
   isLogin: false,
   isError: false,
+  isLoading: false,
   firstName: '',
   lastName: '',
   firstNameKana: '',
@@ -26,6 +27,9 @@ export const mutations = {
   },
   setIsError(state, error) {
     state.isError = error
+  },
+  setIsLoading(state, isLoading) {
+    state.isLoading = isLoading
   },
   setFirstName(state, firstName) {
     state.firstName = firstName
@@ -59,6 +63,8 @@ export const actions = {
   async checkLogin({ commit }, { mail, password }) {
     // 一度エラーはリセットする
     commit('setIsError', false)
+    // ローディング中にする
+    commit('setIsLoading', true)
 
     // TODO:myjsonがPOSTに対応してないので一旦GETにする
     const result = await axios.get(config.api.login1, {
@@ -81,10 +87,12 @@ export const actions = {
         return true
       } else {
         commit('setIsError', true)
+        commit('setIsLoading', false)
         return false
       }
     } else {
       commit('setIsError', true)
+      commit('setIsLoading', false)
       return false
     }
   }

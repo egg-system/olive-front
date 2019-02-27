@@ -1,6 +1,7 @@
 <template>
   <section class="container">
-    <div>
+    <loading v-if="this.$store.state.login.isLoading" class="loading"/>
+    <div :class="{ hidden: this.$store.state.login.isLoading }" class="main" >
       <div>
         <h2>会員の方はログインしてください</h2>
         <login-form />
@@ -21,21 +22,22 @@
         </div>
 
       </div>
-  </div></section>
+    </div>
+  </section>
 </template>
 
 
 <script>
 import LoginForm from '~/components/pages/login/Form.vue'
+import Loading from '~/components/layouts/Loading.vue'
 
 export default {
   components: {
-    LoginForm
+    LoginForm,
+    Loading
   },
   methods: {
     resisterBtn() {
-      // this.$router.push('/registration')
-      // this.$router.push('https://olivebodycare.jp/web-reservation/email/')
       window.location = 'https://olivebodycare.jp/web-reservation/email/'
     },
     skipBtn() {
@@ -51,5 +53,20 @@ export default {
 }
 .v-btn {
   width: 200px;
+}
+.container {
+  position: relative;
+  z-index: 1;
+}
+.main {
+  position: absolute;
+  z-index: 2;
+}
+.loading {
+  position: absolute;
+  z-index: 3;
+}
+.hidden {
+  opacity: 0.3;
 }
 </style>
