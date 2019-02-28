@@ -5,11 +5,10 @@ import {
   createLocalVue
 } from '@vue/test-utils'
 import Vuex from 'vuex'
+import Vuetify from 'vuetify'
 import Login from '~/pages/login/index.vue'
 import Form from '~/components/pages/login/Form.vue'
-
-const localVue = createLocalVue()
-localVue.use(Vuex)
+import { state } from '~/store/login.js'
 
 describe('Login', () => {
   let actions
@@ -17,9 +16,15 @@ describe('Login', () => {
   let wrapper
 
   beforeEach(() => {
+    const localVue = createLocalVue()
+    localVue.use(Vuex)
+    localVue.use(Vuetify)
     store = new Vuex.Store({
-      state: {},
-      actions
+      modules: {
+        login: {
+          state
+        }
+      }
     })
 
     wrapper = shallowMount(Login, {
