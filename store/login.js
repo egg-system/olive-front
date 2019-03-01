@@ -71,7 +71,7 @@ export const actions = {
     commit('setIsLoading', true)
 
     // TODO:myjsonがPOSTに対応してないので一旦GETにする
-    const result = await axios.get(config.api.login1, {
+    const result = await axios.get(config.api.customerLogin, {
       mail: mail,
       password: password
     })

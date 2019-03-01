@@ -1,5 +1,8 @@
 {
   "api": {
-    "login1" : "https://api.myjson.com/bins/14vniu"
+    "customerLogin" : "https://api.myjson.com/bins/14vniu",
+    "customerCreate" : "https://api.myjson.com/bins/18ieba",
+    "customerReset" : "https://api.myjson.com/bins/18ieba",
+    "reserveCommit" : "https://api.myjson.com/bins/18ieba"
   }
 }
