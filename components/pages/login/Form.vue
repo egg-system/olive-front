@@ -50,8 +50,18 @@ export default {
         (!!v && v.length <= 100) || 'メールアドレスは100文字以内でお願いします'
     ],
     passwordRules: [
-      v => !!v || 'パスワードは必須入力です',
-      v => (!!v && v.length <= 30) || 'パスワードは30文字以内でお願いします'
+      v => {
+        if (!v) {
+          return 'パスワードは必須入力です'
+        }
+        const regex = new RegExp(
+          /^([a-z\d\.\*\+\^\|\[\]\(\)\?\$\{\}\-\"\'\`_<>~!=#@$%&]){8,100}$/i
+        )
+        if (!regex.exec(v)) {
+          return '英字/数字/記号の8文字以上100文字以内でお願いします'
+        }
+        return true
+      }
     ]
   }),
   computed: {
