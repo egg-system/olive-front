@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     resisterBtn() {
-      window.location = 'https://olivebodycare.jp/web-reservation/email/'
+      this.$router.push('/registration')
     },
     skipBtn() {
       this.$router.push('/registration')
