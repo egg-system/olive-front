@@ -6,6 +6,7 @@ export const state = () => ({
   isLogin: false,
   isError: false,
   isLoading: false,
+  id: '',
   firstName: '',
   lastName: '',
   firstNameKana: '',
@@ -30,6 +31,9 @@ export const mutations = {
   },
   setIsLoading(state, isLoading) {
     state.isLoading = isLoading
+  },
+  setId(state, id) {
+    state.id = id
   },
   setFirstName(state, firstName) {
     state.firstName = firstName
@@ -77,6 +81,7 @@ export const actions = {
         // ユーザーの入力値と一致していたらログイン状態をセット
         commit('setIsLogin', true)
         commit('setIsError', false)
+        commit('setId', result.data.customer_id)
         commit('setFirstName', result.data.first_name)
         commit('setLastName', result.data.last_name)
         commit('setFirstNameKana', result.data.first_name_kana)
