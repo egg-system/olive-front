@@ -3,7 +3,7 @@
     <v-form ref="form" class="inputText">
       <v-text-field
         v-model="mail"
-        :rules="nameRules"
+        :rules="mailRules"
         type="text"
         label="メールアドレス"
         clearable
@@ -37,6 +37,7 @@
 
 <script>
 import { mapActions, mapState, mapMutations } from 'vuex'
+import { checkMail, checkPassword } from '~/lib/validation'
 
 export default {
   data: () => ({
@@ -44,29 +45,14 @@ export default {
     isError: false,
     mail: '',
     password: '',
-    nameRules: [
-      v => !!v || 'メールアドレスは必須入力です',
-      v =>
-        (!!v && v.length <= 100) || 'メールアドレスは100文字以内でお願いします'
-    ],
-    passwordRules: [
-      v => {
-        if (!v) {
-          return 'パスワードは必須入力です'
-        }
-        const regex = new RegExp(
-          /^([a-z\d\.\*\+\^\|\[\]\(\)\?\$\{\}\-\"\'\`_<>~!=#@$%&]){8,100}$/i
-        )
-        if (!regex.exec(v)) {
-          return '英字/数字/記号の8文字以上100文字以内でお願いします'
-        }
-        return true
-      }
-    ]
+    mailRules: [mail => checkMail(mail)],
+    passwordRules: [password => checkPassword(password)]
   }),
   computed: {
     canLogin() {
-      return this.mail !== '' && this.password !== ''
+      return (
+        checkMail(this.mail) === true && checkPassword(this.password) === true
+      )
     },
     ...mapState({ data: 'login' })
   },
