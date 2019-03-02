@@ -21,9 +21,11 @@ export const mutations = {
   clearSelectedMenus() {
     state.selectedMenuIds = []
   },
-  setSelectedMenu(state, { selectedMenu, selectedOptions }) {
+  setSelectedMenu(state, selectedMenu) {
     state.selectedMenu = selectedMenu
-    state.selectedOptions = selectedOptions
+  },
+  setSelectedOptions(state, options) {
+    state.selectedOptions = options
   }
 }
 
@@ -31,9 +33,6 @@ export const mutations = {
 export const actions = {
   selectTime({ commit }, time) {
     commit('selectTime', time)
-  },
-  setSelectedMenu({ commit }, menu, menuOptions) {
-    commit('setSelectedMenu', menu, menuOptions)
   }
 }
 

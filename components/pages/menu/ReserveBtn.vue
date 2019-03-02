@@ -15,7 +15,7 @@
 export default {
   methods: {
     next() {
-      this.$emit('next')
+      this.$router.push({ name: 'date' })
     }
   }
 }

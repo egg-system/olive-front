@@ -38,6 +38,9 @@ export const getters = {
       return targetMenu
     }
   },
+  getFirstMenu(state) {
+    return state.subShops[0].menus[0]
+  },
   getOption(state) {
     return optionId => {
       let targetOption = null
