@@ -59,7 +59,6 @@ export default {
   z-index: 1;
 }
 .main {
-  position: absolute;
   z-index: 2;
 }
 .loading {
