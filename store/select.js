@@ -7,7 +7,8 @@ export const state = () => ({
   selectedTime: null,
   selectedMenuIds: [],
   selectedMenu: null,
-  selectedOptions: []
+  selectedOptions: [],
+  twoHoursCheck: false
 })
 
 /* mutations */
@@ -26,6 +27,9 @@ export const mutations = {
   },
   setSelectedOptions(state, options) {
     state.selectedOptions = options
+  },
+  setTwoHoursCheck(state, val) {
+    state.twoHoursCheck = val
   }
 }
 
@@ -57,5 +61,8 @@ export const getters = {
       }
     }
     return selectedMenus
+  },
+  isTwoHour(state) {
+    return state.twoHoursCheck || 120 == state.selectedMenu.minutes
   }
 }

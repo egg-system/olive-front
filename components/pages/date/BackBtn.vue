@@ -15,7 +15,7 @@
 export default {
   methods: {
     back() {
-      this.$emit('back')
+      this.$router.go(-1)
     }
   }
 }
