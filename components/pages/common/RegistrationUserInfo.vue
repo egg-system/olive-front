@@ -13,7 +13,7 @@
       <v-flex>
         <v-text-field
           v-model="firstName"
-          :rules="firstNameRules"
+          :rules="nameRules"
           :disabled="isConfirm"
           :clearable="!isConfirm"
           type="text"
@@ -23,7 +23,7 @@
       <v-flex>
         <v-text-field
           v-model="lastName"
-          :rules="lastNameRules"
+          :rules="nameRules"
           :disabled="isConfirm"
           :clearable="!isConfirm"
           type="text"
@@ -37,7 +37,7 @@
       <v-flex>
         <v-text-field
           v-model="firstNameKana"
-          :rules="firstNameRules"
+          :rules="nameKanaRules"
           :disabled="isConfirm"
           :clearable="!isConfirm"
           type="text"
@@ -47,7 +47,7 @@
       <v-flex>
         <v-text-field
           v-model="lastNameKana"
-          :rules="lastNameRules"
+          :rules="nameKanaRules"
           :disabled="isConfirm"
           :clearable="!isConfirm"
           type="text"
@@ -159,6 +159,13 @@
 
 <script>
 import { mapMutations } from 'vuex'
+import {
+  checkMail,
+  checkPassword,
+  checkName,
+  checkNameKana,
+  checkPhoneNumber
+} from '~/lib/validation'
 
 export default {
   props: {
@@ -179,10 +186,10 @@ export default {
       '10ヶ月'
     ],
     children: ['なし', '1人', '2人', '3人', '4人'],
-    firstNameRules: [v => !!v || '必須入力です'],
-    lastNameRules: [v => !!v || '必須入力です'],
-    mailRules: [v => !!v || '必須入力です'],
-    phoneNumberRules: [v => !!v || '必須入力です']
+    nameRules: [name => checkName(name)],
+    nameKanaRules: [nameKana => checkNameKana(nameKana)],
+    mailRules: [mail => checkMail(mail)],
+    phoneNumberRules: [phoneNumber => checkPhoneNumber(phoneNumber)]
   }),
   computed: {
     firstName: {

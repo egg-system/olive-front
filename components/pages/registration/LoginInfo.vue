@@ -27,7 +27,7 @@
         <v-flex>
           <v-text-field
             v-model="password2"
-            :rules="passwordRules2"
+            :rules="passwordRules"
             :append-icon="show2 ? 'visibility_off' : 'visibility'"
             :type="show2 ? 'text' : 'password'"
             label="パスワード"
@@ -52,8 +52,7 @@ export default {
     show2: false,
     password: '',
     password2: '',
-    passwordRules: [password => checkPassword(password)],
-    passwordRules2: [password => checkPassword(password)]
+    passwordRules: [password => checkPassword(password)]
   })
 }
 </script>

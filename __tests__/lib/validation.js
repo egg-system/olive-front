@@ -1,4 +1,10 @@
-import { checkMail, checkPassword } from '~/lib/validation'
+import {
+  checkMail,
+  checkPassword,
+  checkName,
+  checkNameKana,
+  checkPhoneNumber
+} from '~/lib/validation'
 
 describe('lib/validation', () => {
   describe('checkMail', () => {
@@ -18,6 +24,7 @@ describe('lib/validation', () => {
       expect(ret).toBe(true)
     })
   })
+
   describe('checkPassword', () => {
     test('パスワードが空', () => {
       const password = ''
@@ -37,6 +44,50 @@ describe('lib/validation', () => {
     test('正しいパスワード', () => {
       const password = '0)!($UTA$$$$$**FJEROIJF*RG})'
       const ret = checkPassword(password)
+      expect(ret).toBe(true)
+    })
+  })
+
+  describe('checkName', () => {
+    test('氏名が空', () => {
+      const name = ''
+      const ret = checkName(name)
+      expect(ret).toBe('氏名は必須入力です')
+    })
+  })
+
+  describe('checkNameKana', () => {
+    test('氏名カナが空', () => {
+      const nameKana = ''
+      const ret = checkNameKana(nameKana)
+      expect(ret).toBe('氏名(カナ)は必須入力です')
+    })
+    test('氏名カナが全角カナ以外', () => {
+      const nameKana = 'あいうえお'
+      const ret = checkNameKana(nameKana)
+      expect(ret).toBe('氏名(カナ)は全角カタカナでお願いします')
+    })
+    test('正しい氏名カナ', () => {
+      const nameKana = 'アイウエオ'
+      const ret = checkNameKana(nameKana)
+      expect(ret).toBe(true)
+    })
+  })
+
+  describe('checkPhoneNumber', () => {
+    test('電話番号が空', () => {
+      const phoneNumber = ''
+      const ret = checkPhoneNumber(phoneNumber)
+      expect(ret).toBe('電話番号は必須入力です')
+    })
+    test('電話番号が半角数字以外', () => {
+      const phoneNumber = '０１２３４５６７８９'
+      const ret = checkPhoneNumber(phoneNumber)
+      expect(ret).toBe('電話番号は半角数字のみでお願いします')
+    })
+    test('正しい電話番号', () => {
+      const phoneNumber = '0123456789'
+      const ret = checkPhoneNumber(phoneNumber)
       expect(ret).toBe(true)
     })
   })
