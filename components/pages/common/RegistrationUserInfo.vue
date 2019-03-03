@@ -267,7 +267,10 @@ export default {
     },
     isFirst: {
       get() {
-        return this.$store.state.registration.isFirst
+        // ログイン済みの場合は2回目以降とする
+        return this.$store.state.login.isLogin
+          ? false
+          : this.$store.state.registration.isFirst
       },
       set(value) {
         this.setIsFirst(value)
