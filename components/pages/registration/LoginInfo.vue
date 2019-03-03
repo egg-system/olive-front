@@ -44,13 +44,15 @@
 </template>
 
 <script>
+import { checkPassword } from '~/lib/validation'
+
 export default {
   data: () => ({
     show: false,
     password: '',
     password2: '',
-    passwordRules: [v => !!v || '必須入力です'],
-    passwordRules2: [v => !!v || '必須入力です']
+    passwordRules: [password => checkPassword(password)],
+    passwordRules2: [password => checkPassword(password)]
   })
 }
 </script>
