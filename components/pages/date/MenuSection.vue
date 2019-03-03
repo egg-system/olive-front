@@ -26,7 +26,7 @@ export default {
       }
     },
     isTwoHourMenuSelected: function() {
-      let minutes = this.$store.state.select.selectedMenu.minutes
+      let minutes = this.$store.state.select.menu.minutes
       return minutes == 120
     }
   },

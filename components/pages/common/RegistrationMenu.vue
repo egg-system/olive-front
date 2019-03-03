@@ -59,9 +59,9 @@ export default {
   },
   computed: {
     menu() {
-      let menu = [this.$store.state.select.selectedMenu]
-      if (this.$store.state.select.selectedOptions) {
-        this.$store.state.select.selectedOptions.forEach(option => {
+      let menu = [this.$store.state.select.menu]
+      if (this.$store.state.select.options) {
+        this.$store.state.select.options.forEach(option => {
           menu.push(option)
         })
       }

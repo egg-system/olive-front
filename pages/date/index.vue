@@ -11,7 +11,6 @@
   </section>
 </template>
 
-
 <script>
 import { mapActions, mapState, mapMutations, mapGetters } from 'vuex'
 import ShopName from '~/components/pages/common/ShopName.vue'

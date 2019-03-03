@@ -232,9 +232,9 @@ export default {
       return timeSlots.find(slot => slot.start_time.slice(-2) == time).remain
     },
     ...mapActions({
-      getCalendar: 'date/getCalendar',
-      setSelectedTime: 'select/selectTime'
+      getCalendar: 'date/getCalendar'
     }),
+    ...mapMutations('select', ['setSelectedTime']),
     ...mapGetters({
       isTwoHour: 'select/isTwoHour'
     })
