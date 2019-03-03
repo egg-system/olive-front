@@ -28,12 +28,12 @@
           <v-text-field
             v-model="password2"
             :rules="passwordRules2"
-            :append-icon="show ? 'visibility_off' : 'visibility'"
-            :type="show ? 'text' : 'password'"
+            :append-icon="show2 ? 'visibility_off' : 'visibility'"
+            :type="show2 ? 'text' : 'password'"
             label="パスワード"
             clearable
             class="input-password"
-            @click:append="show = !show"
+            @click:append="show2 = !show2"
           />
         </v-flex>
       </v-layout>
@@ -49,6 +49,7 @@ import { checkPassword } from '~/lib/validation'
 export default {
   data: () => ({
     show: false,
+    show2: false,
     password: '',
     password2: '',
     passwordRules: [password => checkPassword(password)],
