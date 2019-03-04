@@ -81,6 +81,14 @@
         </v-flex>
       </v-layout>
     </v-layout>
+    <v-alert v-if="!checkSame"
+             :value="true"
+             color="error"
+             icon="warning"
+             outline
+    >
+      同じメールアドレスを入力してください
+    </v-alert>
 
     <v-layout row>
       <v-flex xs3>電話番号<span class="must">(必須)</span></v-flex>
@@ -164,7 +172,8 @@ import {
   checkPassword,
   checkName,
   checkNameKana,
-  checkPhoneNumber
+  checkPhoneNumber,
+  checkSame
 } from '~/lib/validation'
 
 export default {
@@ -290,6 +299,12 @@ export default {
       set(value) {
         this.setMessage(value)
       }
+    },
+    checkSame() {
+      return checkSame(
+        this.$store.state.login.mail,
+        this.$store.state.login.mail2
+      )
     }
   },
   beforeMount() {

@@ -38,13 +38,21 @@
         </v-flex>
       </v-layout>
     </v-layout>
+    <v-alert v-if="!checkSame"
+             :value="true"
+             color="error"
+             icon="warning"
+             outline
+    >
+      同じパスワードを入力してください
+    </v-alert>
 
   </div>
 
 </template>
 
 <script>
-import { checkPassword } from '~/lib/validation'
+import { checkPassword, checkSame } from '~/lib/validation'
 
 export default {
   data: () => ({
@@ -53,7 +61,12 @@ export default {
     password: '',
     password2: '',
     passwordRules: [password => checkPassword(password)]
-  })
+  }),
+  computed: {
+    checkSame() {
+      return checkSame(this.password, this.password2)
+    }
+  }
 }
 </script>
 
