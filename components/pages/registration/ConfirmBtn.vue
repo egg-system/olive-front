@@ -34,7 +34,8 @@ export default {
         this.$store.state.login.lastNameKana === '' ||
         this.$store.state.login.mail === '' ||
         this.$store.state.login.mail2 === '' ||
-        this.$store.state.login.phoneNumber === ''
+        this.$store.state.login.phoneNumber === '' ||
+        this.$store.state.registration.isOk === null
       ) {
         return false
       }

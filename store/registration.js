@@ -1,11 +1,11 @@
 /* state */
 const initialState = {
-  coupon: '',
+  coupon: null,
   pregnancyTermSelected: '',
   childrenSelected: '',
   isFirst: true,
   message: 'yes',
-  isOk: '',
+  isOk: null,
   request: ''
 }
 export const state = () => Object.assign({}, initialState)
