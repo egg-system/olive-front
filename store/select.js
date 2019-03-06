@@ -28,5 +28,11 @@ export const mutations = {
 export const getters = {
   isTwoHour(state) {
     return state.twoHoursCheck || 120 == state.menu.minutes
+  },
+  isMenuSelected(state) {
+    return state.menu != null
+  },
+  isTimeSelected(state) {
+    return state.time != null
   }
 }

@@ -50,6 +50,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import _ from 'lodash'
 export default {
   props: {
     isConfirm: {
@@ -59,20 +61,32 @@ export default {
   },
   computed: {
     menu() {
-      let menu = [this.$store.state.select.menu]
+      if (!this.isMenuSelected()) {
+        return []
+      }
+      let menu = _.clone(this.$store.state.select.menu)
+      if (this.$store.state.select.twoHoursCheck) {
+        menu.price *= 2
+        menu.minutes = 120
+      }
+      let menus = [menu]
       if (this.$store.state.select.options) {
         this.$store.state.select.options.forEach(option => {
-          menu.push(option)
+          menus.push(option)
         })
       }
-      return menu
+      return menus
     }
   },
   beforeMount() {
+    //メニュー選択がまだならTOPに飛ばす。確認画面で日時選択がまだならTOPに飛ばす
+    if (!this.isMenuSelected() || (this.isConfirm && !this.isTimeSelected())) {
+      this.$router.push('/')
+    }
     // 初めての場合は確認ページで初診料を追加
     if (this.$store.state.registration.isFirst && this.isConfirm) {
       const firstCharged = {
-        course: '初診料',
+        name: '初診料',
         price: 1000,
         minutes: 0
       }
@@ -87,13 +101,18 @@ export default {
         totalTime += obj.time
       })
       const total = {
-        name: '',
-        course: '合計',
+        name: '合計',
         price: totalPrice,
         minutes: totalTime
       }
       this.menu.push(total)
     }
+  },
+  methods: {
+    ...mapGetters({
+      isMenuSelected: 'select/isMenuSelected',
+      isTimeSelected: 'select/isTimeSelected'
+    })
   }
 }
 </script>

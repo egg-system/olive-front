@@ -201,6 +201,9 @@ export default {
       return calendarByWeek
     },
     isTwoHourMenuSelected() {
+      if (!this.isMenuSelected()) {
+        return false
+      }
       let duration = this.$store.state.select.selectedMenu.minutes
       return duration == 120
     }
@@ -211,7 +214,11 @@ export default {
   methods: {
     selectTime: function(time) {
       this.setSelectedTime(time)
-      this.$router.push({ name: 'login' })
+      if (this.isLogin()) {
+        this.$router.push({ name: 'registration' })
+      } else {
+        this.$router.push({ name: 'login' })
+      }
     },
     isPastTime: function(time) {
       return moment(time, 'YYYYMMDDkk').isBefore(moment())
@@ -236,7 +243,9 @@ export default {
     }),
     ...mapMutations('select', ['setSelectedTime']),
     ...mapGetters({
-      isTwoHour: 'select/isTwoHour'
+      isMenuSelected: 'select/isMenuSelected',
+      isTwoHour: 'select/isTwoHour',
+      isLogin: 'login/isLogin'
     })
   }
 }

@@ -41,6 +41,7 @@
 
 <script>
 import { mapActions, mapState, mapMutations, mapGetters } from 'vuex'
+import _ from 'lodash'
 export default {
   data: function() {
     return {
@@ -139,7 +140,7 @@ export default {
       this.selectedNumbersOfOptions = []
     },
     getOptionNumberSet(optionParam) {
-      let option = JSON.parse(JSON.stringify(optionParam))
+      let option = _.clone(optionParam)
       if (this.selectedNumbersOfOptions[option.id]) {
         option.number = this.selectedNumbersOfOptions[option.id]
         option.price = option.price * option.number

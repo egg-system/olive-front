@@ -26,12 +26,16 @@ export default {
       }
     },
     isTwoHourMenuSelected: function() {
+      if (!this.isMenuSelected()) {
+        return false
+      }
       let minutes = this.$store.state.select.menu.minutes
       return minutes == 120
     }
   },
   methods: {
-    ...mapMutations('select', ['setTwoHoursCheck'])
+    ...mapMutations('select', ['setTwoHoursCheck']),
+    ...mapGetters('select', ['isMenuSelected'])
   }
 }
 </script>
