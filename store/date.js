@@ -10,12 +10,6 @@ export const state = () => ({
 export const mutations = {
   setCalendar(state, calendar) {
     state.calendar = calendar
-  },
-  addSelectedMenu(state, id) {
-    state.selectedMenuIds.push(id)
-  },
-  clearSelectedMenus() {
-    state.selectedMenuIds = []
   }
 }
 
