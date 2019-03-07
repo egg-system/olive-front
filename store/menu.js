@@ -27,8 +27,8 @@ export const getters = {
   getMenu(state) {
     return function(menuId) {
       let targetMenu = null
-      state.subShops.forEach(function(subShop) {
-        subShop.menus.forEach(function(menu) {
+      state.subShops.forEach(subShop => {
+        subShop.menus.forEach(menu => {
           if (menu.id == menuId) {
             targetMenu = menu
             return true
@@ -38,14 +38,11 @@ export const getters = {
       return targetMenu
     }
   },
-  getFirstMenu(state) {
-    return state.subShops[0].menus[0]
-  },
   getOption(state) {
     return optionId => {
       let targetOption = null
-      state.subShops.forEach(function(subShop) {
-        subShop.menus.forEach(function(menu) {
+      state.subShops.forEach(subShop => {
+        subShop.menus.forEach(menu => {
           if (menu.options) {
             menu.options.forEach(function(option) {
               if (option.id == optionId) {

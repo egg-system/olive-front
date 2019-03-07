@@ -86,8 +86,7 @@ export default {
     },
     ...mapGetters({
       getMenu: 'menu/getMenu',
-      getOption: 'menu/getOption',
-      getFirstMenu: 'menu/getFirstMenu'
+      getOption: 'menu/getOption'
     })
   },
   watch: {
