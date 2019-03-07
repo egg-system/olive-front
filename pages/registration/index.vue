@@ -5,7 +5,7 @@
         <shop-name />
         <registration-menu />
         <registration-user-info />
-        <login-info v-if="!this.$store.state.login.isLogin" />
+        <login-info v-if="!this.$store.state.login.isLogin && this.$store.state.login.isCreate" />
         <registration-confirm-info />
         <registration-request />
         <confirm-btn />

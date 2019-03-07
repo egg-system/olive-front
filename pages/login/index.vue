@@ -30,6 +30,7 @@
 <script>
 import LoginForm from '~/components/pages/login/Form.vue'
 import Loading from '~/components/layouts/Loading.vue'
+import { mapMutations } from 'vuex'
 
 export default {
   components: {
@@ -38,11 +39,16 @@ export default {
   },
   methods: {
     resisterBtn() {
+      // 会員登録あり
+      this.setIsCreate(true)
       this.$router.push('/registration')
     },
     skipBtn() {
+      // 会員登録なし
+      this.setIsCreate(false)
       this.$router.push('/registration')
-    }
+    },
+    ...mapMutations('login', ['setIsCreate'])
   }
 }
 </script>

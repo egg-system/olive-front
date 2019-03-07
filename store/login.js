@@ -4,6 +4,7 @@ import config from '~/config/constant.json'
 /* state */
 export const state = () => ({
   isLogin: false,
+  isCreate: false,
   isError: false,
   isLoading: false,
   id: '',
@@ -25,6 +26,9 @@ export const getters = {
 export const mutations = {
   setIsLogin(state, isLogin) {
     state.isLogin = isLogin
+  },
+  setIsCreate(state, isCreate) {
+    state.isCreate = isCreate
   },
   setIsError(state, error) {
     state.isError = error
