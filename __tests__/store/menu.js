@@ -13,12 +13,9 @@ describe('store/menu.js', () => {
 
   describe('actions', () => {
     test('getMenus success', async () => {
+      expect(store.state.subShops.length).toBe(0)
       await store.dispatch('getMenus', { storeId: 1 })
       expect(store.state.subShops.length).not.toBe(0)
-    })
-
-    test('getMenus is not called', async () => {
-      expect(store.state.subShops.length).toBe(0)
     })
   })
 
