@@ -1,5 +1,26 @@
 <template>
   <v-flex align-self-baseline>
-    <div>オリーヴボディーケア　◯◯店</div>
+    <div v-if="shop">{{ shop.name }}</div>
   </v-flex>
 </template>
+
+<script>
+import { mapActions } from 'vuex'
+export default {
+  computed: {
+    shop() {
+      return this.$store.state.shop
+    }
+  },
+  created: function() {
+    if (!this.$store.state.shop.id) {
+      this.getShop({ id: 1 })
+    }
+  },
+  methods: {
+    ...mapActions({
+      getShop: 'shop/getShop'
+    })
+  }
+}
+</script>
