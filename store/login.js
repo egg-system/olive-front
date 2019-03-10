@@ -15,7 +15,8 @@ export const state = () => ({
   mail: '',
   mail2: '',
   phoneNumber: '',
-  password: ''
+  password: '',
+  password2: ''
 })
 
 /* getters */
@@ -63,6 +64,9 @@ export const mutations = {
   },
   setPassword(state, password) {
     state.password = password
+  },
+  setPassword2(state, password2) {
+    state.password2 = password2
   },
   logout(state) {
     state.isLogin = false
