@@ -28,9 +28,8 @@
         >
           <template slot="items" slot-scope="props">
             <td>{{ props.item.name }}</td>
-            <td class="text-xs-right">{{ props.item.course }}</td>
-            <td class="text-xs-right">¥{{ props.item.price.toLocaleString() }}(税抜き)</td>
-            <td class="text-xs-right">{{ props.item.time }}分</td>
+            <td class="text-xs-right">{{ props.item.price | priceFormat }}</td>
+            <td class="text-xs-right">{{ props.item.minutes | timeFormat }}</td>
           </template>
         </v-data-table>
       </v-flex>
@@ -51,6 +50,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import _ from 'lodash'
 export default {
   props: {
     isConfirm: {
@@ -58,32 +59,36 @@ export default {
       default: false
     }
   },
-  data() {
-    return {
-      menu: [
-        {
-          name: '整体・マッサージ',
-          course: '通常整体コース',
-          price: 6000,
-          time: 60
-        },
-        {
-          name: '整体・マッサージ',
-          course: '足つぼ',
-          price: 2000,
-          time: 0
-        }
-      ]
+  computed: {
+    menu() {
+      if (!this.isMenuSelected()) {
+        return []
+      }
+      let menu = _.clone(this.$store.state.select.menu)
+      if (this.$store.state.select.twoHoursCheck) {
+        menu.price *= 2
+        menu.minutes = 120
+      }
+      let menus = [menu]
+      if (this.$store.state.select.options) {
+        this.$store.state.select.options.forEach(option => {
+          menus.push(option)
+        })
+      }
+      return menus
     }
   },
   beforeMount() {
+    //メニュー選択がまだならTOPに飛ばす。確認画面で日時選択がまだならTOPに飛ばす
+    if (!this.isMenuSelected() || (this.isConfirm && !this.isTimeSelected())) {
+      this.$router.push('/')
+    }
     // 初めての場合は確認ページで初診料を追加
     if (this.$store.state.registration.isFirst && this.isConfirm) {
       const firstCharged = {
-        name: '整体・マッサージ',
-        course: '初診料',
+        name: '初診料',
         price: 1000,
-        time: 0
+        minutes: 0
       }
       this.menu.push(firstCharged)
     }
@@ -96,13 +101,18 @@ export default {
         totalTime += obj.time
       })
       const total = {
-        name: '',
-        course: '合計',
+        name: '合計',
         price: totalPrice,
-        time: totalTime
+        minutes: totalTime
       }
       this.menu.push(total)
     }
+  },
+  methods: {
+    ...mapGetters({
+      isMenuSelected: 'select/isMenuSelected',
+      isTimeSelected: 'select/isTimeSelected'
+    })
   }
 }
 </script>
@@ -110,9 +120,6 @@ export default {
 <style>
 .menu {
   text-align: left;
-}
-.v-card__text {
-  padding: 7px;
 }
 table.v-table tbody td:first-child {
   padding: 0px 10px;
