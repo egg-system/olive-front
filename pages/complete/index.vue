@@ -5,9 +5,12 @@
         <shop-name />
         <v-layout row>
           <v-flex>
-            <v-card-text class="complete">
+            <v-card-text v-if="!registration.isError" class="complete">
               予約を確定しました。<br>
               予約確定メールをお送りしましたので、ご確認ください。
+            </v-card-text>
+            <v-card-text v-if="registration.isError" class="complete">
+              予約エラーが発生しました。お手数ですが最初からやり直してください。
             </v-card-text>
           </v-flex>
         </v-layout>
@@ -18,7 +21,7 @@
 </template>
 
 <script>
-import { mapMutations, mapActions } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 import ShopName from '~/components/pages/common/ShopName.vue'
 import NextBtn from '~/components/pages/complete/NextBtn.vue'
 
@@ -27,6 +30,9 @@ export default {
     ShopName,
     NextBtn
   },
+  computed: mapState({
+    registration: state => state.registration
+  }),
   beforeMount() {
     // 予約内容をクリア
     this.reset()
