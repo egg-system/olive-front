@@ -1,23 +1,9 @@
 <template>
   <v-layout row wrap>
-    <div v-if="data.isLogin">
-      <v-avatar>
-        <img src="https://image.freepik.com/free-icon/no-translate-detected_318-10541.jpg">
-      </v-avatar>
-      {{ data.userName }}
-      <div>
-        <v-btn
-          color="warning"
-          @click="logoutBtn"
-        >
-          ログアウト
-        </v-btn>
-      </div>
-    </div>
-    <v-form v-if="!data.isLogin" ref="form" class="inputText">
+    <v-form ref="form" class="inputText">
       <v-text-field
-        v-model="userName"
-        :rules="nameRules"
+        v-model="mail"
+        :rules="mailRules"
         type="text"
         label="メールアドレス"
         clearable
@@ -51,26 +37,22 @@
 
 <script>
 import { mapActions, mapState, mapMutations } from 'vuex'
+import { checkMail, checkPassword } from '~/lib/validation'
 
 export default {
   data: () => ({
     show: false,
     isError: false,
-    userName: '',
+    mail: '',
     password: '',
-    nameRules: [
-      v => !!v || 'メールアドレスは必須入力です',
-      v =>
-        (!!v && v.length <= 100) || 'メールアドレスは100文字以内でお願いします'
-    ],
-    passwordRules: [
-      v => !!v || 'パスワードは必須入力です',
-      v => (!!v && v.length <= 30) || 'パスワードは30文字以内でお願いします'
-    ]
+    mailRules: [mail => checkMail(mail)],
+    passwordRules: [password => checkPassword(password)]
   }),
   computed: {
     canLogin() {
-      return this.userName !== '' && this.password !== ''
+      return (
+        checkMail(this.mail) === true && checkPassword(this.password) === true
+      )
     },
     ...mapState({ data: 'login' })
   },
@@ -78,14 +60,19 @@ export default {
     // ログインボタンを押した時の動き
     login() {
       // ログインチェック
-      this.checkLogin({ userName: this.userName, password: this.password })
-
-      // 画面遷移
-      // this.$router.push('/registration')
+      this.checkLogin({
+        mail: this.mail,
+        password: this.password
+      }).then(isLogin => {
+        if (isLogin) {
+          // 画面遷移
+          this.$router.push('/registration')
+        }
+      })
     },
     logoutBtn() {
       // フォームの値をクリアする
-      this.userName = ''
+      this.mail = ''
       this.password = ''
       this.logout()
     },

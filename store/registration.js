@@ -1,45 +1,21 @@
+import axios from 'axios'
+import config from '~/config/constant.json'
+
 /* state */
 const initialState = {
-  firstName: '',
-  lastName: '',
-  firstNameKana: '',
-  lastNameKana: '',
-  mail: '',
-  mail2: '',
-  phoneNumber: '',
-  coupon: '',
+  menuId: '',
+  coupon: null,
   pregnancyTermSelected: '',
   childrenSelected: '',
   isFirst: true,
   message: 'yes',
-  isOk: '',
+  isOk: null,
   request: ''
 }
 export const state = () => Object.assign({}, initialState)
 
 /* mutations */
 export const mutations = {
-  setFirstName(state, firstName) {
-    state.firstName = firstName
-  },
-  setLastName(state, lastName) {
-    state.lastName = lastName
-  },
-  setFirstNameKana(state, firstNameKana) {
-    state.firstNameKana = firstNameKana
-  },
-  setLastNameKana(state, lastNameKana) {
-    state.lastNameKana = lastNameKana
-  },
-  setMail(state, mail) {
-    state.mail = mail
-  },
-  setMail2(state, mail2) {
-    state.mail2 = mail2
-  },
-  setPhoneNumber(state, phoneNumber) {
-    state.phoneNumber = phoneNumber
-  },
   setCoupon(state, coupon) {
     state.coupon = coupon
   },
@@ -63,5 +39,18 @@ export const mutations = {
   },
   reset(state) {
     state = Object.assign(state, initialState)
+  }
+}
+
+/* actions */
+export const actions = {
+  async reserveCommit({ state }, customerId) {
+    console.log(state)
+    // 予約確定APIの実行
+    const result = await axios.get(config.api.reserveCommit, {
+      menu_id: state.menuId,
+      is_first: state.isFirst,
+      customer_id: customerId
+    })
   }
 }

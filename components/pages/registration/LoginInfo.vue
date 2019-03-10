@@ -27,31 +27,46 @@
         <v-flex>
           <v-text-field
             v-model="password2"
-            :rules="passwordRules2"
-            :append-icon="show ? 'visibility_off' : 'visibility'"
-            :type="show ? 'text' : 'password'"
+            :rules="passwordRules"
+            :append-icon="show2 ? 'visibility_off' : 'visibility'"
+            :type="show2 ? 'text' : 'password'"
             label="パスワード"
             clearable
             class="input-password"
-            @click:append="show = !show"
+            @click:append="show2 = !show2"
           />
         </v-flex>
       </v-layout>
     </v-layout>
+    <v-alert v-if="!checkSame"
+             :value="true"
+             color="error"
+             icon="warning"
+             outline
+    >
+      同じパスワードを入力してください
+    </v-alert>
 
   </div>
 
 </template>
 
 <script>
+import { checkPassword, checkSame } from '~/lib/validation'
+
 export default {
   data: () => ({
     show: false,
+    show2: false,
     password: '',
     password2: '',
-    passwordRules: [v => !!v || '必須入力です'],
-    passwordRules2: [v => !!v || '必須入力です']
-  })
+    passwordRules: [password => checkPassword(password)]
+  }),
+  computed: {
+    checkSame() {
+      return checkSame(this.password, this.password2)
+    }
+  }
 }
 </script>
 

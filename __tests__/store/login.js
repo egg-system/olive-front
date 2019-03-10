@@ -22,7 +22,7 @@ describe('store/login.js', () => {
   describe('actions', () => {
     test('checkLogin failed', async () => {
       await store.dispatch('checkLogin', {
-        userName: 'aaaa',
+        mail: 'aaaa',
         password: 'aaaa'
       })
       expect(store.state.isLogin).toBe(false)
@@ -30,8 +30,8 @@ describe('store/login.js', () => {
 
     test('checkLogin success', async () => {
       await store.dispatch('checkLogin', {
-        userName: 'test1',
-        password: 'test1'
+        mail: 'test1@test',
+        password: '12345678'
       })
       expect(store.state.isLogin).toBe(true)
     })

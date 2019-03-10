@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapMutations, mapActions } from 'vuex'
 import ShopName from '~/components/pages/common/ShopName.vue'
 import NextBtn from '~/components/pages/complete/NextBtn.vue'
 
@@ -30,9 +30,14 @@ export default {
   beforeMount() {
     // 予約内容をクリア
     this.reset()
+    // 予約確定
+    this.reserveCommit('customerId')
   },
   methods: {
-    ...mapMutations('registration', ['reset'])
+    ...mapMutations('registration', ['reset']),
+    ...mapActions({
+      reserveCommit: 'registration/reserveCommit'
+    })
   }
 }
 </script>

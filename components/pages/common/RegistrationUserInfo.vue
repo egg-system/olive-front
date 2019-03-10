@@ -13,7 +13,7 @@
       <v-flex>
         <v-text-field
           v-model="firstName"
-          :rules="firstNameRules"
+          :rules="nameRules"
           :disabled="isConfirm"
           :clearable="!isConfirm"
           type="text"
@@ -23,7 +23,7 @@
       <v-flex>
         <v-text-field
           v-model="lastName"
-          :rules="lastNameRules"
+          :rules="nameRules"
           :disabled="isConfirm"
           :clearable="!isConfirm"
           type="text"
@@ -37,7 +37,7 @@
       <v-flex>
         <v-text-field
           v-model="firstNameKana"
-          :rules="firstNameRules"
+          :rules="nameKanaRules"
           :disabled="isConfirm"
           :clearable="!isConfirm"
           type="text"
@@ -47,7 +47,7 @@
       <v-flex>
         <v-text-field
           v-model="lastNameKana"
-          :rules="lastNameRules"
+          :rules="nameKanaRules"
           :disabled="isConfirm"
           :clearable="!isConfirm"
           type="text"
@@ -81,6 +81,14 @@
         </v-flex>
       </v-layout>
     </v-layout>
+    <v-alert v-if="!checkSame"
+             :value="true"
+             color="error"
+             icon="warning"
+             outline
+    >
+      同じメールアドレスを入力してください
+    </v-alert>
 
     <v-layout row>
       <v-flex xs3>電話番号<span class="must">(必須)</span></v-flex>
@@ -159,6 +167,14 @@
 
 <script>
 import { mapMutations } from 'vuex'
+import {
+  checkMail,
+  checkPassword,
+  checkName,
+  checkNameKana,
+  checkPhoneNumber,
+  checkSame
+} from '~/lib/validation'
 
 export default {
   props: {
@@ -179,15 +195,15 @@ export default {
       '10ヶ月'
     ],
     children: ['なし', '1人', '2人', '3人', '4人'],
-    firstNameRules: [v => !!v || '必須入力です'],
-    lastNameRules: [v => !!v || '必須入力です'],
-    mailRules: [v => !!v || '必須入力です'],
-    phoneNumberRules: [v => !!v || '必須入力です']
+    nameRules: [name => checkName(name)],
+    nameKanaRules: [nameKana => checkNameKana(nameKana)],
+    mailRules: [mail => checkMail(mail)],
+    phoneNumberRules: [phoneNumber => checkPhoneNumber(phoneNumber)]
   }),
   computed: {
     firstName: {
       get() {
-        return this.$store.state.registration.firstName
+        return this.$store.state.login.firstName
       },
       set(value) {
         this.setFirstName(value)
@@ -195,7 +211,7 @@ export default {
     },
     lastName: {
       get() {
-        return this.$store.state.registration.lastName
+        return this.$store.state.login.lastName
       },
       set(value) {
         this.setLastName(value)
@@ -203,7 +219,7 @@ export default {
     },
     firstNameKana: {
       get() {
-        return this.$store.state.registration.firstNameKana
+        return this.$store.state.login.firstNameKana
       },
       set(value) {
         this.setFirstNameKana(value)
@@ -211,7 +227,7 @@ export default {
     },
     lastNameKana: {
       get() {
-        return this.$store.state.registration.lastNameKana
+        return this.$store.state.login.lastNameKana
       },
       set(value) {
         this.setLastNameKana(value)
@@ -219,7 +235,7 @@ export default {
     },
     mail: {
       get() {
-        return this.$store.state.registration.mail
+        return this.$store.state.login.mail
       },
       set(value) {
         this.setMail(value)
@@ -227,7 +243,7 @@ export default {
     },
     mail2: {
       get() {
-        return this.$store.state.registration.mail2
+        return this.$store.state.login.mail2
       },
       set(value) {
         this.setMail2(value)
@@ -235,7 +251,7 @@ export default {
     },
     phoneNumber: {
       get() {
-        return this.$store.state.registration.phoneNumber
+        return this.$store.state.login.phoneNumber
       },
       set(value) {
         this.setPhoneNumber(value)
@@ -267,7 +283,10 @@ export default {
     },
     isFirst: {
       get() {
-        return this.$store.state.registration.isFirst
+        // ログイン済みの場合は2回目以降とする
+        return this.$store.state.login.isLogin
+          ? false
+          : this.$store.state.registration.isFirst
       },
       set(value) {
         this.setIsFirst(value)
@@ -280,10 +299,27 @@ export default {
       set(value) {
         this.setMessage(value)
       }
+    },
+    checkSame() {
+      return checkSame(
+        this.$store.state.login.mail,
+        this.$store.state.login.mail2
+      )
     }
+  },
+  beforeMount() {
+    // ローディングを解除
+    this.setIsLoading(false)
   },
   methods: {
     ...mapMutations('registration', [
+      'setCoupon',
+      'setPregnancyTermSelected',
+      'setChildrenSelected',
+      'setIsFirst',
+      'setMessage'
+    ]),
+    ...mapMutations('login', [
       'setFirstName',
       'setLastName',
       'setFirstNameKana',
@@ -291,11 +327,7 @@ export default {
       'setMail',
       'setMail2',
       'setPhoneNumber',
-      'setCoupon',
-      'setPregnancyTermSelected',
-      'setChildrenSelected',
-      'setIsFirst',
-      'setMessage'
+      'setIsLoading'
     ])
   }
 }

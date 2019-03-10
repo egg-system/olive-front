@@ -1,6 +1,7 @@
 <template>
   <section class="container">
-    <div>
+    <loading v-if="this.$store.state.login.isLoading" class="loading"/>
+    <div :class="{ hidden: this.$store.state.login.isLoading }" class="main" >
       <div>
         <h2>会員の方はログインしてください</h2>
         <login-form />
@@ -21,24 +22,33 @@
         </div>
 
       </div>
-  </div></section>
+    </div>
+  </section>
 </template>
 
 
 <script>
 import LoginForm from '~/components/pages/login/Form.vue'
+import Loading from '~/components/layouts/Loading.vue'
+import { mapActions, mapMutations } from 'vuex'
 
 export default {
   components: {
-    LoginForm
+    LoginForm,
+    Loading
   },
   methods: {
     resisterBtn() {
+      // 会員登録あり
+      this.setIsCreate(true)
       this.$router.push('/registration')
     },
     skipBtn() {
+      // 会員登録なし
+      this.setIsCreate(false)
       this.$router.push('/registration')
-    }
+    },
+    ...mapMutations('login', ['setIsCreate'])
   }
 }
 </script>
@@ -49,5 +59,19 @@ export default {
 }
 .v-btn {
   width: 200px;
+}
+.container {
+  position: relative;
+  z-index: 1;
+}
+.main {
+  z-index: 2;
+}
+.loading {
+  position: absolute;
+  z-index: 3;
+}
+.hidden {
+  opacity: 0.3;
 }
 </style>
