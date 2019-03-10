@@ -33,7 +33,7 @@ export default {
   computed: mapState({
     registration: state => state.registration
   }),
-  beforeMount() {
+  created() {
     // 予約内容をクリア
     this.reset()
     // 予約確定
