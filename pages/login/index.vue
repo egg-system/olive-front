@@ -30,7 +30,7 @@
 <script>
 import LoginForm from '~/components/pages/login/Form.vue'
 import Loading from '~/components/layouts/Loading.vue'
-import { mapMutations } from 'vuex'
+import { mapActions, mapMutations } from 'vuex'
 
 export default {
   components: {

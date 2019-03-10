@@ -1,5 +1,9 @@
+import axios from 'axios'
+import config from '~/config/constant.json'
+
 /* state */
 const initialState = {
+  menuId: '',
   coupon: null,
   pregnancyTermSelected: '',
   childrenSelected: '',
@@ -35,5 +39,18 @@ export const mutations = {
   },
   reset(state) {
     state = Object.assign(state, initialState)
+  }
+}
+
+/* actions */
+export const actions = {
+  async reserveCommit({ state }, customerId) {
+    console.log(state)
+    // 予約確定APIの実行
+    const result = await axios.get(config.api.reserveCommit, {
+      menu_id: state.menuId,
+      is_first: state.isFirst,
+      customer_id: customerId
+    })
   }
 }
