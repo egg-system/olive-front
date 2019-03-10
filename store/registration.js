@@ -49,7 +49,6 @@ export const mutations = {
 /* actions */
 export const actions = {
   async reserveCommit({ state, commit }, customerId) {
-    console.log(state)
     // 予約確定APIの実行
     const result = await axios.get(config.api.reserveCommit, {
       menu_id: state.menuId,

@@ -31,18 +31,24 @@ export default {
     NextBtn
   },
   computed: mapState({
-    registration: state => state.registration
+    registration: state => state.registration,
+    login: state => state.login
   }),
   created() {
     // 予約内容をクリア
     this.reset()
     // 予約確定
     this.reserveCommit('customerId')
+    // 会員登録
+    if (this.login.isCreate) {
+      this.customerCreate()
+    }
   },
   methods: {
     ...mapMutations('registration', ['reset']),
     ...mapActions({
-      reserveCommit: 'registration/reserveCommit'
+      reserveCommit: 'registration/reserveCommit',
+      customerCreate: 'login/customerCreate'
     })
   }
 }
