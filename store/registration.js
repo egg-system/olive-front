@@ -62,8 +62,10 @@ export const actions = {
     })
     if (result.status === 200) {
       commit('setIsError', false)
+      return true
     } else {
       commit('setIsError', true)
+      return false
     }
   }
 }

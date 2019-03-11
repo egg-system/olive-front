@@ -5,12 +5,15 @@
         <shop-name />
         <v-layout row>
           <v-flex>
-            <v-card-text v-if="!registration.isError" class="complete">
+            <v-card-text v-if="!registration.isError && !login.isError" class="complete">
               予約を確定しました。<br>
               予約確定メールをお送りしましたので、ご確認ください。
             </v-card-text>
             <v-card-text v-if="registration.isError" class="complete">
               予約エラーが発生しました。お手数ですが最初からやり直してください。
+            </v-card-text>
+            <v-card-text v-if="login.isError" class="complete">
+              会員登録エラーが発生しました。お手数ですが最初からやり直してください。
             </v-card-text>
           </v-flex>
         </v-layout>
@@ -38,11 +41,12 @@ export default {
     // 予約内容をクリア
     this.reset()
     // 予約確定
-    this.reserveCommit('customerId')
-    // 会員登録
-    if (this.login.isCreate) {
-      this.customerCreate()
-    }
+    this.reserveCommit('customerId').then(isReserveOk => {
+      // 会員登録
+      if (isReserveOk && this.login.isCreate) {
+        this.customerCreate()
+      }
+    })
   },
   methods: {
     ...mapMutations('registration', ['reset']),
