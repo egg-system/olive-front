@@ -41,7 +41,7 @@ export default {
     // 予約内容をクリア
     this.reset()
     // 予約確定
-    this.reserveCommit('customerId').then(isReserveOk => {
+    this.reserveCommit(this.login.id).then(isReserveOk => {
       // 会員登録
       if (isReserveOk && this.login.isCreate) {
         this.customerCreate()
