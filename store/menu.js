@@ -55,5 +55,8 @@ export const getters = {
       })
       return targetOption
     }
+  },
+  isLoading(state) {
+    return state.subShops.length == 0
   }
 }

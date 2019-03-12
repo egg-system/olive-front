@@ -13,15 +13,21 @@
   transform: translateY(-100%);
   opacity: 0;
 }
+.hidden {
+  display: none;
+}
 </style>
 
 <template>
   <section class="container">
     <v-container grid-list-xl>
       <v-layout column wrap class="menu-contents">
-        <shop-name />
-        <menu-list />
-        <reserve-btn/>
+        <loading v-if="isLoading" class="loading"/>
+        <div :class="{ hidden: isLoading }" >
+          <shop-name />
+          <menu-list />
+          <reserve-btn/>
+        </div>
       </v-layout>
     </v-container>
   </section>
@@ -32,11 +38,19 @@ import { mapActions, mapState, mapMutations, mapGetters } from 'vuex'
 import ShopName from '~/components/pages/common/ShopName.vue'
 import ReserveBtn from '~/components/pages/menu/ReserveBtn.vue'
 import MenuList from '~/components/pages/menu/MenuList.vue'
+import Loading from '~/components/layouts/Loading.vue'
+
 export default {
   components: {
     ShopName,
     ReserveBtn,
-    MenuList
+    MenuList,
+    Loading
+  },
+  computed: {
+    ...mapGetters({
+      isLoading: 'menu/isLoading'
+    })
   }
 }
 </script>

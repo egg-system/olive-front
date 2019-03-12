@@ -18,4 +18,12 @@ describe('store/date.js', () => {
       expect(store.state.calendar.length).not.toBe(0)
     })
   })
+
+  describe('getters', () => {
+    test('isLoading', async () => {
+      expect(store.getters.isLoading).toBe(true)
+      await store.dispatch('getCalendar', { storeId: 1 })
+      expect(store.getters.isLoading).toBe(false)
+    })
+  })
 })

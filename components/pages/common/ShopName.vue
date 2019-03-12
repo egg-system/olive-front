@@ -1,6 +1,6 @@
 <template>
   <v-flex align-self-baseline>
-    <div v-if="shop">{{ shop.name }}</div>
+    <div v-if="shop" class="shop-name">{{ shop.name }}</div>
   </v-flex>
 </template>
 
@@ -24,3 +24,8 @@ export default {
   }
 }
 </script>
+<style>
+.shop-name {
+  text-align: left;
+}
+</style>
