@@ -6,6 +6,7 @@ export const state = () => ({
   isLogin: false,
   isCreate: false,
   isError: false,
+  errorMessage: '',
   isLoading: false,
   id: '',
   firstName: '',
@@ -34,6 +35,9 @@ export const mutations = {
   },
   setIsError(state, error) {
     state.isError = error
+  },
+  setErrorMessage(state, errorMessage) {
+    state.errorMessage = errorMessage
   },
   setIsLoading(state, isLoading) {
     state.isLoading = isLoading
@@ -115,6 +119,9 @@ export const actions = {
   },
   // ユーザー作成
   async customerCreate({ commit, state }) {
+    // 一度エラーはリセットする
+    commit('setIsError', false)
+    commit('setErrorMessage', '')
     console.log('customerCreate')
     const result = await axios.get(config.api.customerCreate, {
       mail: state.mail,
@@ -127,9 +134,11 @@ export const actions = {
     })
     if (result.status === 200) {
       commit('setIsError', false)
+      commit('setErrorMessage', '')
       return true
     } else {
       commit('setIsError', true)
+      commit('setErrorMessage', 'ユーザー作成に失敗しました。')
       return false
     }
   }

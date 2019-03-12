@@ -11,7 +11,8 @@ const initialState = {
   message: 'yes',
   isOk: null,
   request: '',
-  isError: false
+  isError: false,
+  errorMessage: ''
 }
 export const state = () => Object.assign({}, initialState)
 
@@ -41,6 +42,9 @@ export const mutations = {
   setIsError(state, isError) {
     state.isError = isError
   },
+  setErrorMessage(state, errorMessage) {
+    state.errorMessage = errorMessage
+  },
   reset(state) {
     state = Object.assign(state, initialState)
   }
@@ -49,6 +53,19 @@ export const mutations = {
 /* actions */
 export const actions = {
   async reserveCommit({ state, commit }, customerId) {
+    // 必須パラメータのチェック
+    if (
+      state.menuId === '' ||
+      state.menuId === null ||
+      state.menuId === undefined ||
+      (state.isFirst === '' ||
+        state.isFirst === null ||
+        state.isFirst === undefined)
+    ) {
+      commit('setErrorMessage', 'パラメータが不正です。')
+      commit('setIsError', true)
+      return false
+    }
     // 予約確定APIの実行
     const result = await axios.get(config.api.reserveCommit, {
       menu_id: state.menuId,
@@ -64,6 +81,7 @@ export const actions = {
       commit('setIsError', false)
       return true
     } else {
+      commit('setErrorMessage', '予約に失敗しました。')
       commit('setIsError', true)
       return false
     }

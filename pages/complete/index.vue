@@ -10,10 +10,10 @@
               予約確定メールをお送りしましたので、ご確認ください。
             </v-card-text>
             <v-card-text v-if="registration.isError" class="complete">
-              予約エラーが発生しました。お手数ですが最初からやり直してください。
+              {{ registration.errorMessage }}お手数ですが最初からやり直してください。
             </v-card-text>
             <v-card-text v-if="login.isError" class="complete">
-              会員登録エラーが発生しました。お手数ですが最初からやり直してください。
+              {{ login.errorMessage }}お手数ですが最初からやり直してください。
             </v-card-text>
           </v-flex>
         </v-layout>
