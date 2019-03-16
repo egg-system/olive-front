@@ -1,7 +1,7 @@
 import Vue from 'vue'
 
 Vue.filter('priceFormat', val => {
-  return '¥' + val.toLocaleString() + '(税抜き)'
+  return val ? '¥' + val.toLocaleString() + '(税抜き)' : ''
 })
 
 Vue.filter('timeFormat', val => {

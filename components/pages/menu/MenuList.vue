@@ -8,31 +8,33 @@
           </v-card>
         </v-flex>
         <v-flex>
-          <v-card v-for="menu in subShop.menus" :key="'menu'+menu.id">
-            <v-card-title primary-title>
-              <v-radio :value="menu.id" @change="changeMenu">
-                <div slot="label" class="menu-info">
-                  <span>{{ menu.name }}</span>
-                  <span class="menu-price">{{ menu.price | priceFormat }}</span>
-                  <span class="menu-duration">{{ menu.minutes | timeFormat }}</span>
-                  <div class="description">{{ menu.description }}</div>
-                </div>
-              </v-radio>
-              <transition name="slide">
-                <div v-if="menu.options != null && 0 < menu.options.length && selectedMenu==menu.id" :key="'option-area'+menu.id" class="option-area">
-                  <div v-for="option in menu.options" :key="'option'+option.id">
-                    <v-checkbox v-model="selectedOptions" :value="option.id" @change="changeOption">
-                      <div slot="label" class="menu-info">
-                        <span>{{ option.name }}</span><span>{{ option.price | priceFormat }}</span><span v-if="option.max_number">/&nbsp;{{ option.unit }}</span>
-                      </div>
-                    </v-checkbox>
-                    <v-select v-if="option.max_number" :items="getOptionNumberListForSelect(option.max_number, option.unit)"
-                              v-model="selectedNumbersOfOptions[option.id]" :disabled="!selectedOptions.includes(option.id)" />
+          <div v-for="menu in subShop.menus" :key="'menu'+menu.id">
+            <v-card v-if="getMenuIndex == 0 || menu.minutes == 60">
+              <v-card-title primary-title>
+                <v-radio :value="menu.id" @change="changeMenu">
+                  <div slot="label" class="menu-info">
+                    <span>{{ menu.name }}</span>
+                    <span class="menu-price">{{ menu.price | priceFormat }}</span>
+                    <span class="menu-duration">{{ menu.minutes | timeFormat }}</span>
+                    <div class="description">{{ menu.description }}</div>
                   </div>
-                </div>
-              </transition>
-            </v-card-title>
-          </v-card>
+                </v-radio>
+                <transition name="slide">
+                  <div v-if="menu.options != null && 0 < menu.options.length && selectedMenu==menu.id" :key="'option-area'+menu.id" class="option-area">
+                    <div v-for="option in menu.options" :key="'option'+option.id">
+                      <v-checkbox v-model="selectedOptions" :value="option.id" @change="changeOption">
+                        <div slot="label" class="menu-info">
+                          <span>{{ option.name }}</span><span>{{ option.price | priceFormat }}</span><span v-if="option.max_number">/&nbsp;{{ option.unit }}</span>
+                        </div>
+                      </v-checkbox>
+                      <v-select v-if="option.max_number" :items="getOptionNumberListForSelect(option.max_number, option.unit)"
+                                v-model="selectedNumbersOfOptions[option.id]" :disabled="!selectedOptions.includes(option.id)" />
+                    </div>
+                  </div>
+                </transition>
+              </v-card-title>
+            </v-card>
+          </div>
         </v-flex>
       </v-layout>
     </section>
@@ -54,11 +56,11 @@ export default {
     },
     selectedMenu: {
       get() {
-        let selectedMenu = this.$store.state.select.menu
+        let selectedMenu = this.getSelectedMenu
         if (selectedMenu == null) {
           return null
         }
-        return this.$store.state.select.menu.id
+        return selectedMenu.id
       },
       set(id) {
         let menu = this.getMenu(id)
@@ -67,7 +69,7 @@ export default {
     },
     selectedOptions: {
       get() {
-        let selectedOptions = this.$store.state.select.options
+        let selectedOptions = this.getSelectedOptions
         let ids = []
         selectedOptions.forEach(option => {
           ids.push(option.id)
@@ -86,7 +88,10 @@ export default {
     },
     ...mapGetters({
       getMenu: 'menu/getMenu',
-      getOption: 'menu/getOption'
+      getMenuIndex: 'select/getMenuIndex',
+      getOption: 'menu/getOption',
+      getSelectedMenu: 'select/getMenuNow',
+      getSelectedOptions: 'select/getOptionsNow'
     })
   },
   watch: {
@@ -95,14 +100,19 @@ export default {
     },
     subShops: function(subShops) {
       if (!this.selectedMenu) {
-        this.selectedMenu = subShops[0].menus[0].id
+        this.selectedMenu = this.getDefaultMenu().id
+      }
+    },
+    getSelectedMenu: function(val) {
+      if (!this.selectedMenu && this.getDefaultMenu() != null) {
+        this.selectedMenu = this.getDefaultMenu().id
       }
     }
   },
   created: function() {
     this.getMenus({ storeId: 1 })
     //次画面から戻ってきた場合、選択済みの値をstateから取り出し反映させる
-    let selectedOptions = this.$store.state.select.options
+    let selectedOptions = this.getSelectedOptions
     selectedOptions.forEach(option => {
       if (option.number) {
         this.selectedNumbersOfOptions[option.id] = option.number
@@ -124,7 +134,6 @@ export default {
           this.selectedNumbersOfOptions[optionId] = 1
         }
       })
-      //console.log(self.selectedNumbersOfOptions.keys())
       self.selectedNumbersOfOptions.forEach((val, optionId) => {
         console.log(optionId)
         if (!selectedOptions.includes(optionId)) {
@@ -148,6 +157,9 @@ export default {
     },
     ...mapActions({
       getMenus: 'menu/getMenus'
+    }),
+    ...mapGetters({
+      getDefaultMenu: 'menu/getDefaultMenu'
     }),
     ...mapMutations('select', ['setSelectedMenu', 'setSelectedOptions'])
   }

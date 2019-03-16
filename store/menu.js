@@ -58,5 +58,11 @@ export const getters = {
   },
   isLoading(state) {
     return state.subShops.length == 0
+  },
+  getDefaultMenu(state) {
+    if (state.subShops.length == 0) {
+      return null
+    }
+    return state.subShops[0].menus[0]
   }
 }

@@ -27,7 +27,9 @@
           class="elevation-1"
         >
           <template slot="items" slot-scope="props">
-            <td>{{ props.item.name }}</td>
+            <td>
+              {{ props.item.name }}
+            </td>
             <td class="text-xs-right">{{ props.item.price | priceFormat }}</td>
             <td class="text-xs-right">{{ props.item.minutes | timeFormat }}</td>
           </template>
@@ -57,6 +59,10 @@ export default {
     isConfirm: {
       type: Boolean,
       default: false
+    },
+    ifShowOnlyFirstMenu: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -64,19 +70,29 @@ export default {
       if (!this.isMenuSelected()) {
         return []
       }
-      let menu = _.clone(this.$store.state.select.menu)
-      if (this.$store.state.select.twoHoursCheck) {
-        menu.price *= 2
-        menu.minutes = 120
+      let menus = []
+      let menu = _.clone(this.$store.state.select.menus[0].menu)
+      if (this.isTwoMenusSelected) {
+        menu.name += ' - 1時間目'
       }
-      let menus = [menu]
-      if (this.$store.state.select.options) {
-        this.$store.state.select.options.forEach(option => {
+      menus.push(menu)
+      this.$store.state.select.menus[0].options.forEach(option => {
+        menus.push(option)
+      })
+
+      if (!this.ifShowOnlyFirstMenu && this.isTwoMenusSelected) {
+        let menu = _.clone(this.$store.state.select.menus[1].menu)
+        menu.name += ' - 2時間目'
+        menus.push(menu)
+        this.$store.state.select.menus[1].options.forEach(option => {
           menus.push(option)
         })
       }
       return menus
-    }
+    },
+    ...mapGetters({
+      isTwoMenusSelected: 'select/isTwoMenusSelected'
+    })
   },
   beforeMount() {
     //メニュー選択がまだならTOPに飛ばす。確認画面で日時選択がまだならTOPに飛ばす
