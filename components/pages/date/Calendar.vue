@@ -9,46 +9,48 @@
     </v-layout>
     <section class="calendar">
       <div class="table-wrapper">
-        <table v-for="(weekData, index) in calendar" :key="'weekData'+index" class="outer-table">
-          <tbody>
-            <tr>
-              <th v-if="weekData.secondMonth === undefined" colspan="8">{{ weekData.firstMonth | monthFormat }}</th>
-              <th v-if="weekData.secondMonth !== undefined" :colspan="weekData.firstMonthDays + 1">{{ weekData.firstMonth | monthFormat }}</th>
-              <th v-if="weekData.secondMonth !== undefined" :colspan="7 - weekData.firstMonthDays">{{ weekData.secondMonth | monthFormat }}</th>
-            </tr>
-            <tr>
-              <td class="col-data-wrapper">
-                <table class="inner-table">
-                  <tbody>
-                    <tr><td>&nbsp;&nbsp;</td></tr>
-                    <tr><td>&nbsp;&nbsp;</td></tr>
-                    <tr v-for="time in timeSlots" :key="time+'time_title'">
-                      <td>{{ time | hourFormat }}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-              <td v-for="dateData in weekData.data" :key="'dateDate'+dateData.date" class="col-data-wrapper">
-                <table class="inner-table">
-                  <tbody>
-                    <tr><td>{{ dateData.date | dateFormat }}</td></tr>
-                    <tr><td :class="dateData.date | dayClass">{{ dateData.date | dayFormat }}</td></tr>
-                    <tr v-for="time in timeSlots" :key="time+'time_title'">
-                      <td v-if="dateData.disable !== undefined || isPastTime(dateData.date + time)" class="disabled">-</td>
-                      <td v-else-if="findRemainOfTime(dateData.time_slots, time) == 0" class="disabled">×</td>
-                      <td v-else-if="isTwoHour() && !isNextTimeRemaining(dateData.time_slots, time)" class="disabled">
-                        {{ findRemainOfTime(dateData.time_slots, time) | remainFormat }}
-                      </td>
-                      <td v-else @click="selectTime(time)">
-                        {{ findRemainOfTime(dateData.time_slots, time) | remainFormat }}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="elevation-1">
+          <table v-for="(weekData, index) in calendar" :key="'weekData'+index" class="outer-table">
+            <tbody>
+              <tr>
+                <th v-if="weekData.secondMonth === undefined" colspan="8">{{ weekData.firstMonth | monthFormat }}</th>
+                <th v-if="weekData.secondMonth !== undefined" :colspan="weekData.firstMonthDays + 1">{{ weekData.firstMonth | monthFormat }}</th>
+                <th v-if="weekData.secondMonth !== undefined" :colspan="7 - weekData.firstMonthDays">{{ weekData.secondMonth | monthFormat }}</th>
+              </tr>
+              <tr>
+                <td class="col-data-wrapper">
+                  <table class="inner-table">
+                    <tbody>
+                      <tr><td>&nbsp;&nbsp;</td></tr>
+                      <tr><td>&nbsp;&nbsp;</td></tr>
+                      <tr v-for="time in timeSlots" :key="time+'time_title'">
+                        <td>{{ time | hourFormat }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+                <td v-for="dateData in weekData.data" :key="'dateDate'+dateData.date" class="col-data-wrapper">
+                  <table class="inner-table">
+                    <tbody>
+                      <tr><td>{{ dateData.date | dateFormat }}</td></tr>
+                      <tr><td :class="dateData.date | dayClass">{{ dateData.date | dayFormat }}</td></tr>
+                      <tr v-for="time in timeSlots" :key="time+'time_title'">
+                        <td v-if="dateData.disable !== undefined || isPastTime(dateData.date + time)" class="disabled">-</td>
+                        <td v-else-if="findRemainOfTime(dateData.time_slots, time) == 0" class="disabled">×</td>
+                        <td v-else-if="isTwoHour() && !isNextTimeRemaining(dateData.time_slots, time)" class="disabled">
+                          {{ findRemainOfTime(dateData.time_slots, time) | remainFormat }}
+                        </td>
+                        <td v-else @click="selectTime(time)">
+                          {{ findRemainOfTime(dateData.time_slots, time) | remainFormat }}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </section>
   </div>
@@ -252,6 +254,7 @@ export default {
 </script>
 <style lang="scss">
 $disabledColor: #d9d9d9;
+$borderColor: rgba(0, 0, 0, 0.1);
 .component-wrapper {
   margin-top: 40px;
   .calendar {
@@ -261,7 +264,7 @@ $disabledColor: #d9d9d9;
     }
     td,
     th {
-      border: 1px rgb(0, 0, 0) solid;
+      border: 1px $borderColor solid;
       border-spacing: 0px;
       border-right: none;
       border-bottom: none;
@@ -270,11 +273,11 @@ $disabledColor: #d9d9d9;
       padding: 5px 0;
     }
     .table-wrapper {
-      width: 90%;
       margin: auto;
-      border-bottom: 1px rgb(0, 0, 0) solid;
+      border-bottom: 1px $borderColor solid;
+      background-color: white;
       table.outer-table {
-        border-right: 1px rgb(0, 0, 0) solid;
+        border-right: 1px $borderColor solid;
         width: 100%;
         td.col-data-wrapper {
           border-left: none;
