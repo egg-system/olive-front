@@ -53,19 +53,40 @@
 
 <script>
 import { checkPassword, checkSame } from '~/lib/validation'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
   data: () => ({
     show: false,
     show2: false,
-    password: '',
-    password2: '',
     passwordRules: [password => checkPassword(password)]
   }),
   computed: {
     checkSame() {
       return checkSame(this.password, this.password2)
-    }
+    },
+    password: {
+      get() {
+        return this.login.password
+      },
+      set(value) {
+        this.setPassword(value)
+      }
+    },
+    password2: {
+      get() {
+        return this.login.password2
+      },
+      set(value) {
+        this.setPassword2(value)
+      }
+    },
+    ...mapState({
+      login: state => state.login
+    })
+  },
+  methods: {
+    ...mapMutations('login', ['setPassword', 'setPassword2'])
   }
 }
 </script>

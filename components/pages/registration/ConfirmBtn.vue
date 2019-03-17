@@ -14,6 +14,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 import {
   checkMail,
   checkPassword,
@@ -28,40 +30,50 @@ export default {
     canClick() {
       // 入力チェック
       if (
-        this.$store.state.login.firstName === '' ||
-        this.$store.state.login.lastName === '' ||
-        this.$store.state.login.firstNameKana === '' ||
-        this.$store.state.login.lastNameKana === '' ||
-        this.$store.state.login.mail === '' ||
-        this.$store.state.login.mail2 === '' ||
-        this.$store.state.login.phoneNumber === '' ||
-        this.$store.state.registration.isOk === null
+        this.login.firstName === '' ||
+        this.login.lastName === '' ||
+        this.login.firstNameKana === '' ||
+        this.login.lastNameKana === '' ||
+        this.login.mail === '' ||
+        this.login.mail2 === '' ||
+        this.login.phoneNumber === '' ||
+        this.registration.isOk === null
       ) {
         return false
       }
+      // 新規会員登録の場合
+      if (this.login.isCreate) {
+        // パスワードは必須入力
+        if (this.login.password === '' || this.login.password2 === '') {
+          return false
+        }
+        // 同一チェック
+        if (checkSame(this.login.password, this.login.password2) !== true) {
+          return false
+        }
+      }
       // バリデーションチェック
       if (
-        checkName(this.$store.state.login.firstName) !== true ||
-        checkName(this.$store.state.login.lastName) !== true ||
-        checkNameKana(this.$store.state.login.firstNameKana) !== true ||
-        checkNameKana(this.$store.state.login.lastNameKana) !== true ||
-        checkMail(this.$store.state.login.mail) !== true ||
-        checkMail(this.$store.state.login.mail2) !== true ||
-        checkPhoneNumber(this.$store.state.login.phoneNumber) !== true
+        checkName(this.login.firstName) !== true ||
+        checkName(this.login.lastName) !== true ||
+        checkNameKana(this.login.firstNameKana) !== true ||
+        checkNameKana(this.login.lastNameKana) !== true ||
+        checkMail(this.login.mail) !== true ||
+        checkMail(this.login.mail2) !== true ||
+        checkPhoneNumber(this.login.phoneNumber) !== true
       ) {
         return false
       }
       // 同一チェック
-      if (
-        checkSame(
-          this.$store.state.login.mail,
-          this.$store.state.login.mail2
-        ) !== true
-      ) {
+      if (checkSame(this.login.mail, this.login.mail2) !== true) {
         return false
       }
       return true
-    }
+    },
+    ...mapState({
+      registration: state => state.registration,
+      login: state => state.login
+    })
   },
   methods: {
     confirm() {

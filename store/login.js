@@ -6,6 +6,7 @@ export const state = () => ({
   isLogin: false,
   isCreate: false,
   isError: false,
+  errorMessage: '',
   isLoading: false,
   id: '',
   firstName: '',
@@ -14,7 +15,9 @@ export const state = () => ({
   lastNameKana: '',
   mail: '',
   mail2: '',
-  phoneNumber: ''
+  phoneNumber: '',
+  password: '',
+  password2: ''
 })
 
 /* getters */
@@ -32,6 +35,9 @@ export const mutations = {
   },
   setIsError(state, error) {
     state.isError = error
+  },
+  setErrorMessage(state, errorMessage) {
+    state.errorMessage = errorMessage
   },
   setIsLoading(state, isLoading) {
     state.isLoading = isLoading
@@ -59,6 +65,12 @@ export const mutations = {
   },
   setPhoneNumber(state, phoneNumber) {
     state.phoneNumber = phoneNumber
+  },
+  setPassword(state, password) {
+    state.password = password
+  },
+  setPassword2(state, password2) {
+    state.password2 = password2
   },
   logout(state) {
     state.isLogin = false
@@ -102,6 +114,31 @@ export const actions = {
     } else {
       commit('setIsError', true)
       commit('setIsLoading', false)
+      return false
+    }
+  },
+  // ユーザー作成
+  async customerCreate({ commit, state }) {
+    // 一度エラーはリセットする
+    commit('setIsError', false)
+    commit('setErrorMessage', '')
+    console.log('customerCreate')
+    const result = await axios.get(config.api.customerCreate, {
+      mail: state.mail,
+      password: state.password,
+      first_name: state.firstName,
+      last_name: state.lastName,
+      first_name_kana: state.firstNameKana,
+      last_name_kana: state.lastNameKana,
+      phone_number: state.phoneNumber
+    })
+    if (result.status === 200) {
+      commit('setIsError', false)
+      commit('setErrorMessage', '')
+      return true
+    } else {
+      commit('setIsError', true)
+      commit('setErrorMessage', 'ユーザー作成に失敗しました。')
       return false
     }
   }
