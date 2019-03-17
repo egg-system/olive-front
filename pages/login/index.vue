@@ -26,7 +26,6 @@
   </section>
 </template>
 
-
 <script>
 import LoginForm from '~/components/pages/login/Form.vue'
 import Loading from '~/components/layouts/Loading.vue'

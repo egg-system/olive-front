@@ -23,7 +23,6 @@
   </section>
 </template>
 
-
 <script>
 import LoginForm from '~/components/pages/login/Form.vue'
 import Loading from '~/components/layouts/Loading.vue'
@@ -44,7 +43,6 @@ export default {
   },
   methods: {
     resisterBtn() {
-      // 会員登録あり
       this.setIsCreate(true)
       this.$router.push('/registration')
     },
