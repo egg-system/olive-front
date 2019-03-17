@@ -1,38 +1,22 @@
 <template>
-  <section class="container">
-    <loading v-if="login.isLoading" class="loading"/>
-    <div :class="{ hidden: login.isLoading }" class="main" >
-      <div>
-        <h2>会員の方はログインしてください</h2>
-        <login-form :link="link" />
-        <nuxt-link to="/registration">
-          パスワードを忘れた方はこちら
-        </nuxt-link>
-      </div>
-
-      <div class="not">
-        <h4>ログインIDをお持ちでない方はこちらから</h4>
-        <div>
-          <v-btn color="warning" @click="resisterBtn">
-            新規会員登録へ
-          </v-btn>
-        </div>
-
-      </div>
-    </div>
-  </section>
+  <div>
+    <mypage-header />
+    <v-container grid-list-xl>
+      <v-layout column>
+        <div>aaa</div>
+        <div>aaa</div>
+      </v-layout>
+    </v-container>
+  </div>
 </template>
 
-
 <script>
-import LoginForm from '~/components/pages/login/Form.vue'
-import Loading from '~/components/layouts/Loading.vue'
+import MypageHeader from '~/components/pages/mypage/Header.vue'
 import { mapState, mapActions, mapMutations } from 'vuex'
 
 export default {
   components: {
-    LoginForm,
-    Loading
+    MypageHeader
   },
   data: () => ({
     link: '/mypage/top'
@@ -54,24 +38,4 @@ export default {
 </script>
 
 <style>
-.not {
-  padding-top: 50px;
-}
-.v-btn {
-  width: 200px;
-}
-.container {
-  position: relative;
-  z-index: 1;
-}
-.main {
-  z-index: 2;
-}
-.loading {
-  position: absolute;
-  z-index: 3;
-}
-.hidden {
-  opacity: 0.3;
-}
 </style>
