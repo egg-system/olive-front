@@ -72,22 +72,26 @@ export default {
         return []
       }
       let menus = []
-      let menu = _.clone(this.$store.state.select.menus[0].menu)
-      if (this.isTwoMenusSelected) {
-        menu.name = '1時間目 - ' + menu.name
-      }
-      menus.push(menu)
-      this.$store.state.select.menus[0].options.forEach(option => {
-        menus.push(option)
-      })
-
-      if (!this.ifShowOnlyFirstMenu && this.isTwoMenusSelected) {
-        let menu = _.clone(this.$store.state.select.menus[1].menu)
-        menu.name = '2時間目 - ' + menu.name
+      for (let i = 0; i < 2; i++) {
+        let menu = _.clone(this.$store.state.select.menus[i].menu)
+        if (this.isTwoMenusSelected) {
+          menu.name = (i + 1).toString() + '時間目 - ' + menu.name
+        }
         menus.push(menu)
-        this.$store.state.select.menus[1].options.forEach(option => {
-          menus.push(option)
+        this.$store.state.select.menus[i].options.forEach(option => {
+          let optionTmp = _.clone(option)
+          if (optionTmp.unit != null) {
+            optionTmp.name =
+              optionTmp.name +
+              ' × ' +
+              optionTmp.number.toString() +
+              optionTmp.unit
+          }
+          menus.push(optionTmp)
         })
+        if (this.ifShowOnlyFirstMenu || !this.isTwoMenusSelected) {
+          break
+        }
       }
       return menus
     },

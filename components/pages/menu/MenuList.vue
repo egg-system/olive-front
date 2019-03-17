@@ -1,44 +1,60 @@
 <template>
-  <v-radio-group v-model="selectedMenu" column>
-    <section v-for="subShop in subShops" :key="'menuHead'+subShop.id" :id="'menuHead'+subShop.id" class="content-section">
-      <v-layout column wrap>
-        <v-flex>
-          <v-card dark color="red lighten-2">
-            <v-card-text><h3>{{ subShop.name }}</h3></v-card-text>
-          </v-card>
-        </v-flex>
-        <v-flex>
-          <div v-for="menu in subShop.menus" :key="'menu'+menu.id">
-            <v-card v-if="getMenuIndex == 0 || menu.minutes == 60">
-              <v-card-title primary-title>
-                <v-radio :value="menu.id" @change="changeMenu">
-                  <div slot="label" class="menu-info">
-                    <span>{{ menu.name }}</span>
-                    <span class="menu-price">{{ menu.price | priceFormat }}</span>
-                    <span class="menu-duration">{{ menu.minutes | timeFormat }}</span>
-                    <div class="description">{{ menu.description }}</div>
-                  </div>
-                </v-radio>
-                <transition name="slide">
-                  <div v-if="menu.options != null && 0 < menu.options.length && selectedMenu==menu.id" :key="'option-area'+menu.id" class="option-area">
-                    <div v-for="option in menu.options" :key="'option'+option.id">
-                      <v-checkbox v-model="selectedOptions" :value="option.id" @change="changeOption">
-                        <div slot="label" class="menu-info">
-                          <span>{{ option.name }}</span><span>{{ option.price | priceFormat }}</span><span v-if="option.max_number">/&nbsp;{{ option.unit }}</span>
-                        </div>
-                      </v-checkbox>
-                      <v-select v-if="option.max_number" :items="getOptionNumberListForSelect(option.max_number, option.unit)"
-                                v-model="selectedNumbersOfOptions[option.id]" :disabled="!selectedOptions.includes(option.id)" />
-                    </div>
-                  </div>
-                </transition>
-              </v-card-title>
+  <div>
+    <v-radio-group v-model="selectedMenu" column>
+      <section v-for="subShop in subShops" :key="'menuHead'+subShop.id" :id="'menuHead'+subShop.id" class="content-section">
+        <v-layout column wrap>
+          <v-flex>
+            <v-card dark color="red lighten-2">
+              <v-card-text><h3>{{ subShop.name }}</h3></v-card-text>
             </v-card>
-          </div>
-        </v-flex>
-      </v-layout>
-    </section>
-  </v-radio-group>
+          </v-flex>
+          <v-flex>
+            <div v-for="menu in subShop.menus" :key="'menu'+menu.id">
+              <v-card v-if="getMenuIndex == 0 || menu.minutes == 60">
+                <v-card-title primary-title>
+                  <v-radio :value="menu.id" @change="changeMenu">
+                    <div slot="label" class="menu-info">
+                      <span>{{ menu.name }}</span>
+                      <span class="menu-price">{{ menu.price | priceFormat }}</span>
+                      <span class="menu-duration">{{ menu.minutes | timeFormat }}</span>
+                      <div class="description">{{ menu.description }}</div>
+                    </div>
+                  </v-radio>
+                  <transition name="slide">
+                    <div v-if="menu.options != null && 0 < menu.options.length && selectedMenu==menu.id" :key="'option-area'+menu.id" class="option-area">
+                      <div v-for="option in menu.options" :key="'option'+option.id">
+                        <v-checkbox v-model="selectedOptions" :value="option.id" @change="changeOption">
+                          <div slot="label" class="menu-info">
+                            <span>{{ option.name }}</span><span>{{ option.price | priceFormat }}</span><span v-if="option.max_number">/&nbsp;{{ option.unit }}</span>
+                          </div>
+                        </v-checkbox>
+                        <v-select v-if="option.max_number" :items="getOptionNumberListForSelect(option.max_number, option.unit)"
+                                  v-model="selectedNumbersOfOptions[option.id]" :disabled="!selectedOptions.includes(option.id)" />
+                      </div>
+                    </div>
+                  </transition>
+                </v-card-title>
+              </v-card>
+            </div>
+          </v-flex>
+        </v-layout>
+      </section>
+    </v-radio-group>
+
+    <v-layout column>
+      <v-flex xs6>
+        <v-btn v-if="getMenuIndex == 1" @click="backToFirst">
+          戻る
+        </v-btn>
+        <v-btn color="warning" @click="next">
+          日時指定に進む
+        </v-btn>
+        <v-btn v-if="selectedMenu != null && selectedMenu.minutes != 120 && getMenuIndex == 0" color="warning" @click="twoHour">
+          ２時間予約する
+        </v-btn>
+      </v-flex>
+    </v-layout>
+  </div>
 </template>
 
 <script>
@@ -155,13 +171,37 @@ export default {
       }
       return option
     },
+    next() {
+      this.$router.push({ name: 'date' })
+    },
+    twoHour() {
+      this.setForGoNextMenu()
+      this.selectedNumbersOfOptions = []
+      window.scrollTo(0, 0)
+    },
+    backToFirst() {
+      this.setForGoBackMenu()
+      window.scrollTo(0, 0)
+      let selectedOptions = this.getSelectedOptions
+      selectedOptions.forEach(option => {
+        if (option.number) {
+          this.selectedNumbersOfOptions[option.id] = option.number
+        }
+      })
+    },
     ...mapActions({
       getMenus: 'menu/getMenus'
     }),
     ...mapGetters({
       getDefaultMenu: 'menu/getDefaultMenu'
     }),
-    ...mapMutations('select', ['setSelectedMenu', 'setSelectedOptions'])
+    ...mapMutations('select', [
+      'setSelectedMenu',
+      'setSelectedOptions',
+      'setTwoHoursCheck',
+      'setForGoNextMenu',
+      'setForGoBackMenu'
+    ])
   }
 }
 </script>
