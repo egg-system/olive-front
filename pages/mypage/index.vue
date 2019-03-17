@@ -52,26 +52,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.not {
-  padding-top: 50px;
-}
-.v-btn {
-  width: 200px;
-}
-.container {
-  position: relative;
-  z-index: 1;
-}
-.main {
-  z-index: 2;
-}
-.loading {
-  position: absolute;
-  z-index: 3;
-}
-.hidden {
-  opacity: 0.3;
-}
-</style>
