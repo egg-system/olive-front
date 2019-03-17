@@ -13,15 +13,24 @@
   transform: translateY(-100%);
   opacity: 0;
 }
+.hidden {
+  display: none;
+}
+.menu {
+  margin-bottom: 30px;
+}
 </style>
 
 <template>
   <section class="container">
     <v-container grid-list-xl>
       <v-layout column wrap class="menu-contents">
-        <shop-name />
-        <menu-list />
-        <reserve-btn/>
+        <loading v-if="isLoading" class="loading"/>
+        <div :class="{ hidden: isLoading }" >
+          <shop-name />
+          <registration-menu v-if="getMenuIndex == 1" :if-show-only-first-menu="true" :is-first="false"/>
+          <menu-list />
+        </div>
       </v-layout>
     </v-container>
   </section>
@@ -30,13 +39,22 @@
 <script>
 import { mapActions, mapState, mapMutations, mapGetters } from 'vuex'
 import ShopName from '~/components/pages/common/ShopName.vue'
-import ReserveBtn from '~/components/pages/menu/ReserveBtn.vue'
 import MenuList from '~/components/pages/menu/MenuList.vue'
+import Loading from '~/components/layouts/Loading.vue'
+import RegistrationMenu from '~/components/pages/common/RegistrationMenu.vue'
+
 export default {
   components: {
     ShopName,
-    ReserveBtn,
-    MenuList
+    MenuList,
+    Loading,
+    RegistrationMenu
+  },
+  computed: {
+    ...mapGetters({
+      isLoading: 'menu/isLoading',
+      getMenuIndex: 'select/getMenuIndex'
+    })
   }
 }
 </script>

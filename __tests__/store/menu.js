@@ -43,5 +43,10 @@ describe('store/menu.js', () => {
       let option = store.getters.getOption(10000)
       expect(option).toBeNull()
     })
+    test('isLoading', async () => {
+      expect(store.getters.isLoading).toBe(true)
+      await store.dispatch('getMenus', { storeId: 1 })
+      expect(store.getters.isLoading).toBe(false)
+    })
   })
 })

@@ -22,3 +22,10 @@ export const actions = {
     commit('setCalendar', res.data.date_slots)
   }
 }
+
+/* getters */
+export const getters = {
+  isLoading(state) {
+    return state.calendar.length == 0
+  }
+}
