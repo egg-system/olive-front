@@ -1,5 +1,4 @@
-import axios from 'axios'
-import config from '~/config/constant.json'
+import moment from 'moment'
 
 /* state */
 export const state = () => ({
@@ -61,5 +60,8 @@ export const getters = {
   },
   getMenuIndex(state) {
     return state.menuIndex
+  },
+  getSelectedTime(state) {
+    return state.time
   }
 }

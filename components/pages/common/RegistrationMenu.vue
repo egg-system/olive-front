@@ -14,7 +14,7 @@
         <v-card-text>来店日時</v-card-text>
       </v-flex>
       <v-flex>
-        <v-card-text>2019年1月21日（月）18:00〜</v-card-text>
+        <v-card-text>{{ time }}</v-card-text>
       </v-flex>
     </v-layout>
 
@@ -54,6 +54,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import _ from 'lodash'
+import moment from 'moment'
 export default {
   props: {
     isConfirm: {
@@ -73,7 +74,7 @@ export default {
       let menus = []
       let menu = _.clone(this.$store.state.select.menus[0].menu)
       if (this.isTwoMenusSelected) {
-        menu.name += ' - 1時間目'
+        menu.name = '1時間目 - ' + menu.name
       }
       menus.push(menu)
       this.$store.state.select.menus[0].options.forEach(option => {
@@ -82,13 +83,25 @@ export default {
 
       if (!this.ifShowOnlyFirstMenu && this.isTwoMenusSelected) {
         let menu = _.clone(this.$store.state.select.menus[1].menu)
-        menu.name += ' - 2時間目'
+        menu.name = '2時間目 - ' + menu.name
         menus.push(menu)
         this.$store.state.select.menus[1].options.forEach(option => {
           menus.push(option)
         })
       }
       return menus
+    },
+    time() {
+      let selectedTime = this.getSelectedTime()
+      let momentTime = moment(selectedTime, 'YYYYMMDDHH')
+      return (
+        momentTime.format('YYYY年MM月DD日 ') +
+        this.$root.$options.filters['dayFormat'](
+          momentTime.format('YYYYMMDD')
+        ) +
+        ' ' +
+        momentTime.format('HH:mm')
+      )
     },
     ...mapGetters({
       isTwoMenusSelected: 'select/isTwoMenusSelected'
@@ -127,7 +140,8 @@ export default {
   methods: {
     ...mapGetters({
       isMenuSelected: 'select/isMenuSelected',
-      isTimeSelected: 'select/isTimeSelected'
+      isTimeSelected: 'select/isTimeSelected',
+      getSelectedTime: 'select/getSelectedTime'
     })
   }
 }

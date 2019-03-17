@@ -5,7 +5,7 @@
       <v-container grid-list-xl>
         <v-layout column wrap class="menu-contents">
           <shop-name />
-          <menu-section />
+          <registration-menu :is-first="false"/>
           <calendar />
           <back-btn/>
         </v-layout>
@@ -17,14 +17,14 @@
 <script>
 import { mapActions, mapState, mapMutations, mapGetters } from 'vuex'
 import ShopName from '~/components/pages/common/ShopName.vue'
-import MenuSection from '~/components/pages/date/MenuSection.vue'
+import RegistrationMenu from '~/components/pages/common/RegistrationMenu.vue'
 import Calendar from '~/components/pages/date/Calendar.vue'
 import BackBtn from '~/components/pages/date/BackBtn.vue'
 import Loading from '~/components/layouts/Loading.vue'
 
 export default {
   components: {
-    MenuSection,
+    RegistrationMenu,
     ShopName,
     Calendar,
     BackBtn,

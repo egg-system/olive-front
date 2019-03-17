@@ -40,7 +40,7 @@
                         <td v-else-if="isTwoHour() && !isNextTimeRemaining(dateData.time_slots, time)" class="disabled">
                           {{ findRemainOfTime(dateData.time_slots, time) | remainFormat }}
                         </td>
-                        <td v-else @click="selectTime(time)">
+                        <td v-else @click="selectTime(dateData.date + time + '00')">
                           {{ findRemainOfTime(dateData.time_slots, time) | remainFormat }}
                         </td>
                       </tr>
@@ -78,34 +78,6 @@ export default {
       } else {
         return '○'
       }
-    },
-    dayFormat: function(value) {
-      let day = moment(value).day()
-      let dayDisp = ''
-      switch (day) {
-        case 0:
-          dayDisp = '日'
-          break
-        case 1:
-          dayDisp = '月'
-          break
-        case 2:
-          dayDisp = '火'
-          break
-        case 3:
-          dayDisp = '水'
-          break
-        case 4:
-          dayDisp = '木'
-          break
-        case 5:
-          dayDisp = '金'
-          break
-        case 6:
-          dayDisp = '土'
-          break
-      }
-      return '(' + dayDisp + ')'
     },
     dayClass: function(value) {
       let day = moment(value).day()
