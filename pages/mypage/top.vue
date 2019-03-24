@@ -13,10 +13,12 @@
           </v-card>
         </v-flex>
 
+        <h3><p class="under">残りの回数券（回数券をお持ちの方のみ)</p></h3>
         <mypage-coupon />
 
-        <div>aaa</div>
-        <div>aaa</div>
+        <h3><p class="under">予約履歴</p></h3>
+        <mypage-reserve-history />
+        
       </v-layout>
     </v-container>
   </div>
@@ -25,12 +27,14 @@
 <script>
 import MypageHeader from '~/components/pages/mypage/Header.vue'
 import MypageCoupon from '~/components/pages/mypage/Coupon.vue'
+import MypageReserveHistory from '~/components/pages/mypage/ReserveHistory.vue'
 import { mapState, mapActions, mapMutations } from 'vuex'
 
 export default {
   components: {
     MypageHeader,
-    MypageCoupon
+    MypageCoupon,
+    MypageReserveHistory
   },
   data: () => ({
     link: '/mypage/top'

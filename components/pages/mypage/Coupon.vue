@@ -1,8 +1,5 @@
 <template>
-  <div>
-    <h3>
-      <p class="under">残りの回数券（回数券をお持ちの方のみ)</p>
-    </h3>
+  <div class="coupon-main">
     <v-layout align-center justify-center row>
       <v-flex d-flex xs12 md4>
         <v-card color="white">
@@ -34,5 +31,9 @@
 .number {
   display: inline;
   font-size: 30px;
+}
+.coupon-main {
+  width: 90%;
+  margin: 12px auto;
 }
 </style>
