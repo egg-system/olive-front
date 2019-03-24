@@ -9,4 +9,7 @@
 </template>
 
 <style>
+div {
+  text-align: center;
+}
 </style>

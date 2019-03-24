@@ -14,7 +14,7 @@
         <v-card-text>来店日時</v-card-text>
       </v-flex>
       <v-flex>
-        <v-card-text>2019年1月21日（月）18:00〜</v-card-text>
+        <v-card-text>{{ time }}</v-card-text>
       </v-flex>
     </v-layout>
 
@@ -27,7 +27,9 @@
           class="elevation-1"
         >
           <template slot="items" slot-scope="props">
-            <td>{{ props.item.name }}</td>
+            <td>
+              {{ props.item.name }}
+            </td>
             <td class="text-xs-right">{{ props.item.price | priceFormat }}</td>
             <td class="text-xs-right">{{ props.item.minutes | timeFormat }}</td>
           </template>
@@ -52,9 +54,14 @@
 <script>
 import { mapGetters } from 'vuex'
 import _ from 'lodash'
+import moment from 'moment'
 export default {
   props: {
     isConfirm: {
+      type: Boolean,
+      default: false
+    },
+    ifShowOnlyFirstMenu: {
       type: Boolean,
       default: false
     }
@@ -64,19 +71,45 @@ export default {
       if (!this.isMenuSelected()) {
         return []
       }
-      let menu = _.clone(this.$store.state.select.menu)
-      if (this.$store.state.select.twoHoursCheck) {
-        menu.price *= 2
-        menu.minutes = 120
-      }
-      let menus = [menu]
-      if (this.$store.state.select.options) {
-        this.$store.state.select.options.forEach(option => {
-          menus.push(option)
+      let menus = []
+      for (let i = 0; i < 2; i++) {
+        let menu = _.clone(this.$store.state.select.menus[i].menu)
+        if (this.isTwoMenusSelected) {
+          menu.name = (i + 1).toString() + '時間目 - ' + menu.name
+        }
+        menus.push(menu)
+        this.$store.state.select.menus[i].options.forEach(option => {
+          let optionTmp = _.clone(option)
+          if (optionTmp.unit != null) {
+            optionTmp.name =
+              optionTmp.name +
+              ' × ' +
+              optionTmp.number.toString() +
+              optionTmp.unit
+          }
+          menus.push(optionTmp)
         })
+        if (this.ifShowOnlyFirstMenu || !this.isTwoMenusSelected) {
+          break
+        }
       }
       return menus
-    }
+    },
+    time() {
+      let selectedTime = this.getSelectedTime()
+      let momentTime = moment(selectedTime, 'YYYYMMDDHH')
+      return (
+        momentTime.format('YYYY年MM月DD日 ') +
+        this.$root.$options.filters['dayFormat'](
+          momentTime.format('YYYYMMDD')
+        ) +
+        ' ' +
+        momentTime.format('HH:mm')
+      )
+    },
+    ...mapGetters({
+      isTwoMenusSelected: 'select/isTwoMenusSelected'
+    })
   },
   beforeMount() {
     //メニュー選択がまだならTOPに飛ばす。確認画面で日時選択がまだならTOPに飛ばす
@@ -111,7 +144,8 @@ export default {
   methods: {
     ...mapGetters({
       isMenuSelected: 'select/isMenuSelected',
-      isTimeSelected: 'select/isTimeSelected'
+      isTimeSelected: 'select/isTimeSelected',
+      getSelectedTime: 'select/getSelectedTime'
     })
   }
 }
