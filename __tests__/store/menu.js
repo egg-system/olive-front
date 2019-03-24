@@ -1,9 +1,15 @@
 import Vuex from 'vuex'
 import { state, getters, mutations, actions } from '~/store/menu.js'
 import { createLocalVue } from '@vue/test-utils'
+import config from '~/config/constant.dev.js'
 
 describe('store/menu.js', () => {
   let store
+
+  beforeAll(() => {
+    // 設定ファイルははdevを使う
+    process.env = config
+  })
 
   beforeEach(() => {
     const localVue = createLocalVue()
