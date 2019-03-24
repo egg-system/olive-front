@@ -1,5 +1,4 @@
 import axios from 'axios'
-import config from '~/config/constant.json'
 
 /* state */
 const initialState = {
@@ -67,7 +66,7 @@ export const actions = {
       return false
     }
     // 予約確定APIの実行
-    const result = await axios.get(config.api.reserveCommit, {
+    const result = await axios.get(process.env.api.reserveCommit, {
       menu_id: state.menuId,
       is_first: state.isFirst,
       customer_id: customerId,
