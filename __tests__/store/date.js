@@ -7,7 +7,7 @@ describe('store/date.js', () => {
   let store
 
   beforeAll(() => {
-    // 設定ファイルははdevを使う
+    // 設定ファイルはdevを使う
     process.env = config
   })
 
