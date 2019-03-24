@@ -19,7 +19,6 @@
   </div>
 </template>
 
-
 <style>
 .v-card__title,
 .v-card__text {
