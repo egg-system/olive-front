@@ -9,7 +9,7 @@
         </v-card-title>
 
         <v-layout row wrap>
-          <v-flex xs6>
+          <v-flex xs5>
             <div class="text-menu">予約日時</div>
           </v-flex>
           <v-flex xs6>
@@ -17,7 +17,7 @@
           </v-flex>
         </v-layout>
         <v-layout row wrap>
-          <v-flex xs6>
+          <v-flex xs5>
             <div class="text-menu">予約ID</div>
           </v-flex>
           <v-flex xs6>
@@ -25,7 +25,7 @@
           </v-flex>
         </v-layout>
         <v-layout row wrap>
-          <v-flex xs6>
+          <v-flex xs5>
             <div class="text-menu">メニュー</div>
           </v-flex>
           <v-flex xs6>
@@ -33,7 +33,7 @@
           </v-flex>
         </v-layout>
         <v-layout row wrap>
-          <v-flex xs6>
+          <v-flex xs5>
             <div class="text-menu">合計金額</div>
           </v-flex>
           <v-flex xs6>
