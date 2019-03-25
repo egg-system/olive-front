@@ -1,5 +1,4 @@
 import axios from 'axios'
-import config from '~/config/constant.json'
 
 /* state */
 export const state = () => ({
@@ -17,7 +16,7 @@ export const mutations = {
 export const actions = {
   // ログインチェック
   async getMenus({ commit }, { shopId }) {
-    const res = await axios.get(config.api.menu)
+    const res = await axios.get(process.env.api.menu)
 
     commit('setMenus', res.data.sub_shops)
   }
