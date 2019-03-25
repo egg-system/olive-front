@@ -1,11 +1,15 @@
 <template>
   <v-layout justify-center column>
 
-    <v-flex d-flex xs12 mad4 class="card-width">
+    <v-flex v-for="data in reserveData" :key="data.id"
+            d-flex
+            xs12
+            mad4 class="card-width">
+
       <v-card color="white">
         <v-card-title primary>
-          <v-chip label color="primary" text-color="white">予約中</v-chip>
-          <div class="shop">◯◯◯店</div>
+          <v-chip :color="data.status[0] === '予約中' ? 'primary' : (data.status[0] === 'キャンセル') ? 'red' : ''" label text-color="white">{{ data.status[0] }}</v-chip>
+          <div class="shop">{{ data.status[1] }}</div>
         </v-card-title>
 
         <v-layout row wrap>
@@ -13,7 +17,7 @@
             <div class="text-menu">予約日時</div>
           </v-flex>
           <v-flex xs6>
-            <div class="text-value">2019/03/01 10:00</div>
+            <div class="text-value">{{ data.menu[0] }}</div>
           </v-flex>
         </v-layout>
         <v-layout row wrap>
@@ -21,7 +25,7 @@
             <div class="text-menu">予約ID</div>
           </v-flex>
           <v-flex xs6>
-            <div class="text-value">3456789012</div>
+            <div class="text-value">{{ data.menu[1] }}</div>
           </v-flex>
         </v-layout>
         <v-layout row wrap>
@@ -29,7 +33,7 @@
             <div class="text-menu">メニュー</div>
           </v-flex>
           <v-flex xs6>
-            <div class="text-value">通常整体コース　60分</div>
+            <div class="text-value">{{ data.menu[2] }}</div>
           </v-flex>
         </v-layout>
         <v-layout row wrap>
@@ -37,34 +41,54 @@
             <div class="text-menu">合計金額</div>
           </v-flex>
           <v-flex xs6>
-            <div class="text-value">¥6,000(税抜)</div>
+            <div class="text-value">{{ data.menu[3] }}</div>
           </v-flex>
         </v-layout>
 
       </v-card>
     </v-flex>
 
-    <v-flex d-flex xs12 md4 class="card-width">
-      <v-card color="white">
-        <v-card-title primary>
-          <v-chip label color="red" text-color="white">キャンセル</v-chip>
-        </v-card-title>
-        <v-card-text>予約日時</v-card-text>
-        <v-card-text>予約ID</v-card-text>
-      </v-card>
-    </v-flex>
-
-    <v-flex d-flex xs12 md4 class="card-width">
-      <v-card color="white">
-        <v-card-title primary>
-          <v-chip label text-color="white">来店済</v-chip>
-        </v-card-title>
-        <v-card-text>予約日時</v-card-text>
-        <v-card-text>予約ID</v-card-text>
-      </v-card>
-    </v-flex>
   </v-layout>
 </template>
+
+<script>
+export default {
+  data: () => ({
+    reserveData: [
+      {
+        status: ['予約中', '◯◯◯店'],
+        menu: [
+          '2019/03/01 10:00',
+          '3456789012',
+          '通常整体コース　60分',
+          '¥6,000(税抜)'
+        ]
+      },
+      {
+        status: ['キャンセル', '◯◯◯店'],
+        menu: [
+          '2019/03/01 10:00',
+          '3456789012',
+          '通常整体コース　60分',
+          '¥6,000(税抜)'
+        ]
+      },
+      {
+        status: ['来店済', '◯◯◯店'],
+        menu: [
+          '2019/03/01 10:00',
+          '3456789012',
+          '通常整体コース　60分',
+          '¥6,000(税抜)'
+        ]
+      }
+    ]
+  }),
+  beforeMount() {
+    console.log(this.reserveData)
+  }
+}
+</script>
 
 <style>
 .v-card__title,
