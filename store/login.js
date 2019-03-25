@@ -1,5 +1,4 @@
 import axios from 'axios'
-import config from '~/config/constant.json'
 
 /* state */
 export const state = () => ({
@@ -87,7 +86,7 @@ export const actions = {
     commit('setIsLoading', true)
 
     // TODO:myjsonがPOSTに対応してないので一旦GETにする
-    const result = await axios.get(config.api.customerLogin, {
+    const result = await axios.get(process.env.api.customerLogin, {
       mail: mail,
       password: password
     })

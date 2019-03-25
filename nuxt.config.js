@@ -1,4 +1,6 @@
 const pkg = require('./package')
+const environment = process.env.NODE_ENV || 'dev'
+const envSet = require(`./config/constant.${environment}.js`)
 
 module.exports = {
   mode: 'spa',
@@ -84,5 +86,10 @@ module.exports = {
         })
       }
     }
-  }
+  },
+
+  /*
+  ** env
+  */
+  env: envSet
 }
