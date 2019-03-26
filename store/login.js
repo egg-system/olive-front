@@ -122,7 +122,7 @@ export const actions = {
     commit('setIsError', false)
     commit('setErrorMessage', '')
     console.log('customerCreate')
-    const result = await axios.get(config.api.customerCreate, {
+    const result = await axios.get(process.env.api.customerCreate, {
       mail: state.mail,
       password: state.password,
       first_name: state.firstName,
