@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { sprintf } from 'sprintf-js'
 
 /* state */
 export const state = () => ({
@@ -26,7 +27,7 @@ export const mutations = {
 export const actions = {
   // ログインチェック
   async getShop({ commit }, { id }) {
-    const res = await axios.get(process.env.api.shop)
+    const res = await axios.get(sprintf(process.env.api.shop, id))
     commit('setShop', res.data)
   }
 }
