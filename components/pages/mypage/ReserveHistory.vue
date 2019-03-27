@@ -5,45 +5,50 @@
             d-flex
             xs12
             mad4 class="card-width">
-
       <v-card color="white">
-        <v-card-title primary>
-          <v-chip :color="data.status[0] === '予約中' ? 'primary' : (data.status[0] === 'キャンセル') ? 'red' : ''" label text-color="white">{{ data.status[0] }}</v-chip>
-          <div class="shop">{{ data.status[1] }}</div>
-        </v-card-title>
 
-        <v-layout row wrap>
-          <v-flex xs5>
-            <div class="text-menu">予約日時</div>
-          </v-flex>
-          <v-flex xs6>
-            <div class="text-value">{{ data.menu[0] }}</div>
-          </v-flex>
-        </v-layout>
-        <v-layout row wrap>
-          <v-flex xs5>
-            <div class="text-menu">予約ID</div>
-          </v-flex>
-          <v-flex xs6>
-            <div class="text-value">{{ data.menu[1] }}</div>
-          </v-flex>
-        </v-layout>
-        <v-layout row wrap>
-          <v-flex xs5>
-            <div class="text-menu">メニュー</div>
-          </v-flex>
-          <v-flex xs6>
-            <div class="text-value">{{ data.menu[2] }}</div>
-          </v-flex>
-        </v-layout>
-        <v-layout row wrap>
-          <v-flex xs5>
-            <div class="text-menu">合計金額</div>
-          </v-flex>
-          <v-flex xs6>
-            <div class="text-value">{{ data.menu[3] }}</div>
-          </v-flex>
-        </v-layout>
+        <div class="card-main">
+          <v-layout row wrap>
+            <v-flex xs5 class="text-menu">
+              <v-chip :color="data.status[0] === '予約中' ? 'primary' : (data.status[0] === 'キャンセル') ? 'red' : ''" label text-color="white">{{ data.status[0] }}</v-chip>
+            </v-flex>
+            <v-flex xs6>
+              <div class="text-value shop">{{ data.status[1] }}</div>
+            </v-flex>
+          </v-layout>
+          <v-layout row wrap>
+            <v-flex xs5>
+              <div class="text-menu">予約日時</div>
+            </v-flex>
+            <v-flex xs6>
+              <div class="text-value">{{ data.menu[0] }}</div>
+            </v-flex>
+          </v-layout>
+          <v-layout row wrap>
+            <v-flex xs5>
+              <div class="text-menu">予約ID</div>
+            </v-flex>
+            <v-flex xs6>
+              <div class="text-value">{{ data.menu[1] }}</div>
+            </v-flex>
+          </v-layout>
+          <v-layout row wrap>
+            <v-flex xs5>
+              <div class="text-menu">メニュー</div>
+            </v-flex>
+            <v-flex xs6>
+              <div class="text-value">{{ data.menu[2] }}</div>
+            </v-flex>
+          </v-layout>
+          <v-layout row wrap>
+            <v-flex xs5>
+              <div class="text-menu">合計金額</div>
+            </v-flex>
+            <v-flex xs6>
+              <div class="text-value">{{ data.menu[3] }}</div>
+            </v-flex>
+          </v-layout>
+        </div>
 
       </v-card>
     </v-flex>
@@ -104,12 +109,16 @@ export default {
   margin: 0 auto;
 }
 .shop {
-  margin-left: 30px;
+  margin-top: 12px;
 }
 .text-menu {
   text-align: right;
 }
 .text-value {
   text-align: left;
+}
+.card-main {
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
 </style>
