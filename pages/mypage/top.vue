@@ -21,6 +21,9 @@
 
         <mypage-more-btn />
 
+        <h3><p class="under">予約キャンセル</p></h3>
+        <mypage-cancel-btn />
+
       </v-layout>
     </v-container>
   </div>
@@ -31,6 +34,7 @@ import MypageHeader from '~/components/pages/mypage/Header.vue'
 import MypageCoupon from '~/components/pages/mypage/Coupon.vue'
 import MypageReserveHistory from '~/components/pages/mypage/ReserveHistory.vue'
 import MypageMoreBtn from '~/components/pages/mypage/MoreBtn.vue'
+import MypageCancelBtn from '~/components/pages/mypage/CancelBtn.vue'
 import { mapState, mapActions, mapMutations } from 'vuex'
 
 export default {
@@ -38,7 +42,8 @@ export default {
     MypageHeader,
     MypageCoupon,
     MypageReserveHistory,
-    MypageMoreBtn
+    MypageMoreBtn,
+    MypageCancelBtn
   },
   data: () => ({
     link: '/mypage/top'
