@@ -15,6 +15,7 @@
 
         <h3><p class="under">予約一覧</p></h3>
         <mypage-reserve-history />
+        <mypage-list-pagination />
 
       </v-layout>
     </v-container>
@@ -23,19 +24,15 @@
 
 <script>
 import MypageHeader from '~/components/pages/mypage/Header.vue'
-import MypageCoupon from '~/components/pages/mypage/Coupon.vue'
 import MypageReserveHistory from '~/components/pages/mypage/ReserveHistory.vue'
-import MypageMoreBtn from '~/components/pages/mypage/MoreBtn.vue'
-import MypageCancelBtn from '~/components/pages/mypage/CancelBtn.vue'
+import MypageListPagination from '~/components/pages/mypage/ListPagination.vue'
 import { mapState, mapActions, mapMutations } from 'vuex'
 
 export default {
   components: {
     MypageHeader,
-    MypageCoupon,
     MypageReserveHistory,
-    MypageMoreBtn,
-    MypageCancelBtn
+    MypageListPagination
   },
   data: () => ({
     link: '/mypage/top'
