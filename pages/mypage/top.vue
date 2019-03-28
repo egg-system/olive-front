@@ -18,7 +18,9 @@
 
         <h3><p class="under">予約履歴</p></h3>
         <mypage-reserve-history />
-        
+
+        <mypage-more-btn />
+
       </v-layout>
     </v-container>
   </div>
@@ -28,13 +30,15 @@
 import MypageHeader from '~/components/pages/mypage/Header.vue'
 import MypageCoupon from '~/components/pages/mypage/Coupon.vue'
 import MypageReserveHistory from '~/components/pages/mypage/ReserveHistory.vue'
+import MypageMoreBtn from '~/components/pages/mypage/MoreBtn.vue'
 import { mapState, mapActions, mapMutations } from 'vuex'
 
 export default {
   components: {
     MypageHeader,
     MypageCoupon,
-    MypageReserveHistory
+    MypageReserveHistory,
+    MypageMoreBtn
   },
   data: () => ({
     link: '/mypage/top'
