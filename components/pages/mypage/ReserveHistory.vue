@@ -8,12 +8,15 @@
       <v-card color="white">
 
         <div class="card-main">
-          <v-layout row wrap>
+          <v-layout row>
             <v-flex xs5 class="text-menu">
               <v-chip :color="data.status[0] === '予約中' ? 'primary' : (data.status[0] === 'キャンセル') ? 'red' : ''" label text-color="white">{{ data.status[0] }}</v-chip>
             </v-flex>
             <v-flex xs6>
               <div class="text-value shop">{{ data.status[1] }}</div>
+            </v-flex>
+            <v-flex v-if="data.status[0] === '予約中'" xs6 >
+              <v-btn class="cancel-btn" color="warning">キャンセル</v-btn>
             </v-flex>
           </v-layout>
           <v-layout row wrap>
@@ -120,5 +123,8 @@ export default {
 .card-main {
   margin-top: 12px;
   margin-bottom: 12px;
+}
+.cancel-btn {
+  width: 10px;
 }
 </style>
