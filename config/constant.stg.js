@@ -4,8 +4,10 @@ module.exports = {
     customerCreate: 'https://api.myjson.com/bins/18ieba',
     customerReset: 'https://api.myjson.com/bins/18ieba',
     reserveCommit: 'https://api.myjson.com/bins/18ieba',
-    menu: 'https://api.myjson.com/bins/1dpf6m',
-    shop: 'http://olive-staging.ap-northeast-1.elasticbeanstalk.com/api/shops/',
+    menu:
+      'http://olive-staging.ap-northeast-1.elasticbeanstalk.com/api/shops/:id/menus',
+    shop:
+      'http://olive-staging.ap-northeast-1.elasticbeanstalk.com/api/shops/:id',
     date: 'https://api.myjson.com/bins/tc196'
   }
 }
