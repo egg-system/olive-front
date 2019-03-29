@@ -3,7 +3,9 @@
     <v-layout column wrap>
       <v-flex>
         <v-card dark color="red lighten-2">
-          <v-card-text><h3>日時を選択してください</h3></v-card-text>
+          <v-card-text>
+            <h3>日時を選択してください</h3>
+          </v-card-text>
         </v-card>
       </v-flex>
     </v-layout>
@@ -13,36 +15,65 @@
           <table v-for="(weekData, index) in calendar" :key="'weekData'+index" class="outer-table">
             <tbody>
               <tr>
-                <th v-if="weekData.secondMonth === undefined" colspan="8">{{ weekData.firstMonth | monthFormat }}</th>
-                <th v-if="weekData.secondMonth !== undefined" :colspan="weekData.firstMonthDays + 1">{{ weekData.firstMonth | monthFormat }}</th>
-                <th v-if="weekData.secondMonth !== undefined" :colspan="7 - weekData.firstMonthDays">{{ weekData.secondMonth | monthFormat }}</th>
+                <th
+                  v-if="weekData.secondMonth === undefined"
+                  colspan="8"
+                >{{ weekData.firstMonth | monthFormat }}</th>
+                <th
+                  v-if="weekData.secondMonth !== undefined"
+                  :colspan="weekData.firstMonthDays + 1"
+                >{{ weekData.firstMonth | monthFormat }}</th>
+                <th
+                  v-if="weekData.secondMonth !== undefined"
+                  :colspan="7 - weekData.firstMonthDays"
+                >{{ weekData.secondMonth | monthFormat }}</th>
               </tr>
               <tr>
                 <td class="col-data-wrapper">
                   <table class="inner-table">
                     <tbody>
-                      <tr><td>&nbsp;&nbsp;</td></tr>
-                      <tr><td>&nbsp;&nbsp;</td></tr>
+                      <tr>
+                        <td>&nbsp;&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>&nbsp;&nbsp;</td>
+                      </tr>
                       <tr v-for="time in timeSlots" :key="time+'time_title'">
                         <td>{{ time | hourFormat }}</td>
                       </tr>
                     </tbody>
                   </table>
                 </td>
-                <td v-for="dateData in weekData.data" :key="'dateDate'+dateData.date" class="col-data-wrapper">
+                <td
+                  v-for="dateData in weekData.data"
+                  :key="'dateDate'+dateData.date"
+                  class="col-data-wrapper"
+                >
                   <table class="inner-table">
                     <tbody>
-                      <tr><td>{{ dateData.date | dateFormat }}</td></tr>
-                      <tr><td :class="dateData.date | dayClass">{{ dateData.date | dayFormat }}</td></tr>
+                      <tr>
+                        <td>{{ dateData.date | dateFormat }}</td>
+                      </tr>
+                      <tr>
+                        <td :class="dateData.date | dayClass">{{ dateData.date | dayFormat }}</td>
+                      </tr>
                       <tr v-for="time in timeSlots" :key="time+'time_title'">
-                        <td v-if="dateData.disable !== undefined || isPastTime(dateData.date + time)" class="disabled">-</td>
-                        <td v-else-if="findRemainOfTime(dateData.time_slots, time) == 0" class="disabled">×</td>
-                        <td v-else-if="isTwoHour() && !isNextTimeRemaining(dateData.time_slots, time)" class="disabled">
-                          {{ findRemainOfTime(dateData.time_slots, time) | remainFormat }}
-                        </td>
-                        <td v-else @click="selectTime(dateData.date + time + '00')">
-                          {{ findRemainOfTime(dateData.time_slots, time) | remainFormat }}
-                        </td>
+                        <td
+                          v-if="dateData.disable !== undefined || isPastTime(dateData.date + time)"
+                          class="disabled"
+                        >-</td>
+                        <td
+                          v-else-if="findRemainOfTime(dateData.time_slots, time) == 0"
+                          class="disabled"
+                        >×</td>
+                        <td
+                          v-else-if="isTwoHour() && !isNextTimeRemaining(dateData.time_slots, time)"
+                          class="disabled"
+                        >{{ findRemainOfTime(dateData.time_slots, time) | remainFormat }}</td>
+                        <td
+                          v-else
+                          @click="selectTime(dateData.date + time + '00')"
+                        >{{ findRemainOfTime(dateData.time_slots, time) | remainFormat }}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -59,18 +90,19 @@
 <script>
 import { mapActions, mapState, mapMutations, mapGetters } from 'vuex'
 import moment from 'moment'
+
 export default {
   filters: {
-    monthFormat: function(value) {
+    monthFormat(value) {
       return moment(value).format('M月')
     },
-    hourFormat: function(value) {
+    hourFormat(value) {
       return moment(value, 'kk').format('kk:mm')
     },
-    dateFormat: function(value) {
+    dateFormat(value) {
       return moment(value).format('D')
     },
-    remainFormat: function(value) {
+    remainFormat(value) {
       if (value <= 0) {
         return '×'
       } else if (value < 3) {
@@ -79,7 +111,7 @@ export default {
         return '○'
       }
     },
-    dayClass: function(value) {
+    dayClass(value) {
       let day = moment(value).day()
       if (day == 0) {
         return 'holiday'
@@ -89,7 +121,7 @@ export default {
       return ''
     }
   },
-  data: function() {
+  data() {
     return { twoHoursCheck: false }
   },
   computed: {
@@ -182,11 +214,11 @@ export default {
       return duration == 120
     }
   },
-  created: function() {
+  created() {
     this.getCalendar()
   },
   methods: {
-    selectTime: function(time) {
+    selectTime(time) {
       this.setSelectedTime(time)
       if (this.isLogin()) {
         this.$router.push({ name: 'registration' })
@@ -194,10 +226,10 @@ export default {
         this.$router.push({ name: 'login' })
       }
     },
-    isPastTime: function(time) {
+    isPastTime(time) {
       return moment(time, 'YYYYMMDDkk').isBefore(moment())
     },
-    isNextTimeRemaining: function(timeSlots, time) {
+    isNextTimeRemaining(timeSlots, time) {
       let shop = this.$store.state.shop
       let nextTime = Number(time) + 1
       if (
@@ -209,12 +241,10 @@ export default {
       let nextRemain = this.findRemainOfTime(timeSlots, nextTime.toString())
       return 0 < nextRemain
     },
-    findRemainOfTime: function(timeSlots, time) {
+    findRemainOfTime(timeSlots, time) {
       return timeSlots.find(slot => slot.start_time.slice(-2) == time).remain
     },
-    ...mapActions({
-      getCalendar: 'date/getCalendar'
-    }),
+    ...mapActions('date', ['getCalendar']),
     ...mapMutations('select', ['setSelectedTime']),
     ...mapGetters({
       isMenuSelected: 'select/isMenuSelected',
@@ -224,6 +254,7 @@ export default {
   }
 }
 </script>
+
 <style lang="scss">
 $disabledColor: #d9d9d9;
 $borderColor: rgba(0, 0, 0, 0.1);

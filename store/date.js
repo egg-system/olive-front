@@ -1,4 +1,6 @@
 import axios from 'axios'
+import moment from 'moment'
+import { route } from '../lib/route'
 
 /* state */
 export const state = () => ({
@@ -14,16 +16,33 @@ export const mutations = {
 
 /* actions */
 export const actions = {
-  // ログインチェック
-  async getCalendar({ commit }) {
-    const res = await axios.get(process.env.api.date)
-
-    commit('setCalendar', res.data.date_slots)
+  async getCalendar({ commit, getters }) {
+    const response = await axios.get(getters.dateRoute)
+    commit('setCalendar', response.data)
   }
 }
 
 /* getters */
 export const getters = {
+  dateRoute(state, getters, routeState) {
+    const id = routeState.shop.id
+    return route(process.env.api.date, { id }, getters.dateParameters)
+  },
+  dateParameters(state, getters, routeState) {
+    const menuIds = routeState.select.menus
+      .filter(select => select.menu)
+      .map(select => select.menu.id)
+    const startMonth = moment().format('YYYY-MM')
+    const endNextMonth = moment()
+      .add(1, 'month')
+      .format('YYYY-MM')
+
+    return {
+      menu_ids: menuIds,
+      from: startMonth,
+      to: endNextMonth
+    }
+  },
   isLoading(state) {
     return state.calendar.length == 0
   }
