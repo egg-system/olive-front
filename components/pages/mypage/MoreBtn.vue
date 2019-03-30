@@ -12,7 +12,7 @@
 export default {
   methods: {
     more() {
-      this.$router.push('/mypage/')
+      this.$router.push('/mypage/list')
     }
   }
 }

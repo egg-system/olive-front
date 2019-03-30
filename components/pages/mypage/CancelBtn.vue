@@ -13,7 +13,7 @@
 export default {
   methods: {
     cancel() {
-      this.$router.push('/mypage/')
+      this.$router.push('/mypage/list')
     }
   }
 }
