@@ -26,10 +26,14 @@
     <v-container grid-list-xl>
       <v-layout column wrap class="menu-contents">
         <loading v-if="isLoading" class="loading"/>
-        <div :class="{ hidden: isLoading }" >
-          <shop-name />
-          <registration-menu v-if="getMenuIndex == 1" :if-show-only-first-menu="true" :is-first="false"/>
-          <menu-list />
+        <div :class="{ hidden: isLoading }">
+          <shop-name/>
+          <registration-menu
+            v-if="getMenuIndex == 1"
+            :if-show-only-first-menu="true"
+            :is-first="false"
+          />
+          <menu-list/>
         </div>
       </v-layout>
     </v-container>

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { route } from '../lib/route'
 
 /* state */
 export const state = () => ({
@@ -26,7 +27,8 @@ export const mutations = {
 export const actions = {
   // ログインチェック
   async getShop({ commit }, { id }) {
-    const res = await axios.get(process.env.api.shop)
-    commit('setShop', res.data)
+    const getShopRoute = route(process.env.api.shop, { id })
+    const response = await axios.get(getShopRoute)
+    commit('setShop', response.data)
   }
 }

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { route } from '../lib/route'
 
 /* state */
 export const state = () => ({
@@ -16,43 +17,28 @@ export const mutations = {
 export const actions = {
   // ログインチェック
   async getMenus({ commit }, { shopId }) {
-    const res = await axios.get(process.env.api.menu)
+    const getShopMenuRoute = route(process.env.api.menu, { id: shopId })
+    const response = await axios.get(getShopMenuRoute)
 
-    commit('setMenus', res.data.sub_shops)
+    commit('setMenus', response.data)
   }
 }
 
 export const getters = {
-  getMenu(state) {
-    return function(menuId) {
-      let targetMenu = null
-      state.subShops.forEach(subShop => {
-        subShop.menus.forEach(menu => {
-          if (menu.id == menuId) {
-            targetMenu = menu
-            return true
-          }
-        })
-      })
-      return targetMenu
+  allMenus(state) {
+    return state.subShops.flatMap(subShop => subShop.menus)
+  },
+  getMenu(state, getters) {
+    return menuId => {
+      return getters.allMenus.find(menu => menu.id === menuId)
     }
   },
-  getOption(state) {
+  getOption(state, getters) {
     return optionId => {
-      let targetOption = null
-      state.subShops.forEach(subShop => {
-        subShop.menus.forEach(menu => {
-          if (menu.options) {
-            menu.options.forEach(function(option) {
-              if (option.id == optionId) {
-                targetOption = option
-                return true
-              }
-            })
-          }
-        })
-      })
-      return targetOption
+      return getters.allMenus
+        .filter(menu => menu.options)
+        .flatMap(menu => menu.options)
+        .find(option => option.id === optionId)
     }
   },
   isLoading(state) {

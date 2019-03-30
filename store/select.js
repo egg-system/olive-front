@@ -1,12 +1,12 @@
-import moment from 'moment'
+const FIRST_MENU_INDEX = 0
+const SECOND_MENU_INDEX = 1
 
 /* state */
 export const state = () => ({
   time: null,
-  //menu: null,
-  //options: [],
+  // 二つのメニュー選択可能にするための実装
   menus: [{ menu: null, options: [] }, { menu: null, options: [] }],
-  menuIndex: 0
+  menuIndex: FIRST_MENU_INDEX
 })
 
 /* mutations */
@@ -24,27 +24,31 @@ export const mutations = {
     state.twoHoursCheck = val
   },
   setForGoNextMenu(state) {
-    state.menuIndex = 1
+    state.menuIndex = SECOND_MENU_INDEX
   },
   setForGoBackMenu(state) {
-    state.menuIndex = 0
-    state.menus[1].menu = null
-    state.menus[1].options = []
+    state.menuIndex = FIRST_MENU_INDEX
+    state.menus[SECOND_MENU_INDEX].menu = null
+    state.menus[SECOND_MENU_INDEX].options = []
   }
 }
 
 export const getters = {
   isTwoMenusSelected(state) {
-    return state.menus[1].menu != null
+    return state.menus[SECOND_MENU_INDEX].menu !== null
   },
   isTwoHour(state) {
-    if (state.menus[0].menu == null) {
+    if (state.menus[FIRST_MENU_INDEX].menu === null) {
       return false
     }
-    return state.menus[1].menu != null || 120 == state.menus[0].menu.minutes
+
+    const isSelectedSecondMenu = state.menus[SECOND_MENU_INDEX].menu !== null
+    const firstMenuMinute = state.menus[FIRST_MENU_INDEX].menu.minutes
+
+    return isSelectedSecondMenu || firstMenuMinute === 120
   },
   isMenuSelected(state) {
-    return state.menus[0].menu != null
+    return state.menus[FIRST_MENU_INDEX].menu != null
   },
   isTimeSelected(state) {
     return state.time != null
@@ -52,11 +56,18 @@ export const getters = {
   getMenuNow(state) {
     return state.menus[state.menuIndex].menu
   },
+  selectedMenuId(state, getters) {
+    const selectedMenu = getters.getMenuNow
+    if (!selectedMenu) {
+      return null
+    }
+    return selectedMenu.id
+  },
   getOptionsNow(state) {
     return state.menus[state.menuIndex].options
   },
   ifGoNextMenu(state) {
-    return state.twoHoursCheck && state.menuIndex == 0
+    return state.twoHoursCheck && state.menuIndex === FIRST_MENU_INDEX
   },
   getMenuIndex(state) {
     return state.menuIndex
