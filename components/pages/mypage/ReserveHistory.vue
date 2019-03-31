@@ -16,7 +16,7 @@
               <div class="text-value shop">{{ data.status[1] }}</div>
             </v-flex>
             <v-flex v-if="data.status[0] === '予約中'" xs6 >
-              <v-btn class="cancel-btn" color="warning">キャンセル</v-btn>
+              <v-btn class="cancel-btn" color="warning" @click="cancelConfrim">キャンセル</v-btn>
             </v-flex>
           </v-layout>
           <v-layout row wrap>
@@ -94,6 +94,11 @@ export default {
   }),
   beforeMount() {
     console.log(this.reserveData)
+  },
+  methods: {
+    cancelConfrim() {
+      this.$router.push('/mypage/list/cancel/confirm')
+    }
   }
 }
 </script>

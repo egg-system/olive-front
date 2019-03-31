@@ -47,20 +47,7 @@ export default {
   },
   data: () => ({
     link: '/mypage/top'
-  }),
-  computed: {
-    ...mapState({
-      login: state => state.login
-    })
-  },
-  methods: {
-    resisterBtn() {
-      // 会員登録あり
-      this.setIsCreate(true)
-      this.$router.push('/registration')
-    },
-    ...mapMutations('login', ['setIsCreate'])
-  }
+  })
 }
 </script>
 
