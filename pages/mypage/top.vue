@@ -17,7 +17,7 @@
         <mypage-coupon />
 
         <h3><p class="under">予約履歴</p></h3>
-        <mypage-reserve-history />
+        <mypage-reserve-history :reserve-data="reserveData"/>
 
         <mypage-more-btn />
 
@@ -46,7 +46,35 @@ export default {
     MypageCancelBtn
   },
   data: () => ({
-    link: '/mypage/top'
+    reserveData: [
+      {
+        status: ['予約中', '◯◯◯店'],
+        menu: [
+          '2019/03/01 10:00',
+          '3456789012',
+          '通常整体コース　60分',
+          '¥6,000(税抜)'
+        ]
+      },
+      {
+        status: ['キャンセル', '◯◯◯店'],
+        menu: [
+          '2019/03/01 10:00',
+          '3456789012',
+          '通常整体コース　60分',
+          '¥6,000(税抜)'
+        ]
+      },
+      {
+        status: ['来店済', '◯◯◯店'],
+        menu: [
+          '2019/03/01 10:00',
+          '3456789012',
+          '通常整体コース　60分',
+          '¥6,000(税抜)'
+        ]
+      }
+    ]
   })
 }
 </script>

@@ -15,7 +15,7 @@
             <v-flex xs6>
               <div class="text-value shop">{{ data.status[1] }}</div>
             </v-flex>
-            <v-flex v-if="data.status[0] === '予約中'" xs6 >
+            <v-flex v-if="!isCancelBtnHide && data.status[0] === '予約中'" xs6 >
               <v-btn class="cancel-btn" color="warning" @click="cancelConfrim">キャンセル</v-btn>
             </v-flex>
           </v-layout>
@@ -61,37 +61,19 @@
 
 <script>
 export default {
-  data: () => ({
-    reserveData: [
-      {
-        status: ['予約中', '◯◯◯店'],
-        menu: [
-          '2019/03/01 10:00',
-          '3456789012',
-          '通常整体コース　60分',
-          '¥6,000(税抜)'
-        ]
-      },
-      {
-        status: ['キャンセル', '◯◯◯店'],
-        menu: [
-          '2019/03/01 10:00',
-          '3456789012',
-          '通常整体コース　60分',
-          '¥6,000(税抜)'
-        ]
-      },
-      {
-        status: ['来店済', '◯◯◯店'],
-        menu: [
-          '2019/03/01 10:00',
-          '3456789012',
-          '通常整体コース　60分',
-          '¥6,000(税抜)'
-        ]
+  props: {
+    reserveData: {
+      type: Array,
+      default() {
+        return []
       }
-    ]
-  }),
+    },
+    // リストページだけキャンセルボタンを出すため
+    isCancelBtnHide: {
+      type: Boolean,
+      default: true
+    }
+  },
   beforeMount() {
     console.log(this.reserveData)
   },

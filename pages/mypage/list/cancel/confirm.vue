@@ -13,6 +13,8 @@
           </v-card>
         </v-flex>
 
+        <mypage-reserve-history :reserve-data="reserveData"/>
+
       </v-layout>
     </v-container>
   </div>
@@ -24,8 +26,22 @@ import MypageReserveHistory from '~/components/pages/mypage/ReserveHistory.vue'
 
 export default {
   components: {
-    MypageHeader
-  }
+    MypageHeader,
+    MypageReserveHistory
+  },
+  data: () => ({
+    reserveData: [
+      {
+        status: ['予約中', '◯◯◯店'],
+        menu: [
+          '2019/03/01 10:00',
+          '3456789012',
+          '通常整体コース　60分',
+          '¥6,000(税抜)'
+        ]
+      }
+    ]
+  })
 }
 </script>
 
