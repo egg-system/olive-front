@@ -15,6 +15,12 @@
 
         <mypage-reserve-history :reserve-data="reserveData"/>
 
+        <div class="message">予約をキャンセルします。よろしいですか？</div>
+        <v-flex>
+          <v-btn @click="back">戻る</v-btn>
+          <v-btn color="warning" @click="complete">確定する</v-btn>
+        </v-flex>
+
       </v-layout>
     </v-container>
   </div>
@@ -41,12 +47,24 @@ export default {
         ]
       }
     ]
-  })
+  }),
+  methods: {
+    complete() {
+      this.$router.push('/mypage/list/cancel/complete')
+    },
+    back() {
+      // ブラウザバック
+      this.$router.go(-1)
+    }
+  }
 }
 </script>
 
 <style>
 .mypage-title {
   color: white;
+}
+.message {
+  margin-top: 15px;
 }
 </style>
