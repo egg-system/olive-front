@@ -74,9 +74,6 @@ export default {
       default: true
     }
   },
-  beforeMount() {
-    console.log(this.reserveData)
-  },
   methods: {
     cancelConfrim() {
       this.$router.push('/mypage/list/cancel/confirm')

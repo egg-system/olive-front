@@ -71,9 +71,6 @@ export default {
         password: this.password
       }).then(isLogin => {
         if (isLogin) {
-          // 画面遷移
-          console.log(this.link)
-          // this.$router.push('/registration')
           this.$router.push(this.link)
         }
       })

@@ -121,7 +121,6 @@ export const actions = {
     // 一度エラーはリセットする
     commit('setIsError', false)
     commit('setErrorMessage', '')
-    console.log('customerCreate')
     const result = await axios.get(config.api.customerCreate, {
       mail: state.mail,
       password: state.password,
