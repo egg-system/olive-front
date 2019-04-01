@@ -3,9 +3,7 @@
     <mypage-header />
     <v-container grid-list-xl>
       <v-layout column>
-        <v-flex align-self-baseline>
-          <div>山田　太郎　さん</div>
-        </v-flex>
+        <mypage-name />
 
         <v-flex class="mypage-top">
           <v-card dark color="red lighten-2">
@@ -29,11 +27,13 @@
 <script>
 import MypageHeader from '~/components/pages/mypage/Header.vue'
 import MypageReserveHistory from '~/components/pages/mypage/ReserveHistory.vue'
+import MypageName from '~/components/pages/mypage/Name.vue'
 
 export default {
   components: {
     MypageHeader,
-    MypageReserveHistory
+    MypageReserveHistory,
+    MypageName
   },
   data: () => ({
     reserveData: [

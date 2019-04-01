@@ -3,9 +3,7 @@
     <mypage-header />
     <v-container grid-list-xl>
       <v-layout column>
-        <v-flex align-self-baseline>
-          <div>山田　太郎　さん</div>
-        </v-flex>
+        <mypage-name />
 
         <v-flex class="mypage-top">
           <v-card dark color="red lighten-2">
@@ -35,6 +33,7 @@ import MypageCoupon from '~/components/pages/mypage/Coupon.vue'
 import MypageReserveHistory from '~/components/pages/mypage/ReserveHistory.vue'
 import MypageMoreBtn from '~/components/pages/mypage/MoreBtn.vue'
 import MypageCancelBtn from '~/components/pages/mypage/CancelBtn.vue'
+import MypageName from '~/components/pages/mypage/Name.vue'
 import { mapState, mapActions, mapMutations } from 'vuex'
 
 export default {
@@ -43,7 +42,8 @@ export default {
     MypageCoupon,
     MypageReserveHistory,
     MypageMoreBtn,
-    MypageCancelBtn
+    MypageCancelBtn,
+    MypageName
   },
   data: () => ({
     reserveData: [
