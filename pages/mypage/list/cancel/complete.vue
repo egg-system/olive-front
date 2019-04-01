@@ -13,6 +13,13 @@
           </v-card>
         </v-flex>
 
+        <div>予約をキャンセルしました。</div>
+        <div>予約キャンセルメールをお送りしましたので、ご確認ください。</div>
+
+        <v-flex>
+          <v-btn color="warning" @click="top">マイページトップへ</v-btn>
+        </v-flex>
+
       </v-layout>
     </v-container>
   </div>
@@ -25,6 +32,11 @@ import MypageReserveHistory from '~/components/pages/mypage/ReserveHistory.vue'
 export default {
   components: {
     MypageHeader
+  },
+  methods: {
+    top() {
+      this.$router.push('/mypage/top')
+    }
   }
 }
 </script>
