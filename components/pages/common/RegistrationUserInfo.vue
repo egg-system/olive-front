@@ -8,103 +8,9 @@
       </v-flex>
     </v-layout>
 
-    <v-layout row>
-      <v-flex xs3>氏名<span class="must">(必須)</span></v-flex>
-      <v-flex>
-        <v-text-field
-          v-model="firstName"
-          :rules="nameRules"
-          :disabled="isConfirm"
-          :clearable="!isConfirm"
-          type="text"
-          label="姓"
-        />
-      </v-flex>
-      <v-flex>
-        <v-text-field
-          v-model="lastName"
-          :rules="nameRules"
-          :disabled="isConfirm"
-          :clearable="!isConfirm"
-          type="text"
-          label="名"
-        />
-      </v-flex>
-    </v-layout>
-
-    <v-layout row>
-      <v-flex xs3>氏名カナ<span class="must">(必須)</span></v-flex>
-      <v-flex>
-        <v-text-field
-          v-model="firstNameKana"
-          :rules="nameKanaRules"
-          :disabled="isConfirm"
-          :clearable="!isConfirm"
-          type="text"
-          label="セイ"
-        />
-      </v-flex>
-      <v-flex>
-        <v-text-field
-          v-model="lastNameKana"
-          :rules="nameKanaRules"
-          :disabled="isConfirm"
-          :clearable="!isConfirm"
-          type="text"
-          label="メイ"
-        />
-      </v-flex>
-    </v-layout>
-
-    <v-layout row>
-      <v-flex xs3>メールアドレス<span class="must">(必須)</span></v-flex>
-      <v-layout column>
-        <v-flex>
-          <v-text-field
-            v-model="mail"
-            :rules="mailRules"
-            :disabled="isConfirm"
-            :clearable="!isConfirm"
-            type="text"
-            label="メールアドレス"
-          />
-        </v-flex>
-        <v-flex v-if="!isConfirm">確認のため、再度メールアドレスを入力してください</v-flex>
-        <v-flex v-if="!isConfirm">
-          <v-text-field
-            v-model="mail2"
-            :rules="mailRules"
-            clearable
-            type="text"
-            label="メールアドレス"
-          />
-        </v-flex>
-      </v-layout>
-    </v-layout>
-    <v-alert v-if="!checkSame"
-             :value="true"
-             color="error"
-             icon="warning"
-             outline
-    >
-      同じメールアドレスを入力してください
-    </v-alert>
-
-    <v-layout row>
-      <v-flex xs3>電話番号<span class="must">(必須)</span></v-flex>
-      <v-layout column>
-        <v-flex>
-          <v-text-field
-            v-model="phoneNumber"
-            :rules="phoneNumberRules"
-            :disabled="isConfirm"
-            :clearable="!isConfirm"
-            type="text"
-            label="電話番号"
-          />
-        </v-flex>
-      </v-layout>
-    </v-layout>
+    <customer-name :is-confirm="isConfirm"/>
+    <customer-mail :is-confirm="isConfirm"/>
+    <customer-phone-number :is-confirm="isConfirm"/>
 
     <v-layout row>
       <v-flex xs3>初めてのご利用ですか？<span class="must">(必須)</span></v-flex>
@@ -166,17 +72,17 @@
 </template>
 
 <script>
+import CustomerName from '~/components/pages/common/customer/Name.vue'
+import CustomerMail from '~/components/pages/common/customer/Mail.vue'
+import CustomerPhoneNumber from '~/components/pages/common/customer/PhoneNumber.vue'
 import { mapMutations } from 'vuex'
-import {
-  checkMail,
-  checkPassword,
-  checkName,
-  checkNameKana,
-  checkPhoneNumber,
-  checkSame
-} from '~/lib/validation'
 
 export default {
+  components: {
+    CustomerName,
+    CustomerMail,
+    CustomerPhoneNumber
+  },
   props: {
     isConfirm: {
       type: Boolean,
@@ -194,69 +100,9 @@ export default {
       '9ヶ月',
       '10ヶ月'
     ],
-    children: ['なし', '1人', '2人', '3人', '4人'],
-    nameRules: [name => checkName(name)],
-    nameKanaRules: [nameKana => checkNameKana(nameKana)],
-    mailRules: [mail => checkMail(mail)],
-    phoneNumberRules: [phoneNumber => checkPhoneNumber(phoneNumber)]
+    children: ['なし', '1人', '2人', '3人', '4人']
   }),
   computed: {
-    firstName: {
-      get() {
-        return this.$store.state.login.firstName
-      },
-      set(value) {
-        this.setFirstName(value)
-      }
-    },
-    lastName: {
-      get() {
-        return this.$store.state.login.lastName
-      },
-      set(value) {
-        this.setLastName(value)
-      }
-    },
-    firstNameKana: {
-      get() {
-        return this.$store.state.login.firstNameKana
-      },
-      set(value) {
-        this.setFirstNameKana(value)
-      }
-    },
-    lastNameKana: {
-      get() {
-        return this.$store.state.login.lastNameKana
-      },
-      set(value) {
-        this.setLastNameKana(value)
-      }
-    },
-    mail: {
-      get() {
-        return this.$store.state.login.mail
-      },
-      set(value) {
-        this.setMail(value)
-      }
-    },
-    mail2: {
-      get() {
-        return this.$store.state.login.mail2
-      },
-      set(value) {
-        this.setMail2(value)
-      }
-    },
-    phoneNumber: {
-      get() {
-        return this.$store.state.login.phoneNumber
-      },
-      set(value) {
-        this.setPhoneNumber(value)
-      }
-    },
     coupon: {
       get() {
         return this.$store.state.registration.coupon
@@ -299,12 +145,6 @@ export default {
       set(value) {
         this.setMessage(value)
       }
-    },
-    checkSame() {
-      return checkSame(
-        this.$store.state.login.mail,
-        this.$store.state.login.mail2
-      )
     }
   },
   beforeMount() {
@@ -319,16 +159,7 @@ export default {
       'setIsFirst',
       'setMessage'
     ]),
-    ...mapMutations('login', [
-      'setFirstName',
-      'setLastName',
-      'setFirstNameKana',
-      'setLastNameKana',
-      'setMail',
-      'setMail2',
-      'setPhoneNumber',
-      'setIsLoading'
-    ])
+    ...mapMutations('login', ['setIsLoading'])
   }
 }
 </script>
