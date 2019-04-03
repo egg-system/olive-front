@@ -57,15 +57,7 @@
       </v-flex>
     </v-layout>
 
-    <v-layout row>
-      <v-flex xs3>サロンからのメッセージ受信設定</v-flex>
-      <v-flex>
-        <v-radio-group :disabled="isConfirm" v-model="message" :mandatory="false" class="inputTop">
-          <v-radio label="受け取る" value="yes"/>
-          <v-radio label="受け取らない" value="no"/>
-        </v-radio-group>
-      </v-flex>
-    </v-layout>
+    <customer-message :is-confirm="isConfirm"/>
 
   </div>
 
@@ -75,13 +67,15 @@
 import CustomerName from '~/components/pages/common/customer/Name.vue'
 import CustomerMail from '~/components/pages/common/customer/Mail.vue'
 import CustomerPhoneNumber from '~/components/pages/common/customer/PhoneNumber.vue'
+import CustomerMessage from '~/components/pages/common/customer/Message.vue'
 import { mapMutations } from 'vuex'
 
 export default {
   components: {
     CustomerName,
     CustomerMail,
-    CustomerPhoneNumber
+    CustomerPhoneNumber,
+    CustomerMessage
   },
   props: {
     isConfirm: {
@@ -137,14 +131,6 @@ export default {
       set(value) {
         this.setIsFirst(value)
       }
-    },
-    message: {
-      get() {
-        return this.$store.state.registration.message
-      },
-      set(value) {
-        this.setMessage(value)
-      }
     }
   },
   beforeMount() {
@@ -156,8 +142,7 @@ export default {
       'setCoupon',
       'setPregnancyTermSelected',
       'setChildrenSelected',
-      'setIsFirst',
-      'setMessage'
+      'setIsFirst'
     ]),
     ...mapMutations('login', ['setIsLoading'])
   }
