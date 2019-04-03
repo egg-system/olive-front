@@ -1,22 +1,24 @@
 <template>
   <div>
     <mypage-header />
-    <v-container grid-list-xl>
-      <v-layout column>
-        <mypage-name />
+    <section class="container">
+      <v-container grid-list-xl>
+        <v-layout column>
+          <mypage-name />
 
-        <v-flex class="mypage-top">
-          <v-card dark color="red lighten-2">
-            <v-card-text><h3 class="mypage-title">マイページトップ > 予約一覧</h3></v-card-text>
-          </v-card>
-        </v-flex>
+          <v-flex class="mypage-top">
+            <v-card dark color="red lighten-2">
+              <v-card-text><h3 class="mypage-title">マイページトップ > 予約一覧</h3></v-card-text>
+            </v-card>
+          </v-flex>
 
-        <h3><p class="under">予約一覧</p></h3>
-        <mypage-reserve-history :reserve-data="reserveData" :is-cancel-btn-hide="false"/>
-        <mypage-list-pagination />
+          <h3><p class="under">予約一覧</p></h3>
+          <mypage-reserve-history :reserve-data="reserveData" :is-cancel-btn-hide="false"/>
+          <mypage-list-pagination />
 
-      </v-layout>
-    </v-container>
+        </v-layout>
+      </v-container>
+    </section>
   </div>
 </template>
 

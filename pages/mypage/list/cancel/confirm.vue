@@ -1,26 +1,28 @@
 <template>
   <div>
     <mypage-header />
-    <v-container grid-list-xl>
-      <v-layout column>
-        <mypage-name />
+    <section class="container">
+      <v-container grid-list-xl>
+        <v-layout column>
+          <mypage-name />
 
-        <v-flex class="mypage-top">
-          <v-card dark color="red lighten-2">
-            <v-card-text><h3 class="mypage-title">マイページトップ > 予約一覧 > 予約キャンセル確認</h3></v-card-text>
-          </v-card>
-        </v-flex>
+          <v-flex class="mypage-top">
+            <v-card dark color="red lighten-2">
+              <v-card-text><h3 class="mypage-title">マイページトップ > 予約一覧 > 予約キャンセル確認</h3></v-card-text>
+            </v-card>
+          </v-flex>
 
-        <mypage-reserve-history :reserve-data="reserveData"/>
+          <mypage-reserve-history :reserve-data="reserveData"/>
 
-        <div class="message">予約をキャンセルします。よろしいですか？</div>
-        <v-flex>
-          <v-btn @click="back">戻る</v-btn>
-          <v-btn color="warning" @click="complete">確定する</v-btn>
-        </v-flex>
+          <div class="message">予約をキャンセルします。よろしいですか？</div>
+          <v-flex>
+            <v-btn @click="back">戻る</v-btn>
+            <v-btn color="warning" @click="complete">確定する</v-btn>
+          </v-flex>
 
-      </v-layout>
-    </v-container>
+        </v-layout>
+      </v-container>
+    </section>
   </div>
 </template>
 

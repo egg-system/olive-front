@@ -15,7 +15,6 @@
 
 <script>
 import { mapMutations } from 'vuex'
-import { checkPhoneNumber } from '~/lib/validation'
 
 export default {
   props: {
