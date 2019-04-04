@@ -16,7 +16,10 @@ export const state = () => ({
   mail2: '',
   phoneNumber: '',
   password: '',
-  password2: ''
+  password2: '',
+  postalCode: '',
+  prefecture: '',
+  city: ''
 })
 
 /* getters */
@@ -70,6 +73,15 @@ export const mutations = {
   },
   setPassword2(state, password2) {
     state.password2 = password2
+  },
+  setPostalCode(state, postalCode) {
+    state.postalCode = postalCode
+  },
+  setPrefecture(state, prefecture) {
+    state.prefecture = prefecture
+  },
+  setCity(state, city) {
+    state.city = city
   },
   logout(state) {
     state.isLogin = false

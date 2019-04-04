@@ -17,6 +17,7 @@
             <customer-name />
             <customer-mail />
             <customer-phone-number />
+            <customer-adress />
             <customer-message />
           </div>
 
@@ -36,6 +37,7 @@ import CustomerName from '~/components/pages/common/customer/Name.vue'
 import CustomerMail from '~/components/pages/common/customer/Mail.vue'
 import CustomerPhoneNumber from '~/components/pages/common/customer/PhoneNumber.vue'
 import CustomerMessage from '~/components/pages/common/customer/Message.vue'
+import CustomerAdress from '~/components/pages/common/customer/Adress.vue'
 import { mapState, mapActions, mapMutations } from 'vuex'
 
 export default {
@@ -47,7 +49,8 @@ export default {
     CustomerName,
     CustomerMail,
     CustomerPhoneNumber,
-    CustomerMessage
+    CustomerMessage,
+    CustomerAdress
   },
   data: () => ({}),
   computed: {
