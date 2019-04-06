@@ -66,7 +66,7 @@ export default {
   },
   methods: {
     confirm() {
-      this.$router.push('/mypage/top')
+      this.$router.push('/mypage/profile/confirm')
     }
   }
 }
