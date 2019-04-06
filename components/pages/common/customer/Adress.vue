@@ -27,7 +27,6 @@
             <v-flex>
               <v-text-field
                 v-model="prefecture"
-                :rules="postalCodeRules"
                 :disabled="isConfirm"
                 :clearable="!isConfirm"
                 type="text"
@@ -43,7 +42,6 @@
             <v-flex>
               <v-text-field
                 v-model="city"
-                :rules="postalCodeRules"
                 :disabled="isConfirm"
                 :clearable="!isConfirm"
                 type="text"
