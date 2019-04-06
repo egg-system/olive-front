@@ -19,6 +19,7 @@
             <customer-phone-number />
             <customer-adress />
             <customer-message />
+            <confirm-btn />
           </div>
 
         </v-layout>
@@ -38,6 +39,7 @@ import CustomerMail from '~/components/pages/common/customer/Mail.vue'
 import CustomerPhoneNumber from '~/components/pages/common/customer/PhoneNumber.vue'
 import CustomerMessage from '~/components/pages/common/customer/Message.vue'
 import CustomerAdress from '~/components/pages/common/customer/Adress.vue'
+import ConfirmBtn from '~/components/pages/mypage/profile/ConfirmBtn.vue'
 import { mapState, mapActions, mapMutations } from 'vuex'
 
 export default {
@@ -50,7 +52,8 @@ export default {
     CustomerMail,
     CustomerPhoneNumber,
     CustomerMessage,
-    CustomerAdress
+    CustomerAdress,
+    ConfirmBtn
   },
   data: () => ({}),
   computed: {

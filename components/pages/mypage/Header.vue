@@ -16,7 +16,7 @@ export default {
       this.$router.push('/mypage/top')
     },
     profile() {
-      this.$router.push('/mypage/profile')
+      this.$router.push('/mypage/profile/edit')
     }
   }
 }
