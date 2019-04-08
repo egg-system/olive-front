@@ -1,28 +1,20 @@
 <template>
   <div>
-    <mypage-header />
-    <section class="container">
-      <v-container grid-list-xl>
-        <v-layout column>
-          <mypage-name />
 
-          <v-flex class="mypage-top">
-            <v-card dark color="red lighten-2">
-              <v-card-text><h3 class="mypage-title">マイページトップ > 予約一覧 > 予約キャンセル確認</h3></v-card-text>
-            </v-card>
-          </v-flex>
+    <v-flex class="mypage-top">
+      <v-card dark color="red lighten-2">
+        <v-card-text><h3 class="mypage-title">マイページトップ > 予約一覧 > 予約キャンセル確認</h3></v-card-text>
+      </v-card>
+    </v-flex>
 
-          <mypage-reserve-history :reserve-data="reserveData"/>
+    <mypage-reserve-history :reserve-data="reserveData"/>
 
-          <div class="message">予約をキャンセルします。よろしいですか？</div>
-          <v-flex>
-            <v-btn @click="back">戻る</v-btn>
-            <v-btn color="warning" @click="complete">確定する</v-btn>
-          </v-flex>
+    <div class="message">予約をキャンセルします。よろしいですか？</div>
+    <v-flex>
+      <v-btn @click="back">戻る</v-btn>
+      <v-btn color="warning" @click="complete">確定する</v-btn>
+    </v-flex>
 
-        </v-layout>
-      </v-container>
-    </section>
   </div>
 </template>
 
@@ -32,6 +24,7 @@ import MypageReserveHistory from '~/components/pages/mypage/ReserveHistory.vue'
 import MypageName from '~/components/pages/mypage/Name.vue'
 
 export default {
+  layout: 'mypage',
   components: {
     MypageHeader,
     MypageReserveHistory,
@@ -63,9 +56,6 @@ export default {
 </script>
 
 <style>
-.mypage-title {
-  color: white;
-}
 .message {
   margin-top: 15px;
 }

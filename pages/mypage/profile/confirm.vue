@@ -1,31 +1,22 @@
 <template>
   <div>
-    <mypage-header />
-    <section class="container">
-      <v-container grid-list-xl>
-        <v-layout column>
-          <mypage-name />
 
-          <v-flex class="mypage-top">
-            <v-card dark color="red lighten-2">
-              <v-card-text><h3 class="mypage-title">マイページトップ > 会員情報変更確認</h3></v-card-text>
-            </v-card>
-          </v-flex>
+    <v-flex class="mypage-top">
+      <v-card dark color="red lighten-2">
+        <v-card-text><h3 class="mypage-title">マイページトップ > 会員情報変更確認</h3></v-card-text>
+      </v-card>
+    </v-flex>
 
-          <h3><p class="under">会員情報変更</p></h3>
-          <div class="pr">
-            <customer-name :is-confirm="true"/>
-            <customer-mail :is-confirm="true"/>
-            <customer-phone-number :is-confirm="true"/>
-            <customer-adress :is-confirm="true"/>
-            <customer-message :is-confirm="true"/>
-            <fixed-btn />
-          </div>
+    <h3><p class="under">会員情報変更</p></h3>
+    <div class="pr">
+      <customer-name :is-confirm="true"/>
+      <customer-mail :is-confirm="true"/>
+      <customer-phone-number :is-confirm="true"/>
+      <customer-adress :is-confirm="true"/>
+      <customer-message :is-confirm="true"/>
+      <fixed-btn />
+    </div>
 
-        </v-layout>
-      </v-container>
-
-    </section>
   </div>
 </template>
 
@@ -43,6 +34,7 @@ import FixedBtn from '~/components/pages/mypage/profile/FixedBtn.vue'
 import { mapState, mapActions, mapMutations } from 'vuex'
 
 export default {
+  layout: 'mypage',
   components: {
     MypageHeader,
     MypageReserveHistory,
@@ -65,20 +57,8 @@ export default {
 </script>
 
 <style>
-.mypage-top {
-  text-align: left;
-}
-.mypage-title {
-  color: white;
-}
 .pr {
   width: 90%;
   margin: 0 auto;
-}
-.under {
-  background: linear-gradient(transparent 90%, #ff99ab 70%);
-  width: 90%;
-  margin: 0 auto;
-  text-align: left;
 }
 </style>

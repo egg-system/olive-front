@@ -1,31 +1,23 @@
 <template>
   <div>
-    <mypage-header />
-    <section class="container">
-      <v-container grid-list-xl>
-        <v-layout column>
-          <mypage-name />
 
-          <v-flex class="mypage-top">
-            <v-card dark color="red lighten-2">
-              <v-card-text><h3 class="mypage-title">マイページトップ</h3></v-card-text>
-            </v-card>
-          </v-flex>
+    <v-flex class="mypage-top">
+      <v-card dark color="red lighten-2">
+        <v-card-text><h3 class="mypage-title">マイページトップ</h3></v-card-text>
+      </v-card>
+    </v-flex>
 
-          <h3><p class="under">残りの回数券（回数券をお持ちの方のみ)</p></h3>
-          <mypage-coupon />
+    <h3><p class="under">残りの回数券（回数券をお持ちの方のみ)</p></h3>
+    <mypage-coupon />
 
-          <h3><p class="under">予約履歴</p></h3>
-          <mypage-reserve-history :reserve-data="reserveData"/>
+    <h3><p class="under">予約履歴</p></h3>
+    <mypage-reserve-history :reserve-data="reserveData"/>
 
-          <mypage-more-btn />
+    <mypage-more-btn />
 
-          <h3><p class="under">予約キャンセル</p></h3>
-          <mypage-cancel-btn />
+    <h3><p class="under">予約キャンセル</p></h3>
+    <mypage-cancel-btn />
 
-        </v-layout>
-      </v-container>
-    </section>
   </div>
 </template>
 
@@ -39,6 +31,7 @@ import MypageName from '~/components/pages/mypage/Name.vue'
 import { mapState, mapActions, mapMutations } from 'vuex'
 
 export default {
+  layout: 'mypage',
   components: {
     MypageHeader,
     MypageCoupon,
@@ -80,18 +73,3 @@ export default {
   })
 }
 </script>
-
-<style>
-.mypage-top {
-  text-align: left;
-}
-.mypage-title {
-  color: white;
-}
-.under {
-  background: linear-gradient(transparent 90%, #ff99ab 70%);
-  width: 90%;
-  margin: 0 auto;
-  text-align: left;
-}
-</style>
