@@ -1,10 +1,10 @@
 <template>
   <div>
-    <v-radio-group v-model="selectedMenu" column>
+    <v-radio-group v-model="selectedMenuId" column>
       <section
         v-for="subShop in subShops"
-        :key="'menuHead'+subShop.id"
-        :id="'menuHead'+subShop.id"
+        :key="subShop.id"
+        :id="subShop.id"
         class="content-section"
       >
         <v-layout column wrap>
@@ -16,7 +16,7 @@
             </v-card>
           </v-flex>
           <v-flex>
-            <div v-for="menu in subShop.menus" :key="'menu'+menu.id">
+            <div v-for="menu in subShop.menus" :key="menu.id">
               <menu-row :menu="menu" :selected-option-count.sync="selectedNumbersOfOptions"/>
             </div>
           </v-flex>
@@ -26,10 +26,10 @@
 
     <v-layout column>
       <v-flex xs6>
-        <v-btn v-if="getMenuIndex == 1" @click="backToFirst">戻る</v-btn>
+        <v-btn v-if="menuIndex == 1" @click="backToFirst">戻る</v-btn>
         <v-btn color="warning" @click="next">日時指定に進む</v-btn>
         <v-btn
-          v-if="selectedMenu != null && selectedMenu.minutes != 120 && getMenuIndex == 0"
+          v-if="selectedMenu != null && selectedMenu.minutes != 120 && menuIndex == 0"
           color="warning"
           @click="twoHour"
         >２時間予約する</v-btn>
@@ -54,37 +54,31 @@ export default {
     subShops() {
       return this.$store.state.menu.subShops
     },
-    selectedMenu: {
+    menuIndex() {
+      return this.$store.state.select.menuIndex
+    },
+    selectedMenuId: {
       get() {
-        return this.selectedMenuId
+        if (this.selectedMenu) {
+          return this.selectedMenu.id
+        }
+
+        return null
       },
       set(id) {
         let menu = this.getMenu(id)
         this.setSelectedMenu(menu)
       }
     },
-    ...mapGetters({
-      getMenu: 'menu/getMenu',
-      getMenuIndex: 'select/getMenuIndex',
-      getOption: 'menu/getOption',
-      getSelectedMenu: 'select/getMenuNow',
-      getSelectedOptions: 'select/getOptionsNow',
-      selectedMenuId: 'select/selectedMenuId'
+    ...mapGetters('menu', ['getMenu', 'getOption']),
+    ...mapGetters('select', {
+      selectedOptions: 'selectedOptions',
+      selectedMenu: 'selectedMenu'
     })
   },
   watch: {
     selectedNumbersOfOptions(val) {
       this.selectedOptions = this.selectedOptions
-    },
-    subShops(subShops) {
-      if (!this.selectedMenu) {
-        this.selectedMenu = this.getDefaultMenu().id
-      }
-    },
-    getSelectedMenu(val) {
-      if (!this.selectedMenu && this.getDefaultMenu() != null) {
-        this.selectedMenu = this.getDefaultMenu().id
-      }
     }
   },
   created() {
@@ -111,9 +105,6 @@ export default {
     },
     ...mapActions({
       getMenus: 'menu/getMenus'
-    }),
-    ...mapGetters({
-      getDefaultMenu: 'menu/getDefaultMenu'
     }),
     ...mapMutations('select', [
       'setSelectedMenu',

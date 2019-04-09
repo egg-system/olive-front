@@ -15,7 +15,12 @@ export const mutations = {
     state.time = time
   },
   setSelectedMenu(state, selectedMenu) {
-    state.menus[state.menuIndex].menu = selectedMenu
+    const menus = Object.assign([], state.menus)
+    menus[state.menuIndex].menu = selectedMenu
+
+    // オプションの選択を初期化する
+    menus[state.menuIndex].options = []
+    state.menus = menus
   },
   setSelectedOptions(state, options) {
     state.menus[state.menuIndex].options = options
@@ -53,26 +58,26 @@ export const getters = {
   isTimeSelected(state) {
     return state.time != null
   },
-  getMenuNow(state) {
+  selectedMenu(state) {
     return state.menus[state.menuIndex].menu
   },
-  selectedMenuId(state, getters) {
-    const selectedMenu = getters.getMenuNow
-    if (!selectedMenu) {
-      return null
-    }
-    return selectedMenu.id
-  },
-  getOptionsNow(state) {
+  selectedOptions(state) {
     return state.menus[state.menuIndex].options
   },
   ifGoNextMenu(state) {
     return state.twoHoursCheck && state.menuIndex === FIRST_MENU_INDEX
   },
-  getMenuIndex(state) {
-    return state.menuIndex
-  },
   getSelectedTime(state) {
     return state.time
+  }
+}
+
+export const actions = {
+  setDefaultSelectMenu(context) {
+    const defaultMenu = context.rootGetters['menu/defaultMenu']
+    if (!defaultMenu) {
+      return
+    }
+    context.commit('setSelectedMenu', defaultMenu)
   }
 }
