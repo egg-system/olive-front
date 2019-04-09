@@ -1,0 +1,34 @@
+/* default layout */
+.container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.v-card__text {
+  padding: 7px;
+}
+
+/* マイページ、ログインページ用 */
+.not {
+  padding-top: 50px;
+}
+.v-btn {
+  width: 200px;
+}
+.container {
+  position: relative;
+  z-index: 1;
+}
+.main {
+  z-index: 2;
+}
+.loading {
+  position: absolute;
+  z-index: 3;
+}
+.hidden {
+  opacity: 0.3;
+}
