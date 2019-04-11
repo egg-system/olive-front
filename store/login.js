@@ -1,4 +1,5 @@
 import axios from 'axios'
+import sha512 from 'crypto-js/sha512'
 
 /* state */
 export const state = () => ({
@@ -69,10 +70,12 @@ export const mutations = {
     state.phoneNumber = phoneNumber
   },
   setPassword(state, password) {
-    state.password = password
+    // ハッシュ化して保存
+    state.password = String(sha512(password))
   },
   setPassword2(state, password2) {
-    state.password2 = password2
+    // ハッシュ化して保存
+    state.password2 = String(sha512(password2))
   },
   setPostalCode(state, postalCode) {
     state.postalCode = postalCode
@@ -100,7 +103,8 @@ export const actions = {
     // TODO:myjsonがPOSTに対応してないので一旦GETにする
     const result = await axios.get(process.env.api.customerLogin, {
       mail: mail,
-      password: password
+      // ハッシュ化してリクエスト
+      password: String(sha512(password))
     })
     if (result.status === 200) {
       // テスト用
@@ -133,7 +137,7 @@ export const actions = {
     // 一度エラーはリセットする
     commit('setIsError', false)
     commit('setErrorMessage', '')
-    const result = await axios.get(config.api.customerCreate, {
+    const result = await axios.get(process.env.api.customerCreate, {
       mail: state.mail,
       password: state.password,
       first_name: state.firstName,

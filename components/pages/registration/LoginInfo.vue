@@ -21,6 +21,7 @@
             clearable
             class="input-password"
             @click:append="show = !show"
+            @input="setPasswordValue"
           />
         </v-flex>
         <v-flex>確認のため、再度パスワードを入力してください</v-flex>
@@ -34,6 +35,7 @@
             clearable
             class="input-password"
             @click:append="show2 = !show2"
+            @input="setPassword2Value"
           />
         </v-flex>
       </v-layout>
@@ -59,34 +61,26 @@ export default {
   data: () => ({
     show: false,
     show2: false,
+    password: '',
+    password2: '',
     passwordRules: [password => checkPassword(password)]
   }),
   computed: {
     checkSame() {
       return checkSame(this.password, this.password2)
     },
-    password: {
-      get() {
-        return this.login.password
-      },
-      set(value) {
-        this.setPassword(value)
-      }
-    },
-    password2: {
-      get() {
-        return this.login.password2
-      },
-      set(value) {
-        this.setPassword2(value)
-      }
-    },
     ...mapState({
       login: state => state.login
     })
   },
   methods: {
-    ...mapMutations('login', ['setPassword', 'setPassword2'])
+    ...mapMutations('login', ['setPassword', 'setPassword2']),
+    setPasswordValue(value) {
+      this.setPassword(value)
+    },
+    setPassword2Value(value) {
+      this.setPassword2(value)
+    }
   }
 }
 </script>
