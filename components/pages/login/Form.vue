@@ -75,17 +75,8 @@ export default {
         }
       })
     },
-    logoutBtn() {
-      // フォームの値をクリアする
-      this.mail = ''
-      this.password = ''
-      this.logout()
-    },
     ...mapActions({
       checkLogin: 'login/checkLogin'
-    }),
-    ...mapMutations({
-      logout: 'login/logout'
     })
   }
 }

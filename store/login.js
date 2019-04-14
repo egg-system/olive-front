@@ -2,13 +2,12 @@ import axios from 'axios'
 import sha512 from 'crypto-js/sha512'
 
 /* state */
-export const state = () => ({
+const initialState = {
   isLogin: false,
   isCreate: false,
   isError: false,
   errorMessage: '',
   isLoading: false,
-  id: '',
   firstName: '',
   lastName: '',
   firstNameKana: '',
@@ -21,7 +20,8 @@ export const state = () => ({
   postalCode: '',
   prefecture: '',
   city: ''
-})
+}
+export const state = () => Object.assign({}, initialState)
 
 /* getters */
 export const getters = {
@@ -44,9 +44,6 @@ export const mutations = {
   },
   setIsLoading(state, isLoading) {
     state.isLoading = isLoading
-  },
-  setId(state, id) {
-    state.id = id
   },
   setFirstName(state, firstName) {
     state.firstName = firstName
@@ -86,8 +83,8 @@ export const mutations = {
   setCity(state, city) {
     state.city = city
   },
-  logout(state) {
-    state.isLogin = false
+  reset(state) {
+    state = Object.assign(state, initialState)
   }
 }
 
@@ -112,7 +109,6 @@ export const actions = {
         // ユーザーの入力値と一致していたらログイン状態をセット
         commit('setIsLogin', true)
         commit('setIsError', false)
-        commit('setId', result.data.customer_id)
         commit('setFirstName', result.data.first_name)
         commit('setLastName', result.data.last_name)
         commit('setFirstNameKana', result.data.first_name_kana)
