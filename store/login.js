@@ -1,5 +1,7 @@
 import axios from 'axios'
 import sha512 from 'crypto-js/sha512'
+import Utf8 from 'crypto-js/enc-utf8'
+import Base64 from 'crypto-js/enc-base64'
 
 /* state */
 const initialState = {
@@ -97,11 +99,18 @@ export const actions = {
     // ローディング中にする
     commit('setIsLoading', true)
 
-    // TODO:myjsonがPOSTに対応してないので一旦GETにする
-    const result = await axios.get(process.env.api.customerLogin, {
-      mail: mail,
-      // ハッシュ化してリクエスト
-      password: String(sha512(password))
+    // Basic認証
+    const base = Base64.stringify(Utf8.parse(`${mail}:${password}`))
+    const result = await axios({
+      // TODO:myjsonがPOSTに対応してないので一旦GETにする
+      method: 'get',
+      url: process.env.api.customerLogin,
+      data: {
+        mail: mail,
+        // ハッシュ化してリクエスト
+        password: String(sha512(password))
+      },
+      headers: { authorization: `Basic ${base}` }
     })
     if (result.status === 200) {
       // テスト用
