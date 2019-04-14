@@ -1,5 +1,5 @@
 <template>
-  <v-footer>
+  <v-footer class="footer">
     <v-flex
       text-xs-center>
       &copy;{{ date }} — <strong>olive</strong>
@@ -14,3 +14,10 @@ export default {
   })
 }
 </script>
+
+<style>
+.footer {
+  position: absolute;
+  width: 100%;
+}
+</style>
