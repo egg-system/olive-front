@@ -1,5 +1,4 @@
 import axios from 'axios'
-import sha512 from 'crypto-js/sha512'
 import Utf8 from 'crypto-js/enc-utf8'
 import Base64 from 'crypto-js/enc-base64'
 
@@ -69,12 +68,10 @@ export const mutations = {
     state.phoneNumber = phoneNumber
   },
   setPassword(state, password) {
-    // ハッシュ化して保存
-    state.password = String(sha512(password))
+    state.password = password
   },
   setPassword2(state, password2) {
-    // ハッシュ化して保存
-    state.password2 = String(sha512(password2))
+    state.password2 = password2
   },
   setPostalCode(state, postalCode) {
     state.postalCode = postalCode
@@ -105,11 +102,6 @@ export const actions = {
       // TODO:myjsonがPOSTに対応してないので一旦GETにする
       method: 'get',
       url: process.env.api.customerLogin,
-      data: {
-        mail: mail,
-        // ハッシュ化してリクエスト
-        password: String(sha512(password))
-      },
       headers: { authorization: `Basic ${base}` }
     })
     if (result.status === 200) {
