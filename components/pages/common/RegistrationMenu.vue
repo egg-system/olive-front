@@ -112,13 +112,6 @@ export default {
     })
   },
   beforeMount() {
-    //メニュー選択がまだならTOPに飛ばす。確認画面で日時選択がまだならTOPに飛ばす
-    // if (!this.isMenuSelected() || (this.isConfirm && !this.isTimeSelected())) {
-    //   const error = {}
-    //   error.statusCode = 400
-    //   error.message = '不正な遷移です。'
-    //   throw error
-    // }
     // 初めての場合は確認ページで初診料を追加
     if (this.$store.state.registration.isFirst && this.isConfirm) {
       const firstCharged = {

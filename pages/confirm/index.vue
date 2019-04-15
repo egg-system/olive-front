@@ -34,7 +34,8 @@ export default {
     RegistrationConfirmInfo,
     RegistrationRequest,
     FixedBtn
-  }
+  },
+  middleware: ['select', 'login']
 }
 </script>
 

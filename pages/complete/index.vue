@@ -33,6 +33,7 @@ export default {
     ShopName,
     NextBtn
   },
+  middleware: ['select', 'login'],
   computed: mapState({
     registration: state => state.registration,
     login: state => state.login
