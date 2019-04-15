@@ -10,11 +10,7 @@
         </div>
       </v-radio>
       <transition name="slide">
-        <menu-option-slide
-          v-if="isShownOptionSlide"
-          :options="menu.options"
-          :selected-option-count="selectedOptionCount"
-        />
+        <menu-option-slide v-if="isShownOptionSlide" :options="menu.options"/>
       </transition>
     </v-card-title>
   </v-card>
@@ -30,11 +26,6 @@ export default {
   props: {
     menu: {
       type: Object,
-      required: true
-    },
-    // 耳つぼジュエリーの個数
-    selectedOptionCount: {
-      type: Array,
       required: true
     }
   },

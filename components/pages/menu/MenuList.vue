@@ -17,7 +17,7 @@
           </v-flex>
           <v-flex>
             <div v-for="menu in subShop.menus" :key="menu.id">
-              <menu-row :menu="menu" :selected-option-count.sync="selectedNumbersOfOptions"/>
+              <menu-row :menu="menu"/>
             </div>
           </v-flex>
         </v-layout>
@@ -45,11 +45,6 @@ import MenuRow from './MenuRow.vue'
 
 export default {
   components: { MenuRow },
-  data() {
-    return {
-      selectedNumbersOfOptions: [] //耳つぼジュエリーの個数
-    }
-  },
   computed: {
     subShops() {
       return this.$store.state.menu.subShops
@@ -76,11 +71,6 @@ export default {
       selectedMenu: 'selectedMenu'
     })
   },
-  watch: {
-    selectedNumbersOfOptions(val) {
-      this.selectedOptions = this.selectedOptions
-    }
-  },
   created() {
     this.getMenus({ shopId: 1 })
   },
@@ -90,26 +80,17 @@ export default {
     },
     twoHour() {
       this.setForGoNextMenu()
-      this.selectedNumbersOfOptions = []
       window.scrollTo(0, 0)
     },
     backToFirst() {
       this.setForGoBackMenu()
       window.scrollTo(0, 0)
-      let selectedOptions = this.getSelectedOptions
-      selectedOptions.forEach(option => {
-        if (option.number) {
-          this.selectedNumbersOfOptions[option.id] = option.number
-        }
-      })
     },
     ...mapActions({
       getMenus: 'menu/getMenus'
     }),
     ...mapMutations('select', [
       'setSelectedMenu',
-      'setSelectedOptions',
-      'setTwoHoursCheck',
       'setForGoNextMenu',
       'setForGoBackMenu'
     ])

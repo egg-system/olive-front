@@ -6,7 +6,8 @@ export const state = () => ({
   time: null,
   // 二つのメニュー選択可能にするための実装
   menus: [{ menu: null, options: [] }, { menu: null, options: [] }],
-  menuIndex: FIRST_MENU_INDEX
+  menuIndex: FIRST_MENU_INDEX,
+  mimitsuboCount: [0, 0]
 })
 
 /* mutations */
@@ -25,9 +26,6 @@ export const mutations = {
   setSelectedOptions(state, options) {
     state.menus[state.menuIndex].options = options
   },
-  setTwoHoursCheck(state, val) {
-    state.twoHoursCheck = val
-  },
   setForGoNextMenu(state) {
     state.menuIndex = SECOND_MENU_INDEX
   },
@@ -35,6 +33,9 @@ export const mutations = {
     state.menuIndex = FIRST_MENU_INDEX
     state.menus[SECOND_MENU_INDEX].menu = null
     state.menus[SECOND_MENU_INDEX].options = []
+  },
+  setMimitsuboCount(state, count) {
+    state.mimitsuboCount[state.menuIndex] = count
   }
 }
 
@@ -64,11 +65,17 @@ export const getters = {
   selectedOptions(state) {
     return state.menus[state.menuIndex].options
   },
+  selectedOptionIds(state, getters) {
+    return getters.selectedOptions.map(option => option.id)
+  },
   ifGoNextMenu(state) {
     return state.twoHoursCheck && state.menuIndex === FIRST_MENU_INDEX
   },
   getSelectedTime(state) {
     return state.time
+  },
+  mimitsuboCount(state) {
+    return state.mimitsuboCount[state.menuIndex]
   }
 }
 
