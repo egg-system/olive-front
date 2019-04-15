@@ -1,5 +1,4 @@
 export default ({ store, redirect }) => {
-  console.log(store.state)
   // ユーザー情報が設定されていない場合
   if (
     !store.state.login.firstName ||
