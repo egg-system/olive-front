@@ -32,15 +32,15 @@ export const getters = {
     const menuIds = routeState.select.menus
       .filter(select => select.menu)
       .map(select => select.menu.id)
-    const startMonth = moment().format('YYYY-MM')
+    const startMonth = moment().format('YYYY-MM-DD')
     const endNextMonth = moment()
       .add(1, 'month')
-      .format('YYYY-MM')
+      .format('YYYY-MM-DD')
 
     return {
       menu_ids: menuIds,
-      from: startMonth,
-      to: endNextMonth
+      from_date: startMonth,
+      to_date: endNextMonth
     }
   },
   isLoading(state) {
