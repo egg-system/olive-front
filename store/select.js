@@ -3,7 +3,8 @@ const SECOND_MENU_INDEX = 1
 
 /* state */
 export const state = () => ({
-  time: null,
+  // momentを格納
+  dateTime: null,
   // 二つのメニュー選択可能にするための実装
   menus: [{ menu: null, options: [] }, { menu: null, options: [] }],
   menuIndex: FIRST_MENU_INDEX,
@@ -12,8 +13,8 @@ export const state = () => ({
 
 /* mutations */
 export const mutations = {
-  setSelectedTime(state, time) {
-    state.time = time
+  setSelectedDateTime(state, dateTime) {
+    state.dateTime = dateTime
   },
   setSelectedMenu(state, selectedMenu) {
     const menus = Object.assign([], state.menus)
@@ -40,6 +41,11 @@ export const mutations = {
 }
 
 export const getters = {
+  allSelectedMenuIds(state) {
+    return state.menus
+      .filter(select => select.menu && 'id' in select.menu)
+      .map(select => select.menu.id)
+  },
   isTwoMenusSelected(state) {
     return state.menus[SECOND_MENU_INDEX].menu !== null
   },
@@ -51,13 +57,13 @@ export const getters = {
     const isSelectedSecondMenu = state.menus[SECOND_MENU_INDEX].menu !== null
     const firstMenuMinute = state.menus[FIRST_MENU_INDEX].menu.minutes
 
-    return isSelectedSecondMenu || firstMenuMinute === 120
+    return isSelectedSecondMenu || firstMenuMinute >= 120
   },
   isMenuSelected(state) {
-    return state.menus[FIRST_MENU_INDEX].menu != null
+    return state.menus[FIRST_MENU_INDEX].menu !== null
   },
-  isTimeSelected(state) {
-    return state.time != null
+  isDateTimeSelected(state) {
+    return state.dateTime != null
   },
   selectedMenu(state) {
     return state.menus[state.menuIndex].menu
