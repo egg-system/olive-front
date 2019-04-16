@@ -65,7 +65,7 @@ export const getters = {
   },
   endDate() {
     const endDate = moment().add(1, 'month')
-    while (endDate.day() !== 6) {
+    while (endDate.day() !== 0) {
       endDate.add(1, 'days')
     }
     return endDate
