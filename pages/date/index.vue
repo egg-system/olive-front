@@ -1,12 +1,12 @@
 <template>
   <section class="container">
     <loading v-if="isLoading" class="loading"/>
-    <div :class="{ hidden: isLoading }" >
+    <div :class="{ hidden: isLoading }">
       <v-container grid-list-xl>
         <v-layout column wrap class="menu-contents">
-          <shop-name />
+          <shop-name/>
           <registration-menu :is-first="false"/>
-          <calendar />
+          <calendar/>
           <back-btn/>
         </v-layout>
       </v-container>
@@ -23,6 +23,7 @@ import BackBtn from '~/components/pages/date/BackBtn.vue'
 import Loading from '~/components/layouts/Loading.vue'
 
 export default {
+  middleware: 'isMenuSelected',
   components: {
     RegistrationMenu,
     ShopName,
@@ -31,19 +32,13 @@ export default {
     Loading
   },
   computed: {
-    ...mapGetters({
-      isLoading: 'date/isLoading'
-    })
+    ...mapGetters('date', ['isLoading'])
   },
-  created: function() {
-    let selectedMenu = this.$store.state.select.selectedMenu
-    if (selectedMenu === null) {
-      this.$router.push({ name: 'menu' })
-    }
-    this.setTwoHoursCheck(false)
+  created() {
+    this.getCalendar()
   },
   methods: {
-    ...mapMutations('select', ['setTwoHoursCheck'])
+    ...mapActions('date', ['getCalendar'])
   }
 }
 </script>
