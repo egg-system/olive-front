@@ -16,11 +16,12 @@ export const mutations = {
 /* actions */
 export const actions = {
   // ログインチェック
-  async getMenus({ commit }, { shopId }) {
+  async getMenus({ commit, dispatch }, { shopId }) {
     const getShopMenuRoute = route(process.env.api.menu, { id: shopId })
     const response = await axios.get(getShopMenuRoute)
 
     commit('setMenus', response.data)
+    dispatch('select/setDefaultSelectMenu', null, { root: true })
   }
 }
 
@@ -44,10 +45,15 @@ export const getters = {
   isLoading(state) {
     return state.subShops.length == 0
   },
-  getDefaultMenu(state) {
-    if (state.subShops.length == 0) {
+  defaultMenu(state) {
+    if (state.subShops.length === 0) {
       return null
     }
+
+    if (state.subShops[0].menus.length === 0) {
+      return null
+    }
+
     return state.subShops[0].menus[0]
   }
 }

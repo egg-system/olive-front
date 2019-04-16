@@ -1,10 +1,11 @@
 <template>
   <div class="menu">
-
     <v-layout column wrap>
       <v-flex>
         <v-card dark color="red lighten-2">
-          <v-card-text><h3>予約内容</h3></v-card-text>
+          <v-card-text>
+            <h3>予約内容</h3>
+          </v-card-text>
         </v-card>
       </v-flex>
     </v-layout>
@@ -20,16 +21,9 @@
 
     <v-layout row>
       <v-flex>
-        <v-data-table
-          :items="menu"
-          hide-actions
-          hide-headers
-          class="elevation-1"
-        >
+        <v-data-table :items="menu" hide-actions hide-headers class="elevation-1">
           <template slot="items" slot-scope="props">
-            <td>
-              {{ props.item.name }}
-            </td>
+            <td>{{ props.item.name }}</td>
             <td class="text-xs-right">{{ props.item.price | priceFormat }}</td>
             <td class="text-xs-right">{{ props.item.minutes | timeFormat }}</td>
           </template>
@@ -46,9 +40,7 @@
       </v-flex>
     </v-layout>
     <v-card-text v-if="isConfirm">※それ以降のキャンセルは直接サロンへご連絡ください。</v-card-text>
-
   </div>
-
 </template>
 
 <script>
@@ -68,9 +60,6 @@ export default {
   },
   computed: {
     menu() {
-      if (!this.isMenuSelected()) {
-        return []
-      }
       let menus = []
       for (let i = 0; i < 2; i++) {
         let menu = _.clone(this.$store.state.select.menus[i].menu)
@@ -80,12 +69,12 @@ export default {
         menus.push(menu)
         this.$store.state.select.menus[i].options.forEach(option => {
           let optionTmp = _.clone(option)
-          if (optionTmp.unit != null) {
+          if (optionTmp.is_mimitsubo_jewelry) {
             optionTmp.name =
               optionTmp.name +
               ' × ' +
-              optionTmp.number.toString() +
-              optionTmp.unit
+              this.$store.state.select.mimitsuboCount[i].toString() +
+              '粒'
           }
           menus.push(optionTmp)
         })
@@ -107,15 +96,9 @@ export default {
         momentTime.format('HH:mm')
       )
     },
-    ...mapGetters({
-      isTwoMenusSelected: 'select/isTwoMenusSelected'
-    })
+    ...mapGetters('select', ['isTwoMenusSelected'])
   },
   beforeMount() {
-    //メニュー選択がまだならTOPに飛ばす。確認画面で日時選択がまだならTOPに飛ばす
-    if (!this.isMenuSelected() || (this.isConfirm && !this.isTimeSelected())) {
-      // this.$router.push('/')
-    }
     // 初めての場合は確認ページで初診料を追加
     if (this.$store.state.registration.isFirst && this.isConfirm) {
       const firstCharged = {
@@ -143,7 +126,6 @@ export default {
   },
   methods: {
     ...mapGetters({
-      isMenuSelected: 'select/isMenuSelected',
       isTimeSelected: 'select/isTimeSelected',
       getSelectedTime: 'select/getSelectedTime'
     })

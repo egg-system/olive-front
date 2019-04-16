@@ -3,25 +3,29 @@ const SECOND_MENU_INDEX = 1
 
 /* state */
 export const state = () => ({
-  time: null,
+  // momentを格納
+  dateTime: null,
   // 二つのメニュー選択可能にするための実装
   menus: [{ menu: null, options: [] }, { menu: null, options: [] }],
-  menuIndex: FIRST_MENU_INDEX
+  menuIndex: FIRST_MENU_INDEX,
+  mimitsuboCount: [0, 0]
 })
 
 /* mutations */
 export const mutations = {
-  setSelectedTime(state, time) {
-    state.time = time
+  setSelectedDateTime(state, dateTime) {
+    state.dateTime = dateTime
   },
   setSelectedMenu(state, selectedMenu) {
-    state.menus[state.menuIndex].menu = selectedMenu
+    const menus = Object.assign([], state.menus)
+    menus[state.menuIndex].menu = selectedMenu
+
+    // オプションの選択を初期化する
+    menus[state.menuIndex].options = []
+    state.menus = menus
   },
   setSelectedOptions(state, options) {
     state.menus[state.menuIndex].options = options
-  },
-  setTwoHoursCheck(state, val) {
-    state.twoHoursCheck = val
   },
   setForGoNextMenu(state) {
     state.menuIndex = SECOND_MENU_INDEX
@@ -30,10 +34,18 @@ export const mutations = {
     state.menuIndex = FIRST_MENU_INDEX
     state.menus[SECOND_MENU_INDEX].menu = null
     state.menus[SECOND_MENU_INDEX].options = []
+  },
+  setMimitsuboCount(state, count) {
+    state.mimitsuboCount[state.menuIndex] = count
   }
 }
 
 export const getters = {
+  allSelectedMenuIds(state) {
+    return state.menus
+      .filter(select => select.menu && 'id' in select.menu)
+      .map(select => select.menu.id)
+  },
   isTwoMenusSelected(state) {
     return state.menus[SECOND_MENU_INDEX].menu !== null
   },
@@ -45,34 +57,40 @@ export const getters = {
     const isSelectedSecondMenu = state.menus[SECOND_MENU_INDEX].menu !== null
     const firstMenuMinute = state.menus[FIRST_MENU_INDEX].menu.minutes
 
-    return isSelectedSecondMenu || firstMenuMinute === 120
+    return isSelectedSecondMenu || firstMenuMinute >= 120
   },
   isMenuSelected(state) {
-    return state.menus[FIRST_MENU_INDEX].menu != null
+    return state.menus[FIRST_MENU_INDEX].menu !== null
   },
-  isTimeSelected(state) {
-    return state.time != null
+  isDateTimeSelected(state) {
+    return state.dateTime != null
   },
-  getMenuNow(state) {
+  selectedMenu(state) {
     return state.menus[state.menuIndex].menu
   },
-  selectedMenuId(state, getters) {
-    const selectedMenu = getters.getMenuNow
-    if (!selectedMenu) {
-      return null
-    }
-    return selectedMenu.id
-  },
-  getOptionsNow(state) {
+  selectedOptions(state) {
     return state.menus[state.menuIndex].options
+  },
+  selectedOptionIds(state, getters) {
+    return getters.selectedOptions.map(option => option.id)
   },
   ifGoNextMenu(state) {
     return state.twoHoursCheck && state.menuIndex === FIRST_MENU_INDEX
   },
-  getMenuIndex(state) {
-    return state.menuIndex
-  },
   getSelectedTime(state) {
     return state.time
+  },
+  mimitsuboCount(state) {
+    return state.mimitsuboCount[state.menuIndex]
+  }
+}
+
+export const actions = {
+  setDefaultSelectMenu(context) {
+    const defaultMenu = context.rootGetters['menu/defaultMenu']
+    if (!defaultMenu) {
+      return
+    }
+    context.commit('setSelectedMenu', defaultMenu)
   }
 }

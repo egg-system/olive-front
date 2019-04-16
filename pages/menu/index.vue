@@ -29,7 +29,7 @@
         <div :class="{ hidden: isLoading }">
           <shop-name/>
           <registration-menu
-            v-if="getMenuIndex == 1"
+            v-if="menuIndex == 1"
             :if-show-only-first-menu="true"
             :is-first="false"
           />
@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { mapActions, mapState, mapMutations, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 import ShopName from '~/components/pages/common/ShopName.vue'
 import MenuList from '~/components/pages/menu/MenuList.vue'
 import Loading from '~/components/layouts/Loading.vue'
@@ -55,9 +55,11 @@ export default {
     RegistrationMenu
   },
   computed: {
+    menuIndex() {
+      return this.$store.state.select.menuIndex
+    },
     ...mapGetters({
-      isLoading: 'menu/isLoading',
-      getMenuIndex: 'select/getMenuIndex'
+      isLoading: 'menu/isLoading'
     })
   }
 }
