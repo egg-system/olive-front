@@ -14,7 +14,7 @@ import moment from 'moment'
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
-  filter: {
+  filters: {
     remainFormat(value) {
       if (value <= 0) {
         return '×'
