@@ -16,9 +16,6 @@
           <v-btn color="warning" @click="resisterBtn">
             新規会員登録へ
           </v-btn>
-          <v-btn color="warning" @click="skipBtn">
-            会員登録せずに予約へ進む
-          </v-btn>
         </div>
 
       </div>
@@ -37,7 +34,7 @@ export default {
     Loading
   },
   data: () => ({
-    link: '/registration'
+    link: '/mypage/top'
   }),
   computed: {
     ...mapState({
@@ -46,13 +43,7 @@ export default {
   },
   methods: {
     resisterBtn() {
-      // 会員登録あり
       this.setIsCreate(true)
-      this.$router.push('/registration')
-    },
-    skipBtn() {
-      // 会員登録なし
-      this.setIsCreate(false)
       this.$router.push('/registration')
     },
     ...mapMutations('login', ['setIsCreate'])

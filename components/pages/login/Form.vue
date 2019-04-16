@@ -40,6 +40,12 @@ import { mapActions, mapState, mapMutations } from 'vuex'
 import { checkMail, checkPassword } from '~/lib/validation'
 
 export default {
+  props: {
+    link: {
+      type: String,
+      default: ''
+    }
+  },
   data: () => ({
     show: false,
     isError: false,
@@ -65,8 +71,7 @@ export default {
         password: this.password
       }).then(isLogin => {
         if (isLogin) {
-          // 画面遷移
-          this.$router.push('/registration')
+          this.$router.push(this.link)
         }
       })
     },

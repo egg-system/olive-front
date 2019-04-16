@@ -3,7 +3,8 @@ import {
   checkPassword,
   checkName,
   checkNameKana,
-  checkPhoneNumber
+  checkPhoneNumber,
+  checkPostalCode
 } from '~/lib/validation'
 
 describe('lib/validation', () => {
@@ -88,6 +89,24 @@ describe('lib/validation', () => {
     test('正しい電話番号', () => {
       const phoneNumber = '0123456789'
       const ret = checkPhoneNumber(phoneNumber)
+      expect(ret).toBe(true)
+    })
+  })
+
+  describe('checkPostalCode', () => {
+    test('郵便番号が空', () => {
+      const postalCode = ''
+      const ret = checkPostalCode(postalCode)
+      expect(ret).toBe(true)
+    })
+    test('郵便番号が半角数字以外', () => {
+      const postalCode = '１２３４５６７'
+      const ret = checkPostalCode(postalCode)
+      expect(ret).toBe('郵便番号はハイフンなしの半角数字7桁でお願いします')
+    })
+    test('正しい郵便番号', () => {
+      const postalCode = '1234567'
+      const ret = checkPostalCode(postalCode)
       expect(ret).toBe(true)
     })
   })

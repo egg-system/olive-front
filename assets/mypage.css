@@ -1,0 +1,12 @@
+.mypage-top {
+  text-align: left;
+}
+.mypage-title {
+  color: white;
+}
+.under {
+  background: linear-gradient(transparent 90%, #ff99ab 70%);
+  width: 90%;
+  margin: 0 auto;
+  text-align: left;
+}
