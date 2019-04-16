@@ -8,6 +8,6 @@ module.exports = {
       'http://olive-staging.ap-northeast-1.elasticbeanstalk.com/api/shops/:id/menus',
     shop:
       'http://olive-staging.ap-northeast-1.elasticbeanstalk.com/api/shops/:id',
-    date: 'https://api.myjson.com/bins/tc196'
+    date: 'https://api.myjson.com/bins/1hjqig'
   }
 }

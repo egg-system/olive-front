@@ -6,6 +6,6 @@ module.exports = {
     reserveCommit: 'https://api.myjson.com/bins/18ieba',
     menu: 'https://api.myjson.com/bins/ej1g2',
     shop: 'https://api.myjson.com/bins/c8dli',
-    date: 'https://api.myjson.com/bins/1gms5u'
+    date: 'https://api.myjson.com/bins/1hjqig'
   }
 }
