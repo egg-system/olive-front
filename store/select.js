@@ -46,6 +46,13 @@ export const getters = {
       .filter(select => select.menu && 'id' in select.menu)
       .map(select => select.menu.id)
   },
+  allSelectedOptionIds(state) {
+    return state.menus.flatMap(select => {
+      return select.options
+        .filter(option => 'id' in option)
+        .map(option => option.id)
+    })
+  },
   isTwoMenusSelected(state) {
     return state.menus[SECOND_MENU_INDEX].menu !== null
   },

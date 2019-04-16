@@ -52,19 +52,22 @@ export const getters = {
   dateParameters(state, getters, routeState, rootGetters) {
     return {
       menu_ids: rootGetters['select/allSelectedMenuIds'],
+      option_ids: rootGetters['select/allSelectedOptionIds'],
       from_date: moment().format('YYYY-MM-DD'),
       to_date: getters.endDate.format('YYYY-MM-DD')
     }
   },
   startDate() {
-    const currentDate = moment()
+    const currentDate = moment().startOf('day')
     while (currentDate.day() !== 0) {
       currentDate.subtract(1, 'days')
     }
     return currentDate
   },
   endDate() {
-    const endDate = moment().add(1, 'month')
+    const endDate = moment()
+      .startOf('day')
+      .add(1, 'month')
     while (endDate.day() !== 0) {
       endDate.add(1, 'days')
     }
