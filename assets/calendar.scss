@@ -1,0 +1,50 @@
+$disabledColor: #d9d9d9;
+$borderColor: rgba(0, 0, 0, 0.1);
+
+.component-wrapper {
+  margin-top: 40px;
+  .calendar {
+    text-align: center;
+    table {
+      border-spacing: 0px;
+    }
+    td,
+    th {
+      border: 1px $borderColor solid;
+      border-spacing: 0px;
+      border-right: none;
+      border-bottom: none;
+    }
+    th {
+      padding: 5px 0;
+    }
+    .table-wrapper {
+      margin: auto;
+      border-bottom: 1px $borderColor solid;
+      background-color: white;
+      table.outer-table {
+        border-right: 1px $borderColor solid;
+        width: 100%;
+        td.col-data-wrapper {
+          border-left: none;
+          border-top: none;
+          table.inner-table {
+            width: 100%;
+            .holiday {
+              color: #ff4500;
+            }
+            .saturday {
+              color: darkblue;
+            }
+            td {
+              padding: 5px 0;
+            }
+            td.disabled {
+              background-color: $disabledColor;
+            }
+          }
+        }
+      }
+    }
+  }
+}
