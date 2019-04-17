@@ -56,9 +56,6 @@ export const mutations = {
 /* actions */
 export const actions = {
   async reserveCommit({ state, commit }, customerId) {
-    console.log('reserveCommit')
-    console.log(state)
-    console.log(state.menuId)
     // 必須パラメータのチェック
     if (
       state.menuId === '' ||

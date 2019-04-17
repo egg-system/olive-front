@@ -37,12 +37,6 @@ export const mutations = {
   setIsCreate(state, isCreate) {
     state.isCreate = isCreate
   },
-  setIsError(state, error) {
-    state.isError = error
-  },
-  setErrorMessage(state, errorMessage) {
-    state.errorMessage = errorMessage
-  },
   setIsLoading(state, isLoading) {
     state.isLoading = isLoading
   },
@@ -82,6 +76,13 @@ export const mutations = {
   setCity(state, city) {
     state.city = city
   },
+  setError(state, errorMessage = '') {
+    // stateを初期化
+    state = Object.assign(state, initialState)
+    // エラー情報だけセットする
+    state.isError = true
+    state.errorMessage = errorMessage
+  },
   reset(state) {
     state = Object.assign(state, initialState)
   }
@@ -91,8 +92,6 @@ export const mutations = {
 export const actions = {
   // ログインチェック
   async checkLogin({ commit }, { mail, password }) {
-    // 一度エラーはリセットする
-    commit('setIsError', false)
     // ローディング中にする
     commit('setIsLoading', true)
 
@@ -119,21 +118,18 @@ export const actions = {
         commit('setPhoneNumber', result.data.phone_number)
         return true
       } else {
-        commit('setIsError', true)
+        commit('setError')
         commit('setIsLoading', false)
         return false
       }
     } else {
-      commit('setIsError', true)
+      commit('setError')
       commit('setIsLoading', false)
       return false
     }
   },
   // ユーザー作成
   async customerCreate({ commit, state }) {
-    // 一度エラーはリセットする
-    commit('setIsError', false)
-    commit('setErrorMessage', '')
     const result = await axios.get(process.env.api.customerCreate, {
       mail: state.mail,
       password: state.password,
@@ -144,12 +140,10 @@ export const actions = {
       phone_number: state.phoneNumber
     })
     if (result.status === 200) {
-      commit('setIsError', false)
-      commit('setErrorMessage', '')
+      commit('reset')
       return true
     } else {
-      commit('setIsError', true)
-      commit('setErrorMessage', 'ユーザー作成に失敗しました。')
+      commit('setError', 'ユーザー作成に失敗しました。')
       return false
     }
   }
