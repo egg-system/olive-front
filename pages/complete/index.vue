@@ -39,17 +39,10 @@ export default {
     login: state => state.login
   }),
   created() {
-    console.log('created')
-    console.log(this.registration)
     // 予約確定
     this.reserveCommit(this.login.id).then(isReserveOk => {
-      // 予約内容をクリア
-      // this.reset()
-      console.log('request end')
-      console.log(this.registration)
       // 会員登録
       if (isReserveOk && this.login.isCreate) {
-        console.log('create end')
         this.customerCreate()
       }
     })
