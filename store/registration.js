@@ -38,10 +38,14 @@ export const mutations = {
   setRequest(state, request) {
     state.request = request
   },
-  setIsError(state, isError) {
-    state.isError = isError
+  setMenuId(state, menuId) {
+    state.menuId = menuId
   },
-  setErrorMessage(state, errorMessage) {
+  setError(state, errorMessage) {
+    // stateを初期化
+    state = Object.assign(state, initialState)
+    // エラー情報だけセットする
+    state.isError = true
     state.errorMessage = errorMessage
   },
   reset(state) {
@@ -52,6 +56,9 @@ export const mutations = {
 /* actions */
 export const actions = {
   async reserveCommit({ state, commit }, customerId) {
+    console.log('reserveCommit')
+    console.log(state)
+    console.log(state.menuId)
     // 必須パラメータのチェック
     if (
       state.menuId === '' ||
@@ -61,8 +68,7 @@ export const actions = {
         state.isFirst === null ||
         state.isFirst === undefined)
     ) {
-      commit('setErrorMessage', 'パラメータが不正です。')
-      commit('setIsError', true)
+      commit('setError', 'パラメータが不正です。')
       return false
     }
     // 予約確定APIの実行
@@ -77,11 +83,10 @@ export const actions = {
       request: state.request
     })
     if (result.status === 200) {
-      commit('setIsError', false)
+      commit('reset')
       return true
     } else {
-      commit('setErrorMessage', '予約に失敗しました。')
-      commit('setIsError', true)
+      commit('setError', '予約に失敗しました。')
       return false
     }
   }
