@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import _ from 'lodash'
 import moment from 'moment'
 export default {
@@ -123,12 +123,16 @@ export default {
       }
       this.menu.push(total)
     }
+    // menuIDのセット
+    this.setMenuId(this.selectedMenuId())
   },
   methods: {
     ...mapGetters({
       isTimeSelected: 'select/isTimeSelected',
-      getSelectedTime: 'select/getSelectedTime'
-    })
+      getSelectedTime: 'select/getSelectedTime',
+      selectedMenuId: 'select/selectedMenuId'
+    }),
+    ...mapMutations('registration', ['setMenuId'])
   }
 }
 </script>

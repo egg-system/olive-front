@@ -1,13 +1,14 @@
 import axios from 'axios'
+import Utf8 from 'crypto-js/enc-utf8'
+import Base64 from 'crypto-js/enc-base64'
 
 /* state */
-export const state = () => ({
+const initialState = {
   isLogin: false,
   isCreate: false,
   isError: false,
   errorMessage: '',
   isLoading: false,
-  id: '',
   firstName: '',
   lastName: '',
   firstNameKana: '',
@@ -20,7 +21,8 @@ export const state = () => ({
   postalCode: '',
   prefecture: '',
   city: ''
-})
+}
+export const state = () => Object.assign({}, initialState)
 
 /* getters */
 export const getters = {
@@ -35,17 +37,8 @@ export const mutations = {
   setIsCreate(state, isCreate) {
     state.isCreate = isCreate
   },
-  setIsError(state, error) {
-    state.isError = error
-  },
-  setErrorMessage(state, errorMessage) {
-    state.errorMessage = errorMessage
-  },
   setIsLoading(state, isLoading) {
     state.isLoading = isLoading
-  },
-  setId(state, id) {
-    state.id = id
   },
   setFirstName(state, firstName) {
     state.firstName = firstName
@@ -83,8 +76,15 @@ export const mutations = {
   setCity(state, city) {
     state.city = city
   },
-  logout(state) {
-    state.isLogin = false
+  setError(state, errorMessage = '') {
+    // stateを初期化
+    state = Object.assign(state, initialState)
+    // エラー情報だけセットする
+    state.isError = true
+    state.errorMessage = errorMessage
+  },
+  reset(state) {
+    state = Object.assign(state, initialState)
   }
 }
 
@@ -92,15 +92,16 @@ export const mutations = {
 export const actions = {
   // ログインチェック
   async checkLogin({ commit }, { mail, password }) {
-    // 一度エラーはリセットする
-    commit('setIsError', false)
     // ローディング中にする
     commit('setIsLoading', true)
 
-    // TODO:myjsonがPOSTに対応してないので一旦GETにする
-    const result = await axios.get(process.env.api.customerLogin, {
-      mail: mail,
-      password: password
+    // Basic認証
+    const base = Base64.stringify(Utf8.parse(`${mail}:${password}`))
+    const result = await axios({
+      // TODO:myjsonがPOSTに対応してないので一旦GETにする
+      method: 'get',
+      url: process.env.api.customerLogin,
+      headers: { authorization: `Basic ${base}` }
     })
     if (result.status === 200) {
       // テスト用
@@ -108,7 +109,6 @@ export const actions = {
         // ユーザーの入力値と一致していたらログイン状態をセット
         commit('setIsLogin', true)
         commit('setIsError', false)
-        commit('setId', result.data.customer_id)
         commit('setFirstName', result.data.first_name)
         commit('setLastName', result.data.last_name)
         commit('setFirstNameKana', result.data.first_name_kana)
@@ -118,22 +118,19 @@ export const actions = {
         commit('setPhoneNumber', result.data.phone_number)
         return true
       } else {
-        commit('setIsError', true)
+        commit('setError')
         commit('setIsLoading', false)
         return false
       }
     } else {
-      commit('setIsError', true)
+      commit('setError')
       commit('setIsLoading', false)
       return false
     }
   },
   // ユーザー作成
   async customerCreate({ commit, state }) {
-    // 一度エラーはリセットする
-    commit('setIsError', false)
-    commit('setErrorMessage', '')
-    const result = await axios.get(config.api.customerCreate, {
+    const result = await axios.get(process.env.api.customerCreate, {
       mail: state.mail,
       password: state.password,
       first_name: state.firstName,
@@ -143,12 +140,10 @@ export const actions = {
       phone_number: state.phoneNumber
     })
     if (result.status === 200) {
-      commit('setIsError', false)
-      commit('setErrorMessage', '')
+      commit('reset')
       return true
     } else {
-      commit('setIsError', true)
-      commit('setErrorMessage', 'ユーザー作成に失敗しました。')
+      commit('setError', 'ユーザー作成に失敗しました。')
       return false
     }
   }

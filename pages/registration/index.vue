@@ -32,7 +32,8 @@ export default {
     RegistrationMenu,
     RegistrationConfirmInfo,
     RegistrationRequest
-  }
+  },
+  middleware: 'select'
 }
 </script>
 

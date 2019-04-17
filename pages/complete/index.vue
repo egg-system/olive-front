@@ -33,13 +33,12 @@ export default {
     ShopName,
     NextBtn
   },
+  middleware: ['select', 'login'],
   computed: mapState({
     registration: state => state.registration,
     login: state => state.login
   }),
   created() {
-    // 予約内容をクリア
-    this.reset()
     // 予約確定
     this.reserveCommit(this.login.id).then(isReserveOk => {
       // 会員登録
