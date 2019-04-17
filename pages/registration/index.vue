@@ -2,13 +2,13 @@
   <section class="container">
     <v-container grid-list-xl>
       <v-layout column wrap>
-        <shop-name />
-        <registration-menu />
-        <registration-user-info />
-        <login-info v-if="!this.$store.state.login.isLogin && this.$store.state.login.isCreate" />
-        <registration-confirm-info />
-        <registration-request />
-        <confirm-btn />
+        <shop-name/>
+        <registration-menu/>
+        <registration-user-info/>
+        <login-info v-if="!this.$store.state.login.isLogin && this.$store.state.login.isCreate"/>
+        <registration-confirm-info/>
+        <registration-request/>
+        <confirm-btn/>
       </v-layout>
     </v-container>
   </section>
@@ -33,7 +33,7 @@ export default {
     RegistrationConfirmInfo,
     RegistrationRequest
   },
-  middleware: 'select'
+  middleware: ['menu-selected', 'date-time-selected']
 }
 </script>
 

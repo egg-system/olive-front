@@ -2,22 +2,24 @@
   <section class="container">
     <v-container grid-list-xl>
       <v-layout column wrap>
-        <shop-name />
+        <shop-name/>
         <v-layout row>
           <v-flex>
             <v-card-text v-if="!registration.isError && !login.isError" class="complete">
-              予約を確定しました。<br>
-              予約確定メールをお送りしましたので、ご確認ください。
+              予約を確定しました。
+              <br>予約確定メールをお送りしましたので、ご確認ください。
             </v-card-text>
-            <v-card-text v-if="registration.isError" class="complete">
-              {{ registration.errorMessage }}お手数ですが最初からやり直してください。
-            </v-card-text>
-            <v-card-text v-if="login.isError" class="complete">
-              {{ login.errorMessage }}お手数ですが最初からやり直してください。
-            </v-card-text>
+            <v-card-text
+              v-if="registration.isError"
+              class="complete"
+            >{{ registration.errorMessage }}お手数ですが最初からやり直してください。</v-card-text>
+            <v-card-text
+              v-if="login.isError"
+              class="complete"
+            >{{ login.errorMessage }}お手数ですが最初からやり直してください。</v-card-text>
           </v-flex>
         </v-layout>
-        <next-btn />
+        <next-btn/>
       </v-layout>
     </v-container>
   </section>
@@ -33,7 +35,7 @@ export default {
     ShopName,
     NextBtn
   },
-  middleware: ['select', 'login'],
+  middleware: ['menu-selected', 'date-time-selected', 'login'],
   computed: mapState({
     registration: state => state.registration,
     login: state => state.login

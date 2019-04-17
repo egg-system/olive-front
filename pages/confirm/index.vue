@@ -27,7 +27,7 @@ import RegistrationRequest from '~/components/pages/common/RegistrationRequest.v
 import FixedBtn from '~/components/pages/confirm/FixedBtn.vue'
 
 export default {
-  middleware: 'isDateTimeSelected',
+  middleware: ['menu-selected', 'date-time-selected', 'login'],
   components: {
     ShopName,
     RegistrationUserInfo,
@@ -35,8 +35,7 @@ export default {
     RegistrationConfirmInfo,
     RegistrationRequest,
     FixedBtn
-  },
-  middleware: ['select', 'login']
+  }
 }
 </script>
 
