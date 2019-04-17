@@ -23,7 +23,7 @@ import BackBtn from '~/components/pages/date/BackBtn.vue'
 import Loading from '~/components/layouts/Loading.vue'
 
 export default {
-  middleware: 'isMenuSelected',
+  middleware: 'menu-selected',
   components: {
     RegistrationMenu,
     ShopName,
