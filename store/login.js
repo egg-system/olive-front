@@ -10,6 +10,7 @@ const initialState = {
   isError: false,
   errorMessage: '',
   isLoading: false,
+  customerId: null,
   firstName: '',
   lastName: '',
   firstNameKana: '',
@@ -36,6 +37,9 @@ export const getters = {
     authApi.defaults.headers.common['client'] = state.client
     authApi.defaults.headers.common['uid'] = state.uid
     return authApi
+  },
+  provider(state) {
+    return state.isCreate ? 'email' : 'none'
   }
 }
 
@@ -49,6 +53,9 @@ export const mutations = {
   },
   setIsLoading(state, isLoading) {
     state.isLoading = isLoading
+  },
+  setCustomerId(state, customerId) {
+    state.customerId = customerId
   },
   setFirstName(state, firstName) {
     state.firstName = firstName
@@ -107,14 +114,14 @@ export const mutations = {
 export const actions = {
   setLoginCustomer({ commit }, customer) {
     commit('setIsLogin', true)
-    commit('setIsError', false)
+    commit('setCustomerId', customer.id)
     commit('setFirstName', customer.first_name)
     commit('setLastName', customer.last_name)
     commit('setFirstNameKana', customer.first_name_kana)
     commit('setLastNameKana', customer.last_name_kana)
     commit('setMail', customer.email)
     commit('setMail2', customer.email)
-    commit('setPhoneNumber', customer.phone_number)
+    commit('setPhoneNumber', customer.tel)
 
     return customer
   },
@@ -142,20 +149,25 @@ export const actions = {
     return false
   },
   // ユーザー作成
-  async customerCreate({ commit, state }) {
-    const result = await axios.get(process.env.api.customerCreate, {
-      mail: state.mail,
-      password: state.password,
-      first_name: state.firstName,
-      last_name: state.lastName,
-      first_name_kana: state.firstNameKana,
-      last_name_kana: state.lastNameKana,
-      phone_number: state.phoneNumber
-    })
-    if (result.status === 200) {
-      commit('reset')
+  async createCustomer({ commit, dispatch, getters, state, rootState }) {
+    try {
+      const result = await axios.post(process.env.api.customerCreate, {
+        email: state.mail,
+        password: state.password,
+        first_name: state.firstName,
+        last_name: state.lastName,
+        first_kana: state.firstNameKana,
+        last_kana: state.lastNameKana,
+        tel: state.phoneNumber,
+        provider: getters.provider,
+        first_visit_store_id: rootState.shop.id,
+        last_visit_store_id: rootState.shop.id
+      })
+
+      dispatch('setLoginCustomer', result.data)
       return true
-    } else {
+    } catch (error) {
+      console.log(error)
       commit('setError', 'ユーザー作成に失敗しました。')
       return false
     }
