@@ -3,26 +3,38 @@
     <v-layout column wrap>
       <v-flex>
         <v-card dark color="red lighten-2">
-          <v-card-text><h3>お客様情報</h3></v-card-text>
+          <v-card-text>
+            <h3>お客様情報</h3>
+          </v-card-text>
         </v-card>
       </v-flex>
     </v-layout>
 
-    <customer-name :is-confirm="isConfirm"/>
-    <customer-mail :is-confirm="isConfirm"/>
-    <customer-phone-number :is-confirm="isConfirm"/>
+    <template v-if="!isLogin">
+      <customer-name :is-confirm="isConfirm"/>
+      <customer-mail :is-confirm="isConfirm"/>
+      <customer-phone-number :is-confirm="isConfirm"/>
 
-    <v-layout row>
-      <v-flex xs3>初めてのご利用ですか？<span class="must">(必須)</span></v-flex>
-      <v-flex>
-        <v-radio-group :disabled="isConfirm" v-model="isFirst" :mandatory="false" class="inputTop">
-          <v-radio :value="true" label="初めてです(初診料 ¥1,000)"/>
-          <v-radio :value="false" label="いいえ、2回目以降です"/>
-        </v-radio-group>
-      </v-flex>
-    </v-layout>
+      <v-layout row>
+        <v-flex xs3>
+          初めてのご利用ですか？
+          <span class="must">(必須)</span>
+        </v-flex>
+        <v-flex>
+          <v-radio-group
+            :disabled="isConfirm"
+            v-model="isFirst"
+            :mandatory="false"
+            class="inputTop"
+          >
+            <v-radio :value="true" label="初めてです(初診料 ¥1,000)"/>
+            <v-radio :value="false" label="いいえ、2回目以降です"/>
+          </v-radio-group>
+        </v-flex>
+      </v-layout>
+    </template>
 
-    <v-layout row>
+    <v-layout v-if="isLogin" row>
       <v-flex xs3>回数券利用</v-flex>
       <v-flex>
         <v-checkbox :disabled="isConfirm" v-model="coupon" label="利用する" class="inputTop"/>
@@ -32,35 +44,21 @@
     <v-layout row>
       <v-flex xs3>妊娠有無</v-flex>
       <v-flex xs5>
-        <v-select
-          :items="pregnancyTerm"
-          :disabled="isConfirm"
-          v-model="pregnancyTermSelected"
-        />
+        <v-select :items="pregnancyTerm" :disabled="isConfirm" v-model="pregnancyTermSelected"/>
       </v-flex>
-      <v-flex v-if="!isConfirm" xs5>
-        ※妊娠中の方は何ヶ月かご選択ください
-      </v-flex>
+      <v-flex v-if="!isConfirm" xs5>※妊娠中の方は何ヶ月かご選択ください</v-flex>
     </v-layout>
 
     <v-layout row>
       <v-flex xs3>お子様連れ</v-flex>
       <v-flex xs5>
-        <v-select
-          :items="children"
-          :disabled="isConfirm"
-          v-model="childrenSelected"
-        />
+        <v-select :items="children" :disabled="isConfirm" v-model="childrenSelected"/>
       </v-flex>
-      <v-flex v-if="!isConfirm" xs5>
-        ※お子様連れの方は人数をご選択ください
-      </v-flex>
+      <v-flex v-if="!isConfirm" xs5>※お子様連れの方は人数をご選択ください</v-flex>
     </v-layout>
 
-    <customer-message :is-confirm="isConfirm"/>
-
+    <customer-message v-if="!isLogin" :is-confirm="isConfirm"/>
   </div>
-
 </template>
 
 <script>
@@ -68,7 +66,18 @@ import CustomerName from '~/components/pages/common/customer/Name.vue'
 import CustomerMail from '~/components/pages/common/customer/Mail.vue'
 import CustomerPhoneNumber from '~/components/pages/common/customer/PhoneNumber.vue'
 import CustomerMessage from '~/components/pages/common/customer/Message.vue'
-import { mapMutations } from 'vuex'
+import { mapGetters, mapMutations, mapState } from 'vuex'
+
+const pregnancyTerm = [
+  '妊娠なし',
+  '4ヶ月未満',
+  '5ヶ月',
+  '6ヶ月',
+  '7ヶ月',
+  '8ヶ月'
+]
+
+const children = ['なし', '1人', '2人', '3人', '4人']
 
 export default {
   components: {
@@ -83,19 +92,9 @@ export default {
       default: false
     }
   },
-  data: () => ({
-    pregnancyTerm: [
-      '妊娠なし',
-      '4ヶ月未満',
-      '5ヶ月',
-      '6ヶ月',
-      '7ヶ月',
-      '8ヶ月',
-      '9ヶ月',
-      '10ヶ月'
-    ],
-    children: ['なし', '1人', '2人', '3人', '4人']
-  }),
+  data() {
+    return { pregnancyTerm, children }
+  },
   computed: {
     coupon: {
       get() {
@@ -110,7 +109,8 @@ export default {
         return this.$store.state.registration.pregnancyTermSelected
       },
       set(value) {
-        this.setPregnancyTermSelected(value)
+        const pregnancyTermSelected = pregnancyTerm.indexOf(value)
+        this.setPregnancyTermSelected(pregnancyTermSelected)
       }
     },
     childrenSelected: {
@@ -118,20 +118,21 @@ export default {
         return this.$store.state.registration.childrenSelected
       },
       set(value) {
-        this.setChildrenSelected(value)
+        const childrenSelected = children.indexOf(value)
+        this.setChildrenSelected(childrenSelected)
       }
     },
     isFirst: {
       get() {
         // ログイン済みの場合は2回目以降とする
-        return this.$store.state.login.isLogin
-          ? false
-          : this.$store.state.registration.isFirst
+        return this.isLogin ? false : this.isFirst
       },
       set(value) {
         this.setIsFirst(value)
       }
-    }
+    },
+    ...mapGetters('login', ['isLogin']),
+    ...mapState('registration', ['isFirst'])
   },
   beforeMount() {
     // ローディングを解除
