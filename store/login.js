@@ -40,6 +40,21 @@ export const getters = {
   },
   provider(state) {
     return state.isCreate ? 'email' : 'none'
+  },
+  customerParameters(state, getters, rootState, rootGetters) {
+    return {
+      email: state.mail,
+      password: state.password,
+      first_name: state.firstName,
+      last_name: state.lastName,
+      first_kana: state.firstNameKana,
+      last_kana: state.lastNameKana,
+      tel: state.phoneNumber,
+      provider: getters.provider,
+      can_receive_mail: rootGetters['registration/canReceiveMail'],
+      first_visit_store_id: rootState.shop.id,
+      last_visit_store_id: rootState.shop.id
+    }
   }
 }
 
@@ -117,8 +132,8 @@ export const actions = {
     commit('setCustomerId', customer.id)
     commit('setFirstName', customer.first_name)
     commit('setLastName', customer.last_name)
-    commit('setFirstNameKana', customer.first_name_kana)
-    commit('setLastNameKana', customer.last_name_kana)
+    commit('setFirstNameKana', customer.first_kana)
+    commit('setLastNameKana', customer.last_kana)
     commit('setMail', customer.email)
     commit('setMail2', customer.email)
     commit('setPhoneNumber', customer.tel)
@@ -135,12 +150,17 @@ export const actions = {
     parameters.append('password', password)
 
     try {
-      const result = await axios.post(process.env.api.customerLogin, parameters)
+      const result = await axios.post(process.env.api.customerLogin, {
+        email: mail,
+        password: password
+      })
+
       commit('setToken', result.headers)
-      dispatch('setLoginCustomer', result.data)
+      dispatch('setLoginCustomer', result.data.data)
 
       return true
     } catch (error) {
+      console.log(error)
       commit('setError')
     } finally {
       commit('setIsLoading', false)
@@ -149,22 +169,14 @@ export const actions = {
     return false
   },
   // ユーザー作成
-  async createCustomer({ commit, dispatch, getters, state, rootState }) {
+  async createCustomer({ commit, dispatch, getters }) {
     try {
-      const result = await axios.post(process.env.api.customerCreate, {
-        email: state.mail,
-        password: state.password,
-        first_name: state.firstName,
-        last_name: state.lastName,
-        first_kana: state.firstNameKana,
-        last_kana: state.lastNameKana,
-        tel: state.phoneNumber,
-        provider: getters.provider,
-        first_visit_store_id: rootState.shop.id,
-        last_visit_store_id: rootState.shop.id
-      })
+      const result = await axios.post(
+        process.env.api.customerCreate,
+        getters.customerParameters
+      )
 
-      dispatch('setLoginCustomer', result.data)
+      dispatch('setLoginCustomer', result.data.data)
       return true
     } catch (error) {
       console.log(error)
