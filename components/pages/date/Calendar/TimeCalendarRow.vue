@@ -57,7 +57,7 @@ export default {
       return this.dateTimeSlot.isBefore(moment())
     },
     nextRoute() {
-      return this.isLogin ? 'login' : 'registration'
+      return this.isLogin ? 'registration' : 'login'
     },
     slotEndAt() {
       return this.dateTimeSlot.clone().add(this.timeSlotIncrement, 'hours')
