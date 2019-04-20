@@ -52,6 +52,29 @@ export const mutations = {
 export const getters = {
   isValidRegistration(state) {
     return state.isFirst instanceof Boolean
+  },
+  canReceiveMail(state) {
+    return state.message === 'yes'
+  },
+  reservationParameters(state, getters, rootState, rootGetters) {
+    const reservationAt = rootState.select.dateTime
+
+    if (reservationAt) {
+      return null
+    }
+
+    // 回数券周りの処理を追加する
+    return {
+      store_id: rootState.shop.id,
+      customer_id: rootState.login.customerId,
+      pregnancy_state: state.pregnancyTermSelected,
+      children_count: state.childrenSelected,
+      reservation_comment: state.request,
+      reservation_date: reservationAt.format('YYYY-MM-DD'),
+      start_time: reservationAt.format('HH:mm'),
+      reservation_details_attributes:
+        rootGetters['select/reservationDetailsParameters']
+    }
   }
 }
 
@@ -78,24 +101,20 @@ export const actions = {
       return
     }
 
-    await context.dispatch('createReserve')
-    context.dispatch('resetCustomerWithReserve')
+    if (await context.dispatch('createReserve')) {
+      context.dispatch('resetCustomerWithReserve')
+    }
   },
-  async createReserve({ state, commit, rootState, rootGetters }) {
+  async createReserve({ commit, getters }) {
     try {
       // 予約確定APIの実行
-      const result = await axios.post(process.env.api.reserveCommit, {
-        menus: rootGetters['select/allSelectedMenuIds'],
-        is_first: state.isFirst,
-        customer_id: rootState.logion.customerId,
-        is_use_coupon: state.coupon,
-        pregnancy_term: state.pregnancyTermSelected,
-        children: state.childrenSelected,
-        is_get_message: state.message,
-        request: state.request
-      })
+      const result = await axios.post(
+        process.env.api.reserveCommit,
+        getters.reservationParameters
+      )
       return true
     } catch (error) {
+      console.log(error)
       commit('setError', '予約に失敗しました。')
       return false
     }
