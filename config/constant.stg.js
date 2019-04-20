@@ -5,7 +5,8 @@ module.exports = {
     customerCreate:
       'http://olive-staging.ap-northeast-1.elasticbeanstalk.com/api/customers',
     customerReset: 'https://api.myjson.com/bins/18ieba',
-    reserveCommit: 'https://api.myjson.com/bins/18ieba',
+    reserveCommit:
+      'http://olive-staging.ap-northeast-1.elasticbeanstalk.com/api/reservations',
     shop:
       'http://olive-staging.ap-northeast-1.elasticbeanstalk.com/api/shops/:id',
     menu:
