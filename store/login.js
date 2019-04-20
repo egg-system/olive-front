@@ -1,14 +1,16 @@
 import axios from 'axios'
-import Utf8 from 'crypto-js/enc-utf8'
-import Base64 from 'crypto-js/enc-base64'
 
 /* state */
 const initialState = {
+  accessToken: null,
+  client: null,
+  uid: null,
   isLogin: false,
   isCreate: false,
   isError: false,
   errorMessage: '',
   isLoading: false,
+  customerId: null,
   firstName: '',
   lastName: '',
   firstNameKana: '',
@@ -26,7 +28,34 @@ export const state = () => Object.assign({}, initialState)
 
 /* getters */
 export const getters = {
-  isLogin: state => state.isLogin
+  isLogin(state) {
+    return state.isLogin
+  },
+  authenticatedApi(state) {
+    const authApi = axios.create()
+    authApi.defaults.headers.common['access-token'] = state.accessToken
+    authApi.defaults.headers.common['client'] = state.client
+    authApi.defaults.headers.common['uid'] = state.uid
+    return authApi
+  },
+  provider(state) {
+    return state.isCreate ? 'email' : 'none'
+  },
+  customerParameters(state, getters, rootState, rootGetters) {
+    return {
+      email: state.mail,
+      password: state.password,
+      first_name: state.firstName,
+      last_name: state.lastName,
+      first_kana: state.firstNameKana,
+      last_kana: state.lastNameKana,
+      tel: state.phoneNumber,
+      provider: getters.provider,
+      can_receive_mail: rootGetters['registration/canReceiveMail'],
+      first_visit_store_id: rootState.shop.id,
+      last_visit_store_id: rootState.shop.id
+    }
+  }
 }
 
 /* mutations */
@@ -39,6 +68,9 @@ export const mutations = {
   },
   setIsLoading(state, isLoading) {
     state.isLoading = isLoading
+  },
+  setCustomerId(state, customerId) {
+    state.customerId = customerId
   },
   setFirstName(state, firstName) {
     state.firstName = firstName
@@ -85,64 +117,69 @@ export const mutations = {
   },
   reset(state) {
     state = Object.assign(state, initialState)
+  },
+  setToken(state, responseHeader) {
+    state.accessToken = responseHeader['access-token']
+    state.client = responseHeader['client']
+    state.uid = responseHeader['uid']
   }
 }
 
 /* actions */
 export const actions = {
+  setLoginCustomer({ commit }, customer) {
+    commit('setIsLogin', true)
+    commit('setCustomerId', customer.id)
+    commit('setFirstName', customer.first_name)
+    commit('setLastName', customer.last_name)
+    commit('setFirstNameKana', customer.first_kana)
+    commit('setLastNameKana', customer.last_kana)
+    commit('setMail', customer.email)
+    commit('setMail2', customer.email)
+    commit('setPhoneNumber', customer.tel)
+
+    return customer
+  },
   // ログインチェック
-  async checkLogin({ commit }, { mail, password }) {
+  async checkLogin({ commit, dispatch, getters }, { mail, password }) {
     // ローディング中にする
     commit('setIsLoading', true)
 
-    // Basic認証
-    const base = Base64.stringify(Utf8.parse(`${mail}:${password}`))
-    const result = await axios({
-      // TODO:myjsonがPOSTに対応してないので一旦GETにする
-      method: 'get',
-      url: process.env.api.customerLogin,
-      headers: { authorization: `Basic ${base}` }
-    })
-    if (result.status === 200) {
-      // テスト用
-      if (mail === 'test1@test' && password === '12345678') {
-        // ユーザーの入力値と一致していたらログイン状態をセット
-        commit('setIsLogin', true)
-        commit('setIsError', false)
-        commit('setFirstName', result.data.first_name)
-        commit('setLastName', result.data.last_name)
-        commit('setFirstNameKana', result.data.first_name_kana)
-        commit('setLastNameKana', result.data.last_name_kana)
-        commit('setMail', mail)
-        commit('setMail2', mail)
-        commit('setPhoneNumber', result.data.phone_number)
-        return true
-      } else {
-        commit('setError')
-        commit('setIsLoading', false)
-        return false
-      }
-    } else {
+    const parameters = new URLSearchParams()
+    parameters.append('email', mail)
+    parameters.append('password', password)
+
+    try {
+      const result = await axios.post(process.env.api.customerLogin, {
+        email: mail,
+        password: password
+      })
+
+      commit('setToken', result.headers)
+      dispatch('setLoginCustomer', result.data.data)
+
+      return true
+    } catch (error) {
+      console.log(error)
       commit('setError')
+    } finally {
       commit('setIsLoading', false)
-      return false
     }
+
+    return false
   },
   // ユーザー作成
-  async customerCreate({ commit, state }) {
-    const result = await axios.get(process.env.api.customerCreate, {
-      mail: state.mail,
-      password: state.password,
-      first_name: state.firstName,
-      last_name: state.lastName,
-      first_name_kana: state.firstNameKana,
-      last_name_kana: state.lastNameKana,
-      phone_number: state.phoneNumber
-    })
-    if (result.status === 200) {
-      commit('reset')
+  async createCustomer({ commit, dispatch, getters }) {
+    try {
+      const result = await axios.post(
+        process.env.api.customerCreate,
+        getters.customerParameters
+      )
+
+      dispatch('setLoginCustomer', result.data.data)
       return true
-    } else {
+    } catch (error) {
+      console.log(error)
       commit('setError', 'ユーザー作成に失敗しました。')
       return false
     }

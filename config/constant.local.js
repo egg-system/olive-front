@@ -1,9 +1,9 @@
 module.exports = {
   api: {
-    customerLogin: 'https://api.myjson.com/bins/14vniu',
-    customerCreate: 'https://api.myjson.com/bins/18ieba',
+    customerLogin: 'http://localhost:8080/api/customers/sign_in',
+    customerCreate: 'http://localhost:8080/api/customers',
     customerReset: 'https://api.myjson.com/bins/18ieba',
-    reserveCommit: 'https://api.myjson.com/bins/18ieba',
+    reserveCommit: 'http://localhost:8080/api/reservations',
     menu: `http://localhost:8080/api/shops/:id/menus`,
     shop: `http://localhost:8080/api/shops/:id`,
     date: `http://localhost:8080/api/shops/:id/dates`

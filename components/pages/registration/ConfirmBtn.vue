@@ -1,16 +1,11 @@
 <template>
   <div>
-
     <v-layout column>
       <v-flex xs6>
-        <v-btn :disabled="!canClick" color="warning" @click="confirm">
-          予約内容を確認する
-        </v-btn>
+        <v-btn :disabled="!canClick" color="warning" @click="confirm">予約内容を確認する</v-btn>
       </v-flex>
     </v-layout>
-
   </div>
-
 </template>
 
 <script>
@@ -28,19 +23,16 @@ import {
 export default {
   computed: {
     canClick() {
+      // ログイン済みの場合、okのみチェック
+      if (this.login.isLogin) {
+        return this.registration.isOk
+      }
+
       // 入力チェック
-      if (
-        this.login.firstName === '' ||
-        this.login.lastName === '' ||
-        this.login.firstNameKana === '' ||
-        this.login.lastNameKana === '' ||
-        this.login.mail === '' ||
-        this.login.mail2 === '' ||
-        this.login.phoneNumber === '' ||
-        this.registration.isOk === null
-      ) {
+      if (this.isEmptyRequiredInput || this.registration.isOk === null) {
         return false
       }
+
       // 新規会員登録の場合
       if (this.login.isCreate) {
         // パスワードは必須入力
@@ -52,6 +44,7 @@ export default {
           return false
         }
       }
+
       // バリデーションチェック
       if (
         checkName(this.login.firstName) !== true ||
@@ -64,11 +57,20 @@ export default {
       ) {
         return false
       }
+
       // 同一チェック
-      if (checkSame(this.login.mail, this.login.mail2) !== true) {
-        return false
-      }
-      return true
+      return !checkSame(this.login.mail, this.login.mail2)
+    },
+    isEmptyRequiredInput() {
+      return (
+        this.login.firstName === '' ||
+        this.login.lastName === '' ||
+        this.login.firstNameKana === '' ||
+        this.login.lastNameKana === '' ||
+        this.login.mail === '' ||
+        this.login.mail2 === '' ||
+        this.login.phoneNumber === ''
+      )
     },
     ...mapState({
       registration: state => state.registration,

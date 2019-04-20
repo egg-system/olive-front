@@ -36,25 +36,19 @@ export default {
     NextBtn
   },
   middleware: ['menu-selected', 'date-time-selected', 'login'],
-  computed: mapState({
-    registration: state => state.registration,
-    login: state => state.login
-  }),
+  computed: {
+    registration() {
+      return this.$store.state.registration
+    },
+    login() {
+      return this.$store.state.login
+    }
+  },
   created() {
-    // 予約確定
-    this.reserveCommit(this.login.id).then(isReserveOk => {
-      // 会員登録
-      if (isReserveOk && this.login.isCreate) {
-        this.customerCreate()
-      }
-    })
+    this.registerCustomerWithReserve()
   },
   methods: {
-    ...mapMutations('registration', ['reset']),
-    ...mapActions({
-      reserveCommit: 'registration/reserveCommit',
-      customerCreate: 'login/customerCreate'
-    })
+    ...mapActions('registration', ['registerCustomerWithReserve'])
   }
 }
 </script>

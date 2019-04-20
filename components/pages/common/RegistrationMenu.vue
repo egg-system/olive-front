@@ -123,16 +123,13 @@ export default {
       }
       this.menu.push(total)
     }
-    // menuIDのセット
-    this.setMenuId(this.selectedMenuId())
   },
   methods: {
     ...mapGetters({
       isTimeSelected: 'select/isTimeSelected',
       getSelectedTime: 'select/getSelectedTime',
       selectedMenuId: 'select/selectedMenuId'
-    }),
-    ...mapMutations('registration', ['setMenuId'])
+    })
   }
 }
 </script>

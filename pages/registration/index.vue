@@ -5,7 +5,7 @@
         <shop-name/>
         <registration-menu/>
         <registration-user-info/>
-        <login-info v-if="!this.$store.state.login.isLogin && this.$store.state.login.isCreate"/>
+        <login-info v-if="isShownLoginInfo"/>
         <registration-confirm-info/>
         <registration-request/>
         <confirm-btn/>
@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import { mapGetters, mapState } from 'vuex'
 import ShopName from '~/components/pages/common/ShopName.vue'
 import LoginInfo from '~/components/pages/registration/LoginInfo.vue'
 import ConfirmBtn from '~/components/pages/registration/ConfirmBtn.vue'
@@ -24,6 +25,7 @@ import RegistrationConfirmInfo from '~/components/pages/common/RegistrationConfi
 import RegistrationRequest from '~/components/pages/common/RegistrationRequest.vue'
 
 export default {
+  middleware: ['menu-selected', 'date-time-selected'],
   components: {
     ShopName,
     LoginInfo,
@@ -33,7 +35,13 @@ export default {
     RegistrationConfirmInfo,
     RegistrationRequest
   },
-  middleware: ['menu-selected', 'date-time-selected']
+  computed: {
+    isShownLoginInfo() {
+      return !this.isLogin && this.isCreate
+    },
+    ...mapState('login', ['isCreate']),
+    ...mapGetters('login', ['isLogin'])
+  }
 }
 </script>
 

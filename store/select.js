@@ -8,7 +8,7 @@ export const state = () => ({
   // 二つのメニュー選択可能にするための実装
   menus: [{ menu: null, options: [] }, { menu: null, options: [] }],
   menuIndex: FIRST_MENU_INDEX,
-  mimitsuboCount: [0, 0]
+  mimitsuboCounts: [0, 0]
 })
 
 /* mutations */
@@ -36,7 +36,7 @@ export const mutations = {
     state.menus[SECOND_MENU_INDEX].options = []
   },
   setMimitsuboCount(state, count) {
-    state.mimitsuboCount[state.menuIndex] = count
+    state.mimitsuboCounts[state.menuIndex] = count
   }
 }
 
@@ -88,7 +88,17 @@ export const getters = {
     return state.time
   },
   mimitsuboCount(state) {
-    return state.mimitsuboCount[state.menuIndex]
+    return state.mimitsuboCounts[state.menuIndex]
+  },
+  reservationDetailsParameters(state) {
+    const selectedMenus = state.menus.filter(select => select.menu)
+    return selectedMenus.map((select, index) => {
+      return {
+        menu_id: select.menu.id,
+        mimitusbo_count: state.mimitsuboCounts[index],
+        option_ids: select.options.map(option => option.id)
+      }
+    })
   }
 }
 
