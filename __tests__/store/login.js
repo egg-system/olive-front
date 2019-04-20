@@ -17,7 +17,8 @@ describe('store/login.js', () => {
     store = new Vuex.Store({ state, mutations, actions, getters })
   })
 
-  describe('mutations', () => {
+  // logoutの導線がないため、一旦スキップ
+  describe.skip('mutations', () => {
     test('logout test', () => {
       expect(store.state.isLogin).toBe(false)
       store.commit('logout')
@@ -25,7 +26,8 @@ describe('store/login.js', () => {
     })
   })
 
-  describe('actions', () => {
+  // モックのテストのため、仕様も変更しうる。一旦スキップ
+  describe.skip('actions', () => {
     test('checkLogin failed', async () => {
       await store.dispatch('checkLogin', {
         mail: 'aaaa',
