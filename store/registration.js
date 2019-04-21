@@ -59,7 +59,7 @@ export const getters = {
   reservationParameters(state, getters, rootState, rootGetters) {
     const reservationAt = rootState.select.dateTime
 
-    if (reservationAt) {
+    if (!reservationAt) {
       return null
     }
 
