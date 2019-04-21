@@ -1,17 +1,15 @@
 module.exports = {
   api: {
     customerLogin:
-      'http://olive-staging.ap-northeast-1.elasticbeanstalk.com/api/customers/sign_in',
+      'https://dashboard-stage.olivebodycare.healthcare/api/customers/sign_in',
     customerCreate:
-      'http://olive-staging.ap-northeast-1.elasticbeanstalk.com/api/customers',
+      'https://dashboard-stage.olivebodycare.healthcare/api/customers',
     customerReset: 'https://api.myjson.com/bins/18ieba',
     reserveCommit:
-      'http://olive-staging.ap-northeast-1.elasticbeanstalk.com/api/reservations',
-    shop:
-      'http://olive-staging.ap-northeast-1.elasticbeanstalk.com/api/shops/:id',
+      'https://dashboard-stage.olivebodycare.healthcare/api/reservations',
+    shop: 'https://dashboard-stage.olivebodycare.healthcare/api/shops/:id',
     menu:
-      'http://olive-staging.ap-northeast-1.elasticbeanstalk.com/api/shops/:id/menus',
-    date:
-      'http://olive-staging.ap-northeast-1.elasticbeanstalk.com/api/shops/:id/dates'
+      'https://dashboard-stage.olivebodycare.healthcare/api/shops/:id/menus',
+    date: 'https://dashboard-stage.olivebodycare.healthcare/api/shops/:id/dates'
   }
 }
