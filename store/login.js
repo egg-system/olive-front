@@ -180,7 +180,11 @@ export const actions = {
       return true
     } catch (error) {
       console.log(error)
-      commit('setError', 'ユーザー作成に失敗しました。')
+      const errorMessage =
+        error.response.status === 422
+          ? '登録済みのメールアドレスです。'
+          : 'ユーザー作成に失敗しました。'
+      commit('setError', errorMessage)
       return false
     }
   }

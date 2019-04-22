@@ -24,13 +24,28 @@
 </template>
 
 <script>
+import _ from 'lodash'
 import { mapGetters } from 'vuex'
 import WeekCalendarRow from './Calendar/WeekCalendarRow.vue'
 
 export default {
   components: { WeekCalendarRow },
   computed: {
-    ...mapGetters('date', ['calendarWeeks'])
+    calendarWeeks() {
+      return _.chunk(this.calendarDates, 7)
+    },
+    calendarDates() {
+      const calendarDates = []
+      let calendarDate = this.startDate.clone()
+
+      while (calendarDate.isBefore(this.endDate)) {
+        calendarDates.push(calendarDate)
+        calendarDate = calendarDate.add(1, 'days').clone()
+      }
+
+      return calendarDates
+    },
+    ...mapGetters('date', ['startDate', 'endDate'])
   }
 }
 </script>

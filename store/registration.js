@@ -90,22 +90,26 @@ export const actions = {
       return false
     }
 
-    let doCreateReserve = true
+    let doCreateReservation = true
     if (!context.rootState.login.isLogin) {
-      doCreateReserve = await context.dispatch('login/createCustomer', null, {
-        root: true
-      })
+      doCreateReservation = await context.dispatch(
+        'login/createCustomer',
+        null,
+        {
+          root: true
+        }
+      )
     }
 
-    if (!doCreateReserve) {
+    if (!doCreateReservation) {
       return
     }
 
-    if (await context.dispatch('createReserve')) {
+    if (await context.dispatch('createReservation')) {
       context.dispatch('resetCustomerWithReserve')
     }
   },
-  async createReserve({ commit, getters }) {
+  async createReservation({ commit, getters }) {
     try {
       // 予約確定APIの実行
       const result = await axios.post(

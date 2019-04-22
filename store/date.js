@@ -1,6 +1,5 @@
 import axios from 'axios'
 import moment from 'moment'
-import _ from 'lodash'
 import { route } from '../lib/route'
 
 const START_AT = '10:00'
@@ -31,20 +30,6 @@ export const actions = {
 
 /* getters */
 export const getters = {
-  calendarWeeks(state, getters) {
-    return _.chunk(getters.calendarDates, 7)
-  },
-  calendarDates(state, getters) {
-    const calendarDates = []
-    let calendarDate = getters.startDate.clone()
-
-    while (calendarDate.isBefore(getters.endDate)) {
-      calendarDates.push(calendarDate)
-      calendarDate = calendarDate.add(1, 'days').clone()
-    }
-
-    return calendarDates
-  },
   dateRoute(state, getters, routeState) {
     const id = routeState.shop.id
     return route(process.env.api.date, { id }, getters.dateParameters)
