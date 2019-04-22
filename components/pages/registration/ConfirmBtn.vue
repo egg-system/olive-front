@@ -59,7 +59,7 @@ export default {
       }
 
       // 同一チェック
-      return !checkSame(this.login.mail, this.login.mail2)
+      return checkSame(this.login.mail, this.login.mail2)
     },
     isEmptyRequiredInput() {
       return (
