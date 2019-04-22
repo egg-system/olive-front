@@ -10,7 +10,7 @@
       </v-flex>
     </v-layout>
 
-    <v-layout v-if="isConfirm" row>
+    <v-layout v-if="time" row>
       <v-flex>
         <v-card-text>来店日時</v-card-text>
       </v-flex>
@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 import _ from 'lodash'
 import moment from 'moment'
 export default {
@@ -85,17 +85,20 @@ export default {
       return menus
     },
     time() {
-      let selectedTime = this.getSelectedTime()
-      let momentTime = moment(selectedTime, 'YYYYMMDDHH')
+      if (!this.dateTime) {
+        return
+      }
+
       return (
-        momentTime.format('YYYY年MM月DD日 ') +
+        this.dateTime.format('YYYY年MM月DD日 ') +
         this.$root.$options.filters['dayFormat'](
-          momentTime.format('YYYYMMDD')
+          this.dateTime.format('YYYYMMDD')
         ) +
         ' ' +
-        momentTime.format('HH:mm')
+        this.dateTime.format('HH:mm')
       )
     },
+    ...mapState('select', ['dateTime']),
     ...mapGetters('select', ['isTwoMenusSelected'])
   },
   beforeMount() {
@@ -127,7 +130,6 @@ export default {
   methods: {
     ...mapGetters({
       isTimeSelected: 'select/isTimeSelected',
-      getSelectedTime: 'select/getSelectedTime',
       selectedMenuId: 'select/selectedMenuId'
     })
   }
