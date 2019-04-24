@@ -101,13 +101,3 @@ export const getters = {
     })
   }
 }
-
-export const actions = {
-  setDefaultSelectMenu(context) {
-    const defaultMenu = context.rootGetters['menu/defaultMenu']
-    if (!defaultMenu) {
-      return
-    }
-    context.commit('setSelectedMenu', defaultMenu)
-  }
-}
