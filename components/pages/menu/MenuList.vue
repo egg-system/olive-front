@@ -16,6 +16,9 @@
             </v-card>
           </v-flex>
           <v-flex>
+            <v-card>
+              <v-card-title primary-title>メニュー選択</v-card-title>
+            </v-card>
             <div v-for="menu in subShop.menus" :key="menu.id">
               <menu-row :menu="menu"/>
             </div>
@@ -46,12 +49,6 @@ import MenuRow from './MenuRow.vue'
 export default {
   components: { MenuRow },
   computed: {
-    subShops() {
-      return this.$store.state.menu.subShops
-    },
-    menuIndex() {
-      return this.$store.state.select.menuIndex
-    },
     selectedMenuId: {
       get() {
         if (this.selectedMenu) {
@@ -65,6 +62,8 @@ export default {
         this.setSelectedMenu(menu)
       }
     },
+    ...mapState('select', ['menuIndex']),
+    ...mapState('menu', ['subShops']),
     ...mapGetters('menu', ['getMenu', 'getOption']),
     ...mapGetters('select', {
       selectedOptions: 'selectedOptions',
@@ -121,6 +120,7 @@ section.content-section {
       margin-left: 15px;
     }
   }
+
   p {
     margin-top: 10px;
     text-align: left;
@@ -128,5 +128,11 @@ section.content-section {
 }
 .option-area {
   width: 100%;
+  margin: 1em;
+
+  .option-header {
+    @extend .menu-info;
+    margin-bottom: 0.5em;
+  }
 }
 </style>
