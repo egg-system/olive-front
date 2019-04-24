@@ -47,4 +47,18 @@ $borderColor: rgba(0, 0, 0, 0.1);
       }
     }
   }
+
+  .calendar-explain {
+    margin-top: 2em;
+
+    dl div {
+      display: flex;
+      margin: 1em;
+
+      dt {
+        min-width: 5em;
+        text-align: center;
+      }
+    }
+  }
 }
