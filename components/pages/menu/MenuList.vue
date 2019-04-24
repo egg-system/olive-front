@@ -30,7 +30,7 @@
     <v-layout column>
       <v-flex xs6>
         <v-btn v-if="menuIndex == 1" @click="backToFirst">戻る</v-btn>
-        <v-btn color="warning" @click="next">日時指定に進む</v-btn>
+        <v-btn :disabled="!selectedMenu" color="warning" @click="next">空席確認・予約する</v-btn>
         <v-btn
           v-if="selectedMenu != null && selectedMenu.minutes != 120 && menuIndex == 0"
           color="warning"
