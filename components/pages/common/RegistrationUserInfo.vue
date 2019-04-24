@@ -106,20 +106,20 @@ export default {
     },
     pregnancyTermSelected: {
       get() {
-        return this.$store.state.registration.pregnancyTermSelected
+        return pregnancyTerm[this.pregnantStateId]
       },
       set(value) {
         const pregnancyTermSelected = pregnancyTerm.indexOf(value)
-        this.setPregnancyTermSelected(pregnancyTermSelected)
+        this.setPregnantStateId(pregnancyTermSelected)
       }
     },
     childrenSelected: {
       get() {
-        return this.$store.state.registration.childrenSelected
+        return children[this.childrenCount]
       },
       set(value) {
         const childrenSelected = children.indexOf(value)
-        this.setChildrenSelected(childrenSelected)
+        this.setChildrenCount(childrenSelected)
       }
     },
     isFirst: {
@@ -132,7 +132,7 @@ export default {
       }
     },
     ...mapGetters('login', ['isLogin']),
-    ...mapState('registration', ['isFirst'])
+    ...mapState('registration', ['childrenCount', 'isFirst', 'pregnantStateId'])
   },
   beforeMount() {
     // ローディングを解除
@@ -141,8 +141,8 @@ export default {
   methods: {
     ...mapMutations('registration', [
       'setCoupon',
-      'setPregnancyTermSelected',
-      'setChildrenSelected',
+      'setPregnantStateId',
+      'setChildrenCount',
       'setIsFirst'
     ]),
     ...mapMutations('login', ['setIsLoading'])

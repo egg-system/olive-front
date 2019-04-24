@@ -21,7 +21,6 @@ export const actions = {
     const response = await axios.get(getShopMenuRoute)
 
     commit('setMenus', response.data)
-    dispatch('select/setDefaultSelectMenu', null, { root: true })
   }
 }
 

@@ -73,7 +73,7 @@ export default {
             optionTmp.name =
               optionTmp.name +
               ' × ' +
-              this.$store.state.select.mimitsuboCount[i].toString() +
+              this.$store.state.select.mimitsuboCounts[i].toString() +
               '粒'
           }
           menus.push(optionTmp)

@@ -3,8 +3,8 @@ import axios from 'axios'
 /* state */
 const initialState = {
   coupon: null,
-  pregnancyTermSelected: '',
-  childrenSelected: '',
+  pregnantStateId: 0,
+  childrenCount: 0,
   isFirst: true,
   message: 'yes',
   isOk: null,
@@ -19,11 +19,11 @@ export const mutations = {
   setCoupon(state, coupon) {
     state.coupon = coupon
   },
-  setPregnancyTermSelected(state, pregnancyTermSelected) {
-    state.pregnancyTermSelected = pregnancyTermSelected
+  setPregnantStateId(state, pregnantStateId) {
+    state.pregnantStateId = pregnantStateId
   },
-  setChildrenSelected(state, childrenSelected) {
-    state.childrenSelected = childrenSelected
+  setChildrenCount(state, childrenCount) {
+    state.childrenCount = childrenCount
   },
   setIsFirst(state, isFirst) {
     state.isFirst = isFirst

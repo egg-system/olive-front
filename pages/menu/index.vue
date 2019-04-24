@@ -1,26 +1,3 @@
-<style lang="scss">
-.menu-contents {
-  text-align: left;
-}
-.v-input--selection-controls .v-input__control,
-.v-input--selection-controls {
-  width: 100%;
-  margin-top: 0px;
-  padding-top: 0px;
-}
-.slide-enter,
-.slide-leave-to {
-  transform: translateY(-100%);
-  opacity: 0;
-}
-.hidden {
-  display: none;
-}
-.menu {
-  margin-bottom: 30px;
-}
-</style>
-
 <template>
   <section class="container">
     <v-container grid-list-xl>
@@ -64,3 +41,26 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.menu-contents {
+  text-align: left;
+}
+.v-input--selection-controls .v-input__control,
+.v-input--selection-controls {
+  width: 100%;
+  margin-top: 0px;
+  padding-top: 0px;
+}
+.slide-enter,
+.slide-leave-to {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+.hidden {
+  display: none;
+}
+.menu {
+  margin-bottom: 30px;
+}
+</style>

@@ -1,5 +1,6 @@
 <template>
   <div class="option-area">
+    <div class="option-header">オプション</div>
     <div v-for="option in options" :key="option.id">
       <v-checkbox v-model="checkedOptions" :value="option">
         <div slot="label" class="menu-info">
