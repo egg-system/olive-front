@@ -18,13 +18,14 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import ShopName from '~/components/pages/common/ShopName.vue'
-import MenuList from '~/components/pages/menu/MenuList.vue'
+import MenuList from '~/components/pages/menus/MenuList.vue'
 import Loading from '~/components/layouts/Loading.vue'
 import RegistrationMenu from '~/components/pages/common/RegistrationMenu.vue'
 
 export default {
+  middleware: ['init-menu-index'],
   components: {
     ShopName,
     MenuList,
@@ -35,9 +36,10 @@ export default {
     menuIndex() {
       return this.$store.state.select.menuIndex
     },
-    ...mapGetters({
-      isLoading: 'menu/isLoading'
-    })
+    ...mapGetters('menu', ['isLoading'])
+  },
+  methods: {
+    ...mapMutations('select', ['setMenuIndex'])
   }
 }
 </script>

@@ -31,6 +31,9 @@ export const getters = {
   isLogin(state) {
     return state.isLogin
   },
+  isRegisteredCustomer(state, getters) {
+    return getters.isLogin && !state.isCreate
+  },
   authenticatedApi(state) {
     const authApi = axios.create()
     authApi.defaults.headers.common['access-token'] = state.accessToken
