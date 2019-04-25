@@ -2,7 +2,7 @@
   <div class="option-area">
     <div class="option-header">オプション</div>
     <div v-for="option in options" :key="option.id">
-      <v-checkbox v-model="checkedOptions" :value="option">
+      <v-checkbox v-if="true" v-model="checkedOptions" :value="option">
         <div slot="label" class="menu-info">
           <span>{{ option.name }}</span>
           <span>{{ option.price | priceFormat }}</span>
@@ -29,6 +29,9 @@ export default {
       type: Array,
       required: true
     }
+  },
+  data() {
+    return { loading: true }
   },
   computed: {
     checkedOptions: {
@@ -65,6 +68,9 @@ export default {
     ])
   },
   methods: {
+    getOptionValue(option) {
+      return this.$nextTick(() => option)
+    },
     isShownSelect(option) {
       if (!option.is_mimitsubo_jewelry) {
         return false
