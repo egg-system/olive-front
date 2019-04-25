@@ -12,7 +12,7 @@
 
     <v-layout v-if="time" row>
       <v-flex>
-        <v-card-text>来店日時</v-card-text>
+        <v-card-text>予約日時</v-card-text>
       </v-flex>
       <v-flex>
         <v-card-text>{{ time }}</v-card-text>
