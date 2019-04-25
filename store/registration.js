@@ -56,6 +56,12 @@ export const getters = {
   canReceiveMail(state) {
     return state.message === 'yes'
   },
+  canChangeIsFirst(state, getters, rootState, rootGetters) {
+    return (
+      !rootGetters['login/isRegisteredCustomer'] &&
+      !rootGetters['select/isSelectedMultiStore']
+    )
+  },
   reservationParameters(state, getters, rootState, rootGetters) {
     const reservationAt = rootState.select.dateTime
 
@@ -65,13 +71,13 @@ export const getters = {
 
     // 回数券周りの処理を追加する
     return {
-      store_id: rootState.shop.id,
       customer_id: rootState.login.customerId,
       pregnancy_state: state.pregnancyTermSelected,
       children_count: state.childrenSelected,
       reservation_comment: state.request,
       reservation_date: reservationAt.format('YYYY-MM-DD'),
       start_time: reservationAt.format('HH:mm'),
+      is_first: getters.canChangeIsFirst ? state.isFirst : false,
       reservation_details_attributes:
         rootGetters['select/reservationDetailsParameters']
     }

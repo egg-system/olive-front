@@ -15,7 +15,7 @@
       <customer-mail :is-confirm="isConfirm"/>
       <customer-phone-number :is-confirm="isConfirm"/>
 
-      <v-layout row>
+      <v-layout v-if="canChangeIsFirst" row>
         <v-flex xs3>
           初めてのご利用ですか？
           <span class="must">(必須)</span>
@@ -23,11 +23,11 @@
         <v-flex>
           <v-radio-group
             :disabled="isConfirm"
-            v-model="isFirst"
+            v-model="isFirstValue"
             :mandatory="false"
             class="inputTop"
           >
-            <v-radio :value="true" label="初めてです(初診料 ¥1,000)"/>
+            <v-radio :value="true" :label="isFirstLabel"/>
             <v-radio :value="false" label="いいえ、2回目以降です"/>
           </v-radio-group>
         </v-flex>
@@ -122,17 +122,27 @@ export default {
         this.setChildrenCount(childrenSelected)
       }
     },
-    isFirst: {
+    isFirstValue: {
       get() {
-        // ログイン済みの場合は2回目以降とする
-        return this.isLogin ? false : this.isFirst
+        return this.isFirst
       },
       set(value) {
         this.setIsFirst(value)
       }
     },
+    isFirstLabel() {
+      return this.menus[0].menu.department_id === 1
+        ? '初めてです(初診料 ¥1,000)'
+        : '初めてです(初回カウンセリング料 ¥1,000)'
+    },
     ...mapGetters('login', ['isLogin']),
-    ...mapState('registration', ['childrenCount', 'isFirst', 'pregnantStateId'])
+    ...mapGetters('registration', ['canChangeIsFirst']),
+    ...mapState('registration', [
+      'childrenCount',
+      'isFirst',
+      'pregnantStateId'
+    ]),
+    ...mapState('select', ['menus'])
   },
   beforeMount() {
     // ローディングを解除

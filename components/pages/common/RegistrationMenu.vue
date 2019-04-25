@@ -19,13 +19,13 @@
       </v-flex>
     </v-layout>
 
-    <v-layout row>
+    <v-layout v-if="menu" row>
       <v-flex>
         <v-data-table :items="menu" hide-actions hide-headers class="elevation-1">
           <template slot="items" slot-scope="props">
-            <td>{{ props.item.name }}</td>
-            <td class="text-xs-right">{{ props.item.price | priceFormat }}</td>
-            <td class="text-xs-right">{{ props.item.minutes | timeFormat }}</td>
+            <td v-if="props.item">{{ props.item.name }}</td>
+            <td v-if="props.item" class="text-xs-right">{{ props.item.price | priceFormat }}</td>
+            <td v-if="props.item" class="text-xs-right">{{ props.item.minutes | timeFormat }}</td>
           </template>
         </v-data-table>
       </v-flex>
@@ -36,7 +36,7 @@
         <v-card-text>マイページからキャンセル可能期限</v-card-text>
       </v-flex>
       <v-flex>
-        <v-card-text>2019年1月18日（金）23:59</v-card-text>
+        <v-card-text>{{ cancelableDate | dateTimeAndDatFormat }}</v-card-text>
       </v-flex>
     </v-layout>
     <v-card-text v-if="isConfirm">※それ以降のキャンセルは直接サロンへご連絡ください。</v-card-text>
@@ -59,6 +59,18 @@ export default {
     }
   },
   computed: {
+    allServiceMinutes() {
+      const menus = this.$store.state.select.menus
+      return _.sumBy(menus, 'menu.minutes')
+    },
+    cancelableDay() {
+      return this.$root.$options.filters.dayFormat(this.cancelableDate)
+    },
+    cancelableDate() {
+      return moment()
+        .add('days', 2)
+        .endOf('day')
+    },
     menu() {
       let menus = []
       for (let i = 0; i < 2; i++) {
@@ -73,7 +85,7 @@ export default {
             optionTmp.name =
               optionTmp.name +
               ' × ' +
-              this.$store.state.select.mimitsuboCounts[i].toString() +
+              this.$store.state.select.menus[i].mimitsuboCount.toString() +
               '粒'
           }
           menus.push(optionTmp)
@@ -91,11 +103,16 @@ export default {
 
       return (
         this.dateTime.format('YYYY年MM月DD日 ') +
-        this.$root.$options.filters['dayFormat'](
+        this.$root.$options.filters.dayFormat(
           this.dateTime.format('YYYYMMDD')
         ) +
         ' ' +
-        this.dateTime.format('HH:mm')
+        this.dateTime.format('HH:mm') +
+        ' ～ ' +
+        this.dateTime
+          .clone()
+          .add('minutes', this.allServiceMinutes)
+          .format('HH:mm')
       )
     },
     ...mapState('select', ['dateTime']),
