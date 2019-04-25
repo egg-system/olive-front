@@ -2,7 +2,7 @@ import axios from 'axios'
 
 /* state */
 const initialState = {
-  coupon: null,
+  coupons: [],
   pregnantStateId: 0,
   childrenCount: 0,
   isFirst: true,
@@ -16,8 +16,8 @@ export const state = () => Object.assign({}, initialState)
 
 /* mutations */
 export const mutations = {
-  setCoupon(state, coupon) {
-    state.coupon = coupon
+  setCoupons(state, coupons) {
+    state.coupons = coupons
   },
   setPregnantStateId(state, pregnantStateId) {
     state.pregnantStateId = pregnantStateId
@@ -62,6 +62,9 @@ export const getters = {
       !rootGetters['select/isSelectedMultiStore']
     )
   },
+  selctedCouponIds(state) {
+    return state.coupons.map(coupon => coupon.id)
+  },
   reservationParameters(state, getters, rootState, rootGetters) {
     const reservationAt = rootState.select.dateTime
 
@@ -78,6 +81,7 @@ export const getters = {
       reservation_date: reservationAt.format('YYYY-MM-DD'),
       start_time: reservationAt.format('HH:mm'),
       is_first: getters.canChangeIsFirst ? state.isFirst : false,
+      coupon_ids: getters.selctedCouponIds,
       reservation_details_attributes:
         rootGetters['select/reservationDetailsParameters']
     }

@@ -36,8 +36,14 @@
 
     <v-layout v-if="isLogin" row>
       <v-flex xs3>回数券利用</v-flex>
-      <v-flex>
-        <v-checkbox :disabled="isConfirm" v-model="coupon" label="利用する" class="inputTop"/>
+      <v-flex v-for="coupon in coupons" :key="coupon.id">
+        <v-checkbox
+          :disabled="isConfirm"
+          v-model="selectedCoupons"
+          :value="coupon"
+          :label="coupon.name"
+          class="inputTop"
+        />
       </v-flex>
     </v-layout>
 
@@ -79,6 +85,8 @@ const pregnancyTerm = [
 
 const children = ['なし', '1人', '2人', '3人', '4人']
 
+const couponMaster = ['施術5回券', '施術10回券', 'インデプス11回券']
+
 export default {
   components: {
     CustomerName,
@@ -93,15 +101,19 @@ export default {
     }
   },
   data() {
-    return { pregnancyTerm, children }
+    return {
+      pregnancyTerm: pregnancyTerm,
+      children: children,
+      coupons: null
+    }
   },
   computed: {
-    coupon: {
+    selectedCoupons: {
       get() {
-        return this.$store.state.registration.coupon
+        return this.$store.state.registration.coupons
       },
       set(value) {
-        this.setCoupon(value)
+        this.setCoupons(value)
       }
     },
     pregnancyTermSelected: {
@@ -148,9 +160,14 @@ export default {
     // ローディングを解除
     this.setIsLoading(false)
   },
+  mounted() {
+    this.coupons = couponMaster.map((coupon, index) => {
+      return { id: index + 1, name: coupon }
+    })
+  },
   methods: {
     ...mapMutations('registration', [
-      'setCoupon',
+      'setCoupons',
       'setPregnantStateId',
       'setChildrenCount',
       'setIsFirst'
