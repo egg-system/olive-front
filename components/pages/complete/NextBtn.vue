@@ -21,7 +21,7 @@ export default {
       this.$router.push('/')
     },
     goReserve() {
-      this.$router.push('/menu')
+      this.$router.push('/menus')
     },
     goMyPage() {
       this.$router.push('/mypage/top')
