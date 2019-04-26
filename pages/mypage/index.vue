@@ -5,7 +5,7 @@
       <div>
         <h2>会員の方はログインしてください</h2>
         <login-form :link="link" />
-        <nuxt-link to="/registration">
+        <nuxt-link to="/password/reset">
           パスワードを忘れた方はこちら
         </nuxt-link>
       </div>
@@ -13,7 +13,7 @@
       <div class="not">
         <h4>ログインIDをお持ちでない方はこちらから</h4>
         <div>
-          <v-btn color="warning" @click="resisterBtn">
+          <v-btn color="warning" @click="createBtn">
             新規会員登録へ
           </v-btn>
         </div>
@@ -42,9 +42,9 @@ export default {
     })
   },
   methods: {
-    resisterBtn() {
-      this.setIsCreate(true)
-      this.$router.push('/registration')
+    createBtn() {
+      // this.setIsCreate(true)
+      this.$router.push('/create')
     },
     ...mapMutations('login', ['setIsCreate'])
   }
