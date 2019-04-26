@@ -125,6 +125,14 @@ export const mutations = {
     state.accessToken = responseHeader['access-token']
     state.client = responseHeader['client']
     state.uid = responseHeader['uid']
+  },
+  // パスワードリセットに必要な情報をクリアする
+  resetPasswordInfo(state) {
+    state.mail = ''
+    state.mail2 = ''
+    state.phoneNumber = ''
+    state.password = ''
+    state.password2 = ''
   }
 }
 

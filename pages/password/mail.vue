@@ -13,12 +13,20 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
   layout: 'password',
+  created() {
+    // TODO:パスワードリセットAPIの実行
+    // 入力情報のリセット
+    this.resetPasswordInfo()
+  },
   methods: {
     top() {
       this.$router.push('/mypage/')
-    }
+    },
+    ...mapMutations('login', ['resetPasswordInfo'])
   }
 }
 </script>
