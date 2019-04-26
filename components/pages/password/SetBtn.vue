@@ -2,19 +2,16 @@
   <div>
     <v-layout column>
       <v-flex xs6>
-        <v-btn :disabled="!canClick" color="warning" @click="confirm">
+        <v-btn :disabled="!canClick" color="warning" @click="set">
           パスワードを登録する
         </v-btn>
       </v-flex>
     </v-layout>
-
   </div>
-
 </template>
 
 <script>
 import { mapState } from 'vuex'
-
 import { checkPassword, checkSame } from '~/lib/validation'
 
 export default {
@@ -38,22 +35,12 @@ export default {
       }
       return true
     },
-    ...mapState({
-      registration: state => state.registration,
-      login: state => state.login
-    })
+    ...mapState({ login: state => state.login })
   },
   methods: {
-    confirm() {
+    set() {
       this.$router.push('/password/complete')
-    },
-    back() {
-      // ブラウザバック
-      this.$router.go(-1)
     }
   }
 }
 </script>
-
-<style>
-</style>

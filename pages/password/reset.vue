@@ -14,7 +14,7 @@
 <script>
 import CustomerMail from '~/components/pages/common/customer/Mail.vue'
 import CustomerPhoneNumber from '~/components/pages/common/customer/PhoneNumber.vue'
-import ResetBtn from '~/components/pages/password/reset/ResetBtn.vue'
+import ResetBtn from '~/components/pages/password/ResetBtn.vue'
 
 export default {
   layout: 'password',

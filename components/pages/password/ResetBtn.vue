@@ -10,14 +10,11 @@
         <v-btn @click="back">戻る</v-btn>
       </v-flex>
     </v-layout>
-
   </div>
-
 </template>
 
 <script>
 import { mapState } from 'vuex'
-
 import { checkMail, checkPhoneNumber, checkSame } from '~/lib/validation'
 
 export default {
@@ -46,10 +43,7 @@ export default {
       }
       return true
     },
-    ...mapState({
-      registration: state => state.registration,
-      login: state => state.login
-    })
+    ...mapState({ login: state => state.login })
   },
   methods: {
     confirm() {
@@ -62,6 +56,3 @@ export default {
   }
 }
 </script>
-
-<style>
-</style>

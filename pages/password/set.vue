@@ -12,7 +12,7 @@
 
 <script>
 import CustomerPassword from '~/components/pages/common/customer/Password.vue'
-import SetBtn from '~/components/pages/password/reset/SetBtn.vue'
+import SetBtn from '~/components/pages/password/SetBtn.vue'
 
 export default {
   layout: 'password',
