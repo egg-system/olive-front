@@ -133,6 +133,21 @@ export const mutations = {
     state.phoneNumber = ''
     state.password = ''
     state.password2 = ''
+  },
+  // 新規会員登録に必要な情報をクリアする
+  resetCustomerInfo(state) {
+    state.firstName = ''
+    state.lastName = ''
+    state.firstNameKana = ''
+    state.lastNameKana = ''
+    state.mail = ''
+    state.mail2 = ''
+    state.phoneNumber = ''
+    state.password = ''
+    state.password2 = ''
+    state.postalCode = ''
+    state.prefecture = ''
+    state.city = ''
   }
 }
 

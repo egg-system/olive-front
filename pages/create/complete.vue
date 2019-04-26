@@ -22,11 +22,19 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
+  created() {
+    // TODO:ユーザー作成APIの実行
+    // 入力情報のリセット
+    this.resetCustomerInfo()
+  },
   methods: {
     login() {
       this.$router.push('/mypage/')
-    }
+    },
+    ...mapMutations('login', ['resetCustomerInfo'])
   }
 }
 </script>
