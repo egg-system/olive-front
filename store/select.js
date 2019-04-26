@@ -52,6 +52,10 @@ export const mutations = {
     const menus = _.cloneDeep(state.menus)
     menus[state.menuIndex].mimitsuboCount = count
     state.menus = menus
+  },
+  reset(state) {
+    state.menus = [_.clone(RESERVATION_DETAIL)]
+    state.dateTime = null
   }
 }
 

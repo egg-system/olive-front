@@ -90,9 +90,12 @@ export const getters = {
 
 /* actions */
 export const actions = {
-  resetCustomerWithReserve({ commit }) {
+  resetCustomerWithReserve({ commit, rootState }) {
     commit('reset')
-    commit('login/reset', null, { root: true })
+    commit('select/reset', null, { root: true })
+    if (rootState.login.isCreate) {
+      commit('login/reset', null, { root: true })
+    }
   },
   async registerCustomerWithReserve(context) {
     if (!getters.isValidRegistration) {
