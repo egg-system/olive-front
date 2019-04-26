@@ -2,7 +2,7 @@
   <section class="container">
     <v-container grid-list-xl>
       <v-layout column wrap>
-        <v-flex class="mypage-top">
+        <v-flex class="create">
           <v-card dark color="red lighten-2">
             <v-card-text><h3 class="mypage-title">新規会員登録  > 完了</h3></v-card-text>
           </v-card>
@@ -23,7 +23,6 @@
 
 <script>
 export default {
-  components: {},
   methods: {
     login() {
       this.$router.push('/mypage/')
@@ -31,3 +30,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.create {
+  text-align: left;
+}
+</style>
