@@ -5,7 +5,7 @@
       <div>
         <h2>会員の方はログインしてください</h2>
         <login-form :link="link" />
-        <nuxt-link to="/registration">
+        <nuxt-link to="/password/reset">
           パスワードを忘れた方はこちら
         </nuxt-link>
       </div>
