@@ -15,7 +15,7 @@
       <customer-mail :is-confirm="isConfirm"/>
       <customer-phone-number :is-confirm="isConfirm"/>
 
-      <v-layout row>
+      <v-layout v-if="canChangeIsFirst" row>
         <v-flex xs3>
           初めてのご利用ですか？
           <span class="must">(必須)</span>
@@ -23,11 +23,11 @@
         <v-flex>
           <v-radio-group
             :disabled="isConfirm"
-            v-model="isFirst"
+            v-model="isFirstValue"
             :mandatory="false"
             class="inputTop"
           >
-            <v-radio :value="true" label="初めてです(初診料 ¥1,000)"/>
+            <v-radio :value="true" :label="isFirstLabel"/>
             <v-radio :value="false" label="いいえ、2回目以降です"/>
           </v-radio-group>
         </v-flex>
@@ -36,8 +36,14 @@
 
     <v-layout v-if="isLogin" row>
       <v-flex xs3>回数券利用</v-flex>
-      <v-flex>
-        <v-checkbox :disabled="isConfirm" v-model="coupon" label="利用する" class="inputTop"/>
+      <v-flex v-for="coupon in coupons" :key="coupon.id">
+        <v-checkbox
+          :disabled="isConfirm"
+          v-model="selectedCoupons"
+          :value="coupon"
+          :label="coupon.name"
+          class="inputTop"
+        />
       </v-flex>
     </v-layout>
 
@@ -79,6 +85,8 @@ const pregnancyTerm = [
 
 const children = ['なし', '1人', '2人', '3人', '4人']
 
+const couponMaster = ['施術5回券', '施術10回券', 'インデプス11回券']
+
 export default {
   components: {
     CustomerName,
@@ -93,15 +101,19 @@ export default {
     }
   },
   data() {
-    return { pregnancyTerm, children }
+    return {
+      pregnancyTerm: pregnancyTerm,
+      children: children,
+      coupons: null
+    }
   },
   computed: {
-    coupon: {
+    selectedCoupons: {
       get() {
-        return this.$store.state.registration.coupon
+        return this.$store.state.registration.coupons
       },
       set(value) {
-        this.setCoupon(value)
+        this.setCoupons(value)
       }
     },
     pregnancyTermSelected: {
@@ -122,25 +134,40 @@ export default {
         this.setChildrenCount(childrenSelected)
       }
     },
-    isFirst: {
+    isFirstValue: {
       get() {
-        // ログイン済みの場合は2回目以降とする
-        return this.isLogin ? false : this.isFirst
+        return this.isFirst
       },
       set(value) {
         this.setIsFirst(value)
       }
     },
+    isFirstLabel() {
+      return this.menus[0].menu.department_id === 1
+        ? '初めてです(初診料 ¥1,000)'
+        : '初めてです(初回カウンセリング料 ¥1,000)'
+    },
     ...mapGetters('login', ['isLogin']),
-    ...mapState('registration', ['childrenCount', 'isFirst', 'pregnantStateId'])
+    ...mapGetters('registration', ['canChangeIsFirst']),
+    ...mapState('registration', [
+      'childrenCount',
+      'isFirst',
+      'pregnantStateId'
+    ]),
+    ...mapState('select', ['menus'])
   },
   beforeMount() {
     // ローディングを解除
     this.setIsLoading(false)
   },
+  mounted() {
+    this.coupons = couponMaster.map((coupon, index) => {
+      return { id: index + 1, name: coupon }
+    })
+  },
   methods: {
     ...mapMutations('registration', [
-      'setCoupon',
+      'setCoupons',
       'setPregnantStateId',
       'setChildrenCount',
       'setIsFirst'

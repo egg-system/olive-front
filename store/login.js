@@ -31,6 +31,9 @@ export const getters = {
   isLogin(state) {
     return state.isLogin
   },
+  isRegisteredCustomer(state, getters) {
+    return getters.isLogin && !state.isCreate
+  },
   authenticatedApi(state) {
     const authApi = axios.create()
     authApi.defaults.headers.common['access-token'] = state.accessToken
@@ -52,8 +55,8 @@ export const getters = {
       tel: state.phoneNumber,
       provider: getters.provider,
       can_receive_mail: rootGetters['registration/canReceiveMail'],
-      first_visit_store_id: rootState.shop.id,
-      last_visit_store_id: rootState.shop.id
+      first_visit_store_id: rootState.select.menus[0].storeId,
+      last_visit_store_id: rootState.select.menus[0].storeId
     }
   }
 }

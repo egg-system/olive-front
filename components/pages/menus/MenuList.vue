@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-radio-group v-model="selectedMenuId" column>
+    <v-radio-group v-model="selectedStoreMenu" column>
       <section
         v-for="subShop in subShops"
         :key="subShop.id"
@@ -20,7 +20,7 @@
               <v-card-title primary-title>メニュー選択</v-card-title>
             </v-card>
             <div v-for="menu in subShop.menus" :key="menu.id">
-              <menu-row :menu="menu"/>
+              <menu-row :store-id="subShop.id" :menu="menu"/>
             </div>
           </v-flex>
         </v-layout>
@@ -29,13 +29,9 @@
 
     <v-layout column>
       <v-flex xs6>
-        <v-btn v-if="menuIndex == 1" @click="backToFirst">戻る</v-btn>
-        <v-btn :disabled="!selectedMenu" color="warning" @click="next">空席確認・予約する</v-btn>
-        <v-btn
-          v-if="selectedMenu != null && selectedMenu.minutes != 120 && menuIndex == 0"
-          color="warning"
-          @click="twoHour"
-        >２時間予約する</v-btn>
+        <v-btn v-if="currentPageId > 1" @click="backHour">戻る</v-btn>
+        <v-btn :disabled="!isMenuSelected" color="warning" @click="selectDate">空席確認・予約する</v-btn>
+        <v-btn v-if="isShownNextHourLink" color="warning" @click="nextHour">２時間予約する</v-btn>
       </v-flex>
     </v-layout>
   </div>
@@ -49,50 +45,55 @@ import MenuRow from './MenuRow.vue'
 export default {
   components: { MenuRow },
   computed: {
-    selectedMenuId: {
+    currentPageId() {
+      const pageId = this.$nuxt.$route.params.id
+      return Number(pageId)
+    },
+    selectedStoreMenu: {
       get() {
-        if (this.selectedMenu) {
-          return this.selectedMenu.id
-        }
-
-        return null
+        return this.storeMenu
       },
-      set(id) {
-        let menu = this.getMenu(id)
-        this.setSelectedMenu(menu)
+      set(storeMenu) {
+        this.setStoreMenu(storeMenu)
       }
+    },
+    isMenuSelected() {
+      return this.storeMenu.menu !== null
+    },
+    isShownNextHourLink() {
+      const selectedMenu = this.selectedStoreMenu.menu
+      if (!selectedMenu) {
+        return false
+      }
+
+      if (selectedMenu.minutes > 60) {
+        return false
+      }
+
+      return this.currentPageId === 1
     },
     ...mapState('select', ['menuIndex']),
     ...mapState('menu', ['subShops']),
     ...mapGetters('menu', ['getMenu', 'getOption']),
-    ...mapGetters('select', {
-      selectedOptions: 'selectedOptions',
-      selectedMenu: 'selectedMenu'
-    })
+    ...mapGetters('select', ['storeMenu', 'selectedOptions'])
   },
   created() {
     this.getMenus({ shopId: 1 })
   },
   methods: {
-    next() {
+    selectDate() {
       this.$router.push({ name: 'date' })
     },
-    twoHour() {
-      this.setForGoNextMenu()
-      window.scrollTo(0, 0)
+    nextHour() {
+      const nextPageId = this.currentPageId + 1
+      this.$router.push({ params: { id: nextPageId } })
     },
-    backToFirst() {
-      this.setForGoBackMenu()
-      window.scrollTo(0, 0)
+    backHour() {
+      const beforePageId = this.currentPageId - 1
+      this.$router.push({ params: { id: beforePageId } })
     },
-    ...mapActions({
-      getMenus: 'menu/getMenus'
-    }),
-    ...mapMutations('select', [
-      'setSelectedMenu',
-      'setForGoNextMenu',
-      'setForGoBackMenu'
-    ])
+    ...mapActions('menu', ['getMenus']),
+    ...mapMutations('select', ['setStoreMenu'])
   }
 }
 </script>

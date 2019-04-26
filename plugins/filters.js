@@ -1,6 +1,12 @@
 import Vue from 'vue'
 import moment from 'moment'
 
+const getDay = value => {
+  const dayDisps = ['日', '月', '火', '水', '木', '金', '土']
+  const dayIndex = moment(value).day()
+  return dayDisps[dayIndex]
+}
+
 Vue.filter('priceFormat', val => {
   return val ? '¥' + val.toLocaleString() + '(税抜き)' : ''
 })
@@ -9,31 +15,9 @@ Vue.filter('timeFormat', val => {
   return val ? val + '分' : ''
 })
 
-Vue.filter('dayFormat', val => {
-  let day = moment(val).day()
-  let dayDisp = ''
-  switch (day) {
-    case 0:
-      dayDisp = '日'
-      break
-    case 1:
-      dayDisp = '月'
-      break
-    case 2:
-      dayDisp = '火'
-      break
-    case 3:
-      dayDisp = '水'
-      break
-    case 4:
-      dayDisp = '木'
-      break
-    case 5:
-      dayDisp = '金'
-      break
-    case 6:
-      dayDisp = '土'
-      break
-  }
-  return '(' + dayDisp + ')'
+Vue.filter('dayFormat', val => getDay(val))
+
+Vue.filter('dateTimeAndDatFormat', value => {
+  const format = `YYYY年MM月DD日 ${getDay(value)} HH:mm`
+  return moment(value).format(format)
 })

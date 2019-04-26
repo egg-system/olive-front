@@ -2,7 +2,7 @@ import axios from 'axios'
 
 /* state */
 const initialState = {
-  coupon: null,
+  coupons: [],
   pregnantStateId: 0,
   childrenCount: 0,
   isFirst: true,
@@ -16,8 +16,8 @@ export const state = () => Object.assign({}, initialState)
 
 /* mutations */
 export const mutations = {
-  setCoupon(state, coupon) {
-    state.coupon = coupon
+  setCoupons(state, coupons) {
+    state.coupons = coupons
   },
   setPregnantStateId(state, pregnantStateId) {
     state.pregnantStateId = pregnantStateId
@@ -56,6 +56,15 @@ export const getters = {
   canReceiveMail(state) {
     return state.message === 'yes'
   },
+  canChangeIsFirst(state, getters, rootState, rootGetters) {
+    return (
+      !rootGetters['login/isRegisteredCustomer'] &&
+      !rootGetters['select/isSelectedMultiStore']
+    )
+  },
+  selctedCouponIds(state) {
+    return state.coupons.map(coupon => coupon.id)
+  },
   reservationParameters(state, getters, rootState, rootGetters) {
     const reservationAt = rootState.select.dateTime
 
@@ -65,13 +74,14 @@ export const getters = {
 
     // 回数券周りの処理を追加する
     return {
-      store_id: rootState.shop.id,
       customer_id: rootState.login.customerId,
       pregnancy_state: state.pregnancyTermSelected,
       children_count: state.childrenSelected,
       reservation_comment: state.request,
       reservation_date: reservationAt.format('YYYY-MM-DD'),
       start_time: reservationAt.format('HH:mm'),
+      is_first: getters.canChangeIsFirst ? state.isFirst : false,
+      coupon_ids: getters.selctedCouponIds,
       reservation_details_attributes:
         rootGetters['select/reservationDetailsParameters']
     }
@@ -80,9 +90,12 @@ export const getters = {
 
 /* actions */
 export const actions = {
-  resetCustomerWithReserve({ commit }) {
+  resetCustomerWithReserve({ commit, rootState }) {
     commit('reset')
-    commit('login/reset', null, { root: true })
+    commit('select/reset', null, { root: true })
+    if (rootState.login.isCreate) {
+      commit('login/reset', null, { root: true })
+    }
   },
   async registerCustomerWithReserve(context) {
     if (!getters.isValidRegistration) {
