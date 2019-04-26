@@ -11,13 +11,12 @@
         </v-flex>
 
         <div class="input">
-          <h3 class="block">下記項目を入力して「次へ」でお進みください。</h3>
-          <customer-mail />
-          <customer-phone-number />
+          <h3 class="block">新パスワードを入力して「次へ」でお進みください。</h3>
+          <customer-password />
         </div>
 
         <v-flex>
-          <reset-btn />
+          <set-btn />
         </v-flex>
 
       </v-layout>
@@ -27,18 +26,14 @@
 </template>
 
 <script>
-import MypageHeader from '~/components/pages/mypage/Header.vue'
-import CustomerMail from '~/components/pages/common/customer/Mail.vue'
-import CustomerPhoneNumber from '~/components/pages/common/customer/PhoneNumber.vue'
-import ResetBtn from '~/components/pages/password/reset/ResetBtn.vue'
+import CustomerPassword from '~/components/pages/common/customer/Password.vue'
+import SetBtn from '~/components/pages/password/reset/SetBtn.vue'
 import { mapState, mapActions, mapMutations } from 'vuex'
 
 export default {
   components: {
-    MypageHeader,
-    CustomerMail,
-    CustomerPhoneNumber,
-    ResetBtn
+    CustomerPassword,
+    SetBtn
   }
 }
 </script>
