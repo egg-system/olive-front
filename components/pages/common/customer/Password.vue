@@ -10,8 +10,9 @@
             :rules="passwordRules"
             :append-icon="show ? 'visibility_off' : 'visibility'"
             :type="show ? 'text' : 'password'"
+            :disabled="isConfirm"
+            :clearable="!isConfirm"
             label="パスワード"
-            clearable
             class="input-password"
             @click:append="show = !show"
           />
@@ -23,8 +24,9 @@
             :rules="passwordRules"
             :append-icon="show2 ? 'visibility_off' : 'visibility'"
             :type="show2 ? 'text' : 'password'"
+            :disabled="isConfirm"
+            :clearable="!isConfirm"
             label="パスワード"
-            clearable
             class="input-password"
             @click:append="show2 = !show2"
           />
@@ -48,6 +50,12 @@ import { checkPassword, checkSame } from '~/lib/validation'
 import { mapState, mapMutations } from 'vuex'
 
 export default {
+  props: {
+    isConfirm: {
+      type: Boolean,
+      default: false
+    }
+  },
   data: () => ({
     show: false,
     show2: false,
