@@ -2,12 +2,12 @@
   <div>
     <v-layout column>
       <v-flex xs6>
-        <v-btn @click="back">戻る</v-btn>
-      </v-flex>
-      <v-flex xs6>
         <v-btn :disabled="!canClick" color="warning" @click="confirm">
           パスワードをリセットする
         </v-btn>
+      </v-flex>
+      <v-flex xs6>
+        <v-btn @click="back">戻る</v-btn>
       </v-flex>
     </v-layout>
 
