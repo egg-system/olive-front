@@ -2,9 +2,7 @@
   <div>
     <v-layout column>
       <v-flex xs6>
-        <v-btn :disabled="!canClick" color="warning" @click="confirm">
-          パスワードをリセットする
-        </v-btn>
+        <v-btn :disabled="!canClick" color="warning" @click="confirm">パスワードをリセットする</v-btn>
       </v-flex>
       <v-flex xs6>
         <v-btn @click="back">戻る</v-btn>
@@ -18,6 +16,12 @@ import { mapState } from 'vuex'
 import { checkMail, checkPhoneNumber, checkSame } from '~/lib/validation'
 
 export default {
+  props: {
+    shouldCheckPhone: {
+      type: Boolean,
+      default: true
+    }
+  },
   computed: {
     // TODO:registration/ConfirmBtnと共通化する
     canClick() {
@@ -25,7 +29,7 @@ export default {
       if (
         this.login.mail === '' ||
         this.login.mail2 === '' ||
-        this.login.phoneNumber === ''
+        (this.shouldCheckPhone && this.login.phoneNumber === '')
       ) {
         return false
       }
@@ -33,7 +37,8 @@ export default {
       if (
         checkMail(this.login.mail) !== true ||
         checkMail(this.login.mail2) !== true ||
-        checkPhoneNumber(this.login.phoneNumber) !== true
+        (this.shouldCheckPhone &&
+          checkPhoneNumber(this.login.phoneNumber) !== true)
       ) {
         return false
       }
