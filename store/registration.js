@@ -93,7 +93,7 @@ export const actions = {
   resetAllInputed({ commit, rootState }) {
     commit('reset')
     commit('select/reset', null, { root: true })
-    commit('login/reset', null, { root: true })
+    commit('login/resetCustomerInfo', null, { root: true })
   },
   async registerCustomerWithReserve(context) {
     if (!getters.isValidRegistration) {
