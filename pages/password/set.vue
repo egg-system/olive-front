@@ -2,10 +2,10 @@
   <div>
     <div class="input">
       <h3 class="block">新パスワードを入力して「次へ」でお進みください。</h3>
-      <customer-password />
+      <customer-password/>
     </div>
     <v-flex>
-      <set-btn />
+      <set-btn/>
     </v-flex>
   </div>
 </template>
@@ -15,6 +15,7 @@ import CustomerPassword from '~/components/pages/common/customer/Password.vue'
 import SetBtn from '~/components/pages/password/SetBtn.vue'
 
 export default {
+  middleware: ['set-authenticate-info'],
   layout: 'password',
   components: {
     CustomerPassword,

@@ -2,11 +2,11 @@
   <div>
     <div class="input">
       <h3 class="block">下記項目を入力して「次へ」でお進みください。</h3>
-      <customer-mail />
-      <customer-phone-number />
+      <customer-mail/>
+      <customer-phone-number v-if="sholdCheckPhone"/>
     </div>
     <v-flex>
-      <reset-btn />
+      <reset-btn :should-check-phone="sholdCheckPhone"/>
     </v-flex>
   </div>
 </template>
@@ -22,6 +22,12 @@ export default {
     CustomerMail,
     CustomerPhoneNumber,
     ResetBtn
+  },
+  computed: {
+    sholdCheckPhone() {
+      // bk側が電話番号チェックを実装できていないので、false
+      return false
+    }
   }
 }
 </script>

@@ -90,12 +90,10 @@ export const getters = {
 
 /* actions */
 export const actions = {
-  resetCustomerWithReserve({ commit, rootState }) {
+  resetAllInputed({ commit, rootState }) {
     commit('reset')
     commit('select/reset', null, { root: true })
-    if (rootState.login.isCreate) {
-      commit('login/reset', null, { root: true })
-    }
+    commit('login/resetCustomerInfo', null, { root: true })
   },
   async registerCustomerWithReserve(context) {
     if (!getters.isValidRegistration) {
@@ -118,9 +116,7 @@ export const actions = {
       return
     }
 
-    if (await context.dispatch('createReservation')) {
-      context.dispatch('resetCustomerWithReserve')
-    }
+    return await context.dispatch('createReservation')
   },
   async createReservation({ commit, getters }) {
     try {

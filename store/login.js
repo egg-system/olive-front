@@ -121,10 +121,10 @@ export const mutations = {
   reset(state) {
     state = Object.assign(state, initialState)
   },
-  setToken(state, responseHeader) {
-    state.accessToken = responseHeader['access-token']
-    state.client = responseHeader['client']
-    state.uid = responseHeader['uid']
+  setToken(state, authenticates) {
+    state.accessToken = authenticates['access-token']
+    state.client = authenticates['client']
+    state.uid = authenticates['uid']
   },
   // パスワードリセットに必要な情報をクリアする
   resetPasswordInfo(state) {
@@ -167,7 +167,7 @@ export const actions = {
     return customer
   },
   // ログインチェック
-  async checkLogin({ commit, dispatch, getters }, { mail, password }) {
+  async checkLogin({ commit, dispatch }, { mail, password }) {
     // ローディング中にする
     commit('setIsLoading', true)
 
@@ -213,5 +213,19 @@ export const actions = {
       commit('setError', errorMessage)
       return false
     }
+  },
+  async sendPasswrodResetMail({ state }) {
+    await axios.post(process.env.api.customerReset, {
+      email: state.mail,
+      redirect_url: `${window.location.origin}/password/set`
+    })
+    commit('resetPasswordInfo')
+  },
+  async updatePassword({ state, getters, commit }) {
+    await getters.authenticatedApi.patch(process.env.api.customerReset, {
+      password: state.password,
+      password_confirmation: state.password2
+    })
+    commit('reset')
   }
 }

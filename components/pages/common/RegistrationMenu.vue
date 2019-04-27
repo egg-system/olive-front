@@ -134,7 +134,7 @@ export default {
       let totalTime = 0
       this.menu.forEach(obj => {
         totalPrice += obj.price
-        totalTime += obj.time
+        totalTime += obj.minutes
       })
       const total = {
         name: '合計',

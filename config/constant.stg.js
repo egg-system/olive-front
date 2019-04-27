@@ -4,7 +4,8 @@ module.exports = {
       'https://dashboard-stage.olivebodycare.healthcare/api/customers/sign_in',
     customerCreate:
       'https://dashboard-stage.olivebodycare.healthcare/api/customers',
-    customerReset: 'https://api.myjson.com/bins/18ieba',
+    customerReset:
+      'https://dashboard-stage.olivebodycare.healthcare/api/customers/password',
     reserveCommit:
       'https://dashboard-stage.olivebodycare.healthcare/api/reservations',
     shop: 'https://dashboard-stage.olivebodycare.healthcare/api/shops/:id',

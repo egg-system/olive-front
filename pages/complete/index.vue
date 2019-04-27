@@ -6,7 +6,8 @@
         <v-layout row>
           <v-flex>
             <v-card-text v-if="!registration.isError && !login.isError" class="complete">
-              予約を確定しました。
+              <template v-if="login.isCreate">会員登録、および予約が確定しました。</template>
+              <template v-else>予約が確定しました。</template>
               <br>予約確定メールをお送りしましたので、ご確認ください。
             </v-card-text>
             <v-card-text
@@ -31,6 +32,11 @@ import ShopName from '~/components/pages/common/ShopName.vue'
 import NextBtn from '~/components/pages/complete/NextBtn.vue'
 
 export default {
+  beforeRouteLeave(to, from, next) {
+    // reset漏れによるバグを防ぐため
+    this.resetAllInputed()
+    next()
+  },
   components: {
     ShopName,
     NextBtn
@@ -48,7 +54,10 @@ export default {
     this.registerCustomerWithReserve()
   },
   methods: {
-    ...mapActions('registration', ['registerCustomerWithReserve'])
+    ...mapActions('registration', [
+      'registerCustomerWithReserve',
+      'resetAllInputed'
+    ])
   }
 }
 </script>
