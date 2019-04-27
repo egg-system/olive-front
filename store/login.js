@@ -121,10 +121,10 @@ export const mutations = {
   reset(state) {
     state = Object.assign(state, initialState)
   },
-  setToken(state, responseHeader) {
-    state.accessToken = responseHeader['access-token']
-    state.client = responseHeader['client']
-    state.uid = responseHeader['uid']
+  setToken(state, authenticates) {
+    state.accessToken = authenticates['access-token']
+    state.client = authenticates['client']
+    state.uid = authenticates['uid']
   }
 }
 
