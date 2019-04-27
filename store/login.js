@@ -136,6 +136,7 @@ export const mutations = {
   },
   // 新規会員登録に必要な情報をクリアする
   resetCustomerInfo(state) {
+    state.isCreate = false
     state.firstName = ''
     state.lastName = ''
     state.firstNameKana = ''
