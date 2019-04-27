@@ -116,7 +116,7 @@ export default {
       )
     },
     ...mapState('select', ['dateTime']),
-    ...mapGetters('select', ['isTwoMenusSelected', 'isMenuSelected'])
+    ...mapGetters('select', ['isTwoMenusSelected'])
   },
   beforeMount() {
     // 初めての場合は確認ページで初診料を追加
@@ -129,7 +129,7 @@ export default {
       this.menu.push(firstCharged)
     }
     // 確認ページでは合計を表示
-    if (this.isMenuSelected) {
+    if (this.isConfirm) {
       let totalPrice = 0
       let totalTime = 0
       this.menu.forEach(obj => {
