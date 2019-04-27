@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div>
-      ご登録のメールアドレス宛に、リセット用URLを記載したメールを送信しました。<br>
-      そちらからパスワードのリセットをお願いいたします。
-    </div>
+    <div>パスワードの更新が完了いたしました。</div>
     <v-layout column>
       <v-flex xs6>
         <v-btn @click="login">ログイン</v-btn>
@@ -13,20 +10,18 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   layout: 'password',
   created() {
-    // TODO:パスワード変更APIの実行
-    // 入力情報のリセット
-    this.resetPasswordInfo()
+    this.updatePassword()
   },
   methods: {
     login() {
       this.$router.push('/mypage/')
     },
-    ...mapMutations('login', ['resetPasswordInfo'])
+    ...mapActions('login', ['updatePassword'])
   }
 }
 </script>
