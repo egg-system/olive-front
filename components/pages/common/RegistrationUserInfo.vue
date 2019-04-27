@@ -10,10 +10,10 @@
       </v-flex>
     </v-layout>
 
-    <template v-if="!isLogin">
-      <customer-name :is-confirm="isConfirm"/>
-      <customer-mail :is-confirm="isConfirm"/>
-      <customer-phone-number :is-confirm="isConfirm"/>
+    <template>
+      <customer-name :is-confirm="isConfirm || isLogin"/>
+      <customer-mail :is-confirm="isConfirm || isLogin"/>
+      <customer-phone-number :is-confirm="isConfirm || isLogin"/>
 
       <v-layout v-if="canChangeIsFirst" row>
         <v-flex xs3>
