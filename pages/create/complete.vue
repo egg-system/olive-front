@@ -39,7 +39,7 @@ export default {
     // 会員登録させるため、isCreateをtrueにする
     this.setIsCreate(true)
     this.createCustomer()
-    this.resetCustomerInfo()
+    this.reset()
   },
   methods: {
     login() {

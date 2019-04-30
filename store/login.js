@@ -44,19 +44,27 @@ export const getters = {
   provider(state) {
     return state.isCreate ? 'email' : 'none'
   },
-  customerParameters(state, getters, rootState, rootGetters) {
+  updateParams(state, getters, rootState, rootGetters) {
     return {
-      email: state.mail,
-      password: state.password,
       first_name: state.firstName,
       last_name: state.lastName,
       first_kana: state.firstNameKana,
       last_kana: state.lastNameKana,
       tel: state.phoneNumber,
-      provider: getters.provider,
       can_receive_mail: rootGetters['registration/canReceiveMail'],
+      zip_code: state.postalCode,
+      prefecture: state.prefecture,
+      city: state.city
+    }
+  },
+  createParams(state, getters, rootState) {
+    return {
+      email: state.mail,
+      password: state.password,
+      provider: getters.provider,
       first_visit_store_id: rootState.select.menus[0].storeId,
-      last_visit_store_id: rootState.select.menus[0].storeId
+      last_visit_store_id: rootState.select.menus[0].storeId,
+      ...getters.updateParams
     }
   }
 }
@@ -125,30 +133,6 @@ export const mutations = {
     state.accessToken = authenticates['access-token']
     state.client = authenticates['client']
     state.uid = authenticates['uid']
-  },
-  // パスワードリセットに必要な情報をクリアする
-  resetPasswordInfo(state) {
-    state.mail = ''
-    state.mail2 = ''
-    state.phoneNumber = ''
-    state.password = ''
-    state.password2 = ''
-  },
-  // 新規会員登録に必要な情報をクリアする
-  resetCustomerInfo(state) {
-    state.isCreate = false
-    state.firstName = ''
-    state.lastName = ''
-    state.firstNameKana = ''
-    state.lastNameKana = ''
-    state.mail = ''
-    state.mail2 = ''
-    state.phoneNumber = ''
-    state.password = ''
-    state.password2 = ''
-    state.postalCode = ''
-    state.prefecture = ''
-    state.city = ''
   }
 }
 
@@ -164,6 +148,9 @@ export const actions = {
     commit('setMail', customer.email)
     commit('setMail2', customer.email)
     commit('setPhoneNumber', customer.tel)
+    commit('setPostalCode', customer.zip_code)
+    commit('setPrefecture', customer.prefecture)
+    commit('setCity', customer.city)
 
     return customer
   },
@@ -200,7 +187,7 @@ export const actions = {
     try {
       const result = await axios.post(
         process.env.api.customerCreate,
-        getters.customerParameters
+        getters.createParams
       )
 
       dispatch('setLoginCustomer', result.data.data)
@@ -215,12 +202,27 @@ export const actions = {
       return false
     }
   },
+  async updateCustomer({ commit, dispatch, getters }) {
+    try {
+      const result = await getters.authenticatedApi.patch(
+        process.env.api.customerCreate,
+        getters.updateParams
+      )
+
+      dispatch('setLoginCustomer', result.data.data)
+      return true
+    } catch (error) {
+      console.log(error)
+      commit('setError', 'プロフィール更新に失敗しました。')
+      return false
+    }
+  },
   async sendPasswrodResetMail({ state }) {
     await axios.post(process.env.api.customerReset, {
       email: state.mail,
       redirect_url: `${window.location.origin}/password/set`
     })
-    commit('resetPasswordInfo')
+    commit('reset')
   },
   async updatePassword({ state, getters, commit }) {
     await getters.authenticatedApi.patch(process.env.api.customerReset, {
