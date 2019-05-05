@@ -35,12 +35,22 @@ describe('lib/validation', () => {
     test('パスワードが8文字以下', () => {
       const password = '1234ab'
       const ret = checkPassword(password)
-      expect(ret).toBe('英字/数字/記号の8文字以上100文字以内でお願いします')
+      expect(ret).toBe('英字/数字を含む8文字以上でお願いします')
     })
     test('パスワードで使用できない文字を使っている', () => {
       const password = 'あいうえおかきくけこさしすせそ'
       const ret = checkPassword(password)
-      expect(ret).toBe('英字/数字/記号の8文字以上100文字以内でお願いします')
+      expect(ret).toBe('英字/数字を含む8文字以上でお願いします')
+    })
+    test('数字だけのパスワード', () => {
+      const password = '12345678'
+      const ret = checkPassword(password)
+      expect(ret).toBe('英字/数字を含む8文字以上でお願いします')
+    })
+    test('英字だけのパスワード', () => {
+      const password = 'abcdefgh'
+      const ret = checkPassword(password)
+      expect(ret).toBe('英字/数字を含む8文字以上でお願いします')
     })
     test('正しいパスワード', () => {
       const password = '0)!($UTA$$$$$**FJEROIJF*RG})'
