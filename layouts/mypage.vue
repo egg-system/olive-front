@@ -30,7 +30,8 @@ export default {
     AppHeader,
     MypageHeader,
     MypageName
-  }
+  },
+  middleware: ['is-logged-in']
 }
 </script>
 
