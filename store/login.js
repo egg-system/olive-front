@@ -5,7 +5,6 @@ const initialState = {
   accessToken: null,
   client: null,
   uid: null,
-  isLogin: false,
   isCreate: false,
   isError: false,
   errorMessage: '',
@@ -28,8 +27,11 @@ export const state = () => Object.assign({}, initialState)
 
 /* getters */
 export const getters = {
+  custmerFullName(state) {
+    return `${state.lastName} ${state.firstName}`
+  },
   isLogin(state) {
-    return state.isLogin
+    return Boolean(state.accessToken && state.accessToken && state.uid)
   },
   isRegisteredCustomer(state, getters) {
     return getters.isLogin && !state.isCreate
@@ -71,9 +73,6 @@ export const getters = {
 
 /* mutations */
 export const mutations = {
-  setIsLogin(state, isLogin) {
-    state.isLogin = isLogin
-  },
   setIsCreate(state, isCreate) {
     state.isCreate = isCreate
   },
@@ -133,13 +132,17 @@ export const mutations = {
     state.accessToken = authenticates['access-token']
     state.client = authenticates['client']
     state.uid = authenticates['uid']
+  },
+  logout(state) {
+    state.accessToken = null
+    state.client = null
+    state.uid = null
   }
 }
 
 /* actions */
 export const actions = {
   setLoginCustomer({ commit }, customer) {
-    commit('setIsLogin', true)
     commit('setCustomerId', customer.id)
     commit('setFirstName', customer.first_name)
     commit('setLastName', customer.last_name)
@@ -230,5 +233,17 @@ export const actions = {
       password_confirmation: state.password2
     })
     commit('reset')
+  },
+  async validateToken({ commmit, dispatch, getters }) {
+    const result = await getters.authenticatedApi
+      .get(process.env.api.validateToken)
+      .catch(error => {
+        commmit('logout')
+        return null
+      })
+
+    if (result) {
+      dispatch('setLoginCustomer', result.data.data)
+    }
   }
 }
