@@ -19,7 +19,6 @@ export const actions = {
     const authenticatedApi = rootGetters['login/authenticatedApi']
     const reservationsRoute = route(process.env.api.reserveCommit, null, {
       page: page,
-      store_id: rootState.shop.id,
       customer_id: rootState.login.customerId
     })
     const result = await authenticatedApi.get(reservationsRoute)
