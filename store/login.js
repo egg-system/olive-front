@@ -2,9 +2,6 @@ import axios from 'axios'
 
 /* state */
 const initialState = {
-  accessToken: null,
-  client: null,
-  uid: null,
   isCreate: false,
   isError: false,
   errorMessage: '',
@@ -23,7 +20,15 @@ const initialState = {
   prefecture: '',
   city: ''
 }
-export const state = () => Object.assign({}, initialState)
+export const state = () =>
+  Object.assign(
+    {
+      accessToken: null,
+      client: null,
+      uid: null
+    },
+    initialState
+  )
 
 /* getters */
 export const getters = {
