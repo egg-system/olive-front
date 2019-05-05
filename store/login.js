@@ -239,11 +239,11 @@ export const actions = {
     })
     commit('reset')
   },
-  async validateToken({ commmit, dispatch, getters }) {
+  async validateToken({ commit, dispatch, getters }) {
     const result = await getters.authenticatedApi
       .get(process.env.api.validateToken)
       .catch(error => {
-        commmit('logout')
+        commit('logout')
         return null
       })
 
