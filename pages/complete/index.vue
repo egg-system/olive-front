@@ -41,7 +41,7 @@ export default {
     ShopName,
     NextBtn
   },
-  middleware: ['menu-selected', 'date-time-selected', 'login'],
+  middleware: ['menu-selected', 'date-time-selected', 'is-registered'],
   computed: {
     registration() {
       return this.$store.state.registration
