@@ -18,22 +18,22 @@
     <h3>
       <p class="under">予約履歴</p>
     </h3>
+
     <template v-if="hasReservations">
       <mypage-reserve-history :reserve-data="reserveData"/>
       <mypage-more-btn/>
-    </template>
-    <template v-else>
-      <v-layout column>
-        <v-flex xs6>
-          <div>予約履歴がございません。</div>
-        </v-flex>
-      </v-layout>
+
+      <h3>
+        <p class="under">予約キャンセル</p>
+      </h3>
+      <mypage-cancel-btn/>
     </template>
 
-    <h3>
-      <p class="under">予約キャンセル</p>
-    </h3>
-    <mypage-cancel-btn/>
+    <v-layout v-else column>
+      <v-flex xs6>
+        <div>予約履歴がございません。</div>
+      </v-flex>
+    </v-layout>
   </div>
 </template>
 
