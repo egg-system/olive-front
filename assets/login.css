@@ -1,0 +1,26 @@
+.head {
+  margin-bottom: 30px;
+}
+.subtitle {
+  /* width: 70%; */
+  /* margin: 0 auto; */
+  border-bottom: solid 3px #ef9a9a;
+  margin-bottom: 20px;
+  padding-bottom: 5px;
+  /* text-align: left; */
+}
+.free {
+  padding-top: 10px;
+  font-size: 16px;
+}
+@media screen and (min-width: 350px) {
+  .main {
+    width: 340px;
+  }
+}
+@media screen and (min-width: 500px) {
+  .main {
+    width: 450px;
+    margin: 0 auto;
+  }
+}
