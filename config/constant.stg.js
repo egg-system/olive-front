@@ -6,6 +6,8 @@ module.exports = {
       'https://dashboard-stage.olivebodycare.healthcare/api/customers',
     customerReset:
       'https://dashboard-stage.olivebodycare.healthcare/api/customers/password',
+    validateToken:
+      'https://dashboard-stage.olivebodycare.healthcare/api/customers/validate_token',
     reserveCommit:
       'https://dashboard-stage.olivebodycare.healthcare/api/reservations',
     shop: 'https://dashboard-stage.olivebodycare.healthcare/api/shops/:id',

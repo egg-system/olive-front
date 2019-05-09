@@ -34,7 +34,10 @@ module.exports = {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: ['~/plugins/filters'],
+  plugins: [
+    '~/plugins/filters',
+    { src: '~/plugins/local-storage.js', ssr: false }
+  ],
 
   /*
   ** Nuxt.js modules
@@ -91,5 +94,9 @@ module.exports = {
   /*
   ** env
   */
-  env: envSet
+  env: envSet,
+
+  router: {
+    middleware: 'validate-autenticates'
+  }
 }
