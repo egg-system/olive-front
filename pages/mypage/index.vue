@@ -41,6 +41,7 @@ import Loading from '~/components/layouts/Loading.vue'
 import { mapState, mapActions, mapMutations } from 'vuex'
 
 export default {
+  middleware: ['is-logged-in'],
   components: {
     LoginForm,
     Loading

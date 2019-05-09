@@ -51,7 +51,7 @@ export const mutations = {
 
 export const getters = {
   isValidRegistration(state) {
-    return state.isFirst instanceof Boolean
+    return typeof state.isFirst === 'boolean'
   },
   canReceiveMail(state) {
     return state.message === 'yes'
@@ -93,16 +93,16 @@ export const actions = {
   resetAllInputed({ commit, rootState }) {
     commit('reset')
     commit('select/reset', null, { root: true })
-    commit('login/resetCustomerInfo', null, { root: true })
+    commit('login/reset', null, { root: true })
   },
   async registerCustomerWithReserve(context) {
-    if (!getters.isValidRegistration) {
+    if (!context.getters.isValidRegistration) {
       context.commit('setError', 'パラメータが不正です。')
       return false
     }
 
     let doCreateReservation = true
-    if (!context.rootState.login.isLogin) {
+    if (!context.rootGetters['login/isLogin']) {
       doCreateReservation = await context.dispatch(
         'login/createCustomer',
         null,

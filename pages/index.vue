@@ -6,6 +6,10 @@
       <div class="text-xs-center">
         <v-chip label text-color="white">
           <v-icon left>link</v-icon>
+          <nuxt-link to="/mypage">/mypage</nuxt-link>
+        </v-chip>
+        <v-chip label text-color="white">
+          <v-icon left>link</v-icon>
           <nuxt-link to="/registration">/registration</nuxt-link>
         </v-chip>
         <v-chip label text-color="white">

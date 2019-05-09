@@ -1,8 +1,15 @@
 <template>
   <v-flex align-self-baseline>
-    <div>山田　太郎　さん</div>
+    <div>{{ custmerFullName }} さん</div>
   </v-flex>
 </template>
 
-<style>
-</style>
+<script>
+import { mapGetters } from 'vuex'
+
+export default {
+  computed: {
+    ...mapGetters('login', ['custmerFullName'])
+  }
+}
+</script>

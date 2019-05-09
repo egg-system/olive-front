@@ -130,7 +130,7 @@ export const getters = {
       return {
         store_id: select.storeId,
         menu_id: select.menu.id,
-        mimitusbo_count: state.mimitsuboCount,
+        mimitsubo_count: select.mimitsuboCount,
         option_ids: select.options.map(option => option.id)
       }
     })

@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 import {
   checkMail,
@@ -24,7 +24,7 @@ export default {
   computed: {
     canClick() {
       // ログイン済みの場合、okのみチェック
-      if (this.login.isLogin) {
+      if (this.isLogin) {
         return this.registration.isOk
       }
 
@@ -75,7 +75,8 @@ export default {
     ...mapState({
       registration: state => state.registration,
       login: state => state.login
-    })
+    }),
+    ...mapGetters('login', ['isLogin'])
   },
   methods: {
     confirm() {

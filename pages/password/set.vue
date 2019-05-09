@@ -15,7 +15,7 @@ import CustomerPassword from '~/components/pages/common/customer/Password.vue'
 import SetBtn from '~/components/pages/password/SetBtn.vue'
 
 export default {
-  middleware: ['set-authenticate-info'],
+  middleware: ['set-authenticates'],
   layout: 'password',
   components: {
     CustomerPassword,

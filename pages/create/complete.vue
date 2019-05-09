@@ -4,16 +4,23 @@
       <v-layout column wrap>
         <v-flex class="create">
           <v-card dark color="red lighten-2">
-            <v-card-text><h3 class="mypage-title">新規会員登録  > 完了</h3></v-card-text>
+            <v-card-text>
+              <h3 class="mypage-title">新規会員登録 > 完了</h3>
+            </v-card-text>
           </v-card>
         </v-flex>
 
-        <div>
-          会員登録が完了しました
-        </div>
+        <template v-if="isError">
+          <div>{{ errorMessage }}お手数ですが、最初からやり直してください。</div>
+        </template>
+        <template v-else>
+          <div>会員登録が完了しました</div>
+        </template>
+
         <v-layout column>
           <v-flex xs6>
-            <v-btn @click="login">ログイン</v-btn>
+            <v-btn v-if="isError" @click="back">戻る</v-btn>
+            <v-btn v-else @click="login">ログイン</v-btn>
           </v-flex>
         </v-layout>
       </v-layout>
@@ -22,19 +29,28 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapActions, mapMutations, mapState } from 'vuex'
 
 export default {
+  computed: {
+    ...mapState('login', ['isError', 'errorMessage'])
+  },
   created() {
-    // TODO:ユーザー作成APIの実行
-    // 入力情報のリセット
-    this.resetCustomerInfo()
+    // 会員登録させるため、isCreateをtrueにする
+    this.setIsCreate(true)
+    this.createCustomer()
+    this.reset()
   },
   methods: {
     login() {
-      this.$router.push('/mypage/')
+      this.$router.push('/mypage')
     },
-    ...mapMutations('login', ['resetCustomerInfo'])
+    back() {
+      this.reset()
+      this.$router.push('/create')
+    },
+    ...mapActions('login', ['createCustomer']),
+    ...mapMutations('login', ['setIsCreate', 'reset', 'resetCustomerInfo'])
   }
 }
 </script>
