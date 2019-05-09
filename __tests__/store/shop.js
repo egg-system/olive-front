@@ -19,7 +19,7 @@ describe('store/shop.js', () => {
 
   describe('actions', () => {
     test('getShop success', async () => {
-      expect(store.state.id).toBeNull()
+      expect(store.state.id).toBe(1)
       expect(store.state.name).toBeNull()
       expect(store.state.open_at).toBeNull()
       expect(store.state.close_at).toBeNull()
