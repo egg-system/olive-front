@@ -91,6 +91,7 @@ export default {
 @media screen and (min-width: 500px) {
   .inputText {
     width: 450px;
+    margin: 0 auto;
   }
 }
 </style>
