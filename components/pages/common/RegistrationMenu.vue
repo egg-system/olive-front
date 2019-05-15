@@ -67,8 +67,9 @@ export default {
       return this.$root.$options.filters.dayFormat(this.cancelableDate)
     },
     cancelableDate() {
-      return moment()
-        .add('days', 2)
+      return this.dateTime
+        .clone()
+        .subtract('days', 2)
         .endOf('day')
     },
     menu() {
