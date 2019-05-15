@@ -5,7 +5,7 @@
       <v-flex xs3>氏名<span class="must">(必須)</span></v-flex>
       <v-flex>
         <v-text-field
-          v-model="firstName"
+          v-model="lastName"
           :rules="nameRules"
           :disabled="isConfirm"
           :clearable="!isConfirm"
@@ -15,7 +15,7 @@
       </v-flex>
       <v-flex>
         <v-text-field
-          v-model="lastName"
+          v-model="firstName"
           :rules="nameRules"
           :disabled="isConfirm"
           :clearable="!isConfirm"
@@ -29,7 +29,7 @@
       <v-flex xs3>氏名カナ<span class="must">(必須)</span></v-flex>
       <v-flex>
         <v-text-field
-          v-model="firstNameKana"
+          v-model="lastNameKana"
           :rules="nameKanaRules"
           :disabled="isConfirm"
           :clearable="!isConfirm"
@@ -39,7 +39,7 @@
       </v-flex>
       <v-flex>
         <v-text-field
-          v-model="lastNameKana"
+          v-model="firstNameKana"
           :rules="nameKanaRules"
           :disabled="isConfirm"
           :clearable="!isConfirm"
