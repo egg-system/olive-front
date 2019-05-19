@@ -60,19 +60,30 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   props: {
-    reserveData: {
-      type: Array,
-      default() {
-        return []
-      }
-    },
     // リストページだけキャンセルボタンを出すため
     isCancelBtnHide: {
       type: Boolean,
       default: true
+    },
+    id: {
+      type: Number,
+      default: null
     }
+  },
+  // asyncData({ params, store }) {
+  //   store.dispatch('reservation/paginateReservations')
+  // },
+  comuputed: {
+    reserveData() {
+      return this.reservations.filter(
+        reservation => !this.id || reservation.id === this.id
+      )
+    },
+    ...mapState('reservation', ['reservations'])
   },
   methods: {
     cancelConfrim() {
