@@ -24,7 +24,7 @@ export default {
       this.$router.push('/menus')
     },
     goMyPage() {
-      this.$router.push('/mypage/top')
+      this.$router.push('/mypage')
     }
   }
 }

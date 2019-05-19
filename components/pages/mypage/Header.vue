@@ -18,7 +18,7 @@ import { mapMutations } from 'vuex'
 export default {
   methods: {
     top() {
-      this.$router.push('/mypage/top')
+      this.$router.push('/mypage')
     },
     profile() {
       this.$router.push('/mypage/profile/edit')
@@ -26,7 +26,7 @@ export default {
     logoutBtn() {
       this.logout()
       // マイページトップにリダイレクトさせる
-      this.$router.push('/mypage/')
+      this.$router.push('/mypage/login')
     },
     ...mapMutations('login', ['logout'])
   }

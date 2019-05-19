@@ -19,7 +19,7 @@ export default {
   },
   methods: {
     login() {
-      this.$router.push('/mypage/')
+      this.$router.push('/mypage')
     },
     ...mapActions('login', ['updatePassword'])
   }

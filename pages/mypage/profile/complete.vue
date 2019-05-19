@@ -34,7 +34,7 @@ export default {
   },
   methods: {
     goMypageTop() {
-      this.$router.push('/mypage/top')
+      this.$router.push('/mypage')
     },
     ...mapActions('login', ['updateCustomer']),
     ...mapMutations('login', ['reset'])

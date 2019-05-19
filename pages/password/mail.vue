@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     top() {
-      this.$router.push('/mypage/')
+      this.$router.push('/mypage')
     },
     ...mapActions('login', ['sendPasswrodResetMail'])
   }
