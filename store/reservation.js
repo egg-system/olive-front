@@ -1,16 +1,33 @@
 import { route } from '../lib/route'
 
 export const state = () => ({
+  doCancel: false,
   reservations: [],
-  currentPage: null,
-  totalPages: null
+  currentPage: 1,
+  totalPages: 0
 })
 
 export const mutations = {
-  setReservations(state, { reservations, totalPages, currentPage }) {
+  setReservation(state, reservation) {
+    state.reservations = [reservation]
+  },
+  setReservationDatas(state, { reservations, totalPages, currentPage }) {
     state.reservations = reservations
     state.totalPages = totalPages
     state.currentPage = currentPage
+  },
+  setDoCancel(state, doCancel) {
+    state.doCancel = doCancel
+  }
+}
+
+export const getters = {
+  firstReservation(state) {
+    if (state.reservations.length === 0) {
+      return null
+    }
+
+    return state.reservations[0]
   }
 }
 
@@ -24,11 +41,30 @@ export const actions = {
     const result = await authenticatedApi.get(reservationsRoute)
 
     const resultData = result.data
-    commit('setReservations', {
+    commit('setReservationDatas', {
       reservations: resultData.data,
-      totalPage: resultData.total_pages,
+      totalPages: resultData.total_pages,
       currentPage: page
     })
     return true
+  },
+  async getReservation({ commit, rootGetters }, id) {
+    const authenticatedApi = rootGetters['login/authenticatedApi']
+    const reservationPath = route(process.env.api.reservation, { id })
+
+    const result = await authenticatedApi.get(reservationPath)
+    commit('setReservation', result.data.data)
+    return true
+  },
+  async destroyReservation({ rootGetters }, id) {
+    const authenticatedApi = rootGetters['login/authenticatedApi']
+    const reservationPath = route(process.env.api.reservation, { id })
+
+    try {
+      await authenticatedApi.delete(reservationPath)
+      return true
+    } catch (e) {
+      return false
+    }
   }
 }
