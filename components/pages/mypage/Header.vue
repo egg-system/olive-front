@@ -6,7 +6,7 @@
     <v-btn color="primary" dark class="mybtn" @click="profile">
       登録情報
     </v-btn>
-    <v-btn color="primary" dark class="mybtn" @click="logout">
+    <v-btn color="primary" dark class="mybtn" @click="logoutBtn">
       ログアウト
     </v-btn>
   </v-layout>
@@ -22,6 +22,11 @@ export default {
     },
     profile() {
       this.$router.push('/mypage/profile/edit')
+    },
+    logoutBtn() {
+      this.logout()
+      // マイページトップにリダイレクトさせる
+      this.$router.push('/mypage/')
     },
     ...mapMutations('login', ['logout'])
   }
