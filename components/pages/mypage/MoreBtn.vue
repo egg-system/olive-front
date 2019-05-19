@@ -12,7 +12,10 @@
 export default {
   methods: {
     more() {
-      this.$router.push('/mypage/list')
+      this.$router.push({
+        path: '/mypage/reservations',
+        query: { page: 1 }
+      })
     }
   }
 }
