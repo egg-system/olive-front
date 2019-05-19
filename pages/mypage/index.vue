@@ -40,7 +40,7 @@
 <script>
 import MypageHeader from '~/components/pages/mypage/Header.vue'
 import MypageCoupon from '~/components/pages/mypage/Coupon.vue'
-import MypageReserveHistory from '~/components/pages/mypage/ReserveHistory.vue'
+import MypageReserveHistory from '~/components/pages/mypage/reservations/ReserveHistory.vue'
 import MypageMoreBtn from '~/components/pages/mypage/MoreBtn.vue'
 import MypageCancelBtn from '~/components/pages/mypage/CancelBtn.vue'
 import MypageName from '~/components/pages/mypage/Name.vue'
