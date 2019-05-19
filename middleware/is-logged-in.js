@@ -12,6 +12,5 @@ export default ({ store, redirect, route }) => {
         redirect('/mypage/login')
       }
       break
-
   }
 }
