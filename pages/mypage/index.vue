@@ -48,9 +48,7 @@ import { mapState } from 'vuex'
 
 export default {
   layout: 'mypage',
-  fetch({ store }) {
-    store.dispatch('reservation/paginateReservations', 1)
-  },
+  middleware: ['fetch-reservations'],
   components: {
     MypageHeader,
     MypageCoupon,
