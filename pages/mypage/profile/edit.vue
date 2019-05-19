@@ -22,10 +22,6 @@
 </template>
 
 <script>
-import MypageHeader from '~/components/pages/mypage/Header.vue'
-import MypageReserveHistory from '~/components/pages/mypage/ReserveHistory.vue'
-import MypageListPagination from '~/components/pages/mypage/ListPagination.vue'
-import MypageName from '~/components/pages/mypage/Name.vue'
 import CustomerName from '~/components/pages/common/customer/Name.vue'
 import CustomerMail from '~/components/pages/common/customer/Mail.vue'
 import CustomerPhoneNumber from '~/components/pages/common/customer/PhoneNumber.vue'
@@ -37,10 +33,6 @@ import { mapState, mapActions, mapMutations } from 'vuex'
 export default {
   layout: 'mypage',
   components: {
-    MypageHeader,
-    MypageReserveHistory,
-    MypageListPagination,
-    MypageName,
     CustomerName,
     CustomerMail,
     CustomerPhoneNumber,

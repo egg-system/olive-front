@@ -1,69 +1,70 @@
 <template>
-  <section class="container">
-    <loading v-if="login.isLoading" class="loading"/>
-    <v-layout column>
-      <v-flex>
-        <v-card dark color="red lighten-2" class="head">
-          <v-card-text><h3>ログイン</h3></v-card-text>
-        </v-card>
+  <div>
+    <v-flex class="mypage-top">
+      <v-card dark color="red lighten-2">
+        <v-card-text>
+          <h3 class="mypage-title">マイページトップ</h3>
+        </v-card-text>
+      </v-card>
+    </v-flex>
+
+    <template v-if="isCouponEnabled">
+      <h3>
+        <p class="under">残りの回数券（回数券をお持ちの方のみ)</p>
+      </h3>
+      <mypage-coupon/>
+    </template>
+
+    <h3>
+      <p class="under">予約履歴</p>
+    </h3>
+
+    <template v-if="hasReservations">
+      <mypage-reserve-history/>
+      <mypage-more-btn/>
+
+      <h3>
+        <p class="under">予約キャンセル</p>
+      </h3>
+      <mypage-cancel-btn/>
+    </template>
+
+    <v-layout v-else justify-center column>
+      <v-flex xs6>
+        <div>予約履歴がございません。</div>
       </v-flex>
-
-      <v-flex>
-        <div :class="{ hidden: login.isLoading }" class="main" >
-          <div>
-            <h2 class="subtitle">会員の方はこちら</h2>
-            <login-form :link="link" />
-            <nuxt-link to="/password/reset">
-              パスワードを忘れた方はこちら
-            </nuxt-link>
-          </div>
-
-          <div class="not">
-            <h2 class="subtitle">会員でない方はこちら</h2>
-            <div>
-              <v-btn color="warning" @click="createBtn">
-                新規会員登録へ
-              </v-btn>
-            </div>
-            <div class="free">※会員登録は無料です。</div>
-
-          </div>
-        </div>
-      </v-flex>
-
     </v-layout>
-  </section>
+  </div>
 </template>
 
 <script>
-import LoginForm from '~/components/pages/login/Form.vue'
-import Loading from '~/components/layouts/Loading.vue'
-import { mapState, mapActions, mapMutations } from 'vuex'
+import MypageHeader from '~/components/pages/mypage/Header.vue'
+import MypageCoupon from '~/components/pages/mypage/Coupon.vue'
+import MypageReserveHistory from '~/components/pages/mypage/reservations/ReserveHistory.vue'
+import MypageMoreBtn from '~/components/pages/mypage/MoreBtn.vue'
+import MypageCancelBtn from '~/components/pages/mypage/CancelBtn.vue'
+import MypageName from '~/components/pages/mypage/Name.vue'
+import { mapState } from 'vuex'
 
 export default {
-  middleware: ['is-logged-in'],
+  layout: 'mypage',
+  middleware: ['fetch-reservations'],
   components: {
-    LoginForm,
-    Loading
+    MypageHeader,
+    MypageCoupon,
+    MypageReserveHistory,
+    MypageMoreBtn,
+    MypageCancelBtn,
+    MypageName
   },
-  data: () => ({
-    link: '/mypage/top'
-  }),
   computed: {
-    ...mapState({
-      login: state => state.login
-    })
-  },
-  methods: {
-    createBtn() {
-      // this.setIsCreate(true)
-      this.$router.push('/create')
+    isCouponEnabled() {
+      return false
     },
-    ...mapMutations('login', ['setIsCreate'])
+    hasReservations() {
+      return this.reservations.length > 0
+    },
+    ...mapState('reservation', ['reservations'])
   }
 }
 </script>
-
-<style scoped>
-@import '~/assets/login.css';
-</style>

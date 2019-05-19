@@ -7,8 +7,14 @@
       </v-card>
     </v-flex>
 
-    <div>予約をキャンセルしました。</div>
-    <div>予約キャンセルメールをお送りしましたので、ご確認ください。</div>
+    <template v-if="result">
+      <div>予約をキャンセルしました。</div>
+      <div>予約キャンセルメールをお送りしましたので、ご確認ください。</div>
+    </template>
+
+    <template v-else>
+      <div>エラーが発生しました。お手数ですが、もう一度やり直してください。</div>
+    </template>
 
     <v-flex>
       <v-btn color="warning" @click="top">マイページトップへ</v-btn>
@@ -19,7 +25,6 @@
 
 <script>
 import MypageHeader from '~/components/pages/mypage/Header.vue'
-import MypageReserveHistory from '~/components/pages/mypage/ReserveHistory.vue'
 import MypageName from '~/components/pages/mypage/Name.vue'
 
 export default {
@@ -28,9 +33,17 @@ export default {
     MypageHeader,
     MypageName
   },
+  async asyncData({ store, params }) {
+    const result = await store.dispatch(
+      'reservation/destroyReservation',
+      params.id
+    )
+
+    return { result }
+  },
   methods: {
     top() {
-      this.$router.push('/mypage/top')
+      this.$router.push('/mypage')
     }
   }
 }

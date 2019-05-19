@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     login() {
-      this.$router.push('/mypage')
+      this.$router.push('/mypage/login')
     },
     back() {
       this.reset()

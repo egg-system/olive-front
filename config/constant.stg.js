@@ -10,6 +10,7 @@ module.exports = {
       'https://dashboard-stage.olivebodycare.healthcare/api/customers/validate_token',
     reserveCommit:
       'https://dashboard-stage.olivebodycare.healthcare/api/reservations',
+    reservation: 'https://dashboard-stage.olivebodycare.healthcare/api/reservations/:id',
     shop: 'https://dashboard-stage.olivebodycare.healthcare/api/shops/:id',
     menu:
       'https://dashboard-stage.olivebodycare.healthcare/api/shops/:id/menus',

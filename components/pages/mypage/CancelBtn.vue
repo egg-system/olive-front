@@ -13,7 +13,10 @@
 export default {
   methods: {
     cancel() {
-      this.$router.push('/mypage/list')
+      this.$router.push({
+        path: '/mypage/reservations',
+        query: { page: 1, cancel: true }
+      })
     }
   }
 }
