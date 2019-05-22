@@ -8,7 +8,7 @@
     </v-flex>
 
     <template v-if="isShownHisroty">
-      <mypage-reserve-history/>
+      <mypage-reserve-history />
 
       <div class="message">予約をキャンセルします。よろしいですか？</div>
       <v-flex>
@@ -38,8 +38,8 @@ import MypageName from '~/components/pages/mypage/Name.vue'
 
 export default {
   layout: 'mypage',
-  fetch({ store, params }) {
-    store.dispatch('reservation/getReservation', params.id)
+  fetch({ store, query }) {
+    store.dispatch('reservation/getReservation', query.id)
   },
   components: {
     MypageHeader,
@@ -55,8 +55,8 @@ export default {
   methods: {
     complete() {
       this.$router.push({
-        name: 'mypage-reservations-id-cancel-complete',
-        params: { id: this.$route.params.id }
+        name: 'mypage-reservations-cancel-complete',
+        query: { id: this.$route.query.id }
       })
     },
     back() {
