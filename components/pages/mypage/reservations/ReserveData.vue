@@ -8,7 +8,7 @@
         <v-flex xs6>
           <div class="text-value shop">{{ data.store.name }}</div>
         </v-flex>
-        <v-flex v-if="doCancel && data.state === '予約中'" xs6 >
+        <v-flex v-if="isShownCancelButton" xs6 >
           <v-btn class="cancel-btn" color="warning" @click="cancelConfrim(data.id)">キャンセル</v-btn>
         </v-flex>
       </v-layout>
@@ -62,7 +62,7 @@ export default {
       type: Object,
       required: true
     },
-    isShownCancelBtn: {
+    forceHideCancel: {
       type: Boolean,
       default: false
     }
@@ -81,13 +81,20 @@ export default {
     isMultiReserved() {
       return this.data.menus.length > 1
     },
+    isShownCancelButton() {
+      if (this.forceHideCancel) {
+        return false
+      }
+
+      return this.doCancel && this.data.state === '予約中'
+    },
     ...mapState('reservation', ['doCancel'])
   },
   methods: {
     cancelConfrim(id) {
       this.$router.push({
-        name: 'mypage-reservations-id-cancel',
-        params: { id }
+        name: 'mypage-reservations-cancel',
+        query: { id }
       })
     }
   }
