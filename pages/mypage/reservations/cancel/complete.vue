@@ -33,10 +33,10 @@ export default {
     MypageHeader,
     MypageName
   },
-  async asyncData({ store, params }) {
+  async asyncData({ store, query }) {
     const result = await store.dispatch(
       'reservation/destroyReservation',
-      params.id
+      query.id
     )
 
     return { result }

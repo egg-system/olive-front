@@ -8,7 +8,7 @@
         mad4
         class="card-width"
       >
-        <reserve-data :data="data"/>
+        <reserve-data :data="data" :force-hide-cancel="forceHideCancel"/>
       </v-flex>
     </template>
   </v-layout>
@@ -24,6 +24,10 @@ export default {
     limit: {
       type: Number,
       default: null
+    },
+    forceHideCancel: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
