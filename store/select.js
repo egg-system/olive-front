@@ -94,14 +94,16 @@ export const getters = {
     return state.menus[SECOND_MENU_INDEX].menu !== null
   },
   isTwoHour(state, getters) {
-    if (!getters.isTwoMenusSelected) {
+    if (!getters.isMenuSelected) {
       return false
     }
 
-    const isSelectedSecondMenu = state.menus[SECOND_MENU_INDEX].menu !== null
     const firstMenuMinute = state.menus[FIRST_MENU_INDEX].menu.minutes
+    if (firstMenuMinute >= 120) {
+      return true
+    }
 
-    return isSelectedSecondMenu || firstMenuMinute >= 120
+    return getters.isTwoMenusSelected
   },
   isMenuSelected(state) {
     return state.menus[FIRST_MENU_INDEX].menu !== null
