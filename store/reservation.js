@@ -21,16 +21,6 @@ export const mutations = {
   }
 }
 
-export const getters = {
-  firstReservation(state) {
-    if (state.reservations.length === 0) {
-      return null
-    }
-
-    return state.reservations[0]
-  }
-}
-
 export const actions = {
   async paginateReservations({ commit, rootState, rootGetters }, page) {
     const authenticatedApi = rootGetters['login/authenticatedApi']
