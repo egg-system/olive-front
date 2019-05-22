@@ -20,8 +20,8 @@
     </h3>
 
     <template v-if="hasReservations">
-      <mypage-reserve-history/>
-      <mypage-more-btn/>
+      <mypage-reserve-history :limit="topPageReservationCount"/>
+      <mypage-more-btn v-if="isShownMoreButton" />
 
       <h3>
         <p class="under">予約キャンセル</p>
@@ -60,6 +60,13 @@ export default {
   computed: {
     isCouponEnabled() {
       return false
+    },
+    isShownMoreButton() {
+      return this.reservations.length > this.topPageReservationCount
+    },
+    topPageReservationCount() {
+      // トップページでの表示数を変更する場合、下記の値を修正する
+      return 3
     },
     hasReservations() {
       return this.reservations.length > 0
