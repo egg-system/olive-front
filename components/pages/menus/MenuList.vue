@@ -46,7 +46,7 @@ export default {
   components: { MenuRow },
   computed: {
     currentPageId() {
-      const pageId = this.$nuxt.$route.params.id
+      const pageId = this.$nuxt.$route.query.menuIndex
       return Number(pageId)
     },
     selectedStoreMenu: {
