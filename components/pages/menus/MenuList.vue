@@ -86,11 +86,11 @@ export default {
     },
     nextHour() {
       const nextPageId = this.currentPageId + 1
-      this.$router.push({ params: { id: nextPageId } })
+      this.$router.push({ query: { menuIndex: nextPageId } })
     },
     backHour() {
       const beforePageId = this.currentPageId - 1
-      this.$router.push({ params: { id: beforePageId } })
+      this.$router.push({ query: { menuIndex: beforePageId } })
     },
     ...mapActions('menu', ['getMenus']),
     ...mapMutations('select', ['setStoreMenu'])
