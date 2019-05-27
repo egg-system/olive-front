@@ -2,7 +2,7 @@
   <div>
     <v-radio-group v-model="selectedStoreMenu" column>
       <section
-        v-for="subShop in subShops"
+        v-for="subShop in displayShops"
         :key="subShop.id"
         :id="subShop.id"
         class="content-section"
@@ -49,6 +49,13 @@ export default {
       const pageId = this.$nuxt.$route.query.menuIndex
       return Number(pageId)
     },
+    displayShops() {
+      if (this.menuIndex === 1 && this.storeId) {
+        return this.subShops.filter(shop => shop.id === this.storeId)
+      }
+
+      return this.subShops
+    },
     selectedStoreMenu: {
       get() {
         return this.storeMenu
@@ -56,9 +63,6 @@ export default {
       set(storeMenu) {
         this.setStoreMenu(storeMenu)
       }
-    },
-    isMenuSelected() {
-      return this.storeMenu.menu !== null
     },
     isShownNextHourLink() {
       const selectedMenu = this.selectedStoreMenu.menu
@@ -72,13 +76,10 @@ export default {
 
       return this.currentPageId === 1
     },
-    ...mapState('select', ['menuIndex']),
+    ...mapState('select', ['menuIndex', 'storeId']),
     ...mapState('menu', ['subShops']),
     ...mapGetters('menu', ['getMenu', 'getOption']),
-    ...mapGetters('select', ['storeMenu', 'selectedOptions'])
-  },
-  created() {
-    this.getMenus({ shopId: 1 })
+    ...mapGetters('select', ['storeMenu', 'isMenuSelected', 'selectedOptions'])
   },
   methods: {
     selectDate() {
@@ -92,7 +93,6 @@ export default {
       const beforePageId = this.currentPageId - 1
       this.$router.push({ query: { menuIndex: beforePageId } })
     },
-    ...mapActions('menu', ['getMenus']),
     ...mapMutations('select', ['setStoreMenu'])
   }
 }
