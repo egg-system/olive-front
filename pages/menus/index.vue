@@ -27,6 +27,9 @@ import RegistrationMenu from '~/components/pages/common/RegistrationMenu.vue'
 
 export default {
   middleware: ['init-menu-index'],
+  fetch({ store }) {
+    store.dispatch('menu/getMenus', { shopId: 1 })
+  },
   components: {
     ShopName,
     MenuList,
@@ -38,9 +41,6 @@ export default {
       return this.$store.state.select.menuIndex
     },
     ...mapGetters('menu', ['isLoading'])
-  },
-  methods: {
-    ...mapMutations('select', ['setMenuIndex'])
   }
 }
 </script>
