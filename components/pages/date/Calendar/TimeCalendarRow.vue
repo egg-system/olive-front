@@ -35,7 +35,7 @@ export default {
     },
     remainCount() {
       const remains = this.timeSlots.map(timeSlot => timeSlot.remain)
-      return _.min(remains)
+      return Math.floor(_.min(remains) / this.timeSlotIncrement)
     },
     timeSlots() {
       if (!this.dateSlot) {
