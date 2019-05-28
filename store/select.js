@@ -4,6 +4,8 @@ const FIRST_MENU_INDEX = 0
 const SECOND_MENU_INDEX = 1
 
 const RESERVATION_DETAIL = {
+  // 店舗をまたぐ予約を可能にさせていた名残。現状不可なので、不要なキー
+  // 削除する際は、ラジオボタンにチェックが入るか確認する
   storeId: null,
   menu: null,
   options: [],
@@ -14,6 +16,7 @@ const RESERVATION_DETAIL = {
 export const state = () => ({
   // momentを格納
   dateTime: null,
+  storeId: null,
   // 二つのメニュー選択可能にするための実装
   menus: [_.clone(RESERVATION_DETAIL)],
   menuIndex: FIRST_MENU_INDEX
@@ -32,6 +35,8 @@ export const mutations = {
     // オプションの選択を初期化する
     menus[state.menuIndex].options = []
     state.menus = menus
+
+    state.storeId = selectedStoreMenu.storeId
   },
   setSelectedOptions(state, options) {
     const menus = _.cloneDeep(state.menus)
@@ -82,10 +87,6 @@ export const getters = {
         .map(option => option.id)
     })
   },
-  isSelectedMultiStore(state) {
-    const firstStoreId = state.menus[0].storeId
-    return !state.menus.every(select => select.storeId === firstStoreId)
-  },
   isTwoMenusSelected(state) {
     if (state.menus.length === 1) {
       return false
@@ -130,7 +131,6 @@ export const getters = {
     const selectedMenus = state.menus.filter(select => select.menu)
     return selectedMenus.map(select => {
       return {
-        store_id: select.storeId,
         menu_id: select.menu.id,
         mimitsubo_count: select.mimitsuboCount,
         option_ids: select.options.map(option => option.id)

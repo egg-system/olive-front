@@ -31,7 +31,7 @@ export const actions = {
 /* getters */
 export const getters = {
   dateRoute(state, getters, routeState) {
-    const id = routeState.shop.id
+    const id = routeState.select.storeId
     return route(process.env.api.date, { id }, getters.dateParameters)
   },
   dateParameters(state, getters, routeState, rootGetters) {

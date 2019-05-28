@@ -57,10 +57,7 @@ export const getters = {
     return state.message === 'yes'
   },
   canChangeIsFirst(state, getters, rootState, rootGetters) {
-    return (
-      !rootGetters['login/isRegisteredCustomer'] &&
-      !rootGetters['select/isSelectedMultiStore']
-    )
+    return rootGetters['login/isRegisteredCustomer']
   },
   selctedCouponIds(state) {
     return state.coupons.map(coupon => coupon.id)
@@ -75,6 +72,7 @@ export const getters = {
     // 回数券周りの処理を追加する
     return {
       customer_id: rootState.login.customerId,
+      store_id: rootState.select.storeId,
       pregnancy_state: state.pregnancyTermSelected,
       children_count: state.childrenSelected,
       reservation_comment: state.request,
