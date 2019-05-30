@@ -45,6 +45,7 @@
 import Logo from '~/components/layouts/Logo.vue'
 
 export default {
+  middleware: ['top-page-redirector'],
   components: {
     Logo
   }
