@@ -34,8 +34,13 @@ export default {
       return this.remainCount > 0
     },
     remainCount() {
-      const remains = this.timeSlots.map(timeSlot => timeSlot.remain)
-      return Math.floor(_.min(remains) / this.timeSlotIncrement)
+      const remainIds = this.timeSlots.flatMap(timeSlot => timeSlot.staff_ids)
+      return _(remainIds)
+        .groupBy()
+        .filter(
+          (idArray, id) => idArray.length >= Number(this.timeSlotIncrement * 2)
+        )
+        .value().length
     },
     timeSlots() {
       if (!this.dateSlot) {
@@ -54,7 +59,9 @@ export default {
       return this.getDateSlot(this.dateTimeSlot)
     },
     isPast() {
-      return this.dateTimeSlot.isBefore(moment())
+      return this.dateTimeSlot.isBefore(
+        moment().subtract(1 * this.timeSlotIncrement, 'hours')
+      )
     },
     nextRoute() {
       return this.isLogin ? 'registration' : 'login'
