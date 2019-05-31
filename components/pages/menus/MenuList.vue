@@ -17,7 +17,7 @@
           </v-flex>
           <v-flex>
             <v-card>
-              <v-card-title primary-title>メニュー選択</v-card-title>
+              <v-card-title primary-title>ご希望のメニューを選択してください</v-card-title>
             </v-card>
             <div v-for="menu in subShop.menus" :key="menu.id">
               <menu-row :store-id="subShop.id" :menu="menu"/>
