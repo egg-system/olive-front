@@ -1,12 +1,13 @@
 module.exports = {
   api: {
-    customerLogin: 'https://api.myjson.com/bins/83ajw',
-    customerCreate: 'https://api.myjson.com/bins/18ieba',
-    customerReset: 'https://api.myjson.com/bins/18ieba',
-    validateToken: 'https://api.myjson.com/bins/18ieba',
-    reserveCommit: 'https://api.myjson.com/bins/18ieba',
-    menu: 'https://api.myjson.com/bins/ej1g2',
-    shop: 'https://api.myjson.com/bins/c8dli',
-    date: 'https://api.myjson.com/bins/1hjqig'
+    customerLogin: 'https://dashboard.olivebodycare.healthcare/api/customers/sign_in',
+    customerCreate: 'https://dashboard.olivebodycare.healthcare/api/customers',
+    customerReset: 'https://dashboard.olivebodycare.healthcare/api/customers/password',
+    validateToken: 'https://dashboard.olivebodycare.healthcare/api/customers/validate_token',
+    reserveCommit: 'https://dashboard.olivebodycare.healthcare/api/reservations',
+    reservation: 'https://dashboard.olivebodycare.healthcare/api/reservations/:id',
+    shop: 'https://dashboard.olivebodycare.healthcare/api/shops/:id',
+    menu: 'https://dashboard.olivebodycare.healthcare/api/shops/:id/menus',
+    date: 'https://dashboard.olivebodycare.healthcare/api/shops/:id/dates'
   }
 }
