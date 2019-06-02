@@ -17,7 +17,7 @@
           v-model="request"
           outline
           name="input-7-4"
-          label="ご意見・ご要望"
+          label="ご要望・ご相談"
           value=""
         />
       </v-flex>
