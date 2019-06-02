@@ -14,7 +14,7 @@
           <customer-name/>
           <customer-mail/>
           <customer-phone-number/>
-          <customer-adress/>
+          <customer-adress v-if="enableAddress"/>
           <customer-message/>
           <customer-password/>
           <confirm-btn/>
@@ -42,6 +42,11 @@ export default {
     CustomerAdress,
     CustomerPassword,
     ConfirmBtn
+  },
+  computed: {
+    enableAddress() {
+      return false
+    }
   }
 }
 </script>
