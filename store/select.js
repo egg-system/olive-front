@@ -34,12 +34,20 @@ export const mutations = {
 
     // オプションの選択を初期化する
     menus[state.menuIndex].options = []
+    menus[state.menuIndex].mimitsuboCount = 0
     state.menus = menus
 
     state.storeId = selectedStoreMenu.storeId
   },
   setSelectedOptions(state, options) {
     const menus = _.cloneDeep(state.menus)
+    if (0 < options.filter(option => option.is_mimitsubo_jewelry).length) {
+      if (menus[state.menuIndex].mimitsuboCount === 0) {
+        menus[state.menuIndex].mimitsuboCount = 2
+      }
+    } else {
+      menus[state.menuIndex].mimitsuboCount = 0
+    }
     menus[state.menuIndex].options = options
     state.menus = menus
   },
