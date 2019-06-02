@@ -8,7 +8,10 @@
         </v-card>
       </v-flex>
     </v-layout>
-    ※インデプスをご希望の方は、下記欄にご記入ください。たたし、予約が重なっている場合、受けられない場合がございます。
+
+    <div class="attention">
+      ※インデプスをご希望の方は、下記欄にご記入ください。たたし、予約が重なっている場合、受けられない場合がございます。
+    </div>
 
     <v-layout column>
       <v-flex xs6>
@@ -57,8 +60,11 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .request {
+  text-align: left;
+}
+.attention {
   text-align: left;
 }
 </style>
