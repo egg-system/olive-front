@@ -9,6 +9,10 @@
       </v-flex>
     </v-layout>
 
+    <div class="attention">
+      ※インデプスをご希望の方は、下記欄にご記入ください。たたし、予約が重なっている場合、受けられない場合がございます。
+    </div>
+
     <v-layout column>
       <v-flex xs6>
         <v-textarea
@@ -16,7 +20,7 @@
           v-model="request"
           outline
           name="input-7-4"
-          label="ご意見・ご要望"
+          label="ご要望・ご相談"
           value=""
         />
       </v-flex>
@@ -56,8 +60,11 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .request {
+  text-align: left;
+}
+.attention {
   text-align: left;
 }
 </style>
