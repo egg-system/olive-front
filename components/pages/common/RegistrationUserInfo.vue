@@ -72,7 +72,7 @@ import { mapGetters, mapMutations, mapState } from 'vuex'
 
 const children = ['なし', '1人', '2人', '3人', '4人']
 
-const couponMaster = ['施術5回券', '施術10回券', 'インデプス11回券']
+const couponMaster = ['回数券利用あり']
 
 export default {
   components: {

@@ -53,7 +53,7 @@ export const getters = {
     return state.message === 'yes'
   },
   canChangeIsFirst(state, getters, rootState, rootGetters) {
-    return rootGetters['login/isRegisteredCustomer']
+    return !rootGetters['login/isRegisteredCustomer']
   },
   selctedCouponIds(state) {
     return state.coupons.map(coupon => coupon.id)

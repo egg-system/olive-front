@@ -56,6 +56,9 @@ export default {
 
       return this.subShops
     },
+    enableTwoHourReserve() {
+      return false
+    },
     selectedStoreMenu: {
       get() {
         return this.storeMenu
@@ -65,6 +68,10 @@ export default {
       }
     },
     isShownNextHourLink() {
+      if (!this.enableTwoHourReserve) {
+        return false
+      }
+
       const selectedMenu = this.selectedStoreMenu.menu
       if (!selectedMenu) {
         return false
