@@ -3,7 +3,6 @@ import axios from 'axios'
 /* state */
 const initialState = {
   coupons: [],
-  pregnantStateId: 0,
   childrenCount: 0,
   isFirst: true,
   message: 'yes',
@@ -18,9 +17,6 @@ export const state = () => Object.assign({}, initialState)
 export const mutations = {
   setCoupons(state, coupons) {
     state.coupons = coupons
-  },
-  setPregnantStateId(state, pregnantStateId) {
-    state.pregnantStateId = pregnantStateId
   },
   setChildrenCount(state, childrenCount) {
     state.childrenCount = childrenCount
@@ -73,7 +69,6 @@ export const getters = {
     return {
       customer_id: rootState.login.customerId,
       store_id: rootState.select.storeId,
-      pregnancy_state: state.pregnancyTermSelected,
       children_count: state.childrenSelected,
       reservation_comment: state.request,
       reservation_date: reservationAt.format('YYYY-MM-DD'),

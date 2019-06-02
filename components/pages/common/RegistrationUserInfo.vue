@@ -48,14 +48,6 @@
     </v-layout>
 
     <v-layout row>
-      <v-flex xs3>妊娠有無</v-flex>
-      <v-flex xs5>
-        <v-select :items="pregnancyTerm" :disabled="isConfirm" v-model="pregnancyTermSelected"/>
-      </v-flex>
-      <v-flex v-if="!isConfirm" xs5>※妊娠中の方は何ヶ月かご選択ください</v-flex>
-    </v-layout>
-
-    <v-layout row>
       <v-flex xs3>お子様連れ</v-flex>
       <v-flex xs5>
         <v-select :items="children" :disabled="isConfirm" v-model="childrenSelected"/>
@@ -64,6 +56,10 @@
     </v-layout>
 
     <customer-message v-if="!isLogin" :is-confirm="isConfirm"/>
+
+    <div class="pregnancy">
+      ※ただ今当院では妊娠している方への治療は行っておりません。産後の骨盤矯正は行っております。ぜひ産後のケアはお任せください。
+    </div>
   </div>
 </template>
 
@@ -73,15 +69,6 @@ import CustomerMail from '~/components/pages/common/customer/Mail.vue'
 import CustomerPhoneNumber from '~/components/pages/common/customer/PhoneNumber.vue'
 import CustomerMessage from '~/components/pages/common/customer/Message.vue'
 import { mapGetters, mapMutations, mapState } from 'vuex'
-
-const pregnancyTerm = [
-  '妊娠なし',
-  '4ヶ月未満',
-  '5ヶ月',
-  '6ヶ月',
-  '7ヶ月',
-  '8ヶ月'
-]
 
 const children = ['なし', '1人', '2人', '3人', '4人']
 
@@ -102,7 +89,6 @@ export default {
   },
   data() {
     return {
-      pregnancyTerm: pregnancyTerm,
       children: children,
       coupons: null
     }
@@ -114,15 +100,6 @@ export default {
       },
       set(value) {
         this.setCoupons(value)
-      }
-    },
-    pregnancyTermSelected: {
-      get() {
-        return pregnancyTerm[this.pregnantStateId]
-      },
-      set(value) {
-        const pregnancyTermSelected = pregnancyTerm.indexOf(value)
-        this.setPregnantStateId(pregnancyTermSelected)
       }
     },
     childrenSelected: {
@@ -149,11 +126,7 @@ export default {
     },
     ...mapGetters('login', ['isLogin']),
     ...mapGetters('registration', ['canChangeIsFirst']),
-    ...mapState('registration', [
-      'childrenCount',
-      'isFirst',
-      'pregnantStateId'
-    ]),
+    ...mapState('registration', ['childrenCount', 'isFirst']),
     ...mapState('select', ['menus'])
   },
   beforeMount() {
@@ -177,7 +150,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .userinfo {
   padding-top: 20px;
   text-align: left;
@@ -187,5 +160,9 @@ export default {
 }
 .inputTop {
   margin-top: 1px;
+}
+.pregnancy {
+  margin-top: 20px;
+  text-align: left;
 }
 </style>
