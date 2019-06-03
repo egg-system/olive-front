@@ -32,3 +32,67 @@
 .hidden {
   opacity: 0.3;
 }
+
+
+/* papa追加分 */
+/* 共通 */
+.v-btn__content {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+/* メニュー選択 */
+nav.v-toolbar.theme--light {
+  background-color: #fffde7;
+}
+.layout.column .flex.xs6 {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 0;
+  left: 0;
+}
+
+.layout.column .flex.xs6 button {
+  display: inline-block;
+  padding: 0.5em;
+  width: 25%;
+}
+@media screen and(max-width:750px) {
+  .layout.column .flex.xs6 button {
+    display: inline-block;
+    padding: 0.5em;
+    width: 44%;
+  }
+}
+
+.layout.column .flex.xs6 button .v-btn__content {
+  display: block;
+  width: 100%;
+}
+
+/* 日時選択 */
+.component-wrapper .calendar th,
+.component-wrapper .calendar .table-wrapper table.outer-table td.col-data-wrapper:nth-of-type(1),
+.component-wrapper .calendar .table-wrapper table.outer-table td.col-data-wrapper table.inner-table tr:nth-of-type(1),
+.component-wrapper .calendar .table-wrapper table.outer-table td.col-data-wrapper table.inner-table tr:nth-of-type(2) {
+  background-color: #f8f8f8;
+}
+.v-card__text dl dd {
+  text-align: left !important;
+}
+
+/* お客様情報入力 */
+.confirmInfo .layout.column.wrap + .layout.column div:nth-of-type(n+2) {
+  text-align: left !important;
+}
+
+/* 情報確認 */
+.elevation-1 .v-table__overflow table.v-datatable.v-table.theme--light tr td:nth-of-type(1) {
+  text-align: left;
+}
+
+/* マイページトップ */
+.flex.align-self-baseline div {
+  font-size: 1.5em;
+}
