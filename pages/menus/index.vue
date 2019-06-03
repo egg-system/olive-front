@@ -45,7 +45,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .menu-contents {
   text-align: left;
 }
@@ -65,5 +65,26 @@ export default {
 }
 .menu {
   margin-bottom: 30px;
+}
+
+nav.v-toolbar.theme--light {
+  background-color: #fffde7;
+}
+.layout.column .flex.xs6 {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  background-color: rgb(255, 253, 231);
+}
+.warning {
+  width: 80%;
+}
+.layout.column .flex.xs6 button {
+  width: 80%;
+}
+.layout.column .flex.xs6 button .v-btn__content {
+  display: block;
+  width: 100%;
 }
 </style>

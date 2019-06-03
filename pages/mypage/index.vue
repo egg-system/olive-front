@@ -75,3 +75,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.flex.align-self-baseline div {
+  font-size: 1.5em;
+}
+</style>

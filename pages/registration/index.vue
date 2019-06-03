@@ -45,8 +45,17 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .v-card__text {
   padding: 7px;
 }
+.confirmInfo .layout.column.wrap + .layout.column div:nth-of-type(n + 2) {
+  text-align: left !important;
+}
+/* 
+パパ修正待ち
+div[data-v-f42b7a1c].flex.xs6 {
+  position: initial !important;
+} 
+*/
 </style>
