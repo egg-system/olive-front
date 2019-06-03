@@ -4,7 +4,7 @@ import axios from 'axios'
 const initialState = {
   coupons: [],
   childrenCount: 0,
-  isFirst: true,
+  isFirst: null,
   message: 'yes',
   isOk: null,
   request: '',
@@ -52,8 +52,12 @@ export const getters = {
   canReceiveMail(state) {
     return state.message === 'yes'
   },
-  canChangeIsFirst(state, getters, rootState, rootGetters) {
-    return !rootGetters['login/isRegisteredCustomer']
+  isFirstValue(state, getters, rootState, rootGetters) {
+    if (state.isFirst === null) {
+      return !rootGetters['login/isLogin']
+    }
+
+    return state.isFirst
   },
   selctedCouponIds(state) {
     return state.coupons.map(coupon => coupon.id)
@@ -69,11 +73,11 @@ export const getters = {
     return {
       customer_id: rootState.login.customerId,
       store_id: rootState.select.storeId,
-      children_count: state.childrenSelected,
+      children_count: state.childrenCount,
       reservation_comment: state.request,
       reservation_date: reservationAt.format('YYYY-MM-DD'),
       start_time: reservationAt.format('HH:mm'),
-      is_first: getters.canChangeIsFirst ? state.isFirst : false,
+      is_first: getters.isFirstValue,
       coupon_ids: getters.selctedCouponIds,
       reservation_details_attributes:
         rootGetters['select/reservationDetailsParameters']
