@@ -3,7 +3,7 @@
     <v-container grid-list-xl>
       <v-layout column wrap>
         <shop-name/>
-        <v-layout row>
+        <v-layout row class="confirm-caution-section">
           <v-flex>
             <v-card-text class="notyet">まだ予約は完了していません、ご予約内容の最終確認をしてください</v-card-text>
           </v-flex>
@@ -39,9 +39,31 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .notyet {
   color: red;
   font-weight: bolder;
+}
+.elevation-1
+  .v-table__overflow
+  table.v-datatable.v-table.theme--light
+  tr
+  td:nth-of-type(1) {
+  text-align: left;
+}
+/* 
+パパ修正待ち
+div[data-v-f42b7a1c].request + div div.layout.column div.flex.xs6 {
+  position: initial !important;
+} 
+*/
+.notyet {
+  background-color: rgb(255, 253, 231);
+}
+.menu
+  .v-table__overflow
+  table.v-datatable.v-table.theme--light
+  tr:last-of-type {
+  border-top: 2px solid;
 }
 </style>

@@ -37,4 +37,7 @@ export default {
   width: 90%;
   margin: 0 auto;
 }
+.container {
+  min-height: auto !important;
+}
 </style>

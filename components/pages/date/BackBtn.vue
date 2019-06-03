@@ -1,8 +1,8 @@
 <template>
   <div class="btn-area">
     <v-layout column>
-      <v-flex xs6>
-        <v-btn @click="back">
+      <v-flex xs6 class="back-btn-warapper">
+        <v-btn class="back-btn" @click="back">
           もどる
         </v-btn>
       </v-flex>
