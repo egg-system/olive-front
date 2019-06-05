@@ -46,8 +46,8 @@ export const mutations = {
 }
 
 export const getters = {
-  isValidRegistration(state) {
-    return typeof state.isFirst === 'boolean'
+  isValidRegistration(state, getters) {
+    return typeof getters.isFirstValue === 'boolean'
   },
   canReceiveMail(state) {
     return state.message === 'yes'
