@@ -8,7 +8,7 @@
     </v-flex>
 
     <template v-if="isShownHisroty">
-      <mypage-reserve-history />
+      <mypage-reserve-history　:force-hide-cancel="true" />
 
       <div class="message">予約をキャンセルします。よろしいですか？</div>
       <v-flex>
