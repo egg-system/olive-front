@@ -3,8 +3,14 @@
     <v-btn color="primary" dark class="mybtn" @click="top">
       マイページ<br>トップ
     </v-btn>
+    <v-btn color="primary" dark class="mybtn" @click="reserve">
+      たまプラーザ<br>本店予約
+    </v-btn>
+    <v-btn color="primary" dark class="mybtn" href="https://olivebodycare.jp/">
+      オリーブボディケア<br>店舗情報
+    </v-btn>
     <v-btn color="primary" dark class="mybtn" @click="profile">
-      登録情報
+      登録情報<br>変更
     </v-btn>
     <v-btn color="primary" dark class="mybtn" @click="logoutBtn">
       ログアウト
@@ -17,6 +23,9 @@ import { mapMutations } from 'vuex'
 
 export default {
   methods: {
+    reserve() {
+      this.$router.push('/menus')
+    },
     top() {
       this.$router.push('/mypage')
     },
