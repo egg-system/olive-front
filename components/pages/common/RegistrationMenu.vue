@@ -160,7 +160,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .menu {
   text-align: left;
 }
