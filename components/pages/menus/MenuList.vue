@@ -1,5 +1,18 @@
 <template>
   <div>
+    <div class="linkBtn">
+      <v-flex
+        v-for="subShop in displayShops"
+        :key="subShop.id"
+      >
+        <v-card dark color="red lighten-2" @click="scrollShopSection(subShop.id)">
+          <v-card-text>
+            <h3>{{ subShop.name }}</h3>
+          </v-card-text>
+        </v-card>
+      </v-flex>
+    </div>
+
     <v-radio-group v-model="selectedStoreMenu" column>
       <section
         v-for="subShop in displayShops"
@@ -7,7 +20,7 @@
         :id="subShop.id"
         class="content-section"
       >
-        <v-layout column wrap>
+        <v-layout :ref="subShop.id.toString()" column wrap >
           <v-flex>
             <v-card dark color="red lighten-2">
               <v-card-text>
@@ -27,7 +40,7 @@
       </section>
     </v-radio-group>
 
-    <v-layout column>
+    <v-layout column class="btn_fix">
       <v-flex xs6>
         <v-btn v-if="currentPageId > 1" @click="backHour">戻る</v-btn>
         <v-btn :disabled="!isMenuSelected" color="warning" @click="selectDate">空席確認・予約する</v-btn>
@@ -89,6 +102,9 @@ export default {
     ...mapGetters('select', ['storeMenu', 'isMenuSelected', 'selectedOptions'])
   },
   methods: {
+    scrollShopSection(shopId) {
+      this.$refs[shopId.toString()][0].scrollIntoView(true)
+    },
     selectDate() {
       this.$router.push({ name: 'date' })
     },
@@ -141,6 +157,24 @@ section.content-section {
   .option-header {
     @extend .menu-info;
     margin-bottom: 0.5em;
+  }
+}
+
+.btn_fix {
+  .flex {
+    &.xs6 {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      left: 0;
+      background-color: rgb(255, 253, 231);
+    }
+  }
+}
+.linkBtn {
+  display: flex;
+  .flex {
+    display: flex;
   }
 }
 </style>

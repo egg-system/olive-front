@@ -40,4 +40,9 @@ export default {
 .container {
   min-height: auto !important;
 }
+.reset-btn {
+  .v-btn__content {
+    font-size: 1em;
+  }
+}
 </style>

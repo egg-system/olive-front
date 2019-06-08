@@ -1,6 +1,6 @@
 <template>
   <v-card color="white">
-    <div class="card-main">
+    <div class="card-main cancel">
       <v-layout row>
         <v-flex xs5 class="text-menu">
           <v-chip :color="reserveStateCss" label text-color="white">{{ data.state }}</v-chip>
@@ -122,3 +122,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.cancel button .v-btn__content {
+  font-size: 1em;
+}
+</style>

@@ -21,7 +21,13 @@
 
     <v-layout v-if="menu" row>
       <v-flex>
-        <v-data-table :items="menu" hide-actions hide-headers class="elevation-1">
+        <v-data-table
+          :items="menu"
+          :class="{ 'reservation_confirm': isConfirm }"
+          hide-actions
+          hide-headers
+          class="elevation-1"
+        >
           <template slot="items" slot-scope="props">
             <td v-if="props.item">{{ props.item.name }}</td>
             <td v-if="props.item" class="text-xs-right">{{ props.item.price | priceFormat }}</td>
@@ -31,9 +37,9 @@
       </v-flex>
     </v-layout>
 
-    <v-layout v-if="isConfirm" row>
+    <v-layout v-if="isConfirm" row class="cancel_term">
       <v-flex>
-        <v-card-text>マイページからキャンセル可能期限</v-card-text>
+        <v-card-text class="txt_12em">マイページからキャンセル可能期限</v-card-text>
       </v-flex>
       <v-flex>
         <v-card-text>{{ cancelableDate | dateTimeAndDatFormat }}</v-card-text>
@@ -160,5 +166,42 @@ export default {
 }
 table.v-table tbody td:first-child {
   padding: 0px 10px;
+}
+.reservation_confirm table.v-table tr:last-of-type {
+  border-top: 2px solid;
+}
+
+.cancel_term {
+  display: block;
+}
+.cancel_term .flex {
+  padding: 0 !important;
+  margin-left: 1em;
+}
+.cancel_term .flex .v-card__text {
+  text-align: left;
+}
+.cancel_term .flex + .flex .v-card__text {
+  margin-left: 1em;
+}
+.cancel_term + .v-card__text {
+  text-align: left;
+  margin-left: 1em;
+}
+.txt_12em {
+  font-size: 1.2em;
+}
+.v-btn__content {
+  font-size: 1em;
+}
+table.v-table thead td:not(:nth-child(1)),
+table.v-table tbody td:not(:nth-child(1)),
+table.v-table thead th:not(:nth-child(1)),
+table.v-table tbody th:not(:nth-child(1)),
+table.v-table thead td:first-child,
+table.v-table tbody td:first-child,
+table.v-table thead th:first-child,
+table.v-table tbody th:first-child {
+  padding: 0 0.2em !important;
 }
 </style>
