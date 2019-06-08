@@ -103,11 +103,11 @@ export default {
       }
 
       return (
-        this.dateTime.format('YYYY年MM月DD日 ') +
+        this.dateTime.format('YYYY年MM月DD日 (') +
         this.$root.$options.filters.dayFormat(
           this.dateTime.format('YYYYMMDD')
         ) +
-        ' ' +
+        ') ' +
         this.dateTime.format('HH:mm') +
         ' ～ ' +
         this.dateTime
