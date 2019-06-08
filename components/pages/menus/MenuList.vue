@@ -1,5 +1,16 @@
 <template>
   <div>
+    <v-flex
+      v-for="subShop in displayShops"
+      :key="subShop.id"
+    >
+      <v-card dark color="red lighten-2" @click="scrollShopSection(subShop.id)">
+        <v-card-text>
+          <h3>{{ subShop.name }}</h3>
+        </v-card-text>
+      </v-card>
+    </v-flex>
+
     <v-radio-group v-model="selectedStoreMenu" column>
       <section
         v-for="subShop in displayShops"
@@ -7,7 +18,7 @@
         :id="subShop.id"
         class="content-section"
       >
-        <v-layout column wrap>
+        <v-layout :ref="subShop.id.toString()" column wrap >
           <v-flex>
             <v-card dark color="red lighten-2">
               <v-card-text>
@@ -89,6 +100,9 @@ export default {
     ...mapGetters('select', ['storeMenu', 'isMenuSelected', 'selectedOptions'])
   },
   methods: {
+    scrollShopSection(shopId) {
+      this.$refs[shopId.toString()][0].scrollIntoView(true)
+    },
     selectDate() {
       this.$router.push({ name: 'date' })
     },
