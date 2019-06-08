@@ -2,6 +2,7 @@ import _ from 'lodash'
 
 const FIRST_MENU_INDEX = 0
 const SECOND_MENU_INDEX = 1
+const MIMITSUBO_OPTION_ID = 7
 
 const RESERVATION_DETAIL = {
   // 店舗をまたぐ予約を可能にさせていた名残。現状不可なので、不要なキー
@@ -32,10 +33,11 @@ export const mutations = {
     menus[state.menuIndex].menu = selectedStoreMenu.menu
     menus[state.menuIndex].storeId = selectedStoreMenu.storeId
 
-    // オプションの選択を初期化する
+    // 耳つぼジュエリの個数、オプションの選択を初期化する
     menus[state.menuIndex].options = []
-    state.menus = menus
+    menus[state.menuIndex].mimitsuboCount = 0
 
+    state.menus = menus
     state.storeId = selectedStoreMenu.storeId
   },
   setSelectedOptions(state, options) {
@@ -106,8 +108,15 @@ export const getters = {
 
     return getters.isTwoMenusSelected
   },
-  isMenuSelected(state) {
+  isMenuSelected(state, getters) {
+    if (getters.isMimitsuboOptionSelected) {
+      return getters.mimitsuboCount > 0
+    }
+
     return state.menus[FIRST_MENU_INDEX].menu !== null
+  },
+  isMimitsuboOptionSelected(state, getters) {
+    return getters.selectedOptionIds.includes(MIMITSUBO_OPTION_ID)
   },
   isDateTimeSelected(state) {
     return state.dateTime != null

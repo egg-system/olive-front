@@ -8,7 +8,7 @@ const getDay = value => {
 }
 
 Vue.filter('priceFormat', val => {
-  return val ? '¥' + val.toLocaleString() + '(税抜き)' : ''
+  return val ? '¥' + val.toLocaleString() + '(税抜)' : ''
 })
 
 Vue.filter('timeFormat', val => {
@@ -18,6 +18,6 @@ Vue.filter('timeFormat', val => {
 Vue.filter('dayFormat', val => getDay(val))
 
 Vue.filter('dateTimeAndDatFormat', value => {
-  const format = `YYYY年MM月DD日 ${getDay(value)} HH:mm`
+  const format = `YYYY年MM月DD日 (${getDay(value)}) HH:mm`
   return moment(value).format(format)
 })
