@@ -1,18 +1,27 @@
 <template>
-  <v-layout align-start justify-end row fill-height>
-    <v-btn color="primary" dark class="mybtn" @click="top">
+  <v-layout
+    align-start
+    justify-end
+    row
+    fill-height
+    class="headMenu"
+  >
+    <v-btn dark class="mybtn" @click="top">
       マイページ<br>トップ
     </v-btn>
-    <v-btn color="primary" dark class="mybtn" @click="reserve">
+    <v-btn dark class="mybtn" @click="reserve">
       たまプラーザ<br>本店予約
     </v-btn>
-    <v-btn color="primary" dark class="mybtn" href="https://olivebodycare.jp/">
+    <v-btn dark class="mybtn bg_gray">
+      横浜青葉台店<br>予約
+    </v-btn>
+    <v-btn dark class="mybtn" href="https://olivebodycare.jp/">
       オリーブボディケア<br>店舗情報
     </v-btn>
-    <v-btn color="primary" dark class="mybtn" @click="profile">
+    <v-btn dark class="mybtn" @click="profile">
       登録情報<br>変更
     </v-btn>
-    <v-btn color="primary" dark class="mybtn" @click="logoutBtn">
+    <v-btn dark class="mybtn" @click="logoutBtn">
       ログアウト
     </v-btn>
   </v-layout>
@@ -42,11 +51,34 @@ export default {
 }
 </script>
 
-<style>
-.mybtn {
-  width: 40px;
-  height: 50px;
-  font-size: 12px;
-  font-weight: bold;
+<style lang="scss">
+.headMenu {
+  display: block;
+  width: 75%;
+  margin: 1em auto 0;
+  text-align: center;
+  @media screen and (max-width: 767px) {
+    width: 100%;
+  }
+  .mybtn {
+    background-color: #689f38 !important;
+    text-align: center;
+    &.v-btn {
+      width: 30%;
+      height: 3em;
+      @media screen and (max-width: 767px) {
+        width: 45%;
+        margin: 0.3em 0.2em;
+      }
+    }
+    .v-btn__content {
+      font-weight: normal;
+      font-size: 1em;
+      line-height: 1.2;
+      @media screen and (max-width: 767px) {
+        font-size: 0.9em;
+      }
+    }
+  }
 }
 </style>
