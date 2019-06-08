@@ -28,25 +28,34 @@
           <div class="text-value">{{ data.id }}</div>
         </v-flex>
       </v-layout>
-      <v-layout row wrap>
-        <v-flex xs5>
-          <div class="text-menu">メニュー</div>
-        </v-flex>
-        <template v-for="(menu, index) in data.menus">
-          <v-flex :key="index" xs6>
-            <div class="text-value">
-              <span v-if="isMultiReserved">{{ (index + 1) }}時間目</span>
-              {{ menu.name }}
+      <template v-for="(detail, index) in data.details">
+        <v-layout :key="detail.id" row wrap>
+          <v-flex xs5>
+            <div class="text-menu">
+              メニュー<span v-if="isMultiReserved">({{ (index + 1) }}時間目)</span>
             </div>
           </v-flex>
-        </template>
-      </v-layout>
+          <v-flex xs6>
+            <div class="text-value">{{ detail.menu.name }}</div>
+          </v-flex>
+        </v-layout>
+        <v-layout :key="index" row wrap>
+          <v-flex xs5>
+            <div class="text-menu">
+              オプション<span v-if="isMultiReserved">({{ (index + 1) }}時間目)</span>
+            </div>
+          </v-flex>
+          <v-flex xs6>
+            <div class="text-value">{{ detail.option_names.join(' / ') }}</div>
+          </v-flex>
+        </v-layout>
+      </template>
       <v-layout row wrap>
         <v-flex xs5>
           <div class="text-menu">合計金額</div>
         </v-flex>
         <v-flex xs6>
-          <div class="text-value">{{ data.fee }}</div>
+          <div class="text-value">{{ data.fee | priceFormat }}</div>
         </v-flex>
       </v-layout>
     </div>
@@ -72,14 +81,14 @@ export default {
       switch (this.data.state) {
         case '予約中':
           return 'primary'
-        case 'キャンセル':
+        case 'キャンセル済み':
           return 'red'
         default:
           return ''
       }
     },
     isMultiReserved() {
-      return this.data.menus.length > 1
+      return this.data.details.length > 1
     },
     isShownCancelButton() {
       if (this.forceHideCancel) {
