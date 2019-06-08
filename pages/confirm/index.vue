@@ -5,7 +5,10 @@
         <shop-name/>
         <v-layout row class="confirm-caution-section">
           <v-flex>
-            <v-card-text class="notyet">まだ予約は完了していません、ご予約内容の最終確認をしてください</v-card-text>
+            <v-card-text class="notyet">
+              まだ予約は完了していません。
+              ご予約内容の最終確認をして「予約を確定する」ボタンを押してください。
+            </v-card-text>
           </v-flex>
         </v-layout>
         <registration-menu :is-confirm="true"/>
