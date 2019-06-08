@@ -1,15 +1,17 @@
 <template>
   <div>
-    <v-flex
-      v-for="subShop in displayShops"
-      :key="subShop.id"
-    >
-      <v-card dark color="red lighten-2" @click="scrollShopSection(subShop.id)">
-        <v-card-text>
-          <h3>{{ subShop.name }}</h3>
-        </v-card-text>
-      </v-card>
-    </v-flex>
+    <div class="linkBtn">
+      <v-flex
+        v-for="subShop in displayShops"
+        :key="subShop.id"
+      >
+        <v-card dark color="red lighten-2" @click="scrollShopSection(subShop.id)">
+          <v-card-text>
+            <h3>{{ subShop.name }}</h3>
+          </v-card-text>
+        </v-card>
+      </v-flex>
+    </div>
 
     <v-radio-group v-model="selectedStoreMenu" column>
       <section
@@ -158,11 +160,21 @@ section.content-section {
   }
 }
 
-.btn_fix .flex.xs6 {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  left: 0;
-  background-color: rgb(255, 253, 231);
+.btn_fix {
+  .flex {
+    &.xs6 {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      left: 0;
+      background-color: rgb(255, 253, 231);
+    }
+  }
+}
+.linkBtn {
+  display: flex;
+  .flex {
+    display: flex;
+  }
 }
 </style>
