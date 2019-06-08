@@ -122,13 +122,14 @@ export default {
   beforeMount() {
     // 初めての場合は確認ページで初診料を追加
     if (this.$store.state.registration.isFirst && this.isConfirm) {
-      const firstCharged = {
-        name: '初診料',
-        price: 1000,
-        minutes: 0
-      }
-      this.menu.push(firstCharged)
+      this.menu.push({ name: '初診料', price: 1000, minutes: 0 })
     }
+
+    // 回数券は減算処理
+    if (this.coupons && this.isConfirm) {
+      this.menu.push({ name: '回数券', price: -6000, minutes: 0 })
+    }
+
     // 確認ページでは合計を表示
     if (this.isConfirm) {
       let totalPrice = 0
@@ -146,10 +147,9 @@ export default {
     }
   },
   methods: {
-    ...mapGetters({
-      isTimeSelected: 'select/isTimeSelected',
-      selectedMenuId: 'select/selectedMenuId'
-    })
+    ...mapState('registration', ['coupons']),
+    ...mapGetters('registration', ['isFirstValue']),
+    ...mapGetters('select', ['isTimeSelected', 'selectedMenuId'])
   }
 }
 </script>
