@@ -21,7 +21,13 @@
 
     <v-layout v-if="menu" row>
       <v-flex>
-        <v-data-table :items="menu" hide-actions hide-headers class="elevation-1 reservation_confirm">
+        <v-data-table
+          :items="menu"
+          :class="{ 'reservation_confirm': isConfirm }"
+          hide-actions
+          hide-headers
+          class="elevation-1"
+        >
           <template slot="items" slot-scope="props">
             <td v-if="props.item">{{ props.item.name }}</td>
             <td v-if="props.item" class="text-xs-right">{{ props.item.price | priceFormat }}</td>
@@ -187,5 +193,15 @@ table.v-table tbody td:first-child {
 }
 .v-btn__content {
   font-size: 1em;
+}
+table.v-table thead td:not(:nth-child(1)),
+table.v-table tbody td:not(:nth-child(1)),
+table.v-table thead th:not(:nth-child(1)),
+table.v-table tbody th:not(:nth-child(1)),
+table.v-table thead td:first-child,
+table.v-table tbody td:first-child,
+table.v-table thead th:first-child,
+table.v-table tbody th:first-child {
+  padding: 0 0.2em !important;
 }
 </style>
