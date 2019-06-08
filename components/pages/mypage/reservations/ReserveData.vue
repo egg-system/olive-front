@@ -46,10 +46,23 @@
             </div>
           </v-flex>
           <v-flex xs6>
-            <div class="text-value">{{ detail.option_names.join(' / ') }}</div>
+            <template v-if="detail.option_names.length === 0">
+              <div class="text-value">-</div>
+            </template>
+            <template v-else>
+              <div class="text-value">{{ detail.option_names.join(' / ') }}</div>
+            </template>
           </v-flex>
         </v-layout>
       </template>
+      <v-layout row wrap>
+        <v-flex xs5>
+          <div class="text-menu">回数券</div>
+        </v-flex>
+        <v-flex xs6>
+          <div class="text-value">{{ data.coupons.map(coupon => coupon.name).join(' / ') }}</div>
+        </v-flex>
+      </v-layout>
       <v-layout row wrap>
         <v-flex xs5>
           <div class="text-menu">合計金額</div>
