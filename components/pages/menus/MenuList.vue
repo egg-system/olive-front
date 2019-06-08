@@ -27,7 +27,7 @@
       </section>
     </v-radio-group>
 
-    <v-layout column>
+    <v-layout column class="btn_fix">
       <v-flex xs6>
         <v-btn v-if="currentPageId > 1" @click="backHour">戻る</v-btn>
         <v-btn :disabled="!isMenuSelected" color="warning" @click="selectDate">空席確認・予約する</v-btn>
@@ -142,5 +142,13 @@ section.content-section {
     @extend .menu-info;
     margin-bottom: 0.5em;
   }
+}
+
+.btn_fix .flex.xs6 {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  background-color: rgb(255, 253, 231);
 }
 </style>
