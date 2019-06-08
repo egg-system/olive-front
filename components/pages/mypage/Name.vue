@@ -1,6 +1,6 @@
 <template>
   <v-flex align-self-baseline>
-    <div>{{ custmerFullName }} さん</div>
+    <div class="txt_15em">{{ custmerFullName }} さん</div>
   </v-flex>
 </template>
 
@@ -13,3 +13,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.txt_15em {
+  font-size: 1.5em;
+}
+</style>

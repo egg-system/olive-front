@@ -15,10 +15,10 @@
         ご来店に際しての注意事項
         <span class="must">(必須)</span>
       </v-flex>
-      <v-flex xs3>・ご予約確定後の前日・当日キャンセル・無断キャンセルについては、キャンセル料金を頂戴いたします（前日3,240円、当日6,480円）。予めご了承ください。</v-flex>
-      <v-flex xs3>・ご予約のご変更、キャンセルをご希望の際はご予約日２日前までにマイページからキャンセル処理をするか当院にご連絡ください。</v-flex>
-      <v-flex xs3>・当院は法令およびプライバシーポリシーを厳守しております。しつこい営業や勧誘のメールをお届けすることは一切ありません。</v-flex>
-      <v-flex xs3>
+      <v-flex xs3 class="txt_left">・ご予約確定後の前日・当日キャンセル・無断キャンセルについては、キャンセル料金を頂戴いたします（前日3,240円、当日6,480円）。予めご了承ください。</v-flex>
+      <v-flex xs3 class="txt_left">・ご予約のご変更、キャンセルをご希望の際はご予約日２日前までにマイページからキャンセル処理をするか当院にご連絡ください。</v-flex>
+      <v-flex xs3 class="txt_left">・当院は法令およびプライバシーポリシーを厳守しております。しつこい営業や勧誘のメールをお届けすることは一切ありません。</v-flex>
+      <v-flex xs3 class="txt_left">
         ・
         <a href="https://olivebodycare.jp/web-reservation/agreement/">ご予約に関する規約がございます。</a>確認の上、予約処理を実行して下さい。
       </v-flex>
@@ -72,5 +72,8 @@ export default {
 }
 .okBtn {
   justify-content: center;
+}
+.txt_left {
+  text-align: left;
 }
 </style>

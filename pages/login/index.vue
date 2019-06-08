@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <section id="login" class="container">
     <loading v-if="login.isLoading" class="loading"/>
     <v-layout column>
       <v-flex>
@@ -69,4 +69,14 @@ export default {
 
 <style scoped>
 @import '~/assets/login.css';
+
+#login {
+  button {
+    &.warning {
+      .v-btn__content {
+        font-size: 1em;
+      }
+    }
+  }
+}
 </style>
