@@ -132,7 +132,7 @@ export default {
     }
 
     // 回数券は減算処理
-    if (this.coupons && this.isConfirm) {
+    if (this.coupons().length && this.isConfirm) {
       this.menu.push({ name: '回数券', price: -6000, minutes: 0 })
     }
 
