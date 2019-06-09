@@ -57,8 +57,13 @@ export default {
   font-size: 30px;
 }
 .card-width {
-  width: 90%;
+  width: 80%;
   margin: 0 auto;
+}
+@media screen and (max-width: 767px) {
+  .card-width {
+    width: 90%;
+  }
 }
 .shop {
   margin-top: 12px;
@@ -72,5 +77,12 @@ export default {
 .card-main {
   margin-top: 12px;
   margin-bottom: 12px;
+}
+.cancel-btn {
+  width: 10px;
+}
+.v-btn__content {
+  font-size: 1em;
+  font-weight: normal;
 }
 </style>

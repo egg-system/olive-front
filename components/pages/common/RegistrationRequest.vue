@@ -64,6 +64,12 @@ export default {
 .request {
   text-align: left;
 }
+@media screen and (max-width: 767px) {
+  .request {
+    width: 100%;
+    margin: initial;
+  }
+}
 .attention {
   text-align: left;
 }

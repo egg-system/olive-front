@@ -172,9 +172,39 @@ section.content-section {
   }
 }
 .linkBtn {
-  display: flex;
+  display: inline-block;
   .flex {
-    display: flex;
+    width: 47%;
+    display: inline-block;
+    vertical-align: top;
+    @media screen and (max-width: 767px) {
+      width: 49%;
+      padding: 0.2em !important;
+    }
+    &:hover {
+      cursor: pointer;
+    }
+    .v-card {
+      height: 5em;
+      display: flex;
+      align-items: center;
+      background-color: #689f38 !important;
+      @media screen and (max-width: 767px) {
+        height: 6em;
+        margin: 0 0.2em;
+      }
+    }
+  }
+  & + .v-input {
+    justify-content: center;
+    width: 50%;
+    margin: 1em auto;
+    @media screen and (max-width: 767px) {
+      width: 95%;
+    }
+    .v-input__control {
+      width: 100% !important;
+    }
   }
 }
 </style>

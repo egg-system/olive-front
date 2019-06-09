@@ -80,4 +80,19 @@ export default {
 .flex.align-self-baseline div {
   font-size: 1.5em;
 }
+.mypage-top {
+  width: 90%;
+  margin: 0 auto;
+}
+.under {
+  width: 80%;
+}
+@media screen and (max-width: 767px) {
+  .mypage-top {
+    width: 100%;
+  }
+  .under {
+    width: 90%;
+  }
+}
 </style>
