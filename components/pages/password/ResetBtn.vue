@@ -63,3 +63,13 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.reset-btns-section {
+  .reset-btn {
+    .v-btn__content {
+      font-size: 1em;
+    }
+  }
+}
+</style>

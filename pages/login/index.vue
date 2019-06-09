@@ -67,7 +67,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
 @import '~/assets/login.css';
 
 #login {

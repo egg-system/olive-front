@@ -11,7 +11,7 @@
     </v-layout>
 
     <v-layout column>
-      <v-flex xs3>
+      <v-flex xs3 class="txt_left">
         ご来店に際しての注意事項
         <span class="must">(必須)</span>
       </v-flex>
@@ -69,8 +69,6 @@ export default {
 .confirmInfo {
   padding-top: 20px;
   text-align: left;
-  width: 80%;
-  margin: 0 auto;
 }
 @media screen and (max-width: 767px) {
   .confirmInfo {

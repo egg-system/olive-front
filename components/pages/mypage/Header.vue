@@ -63,6 +63,10 @@ export default {
   .mybtn {
     background-color: #689f38 !important;
     text-align: center;
+    &.bg_gray {
+      background-color: #ccc !important;
+      cursor: initial;
+    }
     &.v-btn {
       width: 30%;
       height: 3em;

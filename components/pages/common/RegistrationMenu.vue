@@ -163,14 +163,6 @@ export default {
 <style scoped>
 .menu {
   text-align: left;
-  width: 80%;
-  margin: 0 auto;
-}
-@media screen and (max-width: 767px) {
-  .menu {
-    width: 100%;
-    margin: initial;
-  }
 }
 table.v-table tbody td:first-child {
   padding: 0px 10px;
