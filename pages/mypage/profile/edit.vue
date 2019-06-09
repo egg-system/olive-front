@@ -12,6 +12,7 @@
       <p class="under">会員情報変更</p>
     </h3>
     <div class="pr">
+      <customer-mail :is-label="true"/>
       <customer-name/>
       <customer-phone-number/>
       <customer-message/>

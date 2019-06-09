@@ -1,7 +1,12 @@
 <template>
   <div class="userinfo">
-
-    <v-layout row>
+    <v-layout v-if="isLabel" row>
+      <v-flex xs3>メールアドレス</v-flex>
+      <v-flex>
+        {{ mail }}
+      </v-flex>
+    </v-layout>
+    <v-layout v-else row>
       <v-flex xs3>メールアドレス<span class="must">(必須)</span></v-flex>
       <v-layout column>
         <v-flex>
@@ -45,6 +50,10 @@ import { checkMail, checkSame } from '~/lib/validation'
 
 export default {
   props: {
+    isLabel: {
+      type: Boolean,
+      default: false
+    },
     isConfirm: {
       type: Boolean,
       default: false
