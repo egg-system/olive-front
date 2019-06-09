@@ -65,8 +65,8 @@ export default {
       let calendarDate = this.startDate.clone()
 
       while (calendarDate.isBefore(this.endDate)) {
-        calendarDates.push(calendarDate)
-        calendarDate = calendarDate.add(1, 'days').clone()
+        calendarDates.push(calendarDate.clone())
+        calendarDate = calendarDate.add(1, 'days')
       }
 
       return calendarDates
