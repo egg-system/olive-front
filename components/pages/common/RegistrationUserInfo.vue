@@ -34,7 +34,7 @@
       </v-layout>
     </template>
 
-    <v-layout v-if="isLogin" row>
+    <v-layout row>
       <v-flex xs3>回数券利用</v-flex>
       <v-flex v-for="coupon in coupons" :key="coupon.id">
         <v-checkbox
