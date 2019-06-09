@@ -9,10 +9,10 @@
 
     <h3><p class="under">会員情報変更</p></h3>
     <div class="pr">
+      <customer-mail :read-only="true"/>
       <customer-name :is-confirm="true"/>
-      <customer-mail :is-confirm="true"/>
       <customer-phone-number :is-confirm="true"/>
-      <customer-adress :is-confirm="true"/>
+      <customer-adress v-if="false" :is-confirm="true"/>
       <customer-message :is-confirm="true"/>
       <fixed-btn />
     </div>

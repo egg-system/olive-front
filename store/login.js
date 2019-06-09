@@ -235,6 +235,7 @@ export const actions = {
       password_confirmation: state.password2
     })
     commit('reset')
+    commit('logout')
   },
   async validateToken({ commit, dispatch, getters }) {
     const result = await getters.authenticatedApi

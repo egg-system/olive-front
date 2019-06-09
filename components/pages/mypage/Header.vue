@@ -15,7 +15,7 @@
     <v-btn dark class="mybtn bg_gray">
       横浜青葉台店<br>予約
     </v-btn>
-    <v-btn dark class="mybtn" href="https://olivebodycare.jp/">
+    <v-btn dark class="mybtn" href="https://olivebodycare.healthcare/">
       オリーブボディケア<br>店舗情報
     </v-btn>
     <v-btn dark class="mybtn" @click="profile">
