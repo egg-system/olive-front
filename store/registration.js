@@ -59,7 +59,7 @@ export const getters = {
 
     return state.isFirst
   },
-  selctedCouponIds(state) {
+  selectedCouponIds(state) {
     return state.coupons.map(coupon => coupon.id)
   },
   reservationParameters(state, getters, rootState, rootGetters) {
@@ -78,7 +78,7 @@ export const getters = {
       reservation_date: reservationAt.format('YYYY-MM-DD'),
       start_time: reservationAt.format('HH:mm'),
       is_first: getters.isFirstValue,
-      coupon_ids: getters.selctedCouponIds,
+      coupon_ids: getters.selectedCouponIds,
       reservation_details_attributes:
         rootGetters['select/reservationDetailsParameters']
     }

@@ -19,10 +19,10 @@
       </v-flex>
     </v-layout>
 
-    <v-layout v-if="menu" row>
+    <v-layout v-if="menusForDisplay" row>
       <v-flex>
         <v-data-table
-          :items="menu"
+          :items="menusForDisplay"
           :class="{ 'reservation_confirm': isConfirm }"
           hide-actions
           hide-headers
@@ -66,8 +66,7 @@ export default {
   },
   computed: {
     allServiceMinutes() {
-      const menus = this.$store.state.select.menus
-      return _.sumBy(menus, 'menu.minutes')
+      return _.sumBy(this.menus, 'menu.minutes')
     },
     cancelableDay() {
       return this.$root.$options.filters.dayFormat(this.cancelableDate)
@@ -78,28 +77,61 @@ export default {
         .subtract('days', 2)
         .endOf('day')
     },
-    menu() {
-      let menus = []
-      for (let i = 0; i < 2; i++) {
-        let menu = _.clone(this.$store.state.select.menus[i].menu)
-        if (this.isTwoMenusSelected) {
-          menu.name = (i + 1).toString() + '時間目 - ' + menu.name
-        }
-        menus.push(menu)
-        this.$store.state.select.menus[i].options.forEach(option => {
-          let optionTmp = _.clone(option)
-          if (optionTmp.is_mimitsubo_jewelry) {
-            optionTmp.name =
-              optionTmp.name +
-              ' × ' +
-              this.$store.state.select.menus[i].mimitsuboCount.toString() +
-              '粒'
+    menusForDisplay() {
+      let menus =
+        0 < this.menus.length &&
+        (this.ifShowOnlyFirstMenu || !this.isTwoMenusSelected)
+          ? [this.menus[0]]
+          : this.menus
+
+      //表示用に加工した配列にする
+      menus = menus
+        .map((menuOfHour, index) => {
+          let forDisplay = []
+          let menu = _.clone(menuOfHour.menu)
+          if (this.isTwoMenusSelected) {
+            menu.name = (index + 1).toString() + '時間目 - ' + menu.name
           }
-          menus.push(optionTmp)
+          forDisplay.push(menu)
+          menuOfHour.options.forEach(optionOriginal => {
+            let option = _.clone(optionOriginal)
+            if (option.is_mimitsubo_jewelry) {
+              option.name =
+                option.name +
+                ' × ' +
+                menuOfHour.mimitsuboCount.toString() +
+                '粒'
+            }
+            forDisplay.push(option)
+          })
+          return forDisplay
         })
-        if (this.ifShowOnlyFirstMenu || !this.isTwoMenusSelected) {
-          break
+        .flat()
+
+      // 初めての場合は確認ページで初診料を追加
+      if (this.isFirst && this.isConfirm) {
+        menus.push({ name: '初診料', price: 1000, minutes: 0 })
+      }
+
+      // 回数券は減算処理
+      if (this.coupons.length && this.isConfirm) {
+        menus.push({ name: '回数券', price: -6000, minutes: 0 })
+      }
+
+      // 確認ページでは合計を表示
+      if (this.isConfirm) {
+        let totalPrice = 0
+        let totalTime = 0
+        menus.forEach(obj => {
+          totalPrice += obj.price
+          totalTime += obj.minutes
+        })
+        const total = {
+          name: '合計',
+          price: totalPrice,
+          minutes: totalTime
         }
+        menus.push(total)
       }
       return menus
     },
@@ -122,40 +154,9 @@ export default {
           .format('HH:mm')
       )
     },
-    ...mapState('select', ['dateTime']),
+    ...mapState('registration', ['coupons', 'isFirst']),
+    ...mapState('select', ['dateTime', 'menus']),
     ...mapGetters('select', ['isTwoMenusSelected'])
-  },
-  beforeMount() {
-    // 初めての場合は確認ページで初診料を追加
-    if (this.$store.state.registration.isFirst && this.isConfirm) {
-      this.menu.push({ name: '初診料', price: 1000, minutes: 0 })
-    }
-
-    // 回数券は減算処理
-    if (this.coupons && this.isConfirm) {
-      this.menu.push({ name: '回数券', price: -6000, minutes: 0 })
-    }
-
-    // 確認ページでは合計を表示
-    if (this.isConfirm) {
-      let totalPrice = 0
-      let totalTime = 0
-      this.menu.forEach(obj => {
-        totalPrice += obj.price
-        totalTime += obj.minutes
-      })
-      const total = {
-        name: '合計',
-        price: totalPrice,
-        minutes: totalTime
-      }
-      this.menu.push(total)
-    }
-  },
-  methods: {
-    ...mapState('registration', ['coupons']),
-    ...mapGetters('registration', ['isFirstValue']),
-    ...mapGetters('select', ['isTimeSelected', 'selectedMenuId'])
   }
 }
 </script>
