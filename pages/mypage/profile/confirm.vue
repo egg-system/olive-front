@@ -12,6 +12,7 @@
       <customer-mail :is-label="true"/>
       <customer-name :is-confirm="true"/>
       <customer-phone-number :is-confirm="true"/>
+      <customer-adress v-if="false" :is-confirm="true"/>
       <customer-message :is-confirm="true"/>
       <fixed-btn />
     </div>

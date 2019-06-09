@@ -15,6 +15,7 @@
       <customer-mail :is-label="true"/>
       <customer-name/>
       <customer-phone-number/>
+      <customer-adress v-if="false"/>
       <customer-message/>
       <confirm-btn/>
     </div>
@@ -37,6 +38,7 @@ export default {
     CustomerMail,
     CustomerPhoneNumber,
     CustomerMessage,
+    CustomerAdress,
     ConfirmBtn
   },
   data: () => ({}),

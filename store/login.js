@@ -15,7 +15,10 @@ const initialState = {
   mail2: '',
   phoneNumber: '',
   password: '',
-  password2: ''
+  password2: '',
+  postalCode: '',
+  prefecture: '',
+  city: ''
 }
 export const state = () =>
   Object.assign(
@@ -52,7 +55,10 @@ export const getters = {
       first_kana: state.firstNameKana,
       last_kana: state.lastNameKana,
       tel: state.phoneNumber,
-      can_receive_mail: rootGetters['registration/canReceiveMail']
+      can_receive_mail: rootGetters['registration/canReceiveMail'],
+      zip_code: state.postalCode,
+      prefecture: state.prefecture,
+      city: state.city
     }
   },
   createParams(state, getters, rootState) {
@@ -105,6 +111,15 @@ export const mutations = {
   setPassword2(state, password2) {
     state.password2 = password2
   },
+  setPostalCode(state, postalCode) {
+    state.postalCode = postalCode
+  },
+  setPrefecture(state, prefecture) {
+    state.prefecture = prefecture
+  },
+  setCity(state, city) {
+    state.city = city
+  },
   setError(state, errorMessage = '') {
     // stateを初期化
     state = Object.assign(state, initialState)
@@ -138,6 +153,9 @@ export const actions = {
     commit('setMail', customer.email)
     commit('setMail2', customer.email)
     commit('setPhoneNumber', customer.tel)
+    commit('setPostalCode', customer.zip_code)
+    commit('setPrefecture', customer.prefecture)
+    commit('setCity', customer.city)
 
     return customer
   },
