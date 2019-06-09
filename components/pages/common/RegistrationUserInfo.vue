@@ -154,6 +154,14 @@ export default {
 .userinfo {
   padding-top: 20px;
   text-align: left;
+  width: 80%;
+  margin: 0 auto;
+}
+@media screen and (max-width: 767px) {
+  .userinfo {
+    width: 100%;
+    margin: initial;
+  }
 }
 .must {
   color: red;

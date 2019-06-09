@@ -69,6 +69,14 @@ export default {
 .confirmInfo {
   padding-top: 20px;
   text-align: left;
+  width: 80%;
+  margin: 0 auto;
+}
+@media screen and (max-width: 767px) {
+  .confirmInfo {
+    width: 100%;
+    margin: initial;
+  }
 }
 .okBtn {
   justify-content: center;

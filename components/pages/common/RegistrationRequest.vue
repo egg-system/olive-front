@@ -63,6 +63,14 @@ export default {
 <style scoped>
 .request {
   text-align: left;
+  width: 80%;
+  margin: 0 auto;
+}
+@media screen and (max-width: 767px) {
+  .request {
+    width: 100%;
+    margin: initial;
+  }
 }
 .attention {
   text-align: left;

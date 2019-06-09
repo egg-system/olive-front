@@ -174,7 +174,16 @@ section.content-section {
 .linkBtn {
   display: flex;
   .flex {
-    display: flex;
+    .v-card {
+      width: 90%;
+      margin: 0 auto;
+    }
+  }
+  & + .v-input {
+    justify-content: center;
+    .v-input__control {
+      width: 90% !important;
+    }
   }
 }
 </style>

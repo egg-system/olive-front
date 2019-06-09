@@ -33,4 +33,8 @@ export default {
 </script>
 
 <style>
+.v-btn__content {
+  font-size: 1em;
+  font-weight: normal;
+}
 </style>
