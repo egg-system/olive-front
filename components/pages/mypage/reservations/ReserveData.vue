@@ -9,7 +9,7 @@
           <div class="text-value shop">{{ data.store.name }}</div>
         </v-flex>
         <v-flex v-if="isShownCancelButton" xs6 >
-          <v-btn class="cancel-btn" color="warning" @click="cancelConfrim(data.id)">キャンセル</v-btn>
+          <v-btn class="cancel-btn" color="warning" @click="cancelConfrim(data.id)">キャンセルする</v-btn>
         </v-flex>
       </v-layout>
       <v-layout row wrap>
@@ -126,5 +126,8 @@ export default {
 <style scoped>
 .cancel button .v-btn__content {
   font-size: 1em;
+}
+.cancel-btn {
+  width: 150px;
 }
 </style>
