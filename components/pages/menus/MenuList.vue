@@ -181,10 +181,14 @@ section.content-section {
       width: 49%;
       padding: 0.2em !important;
     }
+    &:hover {
+      cursor: pointer;
+    }
     .v-card {
       height: 5em;
       display: flex;
       align-items: center;
+      background-color: #689f38 !important;
       @media screen and (max-width: 767px) {
         height: 6em;
         margin: 0 0.2em;
