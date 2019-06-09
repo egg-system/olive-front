@@ -14,7 +14,6 @@
     <div class="pr">
       <customer-name/>
       <customer-phone-number/>
-      <customer-adress/>
       <customer-message/>
       <confirm-btn/>
     </div>
@@ -37,7 +36,6 @@ export default {
     CustomerMail,
     CustomerPhoneNumber,
     CustomerMessage,
-    CustomerAdress,
     ConfirmBtn
   },
   data: () => ({}),

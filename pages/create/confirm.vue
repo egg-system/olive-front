@@ -12,7 +12,6 @@
           <customer-name :is-confirm="true"/>
           <customer-mail :is-confirm="true"/>
           <customer-phone-number :is-confirm="true"/>
-          <customer-adress :is-confirm="true"/>
           <customer-message :is-confirm="true"/>
           <customer-password :is-confirm="true"/>
           <fixed-btn />
