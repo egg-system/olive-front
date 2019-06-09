@@ -88,14 +88,6 @@ module.exports = {
           exclude: /(node_modules)/
         })
       }
-    },
-    bebel: {
-      presets({ isServer }) {
-        targets: isServer ? { node: 'current' } : { browsers: [
-          ">=0.25% in JP",
-          "ie 11"
-        ] }
-      }
     }
   },
 
