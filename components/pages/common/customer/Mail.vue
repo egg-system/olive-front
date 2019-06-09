@@ -1,6 +1,6 @@
 <template>
   <div class="userinfo">
-    <v-layout v-if="isLabel" row>
+    <v-layout v-if="readOnly" row>
       <v-flex xs3>メールアドレス</v-flex>
       <v-flex>
         {{ mail }}
@@ -50,7 +50,7 @@ import { checkMail, checkSame } from '~/lib/validation'
 
 export default {
   props: {
-    isLabel: {
+    readOnly: {
       type: Boolean,
       default: false
     },
