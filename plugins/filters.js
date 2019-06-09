@@ -8,7 +8,7 @@ const getDay = value => {
 }
 
 Vue.filter('priceFormat', val => {
-  return val ? '¥' + val.toLocaleString() + '(税抜)' : ''
+  return isNaN(val) ? '' : '¥' + val.toLocaleString() + '(税抜)'
 })
 
 Vue.filter('timeFormat', val => {
