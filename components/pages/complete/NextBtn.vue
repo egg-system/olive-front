@@ -2,7 +2,7 @@
   <div>
     <v-layout column>
       <v-flex xs6>
-        <v-btn color="warning" href="https://olivebodycare.jp/">店舗ホームページへ</v-btn>
+        <v-btn color="warning" href="https://olivebodycare.healthcare/">店舗ホームページへ</v-btn>
       </v-flex>
       <v-flex xs6>
         <v-btn color="warning" @click="goReserve">続けて予約する方へ</v-btn>

@@ -1,7 +1,7 @@
 <template>
   <v-layout justify-center column>
     <template v-for="data in reserveData">
-      <v-flex 
+      <v-flex
         :key="data.id"
         d-flex
         xs12
@@ -72,8 +72,5 @@ export default {
 .card-main {
   margin-top: 12px;
   margin-bottom: 12px;
-}
-.cancel-btn {
-  width: 10px;
 }
 </style>

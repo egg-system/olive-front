@@ -12,9 +12,10 @@
       <p class="under">会員情報変更</p>
     </h3>
     <div class="pr">
+      <customer-mail :read-only="true"/>
       <customer-name/>
       <customer-phone-number/>
-      <customer-adress/>
+      <customer-adress v-if="false"/>
       <customer-message/>
       <confirm-btn/>
     </div>
