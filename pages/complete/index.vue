@@ -50,14 +50,13 @@ export default {
       return this.$store.state.login
     }
   },
-  created() {
-    this.registerCustomerWithReserve()
+  async asyncData({ store }) {
+    const result = await store.dispatch(
+      'registration/registerCustomerWithReserve'
+    )
   },
   methods: {
-    ...mapActions('registration', [
-      'registerCustomerWithReserve',
-      'resetAllInputed'
-    ])
+    ...mapActions('registration', ['resetAllInputed'])
   }
 }
 </script>

@@ -45,7 +45,8 @@ module.exports = {
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
-    '@nuxtjs/vuetify'
+    '@nuxtjs/vuetify',
+    'nuxt-polyfill'
   ],
   /*
   ** Axios module configuration
@@ -98,5 +99,11 @@ module.exports = {
 
   router: {
     middleware: 'validate-autenticates'
+  },
+
+  polyfill: {
+    features: [
+      { require: 'array-from', detect: () => !Array.from },
+    ]
   }
 }
