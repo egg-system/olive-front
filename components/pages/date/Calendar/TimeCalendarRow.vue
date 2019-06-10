@@ -59,9 +59,7 @@ export default {
       return this.getDateSlot(this.dateTimeSlot)
     },
     isPast() {
-      return this.dateTimeSlot.isBefore(
-        moment().subtract(1 * this.timeSlotIncrement, 'hours')
-      )
+      return this.dateTimeSlot.isBefore(moment().subtract(10, 'minutes'))
     },
     nextRoute() {
       return this.isLogin ? 'registration' : 'login'
