@@ -53,7 +53,9 @@
     "vue-jest": "^3.0.2",
     "webpack-bundle-analyzer": ">=3.3.2",
     "js-yaml": ">=3.13.1",
-    "handlebars": ">=4.0.14"
+    "handlebars": ">=4.0.14",
+    "nuxt-polyfill": "^1.0.3",
+    "array-from": "^2.1.1"
   },
   "jest": {
     "transform": {
