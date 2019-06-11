@@ -139,6 +139,7 @@ export const mutations = {
     state.accessToken = null
     state.client = null
     state.uid = null
+    state = Object.assign(state, initialState)
   }
 }
 
