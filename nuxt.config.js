@@ -9,11 +9,11 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: pkg.name,
+    title: '整体・骨盤矯正の女性専門の治療院オリーヴボディケア',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: pkg.description }
+      { hid: 'description', name: 'description', content: '整体・骨盤矯正の女性専門の治療院オリーヴボディケア。国家資格取得の女性スタッフによる本格施術が受けれます。お子様連れ歓迎。マッサージ、不妊、鍼もお任せ下さい' },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
@@ -45,8 +45,7 @@ module.exports = {
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
-    '@nuxtjs/vuetify',
-    'nuxt-polyfill'
+    '@nuxtjs/vuetify'
   ],
   /*
   ** Axios module configuration
@@ -99,11 +98,5 @@ module.exports = {
 
   router: {
     middleware: 'validate-autenticates'
-  },
-
-  polyfill: {
-    features: [
-      { require: 'array-from', detect: () => !Array.from },
-    ]
   }
 }
