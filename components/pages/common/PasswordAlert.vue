@@ -4,9 +4,3 @@
     <nuxt-link to="/password/reset">パスワードの再設定へ</nuxt-link>
   </v-alert>
 </template>
-
-<style scoped>
-.v-alert > div {
-  text-align: left;
-}
-</style>
