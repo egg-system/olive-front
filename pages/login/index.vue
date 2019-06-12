@@ -25,7 +25,10 @@
               <v-btn color="warning" @click="resisterBtn">新規会員登録をして予約する</v-btn>
               <v-btn color="warning" @click="skipBtn">会員登録せずに予約へ進む</v-btn>
             </div>
-            <div class="free">※会員登録は無料です。</div>
+            <div class="free">
+              ※会員登録は無料です。<br>
+              ※会員登録をしていただくと、マイページからご予約履歴をいつでも確認できて、キャンセル等の手続きも簡単に行えるようになります。
+            </div>
           </div>
         </div>
       </v-flex>
