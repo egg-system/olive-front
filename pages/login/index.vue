@@ -12,6 +12,7 @@
         <div :class="{ hidden: login.isLoading }" class="main">
           <div>
             <h2 class="subtitle">会員の方はこちら</h2>
+            <password-alert />
             <login-form :link="link" />
             <nuxt-link to="/password/reset">
               パスワードを忘れた方はこちら
@@ -36,12 +37,14 @@
 <script>
 import LoginForm from '~/components/pages/login/Form.vue'
 import Loading from '~/components/layouts/Loading.vue'
+import PasswordAlert from '~/components/pages/common/PasswordAlert.vue'
 import { mapState, mapActions, mapMutations } from 'vuex'
 
 export default {
   components: {
     LoginForm,
-    Loading
+    Loading,
+    PasswordAlert
   },
   data: () => ({
     link: '/registration'
