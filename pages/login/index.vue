@@ -12,6 +12,7 @@
         <div :class="{ hidden: login.isLoading }" class="main">
           <div>
             <h2 class="subtitle">会員の方はこちら</h2>
+            <password-alert />
             <login-form :link="link" />
             <nuxt-link to="/password/reset">
               パスワードを忘れた方はこちら
@@ -24,7 +25,10 @@
               <v-btn color="warning" @click="resisterBtn">新規会員登録をして予約する</v-btn>
               <v-btn color="warning" @click="skipBtn">会員登録せずに予約へ進む</v-btn>
             </div>
-            <div class="free">※会員登録は無料です。</div>
+            <div class="free">
+              ※会員登録は無料です。<br>
+              ※会員登録をしていただくと、マイページからご予約履歴をいつでも確認できて、キャンセル等の手続きも簡単に行えるようになります。
+            </div>
           </div>
         </div>
       </v-flex>
@@ -36,12 +40,14 @@
 <script>
 import LoginForm from '~/components/pages/login/Form.vue'
 import Loading from '~/components/layouts/Loading.vue'
+import PasswordAlert from '~/components/pages/common/PasswordAlert.vue'
 import { mapState, mapActions, mapMutations } from 'vuex'
 
 export default {
   components: {
     LoginForm,
-    Loading
+    Loading,
+    PasswordAlert
   },
   data: () => ({
     link: '/registration'

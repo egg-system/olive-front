@@ -8,7 +8,7 @@
 }
 .free {
   padding-top: 10px;
-  font-size: 16px;
+  font-size: 14px;
 }
 @media screen and (min-width: 350px) {
   .main, .head {
