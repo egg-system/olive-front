@@ -19,7 +19,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 .v-card__title,
 .v-card__text {
   color: black;
