@@ -13,7 +13,7 @@
             <v-card-text
               v-if="registration.isError"
               class="complete"
-            >{{ registration.errorMessage }}お手数ですが最初からやり直してください。</v-card-text>
+            >{{ registration.errorMessage }}<br>お手数ですが、再度ご予約の操作をお願いいたします。</v-card-text>
             <v-card-text
               v-if="login.isError"
               class="complete"
