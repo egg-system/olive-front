@@ -125,7 +125,10 @@ export const actions = {
       return true
     } catch (error) {
       console.log(error)
-      commit('setError', '予約に失敗しました。')
+      commit(
+        'setError',
+        '選択された日時が既に予約されてしまった可能性がございます。'
+      )
       return false
     }
   }
