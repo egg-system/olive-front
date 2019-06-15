@@ -9,7 +9,7 @@
           <div class="text-value shop">{{ data.store.name }}</div>
         </v-flex>
         <v-flex v-if="isShownCancelButton" xs6 >
-          <v-btn class="cancel-btn" color="warning" @click="cancelConfrim(data.id)">キャンセルする</v-btn>
+          <v-btn :disabled="canNotCancel" class="cancel-btn" color="warning" @click="cancelConfrim(data.id)">キャンセルする</v-btn>
         </v-flex>
       </v-layout>
       <v-layout row wrap>
@@ -77,6 +77,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import moment from 'moment'
 
 export default {
   props: {
@@ -109,6 +110,13 @@ export default {
       }
 
       return this.doCancel && this.data.state === '予約中'
+    },
+    canNotCancel() {
+      //今日、明日の予約はキャンセルできない
+      return moment(this.data.start_at).isSameOrBefore(
+        moment().add('days', 1),
+        'day'
+      )
     },
     ...mapState('reservation', ['doCancel'])
   },
