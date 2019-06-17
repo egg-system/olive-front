@@ -16,7 +16,7 @@
       横浜青葉台店<br>予約
     </v-btn>
     <v-btn dark class="mybtn" href="https://olivebodycare.healthcare/">
-      オリーブボディケア<br>店舗情報
+      オリーヴボディケア<br>店舗情報
     </v-btn>
     <v-btn dark class="mybtn" @click="profile">
       登録情報<br>変更
