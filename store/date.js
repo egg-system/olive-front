@@ -44,6 +44,8 @@ export const getters = {
   },
   startDate() {
     const currentDate = moment().startOf('day')
+
+    // 曜日が日曜日から始まるように調整している
     while (currentDate.day() !== 0) {
       currentDate.subtract(1, 'days')
     }
@@ -52,7 +54,9 @@ export const getters = {
   endDate() {
     const endDate = moment()
       .startOf('day')
-      .add(1, 'month')
+      .add(2, 'month')
+
+    // 曜日が日曜日から始まるように調整している
     while (endDate.day() !== 0) {
       endDate.add(1, 'days')
     }
