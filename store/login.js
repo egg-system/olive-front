@@ -223,7 +223,7 @@ export const actions = {
       return false
     }
   },
-  async sendPasswrodResetMail({ state }) {
+  async sendPasswrodResetMail({ state, commit }) {
     await axios.post(process.env.api.customerReset, {
       email: state.mail,
       redirect_url: `${window.location.origin}/password/set/`
