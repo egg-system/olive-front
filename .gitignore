@@ -82,3 +82,6 @@ dist
 
 # mac
 .DS_Store
+
+# local history for vs code
+.history
