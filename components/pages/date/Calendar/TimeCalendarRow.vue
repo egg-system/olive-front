@@ -59,7 +59,8 @@ export default {
       return this.getDateSlot(this.dateTimeSlot)
     },
     isPast() {
-      return this.dateTimeSlot.isBefore(moment().subtract(10, 'minutes'))
+      const deadAt = this.dateTimeSlot.clone().subtract(10, 'minutes')
+      return deadAt.isBefore(moment())
     },
     nextRoute() {
       return this.isLogin ? 'registration' : 'login'
