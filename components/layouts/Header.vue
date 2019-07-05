@@ -17,9 +17,11 @@ export default {
   components: {
     Logo
   },
-  data: () => ({
-    bkColor: process.env.NODE_ENV === 'production' ? 'bg-prod' : 'bg-other'
-  })
+  computed: {
+    bkColor: function() {
+      return process.env.NODE_ENV === 'production' ? 'bg-prod' : 'bg-other'
+    }
+  }
 }
 </script>
 
