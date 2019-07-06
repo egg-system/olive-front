@@ -2,13 +2,16 @@
   <section class="container">
     <v-container grid-list-xl>
       <v-layout column wrap>
-        <shop-name/>
-        <registration-menu/>
-        <registration-user-info/>
-        <login-info v-if="isShownLoginInfo"/>
-        <registration-confirm-info/>
-        <registration-request/>
-        <confirm-btn/>
+        <customer-must-update-error v-if="customerMustUpdate"/>
+        <template v-else>
+          <shop-name/>
+          <registration-menu/>
+          <registration-user-info/>
+          <login-info v-if="isShownLoginInfo"/>
+          <registration-confirm-info/>
+          <registration-request/>
+          <confirm-btn/>
+        </template>
       </v-layout>
     </v-container>
   </section>
@@ -23,6 +26,7 @@ import RegistrationUserInfo from '~/components/pages/common/RegistrationUserInfo
 import RegistrationMenu from '~/components/pages/common/RegistrationMenu.vue'
 import RegistrationConfirmInfo from '~/components/pages/common/RegistrationConfirmInfo.vue'
 import RegistrationRequest from '~/components/pages/common/RegistrationRequest.vue'
+import CustomerMustUpdateError from '~/components/pages/common/CustomerMustUpdateError.vue'
 
 export default {
   middleware: ['menu-selected', 'date-time-selected'],
@@ -33,14 +37,16 @@ export default {
     RegistrationUserInfo,
     RegistrationMenu,
     RegistrationConfirmInfo,
-    RegistrationRequest
+    RegistrationRequest,
+    CustomerMustUpdateError
   },
   computed: {
     isShownLoginInfo() {
       return !this.isLogin && this.isCreate
     },
     ...mapState('login', ['isCreate']),
-    ...mapGetters('login', ['isLogin'])
+    ...mapGetters('login', ['isLogin']),
+    ...mapGetters('login', ['customerMustUpdate'])
   }
 }
 </script>

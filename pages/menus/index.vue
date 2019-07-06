@@ -2,17 +2,20 @@
   <section class="container">
     <v-container grid-list-xl>
       <v-layout column wrap class="menu-contents">
-        <password-alert />
-        <loading v-if="isLoading" class="loading"/>
-        <div :class="{ hidden: isLoading }">
-          <shop-name/>
-          <registration-menu
-            v-if="menuIndex == 1"
-            :if-show-only-first-menu="true"
-            :is-first="false"
-          />
-          <menu-list/>
-        </div>
+        <customer-must-update-error v-if="customerMustUpdate"/>
+        <template v-else>
+          <password-alert />
+          <loading v-if="isLoading" class="loading"/>
+          <div :class="{ hidden: isLoading }">
+            <shop-name/>
+            <registration-menu
+              v-if="menuIndex == 1"
+              :if-show-only-first-menu="true"
+              :is-first="false"
+            />
+            <menu-list/>
+          </div>
+        </template>
       </v-layout>
     </v-container>
   </section>
@@ -25,6 +28,7 @@ import MenuList from '~/components/pages/menus/MenuList.vue'
 import Loading from '~/components/layouts/Loading.vue'
 import RegistrationMenu from '~/components/pages/common/RegistrationMenu.vue'
 import PasswordAlert from '~/components/pages/common/PasswordAlert.vue'
+import CustomerMustUpdateError from '~/components/pages/common/CustomerMustUpdateError.vue'
 
 export default {
   middleware: ['init-menu-index'],
@@ -36,13 +40,15 @@ export default {
     MenuList,
     Loading,
     RegistrationMenu,
-    PasswordAlert
+    PasswordAlert,
+    CustomerMustUpdateError
   },
   computed: {
     menuIndex() {
       return this.$store.state.select.menuIndex
     },
-    ...mapGetters('menu', ['isLoading'])
+    ...mapGetters('menu', ['isLoading']),
+    ...mapGetters('login', ['customerMustUpdate'])
   }
 }
 </script>

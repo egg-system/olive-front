@@ -70,6 +70,12 @@ export const getters = {
       last_visit_store_id: rootState.select.menus[0].storeId,
       ...getters.updateParams
     }
+  },
+  customerMustUpdate(state, getters) {
+    return (
+      getters.isLogin &&
+      (!state.firstNameKana || !state.lastNameKana || !state.phoneNumber)
+    )
   }
 }
 
@@ -145,7 +151,7 @@ export const mutations = {
 
 /* actions */
 export const actions = {
-  setLoginCustomer({ commit }, customer) {
+  setLoginCustomer({commit}, customer) {
     commit('setCustomerId', customer.id)
     commit('setFirstName', customer.first_name)
     commit('setLastName', customer.last_name)
@@ -161,7 +167,7 @@ export const actions = {
     return customer
   },
   // ログインチェック
-  async checkLogin({ commit, dispatch }, { mail, password }) {
+  async checkLogin({commit, dispatch}, {mail, password}) {
     // ローディング中にする
     commit('setIsLoading', true)
 
@@ -189,7 +195,7 @@ export const actions = {
     return false
   },
   // ユーザー作成
-  async createCustomer({ commit, dispatch, getters }) {
+  async createCustomer({commit, dispatch, getters}) {
     try {
       const result = await axios.post(
         process.env.api.customerCreate,
@@ -208,7 +214,7 @@ export const actions = {
       return false
     }
   },
-  async updateCustomer({ commit, dispatch, getters }) {
+  async updateCustomer({commit, dispatch, getters}) {
     try {
       const result = await getters.authenticatedApi.patch(
         process.env.api.customerCreate,
@@ -223,14 +229,14 @@ export const actions = {
       return false
     }
   },
-  async sendPasswrodResetMail({ state, commit }) {
+  async sendPasswrodResetMail({state, commit}) {
     await axios.post(process.env.api.customerReset, {
       email: state.mail,
       redirect_url: `${window.location.origin}/password/set/`
     })
     commit('reset')
   },
-  async updatePassword({ state, getters, commit }) {
+  async updatePassword({state, getters, commit}) {
     await getters.authenticatedApi.patch(process.env.api.customerReset, {
       password: state.password,
       password_confirmation: state.password2
@@ -238,7 +244,7 @@ export const actions = {
     commit('reset')
     commit('logout')
   },
-  async validateToken({ commit, dispatch, getters }) {
+  async validateToken({commit, dispatch, getters}) {
     const result = await getters.authenticatedApi
       .get(process.env.api.validateToken)
       .catch(error => {
