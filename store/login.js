@@ -70,6 +70,12 @@ export const getters = {
       last_visit_store_id: rootState.select.menus[0].storeId,
       ...getters.updateParams
     }
+  },
+  customerMustUpdate(state, getters) {
+    return (
+      getters.isLogin &&
+      (!state.firstNameKana || !state.lastNameKana || !state.phoneNumber)
+    )
   }
 }
 
