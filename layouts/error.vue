@@ -1,8 +1,13 @@
 <template>
   <div class="container">
     <div v-if="statusCode === 404">ページが見つかりません。</div>
-    <div v-else>エラーです。</div>
-    <nuxt-link to="/">ホーム</nuxt-link>に戻る。
+    <div v-else>
+      エラーです。<br>OSのバージョンアップをしていただくか、<a href="https://olivebodycare.healthcare/about/contact">こちら</a>のお問い合わせフォームからご予約をお願いいたします。
+    </div>
+    <br>
+    <div>
+      <nuxt-link to="/">ホーム</nuxt-link>に戻る。
+    </div>
   </div>
 </template>
 
@@ -26,3 +31,8 @@ export default {
   }
 }
 </script>
+<style scoped>
+.container {
+  flex-direction: column;
+}
+</style>
