@@ -1,7 +1,7 @@
 <template>
   <v-layout row>
     <v-flex>
-      <v-card :class="bkColor">
+      <v-card :class="isProd ? 'bg-prod' : 'bg-other'">
         <v-card-title>
           <logo class="header-logo" />
         </v-card-title>
@@ -18,8 +18,8 @@ export default {
     Logo
   },
   computed: {
-    bkColor: function() {
-      return process.env.NODE_ENV === 'production' ? 'bg-prod' : 'bg-other'
+    isProd: function() {
+      return process.env.NODE_ENV === 'prod'
     }
   }
 }
