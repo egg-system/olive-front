@@ -1,7 +1,7 @@
 <template>
   <v-layout row>
     <v-flex>
-      <v-card color="#fffde7">
+      <v-card :class="isProd ? 'bg-prod' : 'bg-other'">
         <v-card-title>
           <logo class="header-logo" />
         </v-card-title>
@@ -16,6 +16,11 @@ import Logo from '~/components/layouts/Logo.vue'
 export default {
   components: {
     Logo
+  },
+  computed: {
+    isProd() {
+      return process.env.isProd
+    }
   }
 }
 </script>
@@ -30,5 +35,11 @@ a.logo:hover {
 }
 .header-logo {
   margin: 0 auto;
+}
+.bg-prod {
+  background-color: #fffde7 !important;
+}
+.bg-other {
+  background-color: #ffc107 !important;
 }
 </style>

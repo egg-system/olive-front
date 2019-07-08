@@ -15,5 +15,6 @@ module.exports = {
     menu:
       'https://dashboard-stage.olivebodycare.healthcare/api/shops/:id/menus',
     date: 'https://dashboard-stage.olivebodycare.healthcare/api/shops/:id/dates'
-  }
+  },
+  isProd: false
 }
