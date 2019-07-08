@@ -97,6 +97,9 @@ module.exports = {
   env: envSet,
 
   router: {
-    middleware: 'validate-autenticates'
+    middleware: [
+      'validate-autenticates',
+      'mantenance-redirector'
+    ]
   }
 }
