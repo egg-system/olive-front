@@ -9,5 +9,6 @@ module.exports = {
     shop: 'https://api.myjson.com/bins/c8dli',
     date: 'https://api.myjson.com/bins/1hjqig'
   },
-  isProd: false
+  isProd: false,
+  isMaintenance: false
 }
