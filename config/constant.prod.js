@@ -9,5 +9,6 @@ module.exports = {
     shop: 'https://dashboard.olivebodycare.healthcare/api/shops/:id',
     menu: 'https://dashboard.olivebodycare.healthcare/api/shops/:id/menus',
     date: 'https://dashboard.olivebodycare.healthcare/api/shops/:id/dates'
-  }
+  },
+  isProd: true
 }

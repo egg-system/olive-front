@@ -18,8 +18,8 @@ export default {
     Logo
   },
   computed: {
-    isProd: function() {
-      return process.env.NODE_ENV === 'prod'
+    isProd() {
+      return process.env.isProd
     }
   }
 }
