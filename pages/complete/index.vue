@@ -2,7 +2,6 @@
   <section class="container">
     <v-container grid-list-xl>
       <v-layout column wrap>
-        <shop-name/>
         <v-layout row>
           <v-flex>
             <v-card-text v-if="!registration.isError && !login.isError" class="complete">
@@ -28,7 +27,6 @@
 
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex'
-import ShopName from '~/components/pages/common/ShopName.vue'
 import NextBtn from '~/components/pages/complete/NextBtn.vue'
 
 export default {
@@ -38,7 +36,6 @@ export default {
     next()
   },
   components: {
-    ShopName,
     NextBtn
   },
   middleware: ['menu-selected', 'date-time-selected', 'is-registered'],

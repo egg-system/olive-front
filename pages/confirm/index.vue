@@ -2,7 +2,6 @@
   <section class="container reservation_confirm">
     <v-container grid-list-xl>
       <v-layout column wrap>
-        <shop-name/>
         <v-layout row class="confirm-caution-section">
           <v-flex>
             <v-card-text class="notyet">
@@ -22,7 +21,6 @@
 </template>
 
 <script>
-import ShopName from '~/components/pages/common/ShopName.vue'
 import RegistrationUserInfo from '~/components/pages/common/RegistrationUserInfo.vue'
 import RegistrationMenu from '~/components/pages/common/RegistrationMenu.vue'
 import RegistrationConfirmInfo from '~/components/pages/common/RegistrationConfirmInfo.vue'
@@ -32,7 +30,6 @@ import FixedBtn from '~/components/pages/confirm/FixedBtn.vue'
 export default {
   middleware: ['menu-selected', 'date-time-selected', 'is-registered'],
   components: {
-    ShopName,
     RegistrationUserInfo,
     RegistrationMenu,
     RegistrationConfirmInfo,

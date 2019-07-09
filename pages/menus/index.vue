@@ -7,7 +7,6 @@
           <password-alert />
           <loading v-if="isLoading" class="loading"/>
           <div :class="{ hidden: isLoading }">
-            <shop-name/>
             <registration-menu
               v-if="menuIndex == 1"
               :if-show-only-first-menu="true"
@@ -23,7 +22,6 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
-import ShopName from '~/components/pages/common/ShopName.vue'
 import MenuList from '~/components/pages/menus/MenuList.vue'
 import Loading from '~/components/layouts/Loading.vue'
 import RegistrationMenu from '~/components/pages/common/RegistrationMenu.vue'
@@ -36,7 +34,6 @@ export default {
     store.dispatch('menu/getMenus', { shopId: 1 })
   },
   components: {
-    ShopName,
     MenuList,
     Loading,
     RegistrationMenu,
