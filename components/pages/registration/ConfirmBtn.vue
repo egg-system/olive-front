@@ -4,6 +4,11 @@
       <v-flex xs6>
         <v-btn :disabled="!canClick" color="warning" @click="confirm">予約内容を確認する</v-btn>
       </v-flex>
+      <v-flex xs6>
+        <v-btn @click="back">
+          もどる
+        </v-btn>
+      </v-flex>
     </v-layout>
   </div>
 </template>
@@ -81,6 +86,10 @@ export default {
   methods: {
     confirm() {
       this.$router.push('/confirm')
+    },
+    back() {
+      // ブラウザバック
+      this.$router.go(-1)
     }
   }
 }
