@@ -253,7 +253,7 @@ export const actions = {
       })
 
     if (result) {
-      dispatch('setLoginCustomer', result.data.data)
+      await dispatch('setLoginCustomer', result.data.data)
     }
   }
 }

@@ -16,7 +16,7 @@ export const mutations = {
 /* actions */
 export const actions = {
   // ログインチェック
-  async getMenus({ commit, dispatch }, { shopId }) {
+  async getMenus({ commit }, { shopId }) {
     const getShopMenuRoute = route(process.env.api.menu, { id: shopId })
     const response = await axios.get(getShopMenuRoute)
 
@@ -25,6 +25,9 @@ export const actions = {
 }
 
 export const getters = {
+  hasSubShops(state) {
+    return state.subShops.length > 1
+  },
   allMenus(state) {
     return state.subShops.flatMap(subShop => subShop.menus)
   },
