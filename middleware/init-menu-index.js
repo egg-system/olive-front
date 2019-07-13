@@ -6,5 +6,8 @@ export default function({ redirect, store, query }) {
   }
 
   const maxMenuIndex = store.getters['select/maxMenuIndex']
-  redirect('/menus', { menuIndex: maxMenuIndex })
+  redirect('/menus', {
+    menuIndex: maxMenuIndex,
+    ...query
+  })
 }
