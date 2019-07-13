@@ -28,7 +28,12 @@ import RegistrationRequest from '~/components/pages/common/RegistrationRequest.v
 import FixedBtn from '~/components/pages/confirm/FixedBtn.vue'
 
 export default {
-  middleware: ['menu-selected', 'date-time-selected', 'is-registered'],
+  middleware: [
+    'menu-selected',
+    'date-time-selected',
+    'is-registered',
+    'init-shop-id'
+  ],
   components: {
     RegistrationUserInfo,
     RegistrationMenu,

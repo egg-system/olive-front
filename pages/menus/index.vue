@@ -4,7 +4,7 @@
       <v-layout column wrap class="menu-contents">
         <customer-must-update-error v-if="customerMustUpdate"/>
         <template v-else>
-          <password-alert />
+          <password-alert v-if="hasSubShop"/>
           <loading v-if="isLoading" class="loading"/>
           <div :class="{ hidden: isLoading }">
             <registration-menu
@@ -29,9 +29,9 @@ import PasswordAlert from '~/components/pages/common/PasswordAlert.vue'
 import CustomerMustUpdateError from '~/components/pages/common/CustomerMustUpdateError.vue'
 
 export default {
-  middleware: ['init-menu-index'],
+  middleware: ['init-menu-index', 'init-shop-id'],
   fetch({ store }) {
-    store.dispatch('menu/getMenus', { shopId: 1 })
+    store.dispatch('menu/getMenus', { shopId: store.state.shop.id })
   },
   components: {
     MenuList,
@@ -44,7 +44,7 @@ export default {
     menuIndex() {
       return this.$store.state.select.menuIndex
     },
-    ...mapGetters('menu', ['isLoading']),
+    ...mapGetters('menu', ['isLoading', 'hasSubShops']),
     ...mapGetters('login', ['customerMustUpdate'])
   }
 }

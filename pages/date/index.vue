@@ -21,7 +21,7 @@ import BackBtn from '~/components/pages/date/BackBtn.vue'
 import Loading from '~/components/layouts/Loading.vue'
 
 export default {
-  middleware: 'menu-selected',
+  middleware: ['menu-selected', 'init-shop-id'],
   components: {
     RegistrationMenu,
     Calendar,
