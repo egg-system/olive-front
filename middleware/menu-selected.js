@@ -1,5 +1,5 @@
-export default function({ store, redirect }) {
+export default function({ store, query, redirect }) {
   if (!store.getters['select/isMenuSelected']) {
-    redirect('/menus')
+    redirect('/menus', { shopId: query.shopId })
   }
 }

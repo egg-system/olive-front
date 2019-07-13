@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="linkBtn">
+    <div v-if="hasSubShops" class="linkBtn">
       <v-flex
         v-for="subShop in displayShops"
         :key="subShop.id"
@@ -13,7 +13,7 @@
       </v-flex>
     </div>
 
-    <v-radio-group v-model="selectedStoreMenu" column>
+    <v-radio-group v-model="selectedStoreMenu" column class="menu-list">
       <section
         v-for="subShop in displayShops"
         :key="subShop.id"
@@ -98,7 +98,7 @@ export default {
     },
     ...mapState('select', ['menuIndex', 'storeId']),
     ...mapState('menu', ['subShops']),
-    ...mapGetters('menu', ['getMenu', 'getOption']),
+    ...mapGetters('menu', ['getMenu', 'getOption', 'hasSubShops']),
     ...mapGetters('select', ['storeMenu', 'isMenuSelected', 'selectedOptions'])
   },
   methods: {
@@ -122,6 +122,9 @@ export default {
 </script>
 
 <style lang="scss">
+.menu-list {
+  justify-content: center;
+}
 section.content-section {
   margin-bottom: 20px;
   ul {

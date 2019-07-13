@@ -1,4 +1,4 @@
-export default ({ store, redirect }) => {
+export default ({ store, query, redirect }) => {
   // ユーザー情報が設定されていない場合
   if (
     !store.state.login.firstName ||
@@ -10,6 +10,6 @@ export default ({ store, redirect }) => {
     !store.state.login.phoneNumber
   ) {
     // 登録画面にリダイレクトさせる
-    return redirect('/registration')
+    return redirect('/registration', { shopId: query.shopId })
   }
 }

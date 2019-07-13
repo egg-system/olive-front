@@ -3,8 +3,7 @@ import { route } from '../lib/route'
 
 /* state */
 export const state = () => ({
-  // バグを防ぐため。middlewareで毎度入れるようにする
-  id: 1,
+  id: null,
   name: null,
   open_at: null,
   close_at: null,

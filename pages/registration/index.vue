@@ -4,7 +4,6 @@
       <v-layout column wrap>
         <customer-must-update-error v-if="customerMustUpdate"/>
         <template v-else>
-          <shop-name/>
           <registration-menu/>
           <registration-user-info/>
           <login-info v-if="isShownLoginInfo"/>
@@ -19,7 +18,6 @@
 
 <script>
 import { mapGetters, mapState } from 'vuex'
-import ShopName from '~/components/pages/common/ShopName.vue'
 import LoginInfo from '~/components/pages/registration/LoginInfo.vue'
 import ConfirmBtn from '~/components/pages/registration/ConfirmBtn.vue'
 import RegistrationUserInfo from '~/components/pages/common/RegistrationUserInfo.vue'
@@ -29,9 +27,8 @@ import RegistrationRequest from '~/components/pages/common/RegistrationRequest.v
 import CustomerMustUpdateError from '~/components/pages/common/CustomerMustUpdateError.vue'
 
 export default {
-  middleware: ['menu-selected', 'date-time-selected'],
+  middleware: ['menu-selected', 'date-time-selected', 'init-shop-id'],
   components: {
-    ShopName,
     LoginInfo,
     ConfirmBtn,
     RegistrationUserInfo,

@@ -4,10 +4,9 @@
       <v-layout column wrap class="menu-contents">
         <customer-must-update-error v-if="customerMustUpdate"/>
         <template v-else>
-          <password-alert />
+          <password-alert v-if="hasSubShop"/>
           <loading v-if="isLoading" class="loading"/>
           <div :class="{ hidden: isLoading }">
-            <shop-name/>
             <registration-menu
               v-if="menuIndex == 1"
               :if-show-only-first-menu="true"
@@ -23,7 +22,6 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
-import ShopName from '~/components/pages/common/ShopName.vue'
 import MenuList from '~/components/pages/menus/MenuList.vue'
 import Loading from '~/components/layouts/Loading.vue'
 import RegistrationMenu from '~/components/pages/common/RegistrationMenu.vue'
@@ -31,12 +29,11 @@ import PasswordAlert from '~/components/pages/common/PasswordAlert.vue'
 import CustomerMustUpdateError from '~/components/pages/common/CustomerMustUpdateError.vue'
 
 export default {
-  middleware: ['init-menu-index'],
+  middleware: ['init-menu-index', 'init-shop-id'],
   fetch({ store }) {
-    store.dispatch('menu/getMenus', { shopId: 1 })
+    store.dispatch('menu/getMenus', { shopId: store.state.shop.id })
   },
   components: {
-    ShopName,
     MenuList,
     Loading,
     RegistrationMenu,
@@ -47,7 +44,7 @@ export default {
     menuIndex() {
       return this.$store.state.select.menuIndex
     },
-    ...mapGetters('menu', ['isLoading']),
+    ...mapGetters('menu', ['isLoading', 'hasSubShops']),
     ...mapGetters('login', ['customerMustUpdate'])
   }
 }

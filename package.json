@@ -34,7 +34,9 @@
     "moment": "^2.24.0",
     "nuxt": "^2.0.0",
     "vuetify-loader": "^1.2.2",
-    "vuex-persistedstate": "^2.5.4"
+    "vuex-persistedstate": "^2.5.4",
+    "lodash": ">=4.17.13",
+    "lodash.template": ">=4.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",

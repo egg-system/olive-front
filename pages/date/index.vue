@@ -4,7 +4,6 @@
     <div :class="{ hidden: isLoading }">
       <v-container grid-list-xl>
         <v-layout column wrap class="menu-contents">
-          <shop-name/>
           <registration-menu :is-first="false"/>
           <calendar/>
           <back-btn/>
@@ -16,17 +15,15 @@
 
 <script>
 import { mapActions, mapState, mapMutations, mapGetters } from 'vuex'
-import ShopName from '~/components/pages/common/ShopName.vue'
 import RegistrationMenu from '~/components/pages/common/RegistrationMenu.vue'
 import Calendar from '~/components/pages/date/Calendar.vue'
 import BackBtn from '~/components/pages/date/BackBtn.vue'
 import Loading from '~/components/layouts/Loading.vue'
 
 export default {
-  middleware: 'menu-selected',
+  middleware: ['menu-selected', 'init-shop-id'],
   components: {
     RegistrationMenu,
-    ShopName,
     Calendar,
     BackBtn,
     Loading
