@@ -13,7 +13,7 @@
       </v-flex>
     </div>
 
-    <v-radio-group v-model="selectedStoreMenu" column>
+    <v-radio-group v-model="selectedStoreMenu" column class="menu-list">
       <section
         v-for="subShop in displayShops"
         :key="subShop.id"
@@ -122,6 +122,9 @@ export default {
 </script>
 
 <style lang="scss">
+.menu-list {
+  justify-content: center;
+}
 section.content-section {
   margin-bottom: 20px;
   ul {
