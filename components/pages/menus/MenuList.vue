@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="linkBtn">
+    <div v-if="hasSubShops" class="linkBtn">
       <v-flex
         v-for="subShop in displayShops"
         :key="subShop.id"
@@ -98,7 +98,7 @@ export default {
     },
     ...mapState('select', ['menuIndex', 'storeId']),
     ...mapState('menu', ['subShops']),
-    ...mapGetters('menu', ['getMenu', 'getOption']),
+    ...mapGetters('menu', ['getMenu', 'getOption', 'hasSubShops']),
     ...mapGetters('select', ['storeMenu', 'isMenuSelected', 'selectedOptions'])
   },
   methods: {
