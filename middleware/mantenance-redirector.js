@@ -1,4 +1,4 @@
-const matenancePath = '/maintenance'
+const matenancePath = '/maintenance/'
 
 export default function({ route, redirect }) {
   const isMaintenance = process.env.isMaintenance

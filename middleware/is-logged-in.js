@@ -3,7 +3,7 @@ export default ({ store, redirect, route }) => {
   switch (route.name) {
     case 'mypage-login':
       if (isLoggedIn) {
-        redirect('/mypage')
+        redirect('/mypage/')
       }
       break
 

@@ -3,5 +3,5 @@ export default function({ redirect }) {
     return
   }
 
-  redirect('/menus')
+  redirect('/menus/')
 }

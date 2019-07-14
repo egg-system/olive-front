@@ -10,6 +10,6 @@ export default ({ store, query, redirect }) => {
     !store.state.login.phoneNumber
   ) {
     // 登録画面にリダイレクトさせる
-    return redirect('/registration', { shopId: query.shopId })
+    return redirect('/registration/', { shopId: query.shopId })
   }
 }
