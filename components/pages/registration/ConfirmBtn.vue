@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapState, mapGetters, mapMutations } from 'vuex'
 
 import {
   checkMail,
@@ -88,9 +88,16 @@ export default {
       this.$router.push('/confirm')
     },
     back() {
-      // ブラウザバック
-      this.$router.go(-1)
-    }
+      this.resetRegistration()
+      if (this.isLogin) {
+        this.$router.push({ name: 'date' })
+      } else {
+        this.resetLogin()
+        this.$router.go(-1)
+      }
+    },
+    ...mapMutations('login', { resetLogin: 'reset' }),
+    ...mapMutations('registration', { resetRegistration: 'reset' })
   }
 }
 </script>
