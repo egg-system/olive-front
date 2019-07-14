@@ -4,7 +4,7 @@
       <v-layout column wrap class="menu-contents">
         <customer-must-update-error v-if="customerMustUpdate"/>
         <template v-else>
-          <password-alert v-if="hasSubShop"/>
+          <password-alert v-if="hasSubShops"/>
           <loading v-if="isLoading" class="loading"/>
           <div :class="{ hidden: isLoading }">
             <registration-menu
@@ -30,8 +30,10 @@ import CustomerMustUpdateError from '~/components/pages/common/CustomerMustUpdat
 
 export default {
   middleware: ['init-menu-index', 'init-shop-id'],
-  fetch({ store }) {
-    store.dispatch('menu/getMenus', { shopId: store.state.shop.id })
+  fetch({ store, query }) {
+    const shopId = query.shopId
+    store.dispatch('shop/getShop', { id: shopId })
+    store.dispatch('menu/getMenus', { shopId })
   },
   components: {
     MenuList,
