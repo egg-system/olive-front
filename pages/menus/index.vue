@@ -4,7 +4,7 @@
       <v-layout column wrap class="menu-contents">
         <customer-must-update-error v-if="customerMustUpdate"/>
         <template v-else>
-          <password-alert v-if="hasSubShops"/>
+          <password-alert/>
           <loading v-if="isLoading" class="loading"/>
           <div :class="{ hidden: isLoading }">
             <registration-menu
