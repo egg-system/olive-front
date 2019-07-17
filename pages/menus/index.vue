@@ -31,7 +31,8 @@ import CustomerMustUpdateError from '~/components/pages/common/CustomerMustUpdat
 export default {
   middleware: ['init-menu-index', 'init-shop-id'],
   fetch({ store, query }) {
-    const shopId = query.shopId
+    // shopIdがnullの場合は1をセットする
+    const shopId = query.shopId || 1
     store.dispatch('shop/getShop', { id: shopId })
     store.dispatch('menu/getMenus', { shopId })
   },
