@@ -1,6 +1,7 @@
 export default async function({ store, query, redirect, route }) {
-  if ('shopId' in query && !store.state.shop.id) {
-    await store.dispatch('shop/getShop', { id: query.shopId })
+  // エステ店舗には遷移させない。たまプラーザ本店のメニュー選択画面に遷移させる
+  if ('shopId' in query && query.shopId === '2') {
+    redirect('/menus/', { shopId: 1, menuIndex: 1 })
     return
   }
 
