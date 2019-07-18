@@ -4,12 +4,17 @@
       <v-flex xs6>
         <v-btn :disabled="!canClick" color="warning" @click="confirm">予約内容を確認する</v-btn>
       </v-flex>
+      <v-flex xs6>
+        <v-btn @click="back">
+          もどる
+        </v-btn>
+      </v-flex>
     </v-layout>
   </div>
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapState, mapGetters, mapMutations } from 'vuex'
 
 import {
   checkMail,
@@ -81,7 +86,18 @@ export default {
   methods: {
     confirm() {
       this.$router.push('/confirm')
-    }
+    },
+    back() {
+      this.resetRegistration()
+      if (this.isLogin) {
+        this.$router.push({ name: 'date' })
+      } else {
+        this.resetLogin()
+        this.$router.go(-1)
+      }
+    },
+    ...mapMutations('login', { resetLogin: 'reset' }),
+    ...mapMutations('registration', { resetRegistration: 'reset' })
   }
 }
 </script>
