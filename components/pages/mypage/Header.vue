@@ -9,10 +9,10 @@
     <v-btn dark class="mybtn" @click="top">
       マイページ<br>トップ
     </v-btn>
-    <v-btn dark class="mybtn" @click="reserve">
+    <v-btn dark class="mybtn" href="https://reserve.olivebodycare.healthcare/menus/?shopId=1&menuIndex=1">
       たまプラーザ<br>本店予約
     </v-btn>
-    <v-btn dark class="mybtn bg_gray">
+    <v-btn dark class="mybtn bg_gray" href="https://reserve.olivebodycare.healthcare/menus/?shopId=3&menuIndex=1">
       横浜青葉台店<br>予約
     </v-btn>
     <v-btn dark class="mybtn" href="https://olivebodycare.healthcare/">
