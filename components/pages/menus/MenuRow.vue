@@ -4,7 +4,7 @@
       <v-radio :value="getShopMenuValue(menu)">
         <div slot="label" class="menu-info">
           <span>{{ menu.name }}</span>
-          <span class="menu-price">{{ menu.price | priceFormat }}</span>
+          <span class="menu-price">{{ menu.price | priceTaxExceptFormat }}</span>
           <span class="menu-duration">{{ menu.minutes | timeFormat }}</span>
           <div class="description">{{ menu.description }}</div>
         </div>

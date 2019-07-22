@@ -5,7 +5,7 @@
       <v-checkbox v-if="true" v-model="checkedOptions" :value="option">
         <div slot="label" class="menu-info">
           <span>{{ option.name }}</span>
-          <span>{{ option.price | priceFormat }}</span>
+          <span>{{ option.price | priceTaxExceptFormat }}</span>
           <span v-if="option.is_mimitsubo_jewelry">/&nbsp; 粒</span>
         </div>
       </v-checkbox>
