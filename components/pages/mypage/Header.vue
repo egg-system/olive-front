@@ -9,10 +9,10 @@
     <v-btn dark class="mybtn" @click="top">
       マイページ<br>トップ
     </v-btn>
-    <v-btn dark class="mybtn" @click="reserve">
+    <v-btn dark class="mybtn" @click="reserve(1)">
       たまプラーザ<br>本店予約
     </v-btn>
-    <v-btn dark class="mybtn bg_gray">
+    <v-btn dark class="mybtn" @click="reserve(3)">
       横浜青葉台店<br>予約
     </v-btn>
     <v-btn dark class="mybtn" href="https://olivebodycare.healthcare/">
@@ -32,8 +32,8 @@ import { mapMutations } from 'vuex'
 
 export default {
   methods: {
-    reserve() {
-      this.$router.push('/menus')
+    reserve(shopId) {
+      this.$router.push({ path: '/menus/', query: { shopId } })
     },
     top() {
       this.$router.push('/mypage')
