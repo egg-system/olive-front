@@ -13,9 +13,11 @@
       </v-flex>
     </div>
     <div class="taxLabel">
-      <v-flex>
-        金額は全て税抜きです。
-      </v-flex>
+      <v-layout>
+        <v-flex>
+          ※金額は全て税抜きです。
+        </v-flex>
+      </v-layout>
     </div>
 
     <v-radio-group v-model="selectedStoreMenu" column class="menu-list">
@@ -216,7 +218,19 @@ section.content-section {
   }
 }
 .taxLabel {
+  display: inline-block;
+  justify-content: right;
+  width: 47%;
+  .flex {
+    padding-top: 40px !important;
+    padding-right: 0px !important;
+    text-align: right;
+  }
+  @media screen and (max-width: 767px) {
+    width: 80%;
+  }
   & + .v-input {
+    margin-top: 0px !important;
     justify-content: center;
     width: 50%;
     margin: 1em auto;
