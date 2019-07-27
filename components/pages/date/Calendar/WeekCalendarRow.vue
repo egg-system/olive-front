@@ -2,9 +2,15 @@
   <table class="outer-table">
     <tbody>
       <tr>
-        <th v-if="!hasTwoMonth" colspan="8">{{ firstDate | monthFormat }}</th>
+        <th v-if="!hasTwoMonth" :id="firstMonthId" colspan="8">
+          {{ firstDate | monthFormat }}
+          <a v-if="nextMonthLink" :href="firstMonthLink">来月へ</a>
+        </th>
         <th v-if="hasTwoMonth" :colspan="firstMonthCount + 1">{{ firstDate | monthFormat }}</th>
-        <th v-if="hasTwoMonth" :colspan="7 - firstMonthCount">{{ lastDate | monthFormat }}</th>
+        <th v-if="hasTwoMonth" :id="lastMonthId" :colspan="7 - firstMonthCount">
+          {{ lastDate | monthFormat }}
+          <a v-if="nextMonthLink" :href="lastMonthLink">来月へ</a>
+        </th>
       </tr>
       <tr>
         <td class="col-data-wrapper">
@@ -51,6 +57,10 @@ export default {
     weekData: {
       type: Array,
       required: true
+    },
+    lastMonth: {
+      type: Number,
+      required: true
     }
   },
   computed: {
@@ -72,6 +82,29 @@ export default {
     },
     timeSlotStrings() {
       return this.timeSlots.map(timeSlot => timeSlot.toString())
+    },
+    firstMonthId() {
+      if (this.firstDate.date() == 1) {
+        return 'next-month' + (this.firstDate.month() + 1)
+      }
+      return (
+        'next-month' +
+        (this.firstDate.month() + 1) +
+        '-' +
+        this.firstDate.date()
+      )
+    },
+    lastMonthId() {
+      return 'next-month' + (this.lastDate.month() + 1)
+    },
+    nextMonthLink() {
+      return this.lastMonth != this.firstDate.month()
+    },
+    firstMonthLink() {
+      return '#next-month' + (this.firstDate.month() + 2)
+    },
+    lastMonthLink() {
+      return '#next-month' + (this.lastDate.month() + 2)
     },
     ...mapGetters('date', ['timeSlots'])
   }

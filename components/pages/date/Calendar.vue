@@ -16,6 +16,7 @@
             v-for="(weekData, index) in calendarWeeks"
             :key="index"
             :week-data="weekData"
+            :last-month="lastMonth"
           />
         </div>
       </div>
@@ -51,6 +52,7 @@
 
 <script>
 import _ from 'lodash'
+import moment from 'moment'
 import { mapGetters } from 'vuex'
 import WeekCalendarRow from './Calendar/WeekCalendarRow.vue'
 
@@ -59,6 +61,9 @@ export default {
   computed: {
     calendarWeeks() {
       return _.chunk(this.calendarDates, 7)
+    },
+    lastMonth() {
+      return moment(this.calendarDates.slice(-1)[0]).month()
     },
     calendarDates() {
       const calendarDates = []
