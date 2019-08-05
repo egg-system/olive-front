@@ -41,8 +41,11 @@
       <v-flex>
         <v-card-text class="txt_12em">マイページからキャンセル可能期限</v-card-text>
       </v-flex>
-      <v-flex>
-        <v-card-text>{{ cancelableDate }}</v-card-text>
+      <v-flex v-if="canCancel">
+        <v-card-text>{{ cancelableDate | dateTimeAndDatFormat }}</v-card-text>
+      </v-flex>
+      <v-flex v-else>
+        <v-card-text>キャンセル不可</v-card-text>
       </v-flex>
     </v-layout>
     <v-card-text v-if="isConfirm">※それ以降のキャンセルは直接サロンへご連絡ください。</v-card-text>
@@ -68,24 +71,14 @@ export default {
     allServiceMinutes() {
       return _.sumBy(this.menus, 'menu.minutes')
     },
-    cancelableDay() {
-      return this.$root.$options.filters.dayFormat(this.cancelableDate)
+    canCancel() {
+      return moment().isAfter(this.cancelableDate)
     },
     cancelableDate() {
-      //今日、明日の予約はキャンセル不可
-      const noCancellations = moment(this.dateTime).isSameOrBefore(
-        moment().add('days', 1),
-        'day'
-      )
-      if (noCancellations) {
-        return 'キャンセル不可'
-      } else {
-        const cancel = this.dateTime
-          .clone()
-          .subtract('days', 2)
-          .endOf('day')
-        return this.$root.$options.filters.dateTimeAndDatFormat(cancel)
-      }
+      return this.dateTime
+        .clone()
+        .subtract('days', 2)
+        .endOf('day')
     },
     menusForDisplay() {
       let menus =
