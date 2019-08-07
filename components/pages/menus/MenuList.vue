@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="menu-content">
     <div v-if="hasSubShops" class="linkBtn">
       <v-flex
         v-for="subShop in displayShops"
@@ -129,6 +129,10 @@ export default {
 </script>
 
 <style lang="scss">
+.menu-content {
+  display: flex;
+  flex-direction: column;
+}
 .menu-list {
   justify-content: center;
 }
@@ -182,19 +186,17 @@ section.content-section {
   }
 }
 .linkBtn {
-  display: inline-block;
   .flex {
-    width: 47%;
     display: inline-block;
     vertical-align: top;
     @media screen and (max-width: 767px) {
-      width: 49%;
       padding: 0.2em !important;
     }
     &:hover {
       cursor: pointer;
     }
     .v-card {
+      width: 22em;
       height: 5em;
       display: flex;
       align-items: center;
