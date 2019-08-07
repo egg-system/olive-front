@@ -44,6 +44,10 @@ export default {
     link: {
       type: String,
       default: ''
+    },
+    query: {
+      type: Object,
+      default: () => {}
     }
   },
   data: () => ({
@@ -71,7 +75,7 @@ export default {
         password: this.password
       }).then(isLogin => {
         if (isLogin) {
-          this.$router.push(this.link)
+          this.$router.push({ path: this.link, query: this.query })
         }
       })
     },
