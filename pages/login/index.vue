@@ -13,7 +13,7 @@
           <div>
             <h2 class="subtitle">会員の方はこちら</h2>
             <password-alert />
-            <login-form :link="link" />
+            <login-form :link="link" :query="query" />
             <nuxt-link to="/password/reset">
               パスワードを忘れた方はこちら
             </nuxt-link>
@@ -44,14 +44,18 @@ import PasswordAlert from '~/components/pages/common/PasswordAlert.vue'
 import { mapState, mapActions, mapMutations } from 'vuex'
 
 export default {
+  middleware: ['init-shop-id'],
   components: {
     LoginForm,
     Loading,
     PasswordAlert
   },
-  data: () => ({
-    link: '/registration'
-  }),
+  asyncData({ query }) {
+    return {
+      link: '/registration',
+      query: { shopId: query.shopId }
+    }
+  },
   computed: {
     ...mapState({
       login: state => state.login
