@@ -3,7 +3,7 @@
 
     <v-layout column>
       <v-flex xs6>
-        <v-btn color="warning" @click="fix">
+        <v-btn :disabled="pushed" color="warning" @click="fix">
           上記に同意の上予約を確定する
         </v-btn>
       </v-flex>
@@ -20,8 +20,14 @@
 
 <script>
 export default {
+  data() {
+    return {
+      pushed: false
+    }
+  },
   methods: {
     fix() {
+      this.pushed = true
       this.$router.push('/complete')
     },
     back() {
