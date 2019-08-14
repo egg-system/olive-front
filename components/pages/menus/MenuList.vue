@@ -12,13 +12,6 @@
         </v-card>
       </v-flex>
     </div>
-    <div class="taxLabel">
-      <v-layout>
-        <v-flex>
-          ※金額は全て税抜きです。
-        </v-flex>
-      </v-layout>
-    </div>
 
     <v-radio-group v-model="selectedStoreMenu" column class="menu-list">
       <section
@@ -37,7 +30,10 @@
           </v-flex>
           <v-flex>
             <v-card>
-              <v-card-title primary-title>ご希望のメニューを選択してください</v-card-title>
+              <v-card-title primary-title>
+                ご希望のメニューを選択してください
+                <p class="taxLabel">※金額は全て税抜きです。</p>
+              </v-card-title>
             </v-card>
             <div v-for="menu in subShop.menus" :key="menu.id">
               <menu-row :store-id="subShop.id" :menu="menu"/>
@@ -128,7 +124,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .menu-content {
   display: flex;
   flex-direction: column;
@@ -162,6 +158,13 @@ section.content-section {
   p {
     margin-top: 10px;
     text-align: left;
+  }
+
+  p.taxLabel {
+    font-size: 0.8em;
+    margin: 0;
+    min-width: 100%;
+    text-align: right;
   }
 }
 .option-area {
@@ -216,28 +219,6 @@ section.content-section {
     }
     .v-input__control {
       width: 100% !important;
-    }
-  }
-}
-.taxLabel {
-  display: inline-block;
-  justify-content: right;
-  width: 47%;
-  .flex {
-    padding-top: 40px !important;
-    padding-right: 0px !important;
-    text-align: right;
-  }
-  @media screen and (max-width: 767px) {
-    width: 80%;
-  }
-  & + .v-input {
-    margin-top: 0px !important;
-    justify-content: center;
-    width: 50%;
-    margin: 1em auto;
-    @media screen and (max-width: 767px) {
-      width: 95%;
     }
   }
 }
