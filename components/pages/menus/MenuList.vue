@@ -124,7 +124,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .menu-content {
   display: flex;
   flex-direction: column;
