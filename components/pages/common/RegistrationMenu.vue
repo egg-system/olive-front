@@ -72,7 +72,7 @@ export default {
       return _.sumBy(this.menus, 'menu.minutes')
     },
     canCancel() {
-      return moment().isAfter(this.cancelableDate)
+      return moment().isBefore(this.cancelableDate)
     },
     cancelableDate() {
       return this.dateTime
