@@ -6,7 +6,7 @@
     app
   >
     <v-list v-for="list in lists" :key="list.subHeader">
-      <v-subheader>
+      <v-subheader class="sub-header">
         <v-icon>{{ list.icon }}</v-icon>
         <span class="text-spacer"/>{{ list.subHeader }}
       </v-subheader>
@@ -16,7 +16,7 @@
         @click="link.function"
       >
         <v-list-tile-content>
-          <v-list-tile-title >
+          <v-list-tile-title>
             {{ link.title }}
           </v-list-tile-title>
         </v-list-tile-content>
@@ -52,7 +52,7 @@ export default {
           icon: 'home',
           links: [
             {
-              title: 'マイページトップ',
+              title: 'トップ',
               function: this.top
             },
             {
@@ -72,15 +72,15 @@ export default {
           icon: 'schedule',
           links: [
             {
-              title: 'たまプラーザ本店予約',
+              title: 'たまプラーザ本店',
               function: () => this.reserve(1)
             },
             {
-              title: '横浜青葉台店予約',
+              title: '横浜青葉台店',
               function: () => this.reserve(3)
             },
             {
-              title: '札幌円山店予約',
+              title: '札幌円山店',
               function: () => this.reserve(4)
             }
           ]
@@ -111,6 +111,10 @@ export default {
 <style lang="scss" scoped>
 .text-spacer {
   width: 0.5em;
+}
+
+.sub-header {
+  font-size: 1.2em;
 }
 
 .headMenu {
