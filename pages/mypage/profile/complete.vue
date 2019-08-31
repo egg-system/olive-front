@@ -15,16 +15,10 @@
 </template>
 
 <script>
-import MypageHeader from '~/components/pages/mypage/Header.vue'
-import MypageName from '~/components/pages/mypage/Name.vue'
 import { mapState, mapActions, mapMutations } from 'vuex'
 
 export default {
   layout: 'mypage',
-  components: {
-    MypageHeader,
-    MypageName
-  },
   computed: {
     ...mapState('login', ['errorMessage', 'isError'])
   },

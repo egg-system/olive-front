@@ -38,24 +38,20 @@
 </template>
 
 <script>
-import MypageHeader from '~/components/pages/mypage/Header.vue'
 import MypageCoupon from '~/components/pages/mypage/Coupon.vue'
 import MypageReserveHistory from '~/components/pages/mypage/reservations/ReserveHistory.vue'
 import MypageMoreBtn from '~/components/pages/mypage/MoreBtn.vue'
 import MypageCancelBtn from '~/components/pages/mypage/CancelBtn.vue'
-import MypageName from '~/components/pages/mypage/Name.vue'
 import { mapState } from 'vuex'
 
 export default {
   layout: 'mypage',
   middleware: ['fetch-reservations'],
   components: {
-    MypageHeader,
     MypageCoupon,
     MypageReserveHistory,
     MypageMoreBtn,
-    MypageCancelBtn,
-    MypageName
+    MypageCancelBtn
   },
   computed: {
     isCouponEnabled() {

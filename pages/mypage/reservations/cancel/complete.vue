@@ -24,15 +24,8 @@
 </template>
 
 <script>
-import MypageHeader from '~/components/pages/mypage/Header.vue'
-import MypageName from '~/components/pages/mypage/Name.vue'
-
 export default {
   layout: 'mypage',
-  components: {
-    MypageHeader,
-    MypageName
-  },
   async asyncData({ store, query }) {
     const result = await store.dispatch(
       'reservation/destroyReservation',
