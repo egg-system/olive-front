@@ -32,9 +32,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import MypageHeader from '~/components/pages/mypage/Header.vue'
 import MypageReserveHistory from '~/components/pages/mypage/reservations/ReserveHistory.vue'
-import MypageName from '~/components/pages/mypage/Name.vue'
 
 export default {
   layout: 'mypage',
@@ -42,9 +40,7 @@ export default {
     store.dispatch('reservation/getReservation', query.id)
   },
   components: {
-    MypageHeader,
-    MypageReserveHistory,
-    MypageName
+    MypageReserveHistory
   },
   computed: {
     isShownHisroty() {

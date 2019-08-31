@@ -15,20 +15,16 @@
 </template>
 
 <script>
-import MypageHeader from '~/components/pages/mypage/Header.vue'
 import MypageReserveHistory from '~/components/pages/mypage/reservations/ReserveHistory.vue'
 import MypageListPagination from '~/components/pages/mypage/reservations/Pagination.vue'
-import MypageName from '~/components/pages/mypage/Name.vue'
 import { mapState, mapActions, mapMutations } from 'vuex'
 
 export default {
   layout: 'mypage',
   middleware: ['fetch-reservations'],
   components: {
-    MypageHeader,
     MypageReserveHistory,
-    MypageListPagination,
-    MypageName
+    MypageListPagination
   },
   computed: {
     isShownCancelBtn() {

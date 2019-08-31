@@ -3,7 +3,7 @@
     <div>
       <app-header />
       <div>
-        <mypage-header />
+        <mypage-navbar :is-shown.sync="isShownNabvar"/>
         <section class="container">
           <v-container grid-list-xl>
             <v-layout column>
@@ -13,25 +13,30 @@
           </v-container>
         </section>
       </div>
-      <app-footer />
+      <mypage-footer :is-shown-navbar.sync="isShownNabvar" />
     </div>
   </v-app>
 </template>
 
 <script>
-import AppFooter from '~/components/layouts/Footer.vue'
+import MypageFooter from '~/components/pages/mypage/Footer.vue'
 import AppHeader from '~/components/layouts/Header.vue'
-import MypageHeader from '~/components/pages/mypage/Header.vue'
+import MypageNavbar from '~/components/pages/mypage/Navbar.vue'
 import MypageName from '~/components/pages/mypage/Name.vue'
 
 export default {
   components: {
-    AppFooter,
     AppHeader,
-    MypageHeader,
+    MypageFooter,
+    MypageNavbar,
     MypageName
   },
-  middleware: ['is-logged-in']
+  middleware: ['is-logged-in'],
+  data() {
+    return {
+      isShownNabvar: false
+    }
+  }
 }
 </script>
 
