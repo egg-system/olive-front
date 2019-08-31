@@ -2,7 +2,7 @@
   <v-app>
     <div>
       <app-header />
-      <div>
+      <div class="mypage-body">
         <mypage-navbar :is-shown.sync="isShownNabvar"/>
         <section class="container">
           <v-container grid-list-xl>
