@@ -4,6 +4,7 @@
     fixed
     temporary
     app
+    class="nav-menus"
   >
     <v-list v-for="list in lists" :key="list.subHeader">
       <v-subheader class="sub-header">
@@ -115,6 +116,10 @@ export default {
 
 .sub-header {
   font-size: 1.2em;
+}
+
+.nav-menus {
+  background-color: #fffde7;
 }
 
 .headMenu {
