@@ -1,10 +1,14 @@
 <template>
   <v-toolbar :class="isProd ? 'bg-prod' : 'bg-other'">
-    <v-toolbar-side-icon 
-      v-if="isNavbarActive"
+    <v-btn 
+      flat
+      color="light-green darken-2"
       class="nav-menu-btn"
-      @click="showNavbar"
-    />
+      @click.stop="showNavbar"
+    >
+      <v-icon>menu</v-icon>
+      <span class="text-capitalize">Menu</span>
+    </v-btn>
     <v-toolbar-title>
       <logo class="header-logo" />
     </v-toolbar-title>
