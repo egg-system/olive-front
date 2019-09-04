@@ -1,13 +1,14 @@
 <template>
-  <v-layout row>
-    <v-flex>
-      <v-card :class="isProd ? 'bg-prod' : 'bg-other'">
-        <v-card-title>
-          <logo class="header-logo" />
-        </v-card-title>
-      </v-card>
-    </v-flex>
-  </v-layout>
+  <v-toolbar :class="isProd ? 'bg-prod' : 'bg-other'">
+    <v-toolbar-side-icon 
+      v-if="isNavbarActive"
+      class="nav-menu-btn"
+      @click="showNavbar"
+    />
+    <v-toolbar-title>
+      <logo class="header-logo" />
+    </v-toolbar-title>
+  </v-toolbar>
 </template>
 
 <script>
@@ -17,9 +18,31 @@ export default {
   components: {
     Logo
   },
+  props: {
+    isShownNavbar: {
+      type: Boolean,
+      default: null
+    }
+  },
   computed: {
     isProd() {
       return process.env.isProd
+    },
+    isNavbarActive() {
+      return this.isShownNavbar !== null
+    },
+    drawer: {
+      get() {
+        return this.isShownNavbar
+      },
+      set(drawer) {
+        this.$emit('update:isShownNavbar', drawer)
+      }
+    }
+  },
+  methods: {
+    showNavbar() {
+      this.drawer = true
     }
   }
 }
@@ -41,5 +64,9 @@ a.logo:hover {
 }
 .bg-other {
   background-color: #ffc107 !important;
+}
+
+.nav-menu-btn {
+  width: 36px;
 }
 </style>
