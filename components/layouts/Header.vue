@@ -1,6 +1,7 @@
 <template>
   <v-toolbar :class="isProd ? 'bg-prod' : 'bg-other'">
-    <v-btn 
+    <v-btn
+      v-if="isShownNavBtn"
       flat
       color="light-green darken-2"
       class="nav-menu-btn"
@@ -32,7 +33,7 @@ export default {
     isProd() {
       return process.env.isProd
     },
-    isNavbarActive() {
+    isShownNavBtn() {
       return this.isShownNavbar !== null
     },
     drawer: {
