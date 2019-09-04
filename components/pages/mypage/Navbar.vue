@@ -49,7 +49,7 @@ export default {
     lists() {
       return [
         {
-          subHeader: 'Home',
+          subHeader: 'ホーム',
           icon: 'home',
           links: [
             {
@@ -57,14 +57,24 @@ export default {
               function: this.top
             },
             {
-              title: '登録情報変更',
-              function: this.profile
-            },
-            {
               title: 'オリーヴボディケア店舗情報',
               function: () => {
                 window.location = 'https://olivebodycare.healthcare/'
               }
+            }
+          ]
+        },
+        {
+          subHeader: 'ユーザー',
+          icon: 'person',
+          links: [
+            {
+              title: '登録情報変更',
+              function: this.profile
+            },
+            {
+              title: 'ログアウト',
+              function: this.doLogout
             }
           ]
         },
@@ -99,7 +109,7 @@ export default {
     profile() {
       this.$router.push('/mypage/profile/edit')
     },
-    logoutBtn() {
+    doLogout() {
       this.logout()
       // マイページトップにリダイレクトさせる
       this.$router.push('/mypage/login')
