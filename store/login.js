@@ -171,15 +171,12 @@ export const actions = {
     // ローディング中にする
     commit('setIsLoading', true)
 
-    const parameters = new URLSearchParams()
+    const parameters = new FormData()
     parameters.append('email', mail)
     parameters.append('password', password)
 
     try {
-      const result = await axios.post(process.env.api.customerLogin, {
-        email: mail,
-        password: password
-      })
+      const result = await axios.post(process.env.api.customerLogin, parameters)
 
       commit('setToken', result.headers)
       dispatch('setLoginCustomer', result.data.data)
