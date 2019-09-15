@@ -234,10 +234,11 @@ export const actions = {
     commit('reset')
   },
   async updatePassword({ state, getters, commit }) {
-    await getters.authenticatedApi.patch(process.env.api.customerReset, {
-      password: state.password,
-      password_confirmation: state.password2
-    })
+    const parameters = new FormData()
+    parameters.append('password', state.password)
+    parameters.append('password_confirmation', state.password2)
+
+    await getters.authenticatedApi.patch(process.env.api.customerReset, parameters)
     commit('reset')
     commit('logout')
   },
