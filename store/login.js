@@ -238,7 +238,9 @@ export const actions = {
     parameters.append('password', state.password)
     parameters.append('password_confirmation', state.password2)
 
-    await getters.authenticatedApi.patch(process.env.api.customerReset, parameters)
+    await getters.authenticatedApi.patch(process.env.api.customerReset,
+      parameters
+    )
     commit('reset')
     commit('logout')
   },
