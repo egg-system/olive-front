@@ -73,6 +73,10 @@ export default {
               function: this.profile
             },
             {
+              title: 'パスワード変更',
+              function: this.resetPassword
+            },
+            {
               title: 'ログアウト',
               function: this.doLogout
             }
@@ -113,6 +117,9 @@ export default {
       this.logout()
       // マイページトップにリダイレクトさせる
       this.$router.push('/mypage/login')
+    },
+    resetPassword() {
+      this.$router.push('/password/reset')
     },
     ...mapMutations('login', ['logout'])
   }
