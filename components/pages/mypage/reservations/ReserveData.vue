@@ -3,7 +3,7 @@
     <div class="card-main cancel">
       <v-layout row>
         <v-flex xs5 class="text-menu">
-          <v-chip :color="reserveStateCss" label text-color="white">{{ data.state }}</v-chip>
+          <v-chip :color="reserveStateCss" label text-color="white" disabled>{{ data.state }}</v-chip>
         </v-flex>
         <v-flex xs6>
           <div class="text-value shop">{{ data.store.name }}</div>
