@@ -45,7 +45,12 @@ module.exports = {
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
-    '@nuxtjs/vuetify'
+    '@nuxtjs/vuetify',
+    ['@nuxtjs/google-tag-manager', {
+      id: 'GTM-TPQJNVG',
+      pageTracking: true,
+      dev: environment !== 'prod'
+    }],
   ],
   /*
   ** Axios module configuration
