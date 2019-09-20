@@ -1,15 +1,26 @@
 <template>
-  <v-card color="white">
+  <v-card color="white pa-3">
     <div class="card-main cancel">
-      <v-layout row>
+      <v-layout row wrap>
         <v-flex xs5 class="text-menu">
           <v-chip :color="reserveStateCss" label text-color="white" disabled>{{ data.state }}</v-chip>
         </v-flex>
+        <v-flex v-if="isShownCancelButton" xs6 >
+          <v-btn
+            v-if="isShownCancelButton"
+            :disabled="canNotCancel"
+            class="cancel-btn d-inline-flex"
+            color="warning"
+            @click="cancelConfrim(data.id)"
+          >キャンセルする</v-btn>
+        </v-flex>
+      </v-layout>
+      <v-layout row wrap>
+        <v-flex xs5>
+          <div class="text-menu">予約店舗</div>
+        </v-flex>
         <v-flex xs6>
           <div class="text-value shop">{{ data.store.name }}</div>
-        </v-flex>
-        <v-flex v-if="isShownCancelButton" xs6 >
-          <v-btn :disabled="canNotCancel" class="cancel-btn" color="warning" @click="cancelConfrim(data.id)">キャンセルする</v-btn>
         </v-flex>
       </v-layout>
       <v-layout row wrap>
@@ -132,10 +143,8 @@ export default {
 </script>
 
 <style scoped>
-.cancel button .v-btn__content {
-  font-size: 1em;
-}
 .cancel-btn {
-  width: 150px;
+  width: 90%;
+  font-size: smaller;
 }
 </style>
