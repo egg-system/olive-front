@@ -47,7 +47,7 @@ export default {
   computed: {
     request: {
       get() {
-        return this.$store.state.registration.request
+        return this.$store.state.reservation.registration.request
       },
       set(value) {
         this.setRequest(value)
@@ -55,7 +55,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('registration', ['setRequest'])
+    ...mapMutations('reservation/registration', ['setRequest'])
   }
 }
 </script>

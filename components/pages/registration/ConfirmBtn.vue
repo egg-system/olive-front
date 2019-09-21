@@ -78,7 +78,7 @@ export default {
       )
     },
     ...mapState({
-      registration: state => state.registration,
+      registration: state => state.reservation.registration,
       login: state => state.login
     }),
     ...mapGetters('login', ['isLogin'])
@@ -97,7 +97,7 @@ export default {
       }
     },
     ...mapMutations('login', { resetLogin: 'reset' }),
-    ...mapMutations('registration', { resetRegistration: 'reset' })
+    ...mapMutations('reservation/registration', { resetRegistration: 'reset' })
   }
 }
 </script>

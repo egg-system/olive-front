@@ -38,7 +38,7 @@ export default {
   },
   computed: {
     menuIndex() {
-      return this.$store.state.select.menuIndex
+      return this.$store.state.reservation.select.menuIndex
     },
     hasOption() {
       if (!('options' in this.menu) || this.menu.options === null) {
@@ -55,7 +55,7 @@ export default {
       const isSelectedMenu = this.selectedMenu.id === this.menu.id
       return isSelectedMenu && this.hasOption
     },
-    ...mapGetters('select', ['selectedMenu'])
+    ...mapGetters('reservation/select', ['selectedMenu'])
   },
   updated() {
     // domの再利用により、optionが全チェックされてしまう

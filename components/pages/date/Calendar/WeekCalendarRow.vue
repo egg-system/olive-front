@@ -73,7 +73,7 @@ export default {
     timeSlotStrings() {
       return this.timeSlots.map(timeSlot => timeSlot.toString())
     },
-    ...mapGetters('date', ['timeSlots'])
+    ...mapGetters('reservation/date', ['timeSlots'])
   }
 }
 </script>

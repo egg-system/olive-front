@@ -125,7 +125,7 @@ export default {
     canNotCancel() {
       //今日、明日の予約はキャンセルできない
       return moment(this.data.start_at).isSameOrBefore(
-        moment().add('days', 1),
+        moment().add(1, 'day'),
         'day'
       )
     },

@@ -60,7 +60,7 @@ export default {
       return true
     },
     ...mapState({
-      registration: state => state.registration,
+      registration: state => state.reservation.registration,
       login: state => state.login
     })
   },

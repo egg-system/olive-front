@@ -64,6 +64,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 import CustomerName from '~/components/pages/common/customer/Name.vue'
 import CustomerMail from '~/components/pages/common/customer/Mail.vue'
 import CustomerPhoneNumber from '~/components/pages/common/customer/PhoneNumber.vue'
@@ -96,7 +97,7 @@ export default {
   computed: {
     selectedCoupons: {
       get() {
-        return this.$store.state.registration.coupons
+        return this.$store.state.reservation.registration.coupons
       },
       set(value) {
         this.setCoupons(value)
@@ -120,14 +121,14 @@ export default {
       }
     },
     isFirstLabel() {
-      return this.menus[0].menu.department_id === 1
+      return _.get(this, 'menus[0].menu.department_id') === 1
         ? '初めてです(初診料 ¥1,000)'
         : '初めてです(初回カウンセリング料 ¥1,000)'
     },
     ...mapGetters('login', ['isLogin']),
-    ...mapGetters('registration', ['isFirstValue']),
-    ...mapState('registration', ['childrenCount']),
-    ...mapState('select', ['menus'])
+    ...mapGetters('reservation/registration', ['isFirstValue']),
+    ...mapState('reservation/registration', ['childrenCount']),
+    ...mapState('reservation/select', ['menus'])
   },
   beforeMount() {
     // ローディングを解除
@@ -139,7 +140,7 @@ export default {
     })
   },
   methods: {
-    ...mapMutations('registration', [
+    ...mapMutations('reservation/registration', [
       'setCoupons',
       'setPregnantStateId',
       'setChildrenCount',

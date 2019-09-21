@@ -27,6 +27,7 @@
           hide-actions
           hide-headers
           class="elevation-1"
+          item-key="index"
         >
           <template slot="items" slot-scope="props">
             <td v-if="props.item">{{ props.item.name }}</td>
@@ -136,7 +137,7 @@ export default {
         }
         menus.push(total)
       }
-      return menus
+      return menus.map((menu, index) => ({ ...menu, index }))
     },
     time() {
       if (!this.dateTime) {
@@ -153,13 +154,13 @@ export default {
         ' ～ ' +
         this.dateTime
           .clone()
-          .add('minutes', this.allServiceMinutes)
+          .add(this.allServiceMinutes, 'minutes')
           .format('HH:mm')
       )
     },
-    ...mapState('registration', ['coupons', 'isFirst']),
-    ...mapState('select', ['dateTime', 'menus']),
-    ...mapGetters('select', ['isTwoMenusSelected'])
+    ...mapState('reservation/registration', ['coupons', 'isFirst']),
+    ...mapState('reservation/select', ['dateTime', 'menus']),
+    ...mapGetters('reservation/select', ['isTwoMenusSelected'])
   }
 }
 </script>

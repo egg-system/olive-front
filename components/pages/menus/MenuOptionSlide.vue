@@ -61,7 +61,7 @@ export default {
         }
       })
     },
-    ...mapGetters('select', [
+    ...mapGetters('reservation/select', [
       'selectedOptions',
       'selectedOptionIds',
       'mimitsuboCount'
@@ -78,7 +78,10 @@ export default {
 
       return this.selectedOptionIds.includes(option.id)
     },
-    ...mapMutations('select', ['setSelectedOptions', 'setMimitsuboCount'])
+    ...mapMutations('reservation/select', [
+      'setSelectedOptions',
+      'setMimitsuboCount'
+    ])
   }
 }
 </script>

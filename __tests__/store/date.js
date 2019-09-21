@@ -1,10 +1,10 @@
 import Vuex from 'vuex'
-import { state, getters, mutations, actions } from '~/store/date.js'
+import { state, getters, mutations, actions } from '~/store/reservation/date.js'
 import { createLocalVue } from '@vue/test-utils'
 import config from '~/config/constant.dev.js'
 
 // shopが選択されている前提のテストである必要があるため、一旦skip
-describe.skip('store/date.js', () => {
+describe.skip('store/reservation/date.js', () => {
   let store
 
   beforeAll(() => {

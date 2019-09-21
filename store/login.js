@@ -55,7 +55,7 @@ export const getters = {
       first_kana: state.firstNameKana,
       last_kana: state.lastNameKana,
       tel: state.phoneNumber,
-      can_receive_mail: rootGetters['registration/canReceiveMail'],
+      can_receive_mail: rootGetters['reservation/registration/canReceiveMail'],
       zip_code: state.postalCode,
       prefecture: state.prefecture,
       city: state.city
@@ -66,8 +66,8 @@ export const getters = {
       email: state.mail,
       password: state.password,
       provider: getters.provider,
-      first_visit_store_id: rootState.select.menus[0].storeId,
-      last_visit_store_id: rootState.select.menus[0].storeId,
+      first_visit_store_id: rootState.reservation.select.menus[0].storeId,
+      last_visit_store_id: rootState.reservation.select.menus[0].storeId,
       ...getters.updateParams
     }
   },

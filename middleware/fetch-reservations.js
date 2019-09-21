@@ -3,5 +3,5 @@ export default function({ store, query }) {
   store.commit('reservation/setDoCancel', doCancel)
 
   const page = 'page' in query ? query.page : 1
-  store.dispatch('reservation/paginateReservations', page)
+  store.dispatch('reservation/getReservations', page)
 }
