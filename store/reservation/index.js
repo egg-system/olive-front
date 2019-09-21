@@ -9,7 +9,14 @@ export const state = () => ({
 
 /* mutations */
 export const mutations = {
-  setReservations(state, reservations) {
+  setReservations(state, reservations_param) {
+    let reservations = reservations_param
+
+    // 配列ではない場合、配列に変換する
+    if (!Array.isArray(reservations)) {
+      reservations = [reservations]
+    }
+
     state.reservations = reservations
   },
   setReservationDatas(state, { reservations, totalPages }) {
