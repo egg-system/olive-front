@@ -158,7 +158,7 @@ export default {
           .format('HH:mm')
       )
     },
-    ...mapState('registration', ['coupons', 'isFirst']),
+    ...mapState('reservation/registration', ['coupons', 'isFirst']),
     ...mapState('reservation/select', ['dateTime', 'menus']),
     ...mapGetters('reservation/select', ['isTwoMenusSelected'])
   }

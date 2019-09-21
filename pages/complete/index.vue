@@ -46,7 +46,7 @@ export default {
   ],
   computed: {
     registration() {
-      return this.$store.state.registration
+      return this.$store.state.reservation.registration
     },
     login() {
       return this.$store.state.login
@@ -54,11 +54,11 @@ export default {
   },
   async asyncData({ store }) {
     const result = await store.dispatch(
-      'registration/registerCustomerWithReserve'
+      'reservation/registration/registerCustomerWithReserve'
     )
   },
   methods: {
-    ...mapActions('registration', ['resetAllInputed'])
+    ...mapActions('reservation/registration', ['resetAllInputed'])
   }
 }
 </script>

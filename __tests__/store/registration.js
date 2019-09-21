@@ -1,9 +1,9 @@
 import Vuex from 'vuex'
-import { state, getters, mutations, actions } from '~/store/registration.js'
+import { state, getters, mutations, actions } from '~/store/reservation/registration.js'
 import { createLocalVue } from '@vue/test-utils'
 import config from '~/config/constant.dev.js'
 
-describe('store/registration.js', () => {
+describe('store/reservation/registration.js', () => {
   let store
 
   beforeAll(() => {

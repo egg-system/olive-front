@@ -55,7 +55,7 @@ export const getters = {
       first_kana: state.firstNameKana,
       last_kana: state.lastNameKana,
       tel: state.phoneNumber,
-      can_receive_mail: rootGetters['registration/canReceiveMail'],
+      can_receive_mail: rootGetters['reservation/registration/canReceiveMail'],
       zip_code: state.postalCode,
       prefecture: state.prefecture,
       city: state.city
