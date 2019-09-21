@@ -64,6 +64,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 import CustomerName from '~/components/pages/common/customer/Name.vue'
 import CustomerMail from '~/components/pages/common/customer/Mail.vue'
 import CustomerPhoneNumber from '~/components/pages/common/customer/PhoneNumber.vue'
@@ -120,7 +121,7 @@ export default {
       }
     },
     isFirstLabel() {
-      return this.menus[0].menu.department_id === 1
+      return _.get(this, 'menus[0].menu.department_id') === 1
         ? '初めてです(初診料 ¥1,000)'
         : '初めてです(初回カウンセリング料 ¥1,000)'
     },
