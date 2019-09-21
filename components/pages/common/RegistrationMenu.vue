@@ -158,8 +158,8 @@ export default {
       )
     },
     ...mapState('registration', ['coupons', 'isFirst']),
-    ...mapState('select', ['dateTime', 'menus']),
-    ...mapGetters('select', ['isTwoMenusSelected'])
+    ...mapState('reservation/select', ['dateTime', 'menus']),
+    ...mapGetters('reservation/select', ['isTwoMenusSelected'])
   }
 }
 </script>

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import moment from 'moment'
-import { route } from '../lib/route'
+import { route } from '../../lib/route'
 
 const START_AT = '10:00'
 const BREAK_FROM = '13:00'
@@ -30,14 +30,14 @@ export const actions = {
 
 /* getters */
 export const getters = {
-  dateRoute(state, getters, routeState) {
-    const id = routeState.select.storeId
+  dateRoute(state, getters, rootState) {
+    const id = rootState.reservation.select.storeId
     return route(process.env.api.date, { id }, getters.dateParameters)
   },
-  dateParameters(state, getters, routeState, rootGetters) {
+  dateParameters(state, getters, rootState, rootGetters) {
     return {
-      menu_ids: rootGetters['select/allSelectedMenuIds'],
-      option_ids: rootGetters['select/allSelectedOptionIds'],
+      menu_ids: rootGetters['reservation/select/allSelectedMenuIds'],
+      option_ids: rootGetters['reservation/select/allSelectedOptionIds'],
       from_date: moment().format('YYYY-MM-DD'),
       to_date: getters.endDate.format('YYYY-MM-DD')
     }
@@ -84,7 +84,7 @@ export const getters = {
   },
   timeSlotIncrement(state, getters, rootState, rootGetters) {
     // twoHourかどうかで二時間になる
-    return rootGetters['select/isTwoHour'] ? 2 : 1
+    return rootGetters['reservation/select/isTwoHour'] ? 2 : 1
   },
   getDateSlot(state) {
     return date => {

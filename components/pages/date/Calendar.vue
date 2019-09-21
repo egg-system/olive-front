@@ -71,7 +71,7 @@ export default {
 
       return calendarDates
     },
-    ...mapGetters('date', ['startDate', 'endDate'])
+    ...mapGetters('reservation/date', ['startDate', 'endDate'])
   }
 }
 </script>

@@ -99,10 +99,14 @@ export default {
 
       return this.currentPageId === 1
     },
-    ...mapState('select', ['menuIndex', 'storeId']),
+    ...mapState('reservation/select', ['menuIndex', 'storeId']),
     ...mapState('menu', ['subShops']),
     ...mapGetters('menu', ['getMenu', 'getOption', 'hasSubShops']),
-    ...mapGetters('select', ['storeMenu', 'isMenuSelected', 'selectedOptions'])
+    ...mapGetters('reservation/select', [
+      'storeMenu',
+      'isMenuSelected',
+      'selectedOptions'
+    ])
   },
   methods: {
     scrollShopSection(shopId) {
@@ -119,7 +123,7 @@ export default {
       const beforePageId = this.currentPageId - 1
       this.$router.push({ query: { menuIndex: beforePageId } })
     },
-    ...mapMutations('select', ['setStoreMenu'])
+    ...mapMutations('reservation/select', ['setStoreMenu'])
   }
 }
 </script>

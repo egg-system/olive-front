@@ -69,14 +69,14 @@ export default {
       return this.dateTimeSlot.clone().add(this.timeSlotIncrement, 'hours')
     },
     ...mapGetters('login', ['isLogin']),
-    ...mapGetters('date', ['timeSlotIncrement', 'getDateSlot'])
+    ...mapGetters('reservation/date', ['timeSlotIncrement', 'getDateSlot'])
   },
   methods: {
     setDataTimeSlot() {
       this.setSelectedDateTime(this.dateTimeSlot)
       this.$router.push({ name: this.nextRoute })
     },
-    ...mapMutations('select', ['setSelectedDateTime'])
+    ...mapMutations('reservation/select', ['setSelectedDateTime'])
   }
 }
 </script>

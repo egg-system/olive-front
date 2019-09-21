@@ -66,8 +66,8 @@ export const getters = {
       email: state.mail,
       password: state.password,
       provider: getters.provider,
-      first_visit_store_id: rootState.select.menus[0].storeId,
-      last_visit_store_id: rootState.select.menus[0].storeId,
+      first_visit_store_id: rootState.reservation.select.menus[0].storeId,
+      last_visit_store_id: rootState.reservation.select.menus[0].storeId,
       ...getters.updateParams
     }
   },

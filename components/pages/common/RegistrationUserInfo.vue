@@ -127,7 +127,7 @@ export default {
     ...mapGetters('login', ['isLogin']),
     ...mapGetters('registration', ['isFirstValue']),
     ...mapState('registration', ['childrenCount']),
-    ...mapState('select', ['menus'])
+    ...mapState('reservation/select', ['menus'])
   },
   beforeMount() {
     // ローディングを解除

@@ -29,13 +29,13 @@ export default {
     Loading
   },
   computed: {
-    ...mapGetters('date', ['isLoading'])
+    ...mapGetters('reservation/date', ['isLoading'])
   },
   created() {
     this.getCalendar()
   },
   methods: {
-    ...mapActions('date', ['getCalendar'])
+    ...mapActions('reservation/date', ['getCalendar'])
   }
 }
 </script>

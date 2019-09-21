@@ -56,7 +56,7 @@ export default {
         return moment(dateTime)
       })
     },
-    ...mapGetters('date', ['timeSlots'])
+    ...mapGetters('reservation/date', ['timeSlots'])
   }
 }
 </script>

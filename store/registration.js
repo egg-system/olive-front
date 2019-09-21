@@ -63,7 +63,7 @@ export const getters = {
     return state.coupons.map(coupon => coupon.id)
   },
   reservationParameters(state, getters, rootState, rootGetters) {
-    const reservationAt = rootState.select.dateTime
+    const reservationAt = rootState.reservation.select.dateTime
 
     if (!reservationAt) {
       return null
@@ -72,7 +72,7 @@ export const getters = {
     // 回数券周りの処理を追加する
     return {
       customer_id: rootState.login.customerId,
-      store_id: rootState.select.storeId,
+      store_id: rootState.reservation.select.storeId,
       children_count: state.childrenCount,
       reservation_comment: state.request,
       reservation_date: reservationAt.format('YYYY-MM-DD'),
@@ -80,7 +80,7 @@ export const getters = {
       is_first: getters.isFirstValue,
       coupon_ids: getters.selectedCouponIds,
       reservation_details_attributes:
-        rootGetters['select/reservationDetailsParameters']
+        rootGetters['reservation/select/reservationDetailsParameters']
     }
   }
 }
@@ -89,7 +89,7 @@ export const getters = {
 export const actions = {
   resetAllInputed({ commit, rootState }) {
     commit('reset')
-    commit('select/reset', null, { root: true })
+    commit('reservation/select/reset', null, { root: true })
     commit('login/reset', null, { root: true })
   },
   async registerCustomerWithReserve(context) {

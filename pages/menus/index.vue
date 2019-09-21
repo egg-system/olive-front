@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapState, mapGetters, mapMutations } from 'vuex'
 import MenuList from '~/components/pages/menus/MenuList.vue'
 import Loading from '~/components/layouts/Loading.vue'
 import RegistrationMenu from '~/components/pages/common/RegistrationMenu.vue'
@@ -45,9 +45,7 @@ export default {
     CustomerMustUpdateError
   },
   computed: {
-    menuIndex() {
-      return this.$store.state.select.menuIndex
-    },
+    ...mapState('reservation/select', ['menuIndex']),
     ...mapGetters('menu', ['isLoading', 'hasSubShops']),
     ...mapGetters('login', ['customerMustUpdate'])
   }
