@@ -1,7 +1,7 @@
 <template>
   <section class="container">
     <v-container grid-list-xl>
-      <v-layout column wrap>
+      <v-layout column>
         <customer-must-update-error v-if="customerMustUpdate"/>
         <template v-else>
           <registration-menu/>
