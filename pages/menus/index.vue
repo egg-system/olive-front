@@ -31,11 +31,17 @@ import CustomerMustUpdateError from '~/components/pages/common/CustomerMustUpdat
 export default {
   middleware: ['init-menu-index', 'init-shop-id'],
   watchQuery: ['shopId'],
-  fetch({ store, query }) {
-    // shopIdがnullの場合は1をセットする
-    const shopId = query.shopId || 1
-    store.dispatch('shop/getShop', { id: shopId })
-    store.dispatch('menu/getMenus', { shopId })
+  async fetch({ store, query, error }) {
+    try {
+      // shopIdがnullの場合は1をセットする
+      const shopId = query.shopId || 1
+      await Promise.all([
+        store.dispatch('shop/getShop', { id: shopId }),
+        store.dispatch('menu/getMenus', { shopId })
+      ])
+    } catch (e) {
+      error({ statusCode: (e.response && e.response.status) || 500 })
+    }
   },
   components: {
     MenuList,
