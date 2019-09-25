@@ -4,19 +4,11 @@
       <v-layout column wrap>
         <v-layout row>
           <v-flex>
-            <v-card-text v-if="!registration.isError && !login.isError" class="complete">
+            <v-card-text class="complete">
               <template v-if="login.isCreate">会員登録、および予約が確定しました。</template>
               <template v-else>予約が確定しました。</template>
               <br>予約確定メールをお送りしましたので、ご確認ください。
             </v-card-text>
-            <v-card-text
-              v-if="registration.isError"
-              class="complete"
-            >{{ registration.errorMessage }}<br>お手数ですが、再度ご予約の操作をお願いいたします。</v-card-text>
-            <v-card-text
-              v-if="login.isError"
-              class="complete"
-            >{{ login.errorMessage }}お手数ですが最初からやり直してください。</v-card-text>
           </v-flex>
         </v-layout>
         <next-btn/>
@@ -52,10 +44,36 @@ export default {
       return this.$store.state.login
     }
   },
-  async asyncData({ store }) {
-    const result = await store.dispatch(
-      'reservation/registration/registerCustomerWithReserve'
-    )
+  async fetch({ store, error }) {
+    try {
+      const result = await store.dispatch(
+        'reservation/registration/registerCustomerWithReserve'
+      )
+
+      const { registration } = store.state.reservation
+      if (registration.isError) {
+        error({
+          statusCode: 500,
+          message:
+            registration.errorMessage +
+            '\nお手数ですが、再度ご予約の操作をお願いいたします。'
+        })
+      }
+
+      const { login } = store.state
+      if (login.isError) {
+        error({
+          statusCode: 401,
+          message:
+            login.errorMessage + '\nお手数ですが最初からやり直してください。'
+        })
+      }
+    } catch (e) {
+      error({
+        statusCode: (e.response && e.response.status) || 500,
+        message: ''
+      })
+    }
   },
   methods: {
     ...mapActions('reservation/registration', ['resetAllInputed'])
