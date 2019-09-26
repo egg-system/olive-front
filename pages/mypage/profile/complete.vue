@@ -8,30 +8,33 @@
       </v-card>
     </v-flex>
 
-    <div v-if="isError">{{ errorMessage }}お手数ですが、もう一度やり直しください。</div>
-    <div v-else>会員情報の変更が完了しました</div>
+    <div>会員情報の変更が完了しました</div>
     <v-btn color="warning" @click="goMypageTop">マイページトップへ</v-btn>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions, mapMutations } from 'vuex'
-
 export default {
   layout: 'mypage',
-  computed: {
-    ...mapState('login', ['errorMessage', 'isError'])
-  },
-  created() {
-    this.updateCustomer()
-    this.reset()
+  async fetch({ store, error }) {
+    try {
+      await store.dispatch('login/updateCustomer')
+
+      const { login } = store.state
+      if (login.isError) {
+        const message =
+          login.errorMessage + '\nお手数ですが最初からやり直してください。'
+        store.commit('login/reset')
+        error({ statusCode: 400, message })
+      }
+    } catch (e) {
+      error({ statusCode: (e.response && e.response.status) || 500 })
+    }
   },
   methods: {
     goMypageTop() {
       this.$router.push('/mypage')
-    },
-    ...mapActions('login', ['updateCustomer']),
-    ...mapMutations('login', ['reset'])
+    }
   }
 }
 </script>

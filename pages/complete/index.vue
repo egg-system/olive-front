@@ -69,10 +69,7 @@ export default {
         })
       }
     } catch (e) {
-      error({
-        statusCode: (e.response && e.response.status) || 500,
-        message: ''
-      })
+      error({ statusCode: (e.response && e.response.status) || 500 })
     }
   },
   methods: {

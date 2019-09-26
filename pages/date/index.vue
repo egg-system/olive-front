@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { mapActions, mapState, mapMutations, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 import RegistrationMenu from '~/components/pages/common/RegistrationMenu.vue'
 import Calendar from '~/components/pages/date/Calendar.vue'
 import BackBtn from '~/components/pages/date/BackBtn.vue'
@@ -31,11 +31,12 @@ export default {
   computed: {
     ...mapGetters('reservation/date', ['isLoading'])
   },
-  created() {
-    this.getCalendar()
-  },
-  methods: {
-    ...mapActions('reservation/date', ['getCalendar'])
+  async fetch({ store, error }) {
+    try {
+      await store.dispatch('reservation/date/getCalendar')
+    } catch (e) {
+      error({ statusCode: (e.response && e.response.status) || 500 })
+    }
   }
 }
 </script>

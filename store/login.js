@@ -203,6 +203,7 @@ export const actions = {
       dispatch('setLoginCustomer', result.data.data)
       return true
     } catch (error) {
+      console.log(error)
       const errorMessage =
         get(error, 'response.status') === 422
           ? '登録済みのメールアドレスです。'
