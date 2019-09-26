@@ -42,14 +42,18 @@ export default {
     message() {
       return this.error && this.error.message
     },
+    // messageにobjectの文字列が勝手に入っている場合があるので考慮
+    isIncludedObjectString() {
+      return /({|})/.test(this.message)
+    },
     errorMessage() {
       const statusCode = this.statusCode
       if (statusCode === 404) {
-        // 404はerror.messageにデフォルトの値が入っている場合があるので先に返す
+        // 404はerror.messageにデフォルトの文字列が入っている場合があるので先に返す
         return 'ページが見つかりません。'
       }
 
-      if (this.message) {
+      if (this.message && !this.isIncludedObjectString) {
         return this.message
       }
 
@@ -60,7 +64,9 @@ export default {
       return message
     },
     isShownDefaultErrorMessage() {
-      return !this.message || this.statusCode === 404
+      return (
+        !this.message || this.isIncludedObjectString || this.statusCode === 404
+      )
     },
     ...mapGetters('login', ['isLogin'])
   },

@@ -10,17 +10,11 @@
           </v-card>
         </v-flex>
 
-        <template v-if="isError">
-          <div>{{ errorMessage }}お手数ですが、最初からやり直してください。</div>
-        </template>
-        <template v-else>
-          <div>会員登録が完了しました</div>
-        </template>
+        <div>会員登録が完了しました</div>
 
         <v-layout column>
           <v-flex xs6>
-            <v-btn v-if="isError" @click="back">戻る</v-btn>
-            <v-btn v-else @click="login">ログイン</v-btn>
+            <v-btn @click="login">ログイン</v-btn>
           </v-flex>
         </v-layout>
       </v-layout>
@@ -29,28 +23,28 @@
 </template>
 
 <script>
-import { mapActions, mapMutations, mapState } from 'vuex'
-
 export default {
-  computed: {
-    ...mapState('login', ['isError', 'errorMessage'])
-  },
-  created() {
-    // 会員登録させるため、isCreateをtrueにする
-    this.setIsCreate(true)
-    this.createCustomer()
-    this.reset()
+  async fetch({ store, error }) {
+    try {
+      // 会員登録させるため、isCreateをtrueにする
+      store.commit('login/setIsCreate', true)
+      await store.dispatch('login/createCustomer')
+
+      const { login } = store.state
+      if (login.isError) {
+        const message =
+          login.errorMessage + '\nお手数ですが最初からやり直してください。'
+        store.commit('login/reset')
+        error({ statusCode: 401, message })
+      }
+    } catch (e) {
+      error({ statusCode: (e.response && e.response.status) || 500 })
+    }
   },
   methods: {
     login() {
       this.$router.push('/mypage/login')
-    },
-    back() {
-      this.reset()
-      this.$router.push('/create')
-    },
-    ...mapActions('login', ['createCustomer']),
-    ...mapMutations('login', ['setIsCreate', 'reset', 'resetCustomerInfo'])
+    }
   }
 }
 </script>
