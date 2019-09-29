@@ -14,14 +14,17 @@ import { mapActions } from 'vuex'
 
 export default {
   layout: 'password',
-  created() {
-    this.updatePassword()
+  async fetch({ store, error }) {
+    try {
+      await store.dispatch('login/updatePassword')
+    } catch (e) {
+      error({ statusCode: (e.response && e.response.status) || 500 })
+    }
   },
   methods: {
     login() {
       this.$router.push('/mypage')
-    },
-    ...mapActions('login', ['updatePassword'])
+    }
   }
 }
 </script>
