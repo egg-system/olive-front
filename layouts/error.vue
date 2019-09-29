@@ -15,6 +15,9 @@
           <v-flex v-if="isLogin" xs6>
             <v-btn color="warning" @click="goMyPage">マイページへ</v-btn>
           </v-flex>
+          <v-flex xs6>
+            <v-btn color="warning" @click="back">戻る</v-btn>
+          </v-flex>
         </v-layout>
       </v-layout>
     </v-container>
@@ -76,6 +79,10 @@ export default {
     },
     goMyPage() {
       this.$router.push('/mypage')
+    },
+    back() {
+      // ブラウザバック
+      this.$router.go(-1)
     }
   }
 }
