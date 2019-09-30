@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import qs from 'qs'
 
 const FIRST_MENU_INDEX = 0
 const SECOND_MENU_INDEX = 1
@@ -145,5 +146,22 @@ export const getters = {
         option_ids: select.options.map(option => option.id)
       }
     })
+  },
+  // 選択したメニューの情報のquerystring
+  selectedMenuParamsQuery(state) {
+    const selectedStoreId = state.menus[state.menuIndex].storeId
+    const selectedMenus = state.menus.filter(_menu => _menu).map(_menu => {
+      const menuId = _menu.menu.id || undefined
+      let optionIds
+      if (Array.isArray(_menu.options) && _menu.options.length > 0) {
+        optionIds = _menu.options
+          .filter(option => option.id)
+          .map(option => option.id)
+          .join(',')
+      }
+      const mimitsuboCount = _menu.mimitsuboCount || undefined
+      return { menuId, optionIds, mimitsuboCount }
+    })
+    return qs.stringify({ storeId: selectedStoreId, menus: selectedMenus })
   }
 }
