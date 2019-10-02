@@ -46,6 +46,7 @@ module.exports = {
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
     '@nuxtjs/vuetify',
+    '@nuxtjs/sentry',
     ['@nuxtjs/google-tag-manager', {
       id: 'GTM-TPQJNVG',
       pageTracking: true,
@@ -57,6 +58,10 @@ module.exports = {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
+  },
+
+  sentry: { 
+    dsn: environment === 'dev' ? '' : 'https://8056d5ece17843d590aca2b00c36887d@sentry.io/1768480'
   },
 
   /*
