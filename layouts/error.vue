@@ -65,7 +65,7 @@ export default {
       }
 
       let message = 'エラーです。'
-      if (Math.floor(statusCode / 100) === 5) {
+      if (/5\d{2}/.test(statusCode)) {
         message = 'ただいまサイトにアクセスできません。'
       }
       return message
