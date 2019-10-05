@@ -29,16 +29,17 @@ export default {
       // 会員登録させるため、isCreateをtrueにする
       store.commit('login/setIsCreate', true)
       await store.dispatch('login/createCustomer')
-
-      const { login } = store.state
-      if (login.isError) {
-        const message =
-          login.errorMessage + '\nお手数ですが最初からやり直してください。'
-        store.commit('login/reset')
-        error({ statusCode: 400, message })
-      }
     } catch (e) {
       error({ statusCode: (e.response && e.response.status) || 500 })
+    }
+
+    const { login } = store.state
+    if (login.isError) {
+      const message = `${
+        login.errorMessage
+      }\nお手数ですが最初からやり直してください。`
+      store.commit('login/reset')
+      error({ statusCode: 400, message })
     }
   },
   methods: {

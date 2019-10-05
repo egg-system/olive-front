@@ -26,20 +26,20 @@ export default {
   async fetch({ store, query, error }) {
     try {
       await store.dispatch('reservation/getReservation', query.id)
-
-      const { reservations } = store.state.reservation
-      if (!reservations.length) {
-        error({
-          statusCode: 400,
-          message:
-            'エラーが発生しました。お手数ですが、もう一度やりなおしてください。'
-        })
-      }
     } catch (e) {
       error({
         statusCode: (e.response && e.response.status) || 500,
         message:
           'エラーが発生しました。お手数ですが、もう一度やり直してください。'
+      })
+    }
+
+    const { reservations } = store.state.reservation
+    if (!reservations.length) {
+      error({
+        statusCode: 400,
+        message:
+          'エラーが発生しました。お手数ですが、もう一度やりなおしてください。'
       })
     }
   },

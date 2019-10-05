@@ -49,27 +49,28 @@ export default {
       const result = await store.dispatch(
         'reservation/registration/registerCustomerWithReserve'
       )
-
-      const { registration } = store.state.reservation
-      if (registration.isError) {
-        error({
-          statusCode: 500,
-          message:
-            registration.errorMessage +
-            '\nお手数ですが、再度ご予約の操作をお願いいたします。'
-        })
-      }
-
-      const { login } = store.state
-      if (login.isError) {
-        error({
-          statusCode: 401,
-          message:
-            login.errorMessage + '\nお手数ですが最初からやり直してください。'
-        })
-      }
     } catch (e) {
       error({ statusCode: (e.response && e.response.status) || 500 })
+    }
+
+    const { registration } = store.state.reservation
+    if (registration.isError) {
+      error({
+        statusCode: 500,
+        message: `${
+          registration.errorMessage
+        }\nお手数ですが、再度ご予約の操作をお願いいたします。`
+      })
+    }
+
+    const { login } = store.state
+    if (login.isError) {
+      error({
+        statusCode: 401,
+        message: `${
+          login.errorMessage
+        }\nお手数ですが最初からやり直してください。`
+      })
     }
   },
   methods: {

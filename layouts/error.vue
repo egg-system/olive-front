@@ -4,7 +4,11 @@
       <v-layout column wrap>
         <v-layout row>
           <v-flex>
-            <v-card-text class="message">{{ errorMessage }}<template v-if="isShownDefaultErrorMessage"><br>OSのバージョンアップをしていただくか、<a href="https://olivebodycare.healthcare/about/contact">こちら</a>のお問い合わせフォームからご予約をお願いいたします。</template>
+            <v-card-text class="message">
+              {{ errorMessage }}
+              <template v-if="isShownDefaultErrorMessage">
+                <br>OSのバージョンアップをしていただくか、<a href="https://olivebodycare.healthcare/about/contact">こちら</a>のお問い合わせフォームからご予約をお願いいたします。
+              </template>
             </v-card-text>
           </v-flex>
         </v-layout>
@@ -92,6 +96,6 @@ export default {
 .message {
   color: red;
   font-weight: bolder;
-  white-space: pre-wrap;
+  white-space: pre-line;
 }
 </style>
