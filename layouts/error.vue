@@ -4,12 +4,7 @@
       <v-layout column wrap>
         <v-layout row>
           <v-flex>
-            <v-card-text class="message">
-              {{ errorMessage }}
-              <template v-if="isShownDefaultErrorMessage">
-                <br>OSのバージョンアップをしていただくか、<a href="https://olivebodycare.healthcare/about/contact">こちら</a>のお問い合わせフォームからご予約をお願いいたします。
-              </template>
-            </v-card-text>
+            <v-card-text class="message" v-html="errorMessage" />
           </v-flex>
         </v-layout>
         <v-layout column>
@@ -55,20 +50,24 @@ export default {
     },
     errorMessage() {
       const statusCode = this.statusCode
+      let _message = ''
       if (statusCode === 404) {
         // 404はerror.messageにデフォルトの文字列が入っている場合があるので先に返す
-        return 'ページが見つかりません。'
+        _message += 'ページが見つかりません。'
+      } else if (this.message && !this.isIncludedObjectString) {
+        _message += this.message
+      } else if (/5\d{2}/.test(statusCode)) {
+        _message += 'ただいまサイトにアクセスできません。'
       }
 
-      if (this.message && !this.isIncludedObjectString) {
-        return this.message
+      if (this.isShownDefaultErrorMessage) {
+        _message +=
+          '<br>OSのバージョンアップをしていただくか、\
+          <a href="https://olivebodycare.healthcare/about/contact">こちら</a>\
+          のお問い合わせフォームからご予約をお願いいたします。'
       }
 
-      let message = 'エラーです。'
-      if (/5\d{2}/.test(statusCode)) {
-        message = 'ただいまサイトにアクセスできません。'
-      }
-      return message
+      return _message
     },
     isShownDefaultErrorMessage() {
       return (
@@ -96,6 +95,5 @@ export default {
 .message {
   color: red;
   font-weight: bolder;
-  white-space: pre-line;
 }
 </style>

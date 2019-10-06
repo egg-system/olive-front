@@ -37,7 +37,7 @@ export default {
     if (login.isError) {
       const message = `${
         login.errorMessage
-      }\nお手数ですが最初からやり直してください。`
+      }<br>お手数ですが最初からやり直してください。`
       store.commit('login/reset')
       error({ statusCode: 400, message })
     }

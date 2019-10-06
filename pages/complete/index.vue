@@ -59,7 +59,7 @@ export default {
         statusCode: 500,
         message: `${
           registration.errorMessage
-        }\nお手数ですが、再度ご予約の操作をお願いいたします。`
+        }<br>お手数ですが、再度ご予約の操作をお願いいたします。`
       })
     }
 
@@ -69,7 +69,7 @@ export default {
         statusCode: 401,
         message: `${
           login.errorMessage
-        }\nお手数ですが最初からやり直してください。`
+        }<br>お手数ですが最初からやり直してください。`
       })
     }
   },
