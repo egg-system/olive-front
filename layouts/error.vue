@@ -84,7 +84,7 @@ export default {
       } else if (this.message && !this.isIncludedObjectString) {
         return this.message
       }
-      return 'ただいまサイトにアクセスできません。'
+      return 'エラーが発生しました。'
     }
   }
 }
