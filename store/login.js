@@ -1,4 +1,5 @@
 import axios from 'axios'
+import get from 'lodash/get'
 
 /* state */
 const initialState = {
@@ -204,7 +205,7 @@ export const actions = {
     } catch (error) {
       console.log(error)
       const errorMessage =
-        error.response.status === 422
+        get(error, 'response.status') === 422
           ? '登録済みのメールアドレスです。'
           : 'ユーザー作成に失敗しました。'
       commit('setError', errorMessage)

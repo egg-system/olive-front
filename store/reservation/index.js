@@ -56,11 +56,7 @@ export const actions = {
     const authenticatedApi = rootGetters['login/authenticatedApi']
     const reservationPath = route(process.env.api.reservation, { id })
 
-    try {
-      await authenticatedApi.delete(reservationPath)
-      return true
-    } catch (e) {
-      return false
-    }
+    await authenticatedApi.delete(reservationPath)
+    return true
   }
 }

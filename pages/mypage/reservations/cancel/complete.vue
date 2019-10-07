@@ -7,14 +7,8 @@
       </v-card>
     </v-flex>
 
-    <template v-if="result">
-      <div>予約をキャンセルしました。</div>
-      <div>予約キャンセルメールをお送りしましたので、ご確認ください。</div>
-    </template>
-
-    <template v-else>
-      <div>エラーが発生しました。お手数ですが、もう一度やり直してください。</div>
-    </template>
+    <div>予約をキャンセルしました。</div>
+    <div>予約キャンセルメールをお送りしましたので、ご確認ください。</div>
 
     <v-flex>
       <v-btn color="warning" @click="top">マイページトップへ</v-btn>
@@ -26,13 +20,16 @@
 <script>
 export default {
   layout: 'mypage',
-  async asyncData({ store, query }) {
-    const result = await store.dispatch(
-      'reservation/destroyReservation',
-      query.id
-    )
-
-    return { result }
+  async fetch({ store, query, error }) {
+    try {
+      await store.dispatch('reservation/destroyReservation', query.id)
+    } catch (e) {
+      error({
+        statusCode: (e.response && e.response.status) || 500,
+        message:
+          'エラーが発生しました。お手数ですが、もう一度やり直してください。'
+      })
+    }
   },
   methods: {
     top() {

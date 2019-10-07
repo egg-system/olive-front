@@ -7,46 +7,44 @@
       </v-card>
     </v-flex>
 
-    <template v-if="isShownHisroty">
-      <mypage-reserve-history　:force-hide-cancel="true" />
+    <mypage-reserve-history　:force-hide-cancel="true" />
 
-      <div class="message">予約をキャンセルします。よろしいですか？</div>
-      <v-flex>
-        <v-btn @click="back">戻る</v-btn>
-        <v-btn color="warning" @click="complete">確定する</v-btn>
-      </v-flex>
-    </template>
-    <template v-else>
-      <v-layout justify-center column>
-        <v-flex xs6>
-          <div>エラーが発生しました。お手数ですが、もう一度やりなおしてください。</div>
-        </v-flex>
-      </v-layout>
-      <v-flex>
-        <v-btn @click="back">戻る</v-btn>
-      </v-flex>
-    </template>
+    <div class="message">予約をキャンセルします。よろしいですか？</div>
+    <v-flex>
+      <v-btn @click="back">戻る</v-btn>
+      <v-btn color="warning" @click="complete">確定する</v-btn>
+    </v-flex>
 
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
 import MypageReserveHistory from '~/components/pages/mypage/reservations/ReserveHistory.vue'
 
 export default {
   layout: 'mypage',
-  fetch({ store, query }) {
-    store.dispatch('reservation/getReservation', query.id)
+  async fetch({ store, query, error }) {
+    try {
+      await store.dispatch('reservation/getReservation', query.id)
+    } catch (e) {
+      error({
+        statusCode: (e.response && e.response.status) || 500,
+        message:
+          'エラーが発生しました。お手数ですが、もう一度やり直してください。'
+      })
+    }
+
+    const { reservations } = store.state.reservation
+    if (!reservations.length) {
+      error({
+        statusCode: 400,
+        message:
+          'エラーが発生しました。お手数ですが、もう一度やりなおしてください。'
+      })
+    }
   },
   components: {
     MypageReserveHistory
-  },
-  computed: {
-    isShownHisroty() {
-      return this.reservations.length > 0
-    },
-    ...mapState('reservation', ['reservations'])
   },
   methods: {
     complete() {
@@ -54,10 +52,6 @@ export default {
         name: 'mypage-reservations-cancel-complete',
         query: { id: this.$route.query.id }
       })
-    },
-    back() {
-      // ブラウザバック
-      this.$router.go(-1)
     }
   }
 }

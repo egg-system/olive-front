@@ -13,18 +13,19 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-
 export default {
   layout: 'password',
-  created() {
-    this.sendPasswrodResetMail()
+  async fetch({ store, error }) {
+    try {
+      await store.dispatch('login/sendPasswrodResetMail')
+    } catch (e) {
+      error({ statusCode: (e.response && e.response.status) || 500 })
+    }
   },
   methods: {
     top() {
       this.$router.push('/mypage')
-    },
-    ...mapActions('login', ['sendPasswrodResetMail'])
+    }
   }
 }
 </script>
