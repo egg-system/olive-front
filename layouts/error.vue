@@ -49,16 +49,7 @@ export default {
       return /({|})/.test(this.message)
     },
     errorMessage() {
-      const statusCode = this.statusCode
-      let _message = ''
-      if (statusCode === 404) {
-        // 404はerror.messageにデフォルトの文字列が入っている場合があるので先に返す
-        _message += 'ページが見つかりません。'
-      } else if (this.message && !this.isIncludedObjectString) {
-        _message += this.message
-      } else if (/5\d{2}/.test(statusCode)) {
-        _message += 'ただいまサイトにアクセスできません。'
-      }
+      let _message = this.getBaseErrorMessage()
 
       if (this.isShownDefaultErrorMessage) {
         _message +=
@@ -66,7 +57,6 @@ export default {
           <a href="https://olivebodycare.healthcare/about/contact">こちら</a>\
           のお問い合わせフォームからご予約をお願いいたします。'
       }
-
       return _message
     },
     isShownDefaultErrorMessage() {
@@ -86,6 +76,17 @@ export default {
     back() {
       // ブラウザバック
       this.$router.go(-1)
+    },
+    getBaseErrorMessage() {
+      const statusCode = this.statusCode
+      if (statusCode === 404) {
+        // 404はerror.messageにデフォルトの文字列が入っている場合があるので先に返す
+        return 'ページが見つかりません。'
+      } else if (this.message && !this.isIncludedObjectString) {
+        return this.message
+      } else if (/5\d{2}/.test(statusCode)) {
+        return 'ただいまサイトにアクセスできません。'
+      }
     }
   }
 }
