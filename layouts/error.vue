@@ -49,15 +49,14 @@ export default {
       return /({|})/.test(this.message)
     },
     errorMessage() {
-      let _message = this.getBaseErrorMessage()
+      const _message = this.getBaseErrorMessage()
 
-      if (this.isShownDefaultErrorMessage) {
-        _message +=
-          '<br>OSのバージョンアップをしていただくか、\
-          <a href="https://olivebodycare.healthcare/about/contact">こちら</a>\
-          のお問い合わせフォームからご予約をお願いいたします。'
-      }
-      return _message
+      if (!this.isShownDefaultErrorMessage) return _message
+
+      return `${_message}\
+        <br>OSのバージョンアップをしていただくか、\
+        <a href="https://olivebodycare.healthcare/about/contact">こちら</a>\
+        のお問い合わせフォームからご予約をお願いいたします。`
     },
     isShownDefaultErrorMessage() {
       return (
@@ -84,9 +83,8 @@ export default {
         return 'ページが見つかりません。'
       } else if (this.message && !this.isIncludedObjectString) {
         return this.message
-      } else if (/5\d{2}/.test(statusCode)) {
-        return 'ただいまサイトにアクセスできません。'
       }
+      return 'ただいまサイトにアクセスできません。'
     }
   }
 }
