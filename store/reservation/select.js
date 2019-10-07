@@ -133,7 +133,7 @@ export const getters = {
     return state.menus[state.menuIndex].menu
   },
   selectedOptions(state) {
-    return state.menus[state.menuIndex].options
+    return state.menus[state.menuIndex].options || []
   },
   selectedOptionIds(state, getters) {
     return getters.selectedOptions.map(option => option.id)

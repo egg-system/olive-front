@@ -97,7 +97,8 @@ export default {
             menu.name = (index + 1).toString() + '時間目 - ' + menu.name
           }
           forDisplay.push(menu)
-          menuOfHour.options.forEach(optionOriginal => {
+          const menuOfHourOptions = menuOfHour.options || []
+          menuOfHourOptions.forEach(optionOriginal => {
             let option = _.clone(optionOriginal)
             if (option.is_mimitsubo_jewelry) {
               option.name =
