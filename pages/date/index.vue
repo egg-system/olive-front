@@ -15,14 +15,13 @@
 
 <script>
 import { mapState, mapMutations, mapGetters } from 'vuex'
-import qs from 'qs'
 import RegistrationMenu from '~/components/pages/common/RegistrationMenu.vue'
 import Calendar from '~/components/pages/date/Calendar.vue'
 import BackBtn from '~/components/pages/date/BackBtn.vue'
 import Loading from '~/components/layouts/Loading.vue'
 
 export default {
-  middleware: ['init-shop-id'],
+  middleware: ['init-shop-id', 'fetch-menus-from-query'],
   components: {
     RegistrationMenu,
     Calendar,
@@ -34,54 +33,6 @@ export default {
   },
   async fetch({ store, error, route, redirect }) {
     try {
-      const queryString = route.fullPath.match(/\?(.+)$/)
-      if (!Array.isArray(queryString) || queryString.length <= 1) {
-        redirect('/menus/')
-      }
-      const _query = qs.parse(queryString[1])
-      if (
-        !_query.storeId ||
-        !_query.shopId ||
-        !Array.isArray(_query.menus) ||
-        !_query.menus.length
-      ) {
-        redirect('/menus/')
-      }
-
-      // queryの情報を使ってメニューを取得
-      await store.dispatch('menu/getMenus', { shopId: _query.shopId })
-      const allMenus = store.getters['menu/allMenus']
-      const menus = allMenus
-        .map(menu => {
-          const _menu = _query.menus.find(
-            qMenu => parseInt(menu.id) === parseInt(qMenu.menuId)
-          )
-          if (!_menu) return null
-
-          const _optionIds = _menu.optionIds ? _menu.optionIds.split(',') : null
-          let options = null
-          if (
-            Array.isArray(menu.options) &&
-            menu.options.length > 0 &&
-            _optionIds
-          ) {
-            options = menu.options.filter(option =>
-              _optionIds.includes(String(option.id))
-            )
-          }
-          const mimitsuboCount = _menu.mimitsuboCount || 0
-
-          return {
-            menu,
-            options,
-            mimitsuboCount
-          }
-        })
-        .filter(menu => menu)
-      // 値をセット
-      store.commit('reservation/select/setMenus', menus)
-      store.commit('reservation/select/setStoreId', _query.storeId)
-
       // カレンダーを取得
       await store.dispatch('reservation/date/getCalendar')
     } catch (e) {

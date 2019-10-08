@@ -65,12 +65,10 @@ export const mutations = {
     state.menus = [_.clone(RESERVATION_DETAIL)]
     state.dateTime = null
   },
-  setMenus(state, menus) {
+  setMenus(state, { menus, storeId }) {
     state.menus = menus
-    state.menuIndex = FIRST_MENU_INDEX
-  },
-  setStoreId(state, id) {
-    state.storeId = id
+    state.menuIndex = menus.length - 1
+    state.storeId = storeId
   }
 }
 
