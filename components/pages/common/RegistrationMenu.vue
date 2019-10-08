@@ -82,86 +82,95 @@ export default {
         .endOf('day')
     },
     menusForDisplay() {
-      let menus =
+      const menus =
         0 < this.menus.length &&
         (this.ifShowOnlyFirstMenu || !this.isTwoMenusSelected)
           ? [this.menus[0]]
           : this.menus
 
-      //表示用に加工した配列にする
-      menus = menus
-        .map((menuOfHour, index) => {
-          let forDisplay = []
-          let menu = _.clone(menuOfHour.menu)
-          if (this.isTwoMenusSelected) {
-            menu.name = (index + 1).toString() + '時間目 - ' + menu.name
-          }
-          forDisplay.push(menu)
-          const menuOfHourOptions = menuOfHour.options || []
-          menuOfHourOptions.forEach(optionOriginal => {
-            let option = _.clone(optionOriginal)
-            if (option.is_mimitsubo_jewelry) {
-              option.name =
-                option.name +
-                ' × ' +
-                menuOfHour.mimitsuboCount.toString() +
-                '粒'
-            }
-            forDisplay.push(option)
-          })
-          return forDisplay
-        })
-        .flat()
+      const menusForDisplay = menus.map((_menu, index) => {
+        const { menu } = _menu
+        return {
+          name: this.isTwoMenusSelected
+            ? `${(index + 1).toString()}時間目 - ${menu.name}`
+            : menu.name,
+          price: menu.price,
+          minutes: menu.minutes
+        }
+      })
+      const menuOptionsForDisplay = this.getMenuOptionsForDisplay(menus)
 
+      const additionalMenus = []
       // 初めての場合は確認ページで初診料を追加
       if (this.isFirst && this.isConfirm) {
-        menus.push({ name: '初診料', price: 1000, minutes: 0 })
+        additionalMenus.push({ name: '初診料', price: 1000, minutes: 0 })
       }
-
       // 回数券は減算処理
       if (this.coupons.length && this.isConfirm) {
-        menus.push({ name: '回数券', price: -6000, minutes: 0 })
+        additionalMenus.push({ name: '回数券', price: -6000, minutes: 0 })
       }
+
+      const resultsMenus = menusForDisplay.concat(
+        menuOptionsForDisplay,
+        additionalMenus
+      )
 
       // 確認ページでは合計を表示
       if (this.isConfirm) {
-        let totalPrice = 0
-        let totalTime = 0
-        menus.forEach(obj => {
-          totalPrice += obj.price
-          totalTime += obj.minutes
-        })
-        const total = {
+        const totalPrice = resultsMenus.reduce((acc, cur) => {
+          return acc.price + cur
+        }, 0)
+        const totalTime = resultsMenus.reduce((acc, cur) => {
+          return acc.minutes + cur
+        }, 0)
+        resultsMenus.push({
           name: '合計',
           price: totalPrice,
           minutes: totalTime
-        }
-        menus.push(total)
+        })
       }
-      return menus.map((menu, index) => ({ ...menu, index }))
+      return resultsMenus.map((menu, index) => ({ ...menu, index }))
     },
     time() {
-      if (!this.dateTime) {
-        return
-      }
+      if (!this.dateTime || !this.dateTime.isValid()) return null
 
-      return (
-        this.dateTime.format('YYYY年MM月DD日 (') +
-        this.$root.$options.filters.dayFormat(
-          this.dateTime.format('YYYYMMDD')
-        ) +
-        ') ' +
-        this.dateTime.format('HH:mm') +
-        ' ～ ' +
-        this.dateTime
-          .clone()
-          .add(this.allServiceMinutes, 'minutes')
-          .format('HH:mm')
+      const date = this.dateTime.format('YYYY年MM月DD日')
+      const dayOfTheWeek = this.$root.$options.filters.dayFormat(
+        this.dateTime.format('YYYYMMDD')
       )
+      const timeFrom = this.dateTime.format('HH:mm')
+      const timeTo = this.dateTime
+        .clone()
+        .add(this.allServiceMinutes, 'minutes')
+        .format('HH:mm')
+
+      return `${date} (${dayOfTheWeek}) ${timeFrom} ～ ${timeTo}`
     },
     ...mapState('reservation/registration', ['coupons', 'isFirst']),
     ...mapState('reservation/select', ['dateTime', 'menus']),
     ...mapGetters('reservation/select', ['isTwoMenusSelected'])
+  },
+  methods: {
+    getMenuOptionsForDisplay(menus) {
+      if (!Array.isArray(menus) || !menus.length) return []
+      const optionsList = menus
+        .map(menu => menu.options)
+        .filter(options => Array.isArray(options) && options.length > 0)
+      const menuOptionsForDisplay = []
+      optionsList.forEach(options => {
+        options.forEach(option => {
+          menuOptionsForDisplay.push({
+            name: option.is_mimitsubo_jewelry
+              ? `${option.name} × ${menuOfHour.mimitsuboCount.toString()}粒`
+              : option.name,
+            price: option.price,
+            minutes: option.minutes
+          })
+        })
+      })
+
+      return menuOptionsForDisplay
+    }
   }
 }
 </script>
