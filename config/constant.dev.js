@@ -10,5 +10,6 @@ module.exports = {
     date: 'https://api.myjson.com/bins/1hjqig'
   },
   isProd: false,
-  isMaintenance: false
+  isMaintenance: false,
+  doNotify: false
 }

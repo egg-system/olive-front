@@ -1,5 +1,6 @@
 module.exports = {
     api: {},
     isProd: true,
-    isMaintenance: true
+    isMaintenance: true,
+    doNotify: true
 }
