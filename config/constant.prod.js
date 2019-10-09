@@ -11,5 +11,6 @@ module.exports = {
     date: 'https://dashboard.olivebodycare.healthcare/api/shops/:id/dates'
   },
   isProd: true,
-  isMaintenance: false
+  isMaintenance: false,
+  doNotify: true
 }

@@ -61,7 +61,7 @@ module.exports = {
   },
 
   sentry: { 
-    dsn: environment === 'dev' ? '' : 'https://8056d5ece17843d590aca2b00c36887d@sentry.io/1768480'
+    dsn: envSet.doNotify ? 'https://8056d5ece17843d590aca2b00c36887d@sentry.io/1768480' : ''
   },
 
   /*
