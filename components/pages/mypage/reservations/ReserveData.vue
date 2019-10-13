@@ -145,6 +145,8 @@ export default {
 <style scoped>
 .cancel-btn {
   width: 90%;
+  min-width: 8rem;
+  max-width: 10rem;
   font-size: smaller;
 }
 </style>
