@@ -1,26 +1,17 @@
-import qs from 'qs'
-
-export default async function({ store, error, route, redirect }) {
+export default async function({ store, error, route, redirect, query }) {
   try {
-    const queryString = route.fullPath.match(/\?(.+)$/)
-    if (!Array.isArray(queryString) || queryString.length <= 1) {
-      redirect('/menus/')
-    }
-    const _query = qs.parse(queryString[1])
-    if (
-      !_query.storeId ||
-      !Array.isArray(_query.menus) ||
-      !_query.menus.length
-    ) {
+    const { shopId, storeId, menus: _qmenus } = query
+    const qmenus = JSON.parse(_qmenus)
+    if (!storeId || !Array.isArray(qmenus) || !qmenus.length) {
       redirect('/menus/')
     }
 
     // queryの情報を使ってメニューを取得
-    await store.dispatch('menu/getMenus', { shopId: _query.shopId })
+    await store.dispatch('menu/getMenus', { shopId })
     const allMenus = store.getters['menu/allMenus']
     const menus = allMenus
       .map(menu => {
-        const _menu = _query.menus.find(
+        const _menu = qmenus.find(
           qMenu => parseInt(menu.id) === parseInt(qMenu.menuId)
         )
         if (!_menu) return null
@@ -48,7 +39,7 @@ export default async function({ store, error, route, redirect }) {
     // 値をセット
     store.commit('reservation/select/setMenus', {
       menus,
-      storeId: _query.storeId
+      storeId: storeId
     })
   } catch (e) {
     error({ statusCode: (e.response && e.response.status) || 500 })

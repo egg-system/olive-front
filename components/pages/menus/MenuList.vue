@@ -114,8 +114,8 @@ export default {
       this.$refs[shopId.toString()][0].scrollIntoView(true)
     },
     selectDate() {
-      const queryString = this.selectedMenuParamsQuery
-      this.$router.push({ path: `/date?${queryString}` })
+      const query = this.selectedMenuParamsQuery
+      this.$router.push({ path: '/date', query })
     },
     nextHour() {
       const nextPageId = this.currentPageId + 1
