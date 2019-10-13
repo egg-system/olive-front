@@ -197,6 +197,7 @@ section.content-section {
     display: inline-block;
     vertical-align: top;
     @media screen and (max-width: 767px) {
+      width: 100%;
       padding: 0.2em !important;
     }
     &:hover {
@@ -209,6 +210,7 @@ section.content-section {
       align-items: center;
       background-color: #689f38 !important;
       @media screen and (max-width: 767px) {
+        width: 100%;
         height: 6em;
         margin: 0 0.2em;
       }
