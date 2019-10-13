@@ -47,6 +47,9 @@ export default {
     MypageReserveHistory
   },
   methods: {
+    back() {
+      this.$router.go(-1)
+    },
     complete() {
       this.$router.push({
         name: 'mypage-reservations-cancel-complete',
