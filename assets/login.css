@@ -13,6 +13,7 @@
 @media screen and (min-width: 350px) {
   .main, .head {
     width: 340px;
+    margin: 0 auto;
   }
 }
 @media screen and (min-width: 500px) {
