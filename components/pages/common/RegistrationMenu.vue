@@ -153,23 +153,22 @@ export default {
   methods: {
     getMenuOptionsForDisplay(menus) {
       if (!Array.isArray(menus) || !menus.length) return []
-      const menuOptionsForDisplay = []
-      menus
+      return menus
         .filter(menu => Array.isArray(menu.options) && menu.options.length > 0)
-        .forEach(menu => {
+        .map(menu => {
           const { options, mimitsuboCount } = menu
-          options.forEach(option => {
-            menuOptionsForDisplay.push({
+          const optionsForDisplay = options.map(option => {
+            return {
               name: option.is_mimitsubo_jewelry
                 ? `${option.name} × ${mimitsuboCount.toString()}粒`
                 : option.name,
               price: option.price,
               minutes: option.minutes
-            })
+            }
           })
+          return optionsForDisplay
         })
-
-      return menuOptionsForDisplay
+        .flat()
     }
   }
 }
