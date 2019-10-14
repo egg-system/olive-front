@@ -11,5 +11,6 @@ module.exports = {
     date: `http://localhost:8080/api/shops/:id/dates`
   },
   isProd: false,
-  isMaintenance: false
+  isMaintenance: false,
+  doNotify: false
 }

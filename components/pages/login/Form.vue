@@ -87,15 +87,7 @@ export default {
 </script>
 
 <style>
-@media screen and (min-width: 350px) {
-  .inputText {
-    width: 340px;
-  }
-}
-@media screen and (min-width: 500px) {
-  .inputText {
-    width: 450px;
-    margin: 0 auto;
-  }
+.inputText {
+  width: 100%;
 }
 </style>
