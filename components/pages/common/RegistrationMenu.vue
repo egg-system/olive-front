@@ -117,12 +117,8 @@ export default {
 
       // 確認ページでは合計を表示
       if (this.isConfirm) {
-        const totalPrice = resultsMenus.reduce((acc, cur) => {
-          return acc.price + cur
-        }, 0)
-        const totalTime = resultsMenus.reduce((acc, cur) => {
-          return acc.minutes + cur
-        }, 0)
+        const totalPrice = _.sumBy(resultsMenus, menu => menu.price)
+        const totalTime = _.sumBy(resultsMenus, menu => menu.minutes)
         resultsMenus.push({
           name: '合計',
           price: totalPrice,
