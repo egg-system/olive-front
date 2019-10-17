@@ -4,7 +4,6 @@
       <v-layout column wrap class="menu-contents">
         <customer-must-update-error v-if="customerMustUpdate"/>
         <template v-else>
-          <password-alert/>
           <loading v-if="isLoading" class="loading"/>
           <div :class="{ hidden: isLoading }">
             <registration-menu
@@ -25,7 +24,6 @@ import { mapState, mapGetters, mapMutations } from 'vuex'
 import MenuList from '~/components/pages/menus/MenuList.vue'
 import Loading from '~/components/layouts/Loading.vue'
 import RegistrationMenu from '~/components/pages/common/RegistrationMenu.vue'
-import PasswordAlert from '~/components/pages/common/PasswordAlert.vue'
 import CustomerMustUpdateError from '~/components/pages/common/CustomerMustUpdateError.vue'
 
 export default {
@@ -47,7 +45,6 @@ export default {
     MenuList,
     Loading,
     RegistrationMenu,
-    PasswordAlert,
     CustomerMustUpdateError
   },
   computed: {
