@@ -153,7 +153,8 @@ export const getters = {
   },
   // 選択したメニューの情報のquery
   selectedMenuParamsQuery(state) {
-    const selectedStoreId = state.menus[state.menuIndex].storeId
+    const selectedStoreId =
+      state.menus[state.menuIndex].storeId || state.storeId
     const selectedMenus = state.menus.filter(_menu => _menu).map(_menu => {
       const menuId = _menu.menu.id || undefined
       let optionIds
