@@ -1,7 +1,7 @@
 export default async function({ store, error, redirect, query }) {
-  const { shopId, storeId, menus: _qmenus } = query
-  const qmenus = _parseMenusQuery(_qmenus)
-  if (!storeId || !Array.isArray(qmenus) || !qmenus.length) {
+  const { shopId, storeId, menus: menusQuery } = query
+  const menusQueryArr = _parseMenusQuery(menusQuery)
+  if (!storeId || !Array.isArray(menusQueryArr) || !menusQueryArr.length) {
     redirect('/menus/')
   }
 
@@ -13,7 +13,7 @@ export default async function({ store, error, redirect, query }) {
   }
   const allMenus = store.getters['menu/allMenus']
   const menus = allMenus
-    .map(menu => _createMenuFromQuery(menu, qmenus))
+    .map(menu => _createMenu(menu, menusQueryArr))
     .filter(menu => menu)
   // 値をセット
   store.commit('reservation/select/setMenus', {
@@ -31,8 +31,8 @@ function _parseMenusQuery(menusQuery) {
   return result
 }
 
-function _createMenuFromQuery(menu, menusQuery) {
-  const _menu = menusQuery.find(
+function _createMenu(menu, menusQueryArr) {
+  const _menu = menusQueryArr.find(
     qMenu => parseInt(menu.id) === parseInt(qMenu.menuId)
   )
   if (!_menu) return null
