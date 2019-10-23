@@ -74,9 +74,10 @@ export default {
   },
   methods: {
     setDataTimeSlot() {
-      const dateTime = this.dateTimeSlot.format('YYYY-MM-DD HH:mm:ss')
+      const dateTime = this.dateTimeSlot.format('YYYY-MM-DDTHH:mm:ss')
+      const dateTimeQuery = encodeURIComponent(dateTime)
       const menuQuery = this.selectedMenuParamsQuery
-      const query = { ...menuQuery, dateTime }
+      const query = { ...menuQuery, dateTime: dateTimeQuery }
       this.$router.push({ path: `/${this.nextRoute}`, query })
     }
   }
