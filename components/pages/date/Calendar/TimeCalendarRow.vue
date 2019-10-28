@@ -34,7 +34,8 @@ export default {
       return this.remainCount > 0
     },
     remainCount() {
-      const remainIds = this.timeSlots.flatMap(timeSlot => timeSlot.staff_ids)
+      const remainIds =
+        this.timeSlots && this.timeSlots.flatMap(timeSlot => timeSlot.staff_ids)
       return _(remainIds)
         .groupBy()
         .filter(

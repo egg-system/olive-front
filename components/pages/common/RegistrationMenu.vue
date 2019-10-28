@@ -31,8 +31,8 @@
         >
           <template slot="items" slot-scope="props">
             <td v-if="props.item">{{ props.item.name }}</td>
-            <td v-if="props.item" class="text-xs-right">{{ props.item.price | priceFormat }}</td>
-            <td v-if="props.item" class="text-xs-right">{{ props.item.minutes | timeFormat }}</td>
+            <td v-if="props.item">{{ props.item.price | priceFormat }}</td>
+            <td v-if="props.item">{{ props.item.minutes | timeFormat }}</td>
           </template>
         </v-data-table>
       </v-flex>
@@ -57,6 +57,7 @@
 import { mapGetters, mapState } from 'vuex'
 import _ from 'lodash'
 import moment from 'moment'
+
 export default {
   props: {
     isConfirm: {
@@ -82,22 +83,23 @@ export default {
         .endOf('day')
     },
     menusForDisplay() {
-      const menus =
-        0 < this.menus.length &&
+      const doShowOnlyFirstMenu =
+        this.menus.length > 0 &&
         (this.ifShowOnlyFirstMenu || !this.isTwoMenusSelected)
-          ? [this.menus[0]]
-          : this.menus
+      const menus = doShowOnlyFirstMenu ? [this.menus[0]] : this.menus
 
-      const menusForDisplay = menus.map((_menu, index) => {
-        const { menu } = _menu
-        return {
-          name: this.isTwoMenusSelected
-            ? `${(index + 1).toString()}時間目 - ${menu.name}`
-            : menu.name,
-          price: menu.price,
-          minutes: menu.minutes
-        }
-      })
+      const menusForDisplay =
+        menus &&
+        menus.map((_menu, index) => {
+          const { menu } = _menu
+          return {
+            name: this.isTwoMenusSelected
+              ? `${(index + 1).toString()}時間目 - ${menu.name}`
+              : menu.name,
+            price: menu.price,
+            minutes: menu.minutes
+          }
+        })
       const menuOptionsForDisplay = this.getMenuOptionsForDisplay(menus)
 
       const additionalMenus = []
