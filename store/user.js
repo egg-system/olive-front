@@ -19,17 +19,19 @@ const initialState = {
   password2: '',
   postalCode: '',
   prefecture: '',
-  city: ''
+  city: '',
+  coupons: [],
+  childrenCount: 0,
+  isFirst: null
 }
-export const state = () =>
-  Object.assign(
-    {
-      accessToken: null,
-      client: null,
-      uid: null
-    },
-    initialState
-  )
+export const state = () => {
+  return {
+    accessToken: null,
+    client: null,
+    uid: null,
+    ...initialState
+  }
+}
 
 /* getters */
 export const getters = {
@@ -77,6 +79,13 @@ export const getters = {
       getters.isLogin &&
       (!state.firstNameKana || !state.lastNameKana || !state.phoneNumber)
     )
+  },
+  isFirstValue(state, getters) {
+    if (state.isFirst === null) {
+      return !getters.isLogin
+    }
+
+    return state.isFirst
   }
 }
 
@@ -147,6 +156,15 @@ export const mutations = {
     state.client = null
     state.uid = null
     state = Object.assign(state, initialState)
+  },
+  setCoupons(state, coupons) {
+    state.coupons = coupons
+  },
+  setChildrenCount(state, childrenCount) {
+    state.childrenCount = childrenCount
+  },
+  setIsFirst(state, isFirst) {
+    state.isFirst = isFirst
   }
 }
 

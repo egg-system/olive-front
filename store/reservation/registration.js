@@ -2,9 +2,6 @@ import axios from 'axios'
 
 /* state */
 const initialState = {
-  coupons: [],
-  childrenCount: 0,
-  isFirst: null,
   message: 'yes',
   isOk: null,
   request: '',
@@ -15,15 +12,6 @@ export const state = () => Object.assign({}, initialState)
 
 /* mutations */
 export const mutations = {
-  setCoupons(state, coupons) {
-    state.coupons = coupons
-  },
-  setChildrenCount(state, childrenCount) {
-    state.childrenCount = childrenCount
-  },
-  setIsFirst(state, isFirst) {
-    state.isFirst = isFirst
-  },
   setMessage(state, message) {
     state.message = message
   },
@@ -46,21 +34,14 @@ export const mutations = {
 }
 
 export const getters = {
-  isValidRegistration(state, getters) {
-    return typeof getters.isFirstValue === 'boolean'
+  isValidRegistration(state, getters, rootState, rootGetters) {
+    return typeof rootGetters['user/isFirstValue'] === 'boolean'
   },
   canReceiveMail(state) {
     return state.message === 'yes'
   },
-  isFirstValue(state, getters, rootState, rootGetters) {
-    if (state.isFirst === null) {
-      return !rootGetters['user/isLogin']
-    }
-
-    return state.isFirst
-  },
-  selectedCouponIds(state) {
-    return state.coupons.map(coupon => coupon.id)
+  selectedCouponIds(state, getters, rootState) {
+    return rootState.user.coupons.map(coupon => coupon.id)
   },
   reservationParameters(state, getters, rootState, rootGetters) {
     const reservationAt = rootState.reservation.select.dateTime
@@ -73,11 +54,11 @@ export const getters = {
     return {
       customer_id: rootState.user.customerId,
       store_id: rootState.reservation.select.storeId,
-      children_count: state.childrenCount,
+      children_count: rootState.user.childrenCount,
       reservation_comment: state.request,
       reservation_date: reservationAt.format('YYYY-MM-DD'),
       start_time: reservationAt.format('HH:mm'),
-      is_first: getters.isFirstValue,
+      is_first: rootGetters['user/isFirstValue'],
       coupon_ids: getters.selectedCouponIds,
       reservation_details_attributes:
         rootGetters['reservation/select/reservationDetailsParameters']

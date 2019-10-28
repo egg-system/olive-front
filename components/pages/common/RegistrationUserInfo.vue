@@ -97,7 +97,7 @@ export default {
   computed: {
     selectedCoupons: {
       get() {
-        return this.$store.state.reservation.registration.coupons
+        return this.$store.state.user.coupons
       },
       set(value) {
         this.setCoupons(value)
@@ -125,9 +125,8 @@ export default {
         ? '初めてです(初診料 ¥1,000)'
         : '初めてです(初回カウンセリング料 ¥1,000)'
     },
-    ...mapGetters('user', ['isLogin']),
-    ...mapGetters('reservation/registration', ['isFirstValue']),
-    ...mapState('reservation/registration', ['childrenCount']),
+    ...mapGetters('user', ['isLogin', 'isFirstValue']),
+    ...mapState('user', ['childrenCount']),
     ...mapState('reservation/select', ['menus'])
   },
   beforeMount() {
@@ -140,13 +139,13 @@ export default {
     })
   },
   methods: {
-    ...mapMutations('reservation/registration', [
+    ...mapMutations('reservation/registration', ['setPregnantStateId']),
+    ...mapMutations('user', [
+      'setIsLoading',
       'setCoupons',
-      'setPregnantStateId',
       'setChildrenCount',
       'setIsFirst'
-    ]),
-    ...mapMutations('user', ['setIsLoading'])
+    ])
   }
 }
 </script>
