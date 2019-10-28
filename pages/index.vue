@@ -1,6 +1,6 @@
 <template>
   <section class="container">
-    <div>
+    <div v-if="isDev">
       <logo/>
       <h1 class="mainTitle">olive salon</h1>
       <div class="text-xs-center">
@@ -38,6 +38,11 @@
         </v-chip>
       </div>
     </div>
+    <v-progress-circular
+      v-else
+      indeterminate
+      size="100"
+    />
   </section>
 </template>
 
@@ -48,6 +53,11 @@ export default {
   middleware: ['top-page-redirector'],
   components: {
     Logo
+  },
+  computed: {
+    isDev() {
+      return process.env.NODE_ENV === 'development'
+    }
   }
 }
 </script>
