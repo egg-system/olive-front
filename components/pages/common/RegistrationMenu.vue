@@ -31,8 +31,8 @@
         >
           <template slot="items" slot-scope="props">
             <td v-if="props.item">{{ props.item.name }}</td>
-            <td v-if="props.item" class="text-xs-right">{{ props.item.price | priceFormat }}</td>
-            <td v-if="props.item" class="text-xs-right">{{ props.item.minutes | timeFormat }}</td>
+            <td v-if="props.item">{{ props.item.price | priceFormat }}</td>
+            <td v-if="props.item">{{ props.item.minutes | timeFormat }}</td>
           </template>
         </v-data-table>
       </v-flex>
