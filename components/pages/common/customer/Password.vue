@@ -67,7 +67,7 @@ export default {
     },
     password: {
       get() {
-        return this.login.password
+        return this.user.password
       },
       set(value) {
         this.setPassword(value)
@@ -75,18 +75,18 @@ export default {
     },
     password2: {
       get() {
-        return this.login.password2
+        return this.user.password2
       },
       set(value) {
         this.setPassword2(value)
       }
     },
     ...mapState({
-      login: state => state.login
+      user: state => state.user
     })
   },
   methods: {
-    ...mapMutations('login', ['setPassword', 'setPassword2'])
+    ...mapMutations('user', ['setPassword', 'setPassword2'])
   }
 }
 </script>

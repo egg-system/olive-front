@@ -39,49 +39,49 @@ export default {
       }
 
       // 新規会員登録の場合
-      if (this.login.isCreate) {
+      if (this.user.isCreate) {
         // パスワードは必須入力
-        if (this.login.password === '' || this.login.password2 === '') {
+        if (this.user.password === '' || this.user.password2 === '') {
           return false
         }
         // 同一チェック
-        if (checkSame(this.login.password, this.login.password2) !== true) {
+        if (checkSame(this.user.password, this.user.password2) !== true) {
           return false
         }
       }
 
       // バリデーションチェック
       if (
-        checkName(this.login.firstName) !== true ||
-        checkName(this.login.lastName) !== true ||
-        checkNameKana(this.login.firstNameKana) !== true ||
-        checkNameKana(this.login.lastNameKana) !== true ||
-        checkMail(this.login.mail) !== true ||
-        checkMail(this.login.mail2) !== true ||
-        checkPhoneNumber(this.login.phoneNumber) !== true
+        checkName(this.user.firstName) !== true ||
+        checkName(this.user.lastName) !== true ||
+        checkNameKana(this.user.firstNameKana) !== true ||
+        checkNameKana(this.user.lastNameKana) !== true ||
+        checkMail(this.user.mail) !== true ||
+        checkMail(this.user.mail2) !== true ||
+        checkPhoneNumber(this.user.phoneNumber) !== true
       ) {
         return false
       }
 
       // 同一チェック
-      return checkSame(this.login.mail, this.login.mail2)
+      return checkSame(this.user.mail, this.user.mail2)
     },
     isEmptyRequiredInput() {
       return (
-        this.login.firstName === '' ||
-        this.login.lastName === '' ||
-        this.login.firstNameKana === '' ||
-        this.login.lastNameKana === '' ||
-        this.login.mail === '' ||
-        this.login.mail2 === '' ||
-        this.login.phoneNumber === ''
+        this.user.firstName === '' ||
+        this.user.lastName === '' ||
+        this.user.firstNameKana === '' ||
+        this.user.lastNameKana === '' ||
+        this.user.mail === '' ||
+        this.user.mail2 === '' ||
+        this.user.phoneNumber === ''
       )
     },
     ...mapState({
       registration: state => state.reservation.registration,
-      login: state => state.login
+      user: state => state.user
     }),
-    ...mapGetters('login', ['isLogin'])
+    ...mapGetters('user', ['isLogin'])
   },
   methods: {
     confirm() {
@@ -96,7 +96,7 @@ export default {
         this.$router.go(-1)
       }
     },
-    ...mapMutations('login', { resetLogin: 'reset' }),
+    ...mapMutations('user', { resetLogin: 'reset' }),
     ...mapMutations('reservation/registration', { resetRegistration: 'reset' })
   }
 }

@@ -5,7 +5,7 @@
         <v-layout row>
           <v-flex>
             <v-card-text class="complete">
-              <template v-if="login.isCreate">会員登録、および予約が確定しました。</template>
+              <template v-if="user.isCreate">会員登録、および予約が確定しました。</template>
               <template v-else>予約が確定しました。</template>
               <br>予約確定メールをお送りしましたので、ご確認ください。
             </v-card-text>
@@ -40,8 +40,8 @@ export default {
     registration() {
       return this.$store.state.reservation.registration
     },
-    login() {
-      return this.$store.state.login
+    user() {
+      return this.$store.state.user
     }
   },
   async fetch({ store, error }) {
@@ -63,12 +63,12 @@ export default {
       })
     }
 
-    const { login } = store.state
-    if (login.isError) {
+    const { user } = store.state
+    if (user.isError) {
       error({
         statusCode: 401,
         message: `${
-          login.errorMessage
+          user.errorMessage
         }<br>お手数ですが最初からやり直してください。`
       })
     }

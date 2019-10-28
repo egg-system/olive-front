@@ -50,7 +50,7 @@ export default {
   computed: {
     ...mapState('reservation/select', ['menuIndex']),
     ...mapGetters('menu', ['isLoading', 'hasSubShops']),
-    ...mapGetters('login', ['customerMustUpdate'])
+    ...mapGetters('user', ['customerMustUpdate'])
   }
 }
 </script>

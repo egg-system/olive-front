@@ -31,36 +31,36 @@ export default {
     canClick() {
       // 入力チェック
       if (
-        this.login.firstName === '' ||
-        this.login.lastName === '' ||
-        this.login.firstNameKana === '' ||
-        this.login.lastNameKana === '' ||
-        this.login.mail === '' ||
-        this.login.mail2 === '' ||
-        this.login.phoneNumber === '' ||
-        this.login.password === '' ||
-        this.login.password2 === ''
+        this.user.firstName === '' ||
+        this.user.lastName === '' ||
+        this.user.firstNameKana === '' ||
+        this.user.lastNameKana === '' ||
+        this.user.mail === '' ||
+        this.user.mail2 === '' ||
+        this.user.phoneNumber === '' ||
+        this.user.password === '' ||
+        this.user.password2 === ''
       ) {
         return false
       }
       // バリデーションチェック
       if (
-        checkName(this.login.firstName) !== true ||
-        checkName(this.login.lastName) !== true ||
-        checkNameKana(this.login.firstNameKana) !== true ||
-        checkNameKana(this.login.lastNameKana) !== true ||
-        checkMail(this.login.mail) !== true ||
-        checkMail(this.login.mail2) !== true ||
-        checkPhoneNumber(this.login.phoneNumber) !== true ||
-        checkPassword(this.login.password) !== true ||
-        checkPassword(this.login.password2) !== true
+        checkName(this.user.firstName) !== true ||
+        checkName(this.user.lastName) !== true ||
+        checkNameKana(this.user.firstNameKana) !== true ||
+        checkNameKana(this.user.lastNameKana) !== true ||
+        checkMail(this.user.mail) !== true ||
+        checkMail(this.user.mail2) !== true ||
+        checkPhoneNumber(this.user.phoneNumber) !== true ||
+        checkPassword(this.user.password) !== true ||
+        checkPassword(this.user.password2) !== true
       ) {
         return false
       }
       // 同一チェック
       if (
-        checkSame(this.login.mail, this.login.mail2) !== true ||
-        checkSame(this.login.password, this.login.password2) !== true
+        checkSame(this.user.mail, this.user.mail2) !== true ||
+        checkSame(this.user.password, this.user.password2) !== true
       ) {
         return false
       }
@@ -68,7 +68,7 @@ export default {
     },
     ...mapState({
       registration: state => state.reservation.registration,
-      login: state => state.login
+      user: state => state.user
     })
   },
   methods: {

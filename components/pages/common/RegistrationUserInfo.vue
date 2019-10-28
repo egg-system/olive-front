@@ -125,7 +125,7 @@ export default {
         ? '初めてです(初診料 ¥1,000)'
         : '初めてです(初回カウンセリング料 ¥1,000)'
     },
-    ...mapGetters('login', ['isLogin']),
+    ...mapGetters('user', ['isLogin']),
     ...mapGetters('reservation/registration', ['isFirstValue']),
     ...mapState('reservation/registration', ['childrenCount']),
     ...mapState('reservation/select', ['menus'])
@@ -146,7 +146,7 @@ export default {
       'setChildrenCount',
       'setIsFirst'
     ]),
-    ...mapMutations('login', ['setIsLoading'])
+    ...mapMutations('user', ['setIsLoading'])
   }
 }
 </script>

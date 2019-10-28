@@ -54,7 +54,7 @@ export const getters = {
   },
   isFirstValue(state, getters, rootState, rootGetters) {
     if (state.isFirst === null) {
-      return !rootGetters['login/isLogin']
+      return !rootGetters['user/isLogin']
     }
 
     return state.isFirst
@@ -71,7 +71,7 @@ export const getters = {
 
     // 回数券周りの処理を追加する
     return {
-      customer_id: rootState.login.customerId,
+      customer_id: rootState.user.customerId,
       store_id: rootState.reservation.select.storeId,
       children_count: state.childrenCount,
       reservation_comment: state.request,
@@ -90,7 +90,7 @@ export const actions = {
   resetAllInputed({ commit, rootState }) {
     commit('reset')
     commit('reservation/select/reset', null, { root: true })
-    commit('login/reset', null, { root: true })
+    commit('user/reset', null, { root: true })
   },
   async registerCustomerWithReserve(context) {
     if (!context.getters.isValidRegistration) {
@@ -99,9 +99,9 @@ export const actions = {
     }
 
     let doCreateReservation = true
-    if (!context.rootGetters['login/isLogin']) {
+    if (!context.rootGetters['user/isLogin']) {
       doCreateReservation = await context.dispatch(
-        'login/createCustomer',
+        'user/createCustomer',
         null,
         {
           root: true

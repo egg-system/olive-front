@@ -17,7 +17,7 @@ export default {
   layout: 'password',
   async fetch({ store, error }) {
     try {
-      await store.dispatch('login/sendPasswrodResetMail')
+      await store.dispatch('user/sendPasswrodResetMail')
     } catch (e) {
       error({ statusCode: (e.response && e.response.status) || 500 })
     }

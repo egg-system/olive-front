@@ -35,7 +35,7 @@ export default {
       return false
     },
     ...mapState({
-      login: state => state.login
+      user: state => state.user
     })
   }
 }

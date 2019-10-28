@@ -68,7 +68,7 @@ export default {
     slotEndAt() {
       return this.dateTimeSlot.clone().add(this.timeSlotIncrement, 'hours')
     },
-    ...mapGetters('login', ['isLogin']),
+    ...mapGetters('user', ['isLogin']),
     ...mapGetters('reservation/date', ['timeSlotIncrement', 'getDateSlot'])
   },
   methods: {

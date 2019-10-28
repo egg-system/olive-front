@@ -19,23 +19,23 @@ export default {
     // TODO:registration/ConfirmBtnと共通化する
     canClick() {
       // 入力チェック
-      if (this.login.password === '' || this.login.password2 === '') {
+      if (this.user.password === '' || this.user.password2 === '') {
         return false
       }
       // バリデーションチェック
       if (
-        checkPassword(this.login.password) !== true ||
-        checkPassword(this.login.password2) !== true
+        checkPassword(this.user.password) !== true ||
+        checkPassword(this.user.password2) !== true
       ) {
         return false
       }
       // 同一チェック
-      if (checkSame(this.login.password, this.login.password2) !== true) {
+      if (checkSame(this.user.password, this.user.password2) !== true) {
         return false
       }
       return true
     },
-    ...mapState({ login: state => state.login })
+    ...mapState({ user: state => state.user })
   },
   methods: {
     set() {

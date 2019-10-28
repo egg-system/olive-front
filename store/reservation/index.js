@@ -31,7 +31,7 @@ export const mutations = {
 /* actions */
 export const actions = {
   async getReservation({ commit, rootGetters }, id) {
-    const authenticatedApi = rootGetters['login/authenticatedApi']
+    const authenticatedApi = rootGetters['user/authenticatedApi']
     const reservationPath = route(process.env.api.reservation, { id })
 
     const { data } = await authenticatedApi.get(reservationPath)
@@ -39,10 +39,10 @@ export const actions = {
     return true
   },
   async getReservations({ commit, rootState, rootGetters }, page) {
-    const authenticatedApi = rootGetters['login/authenticatedApi']
+    const authenticatedApi = rootGetters['user/authenticatedApi']
     const reservationsRoute = route(process.env.api.reserveCommit, null, {
       page: page,
-      customer_id: rootState.login.customerId
+      customer_id: rootState.user.customerId
     })
     const { data } = await authenticatedApi.get(reservationsRoute)
 
@@ -53,7 +53,7 @@ export const actions = {
     return true
   },
   async destroyReservation({ rootGetters }, id) {
-    const authenticatedApi = rootGetters['login/authenticatedApi']
+    const authenticatedApi = rootGetters['user/authenticatedApi']
     const reservationPath = route(process.env.api.reservation, { id })
 
     await authenticatedApi.delete(reservationPath)

@@ -31,37 +31,37 @@ export default {
     canClick() {
       // 入力チェック
       if (
-        this.login.firstName === '' ||
-        this.login.lastName === '' ||
-        this.login.firstNameKana === '' ||
-        this.login.lastNameKana === '' ||
-        this.login.mail === '' ||
-        this.login.mail2 === '' ||
-        this.login.phoneNumber === ''
+        this.user.firstName === '' ||
+        this.user.lastName === '' ||
+        this.user.firstNameKana === '' ||
+        this.user.lastNameKana === '' ||
+        this.user.mail === '' ||
+        this.user.mail2 === '' ||
+        this.user.phoneNumber === ''
       ) {
         return false
       }
       // バリデーションチェック
       if (
-        checkName(this.login.firstName) !== true ||
-        checkName(this.login.lastName) !== true ||
-        checkNameKana(this.login.firstNameKana) !== true ||
-        checkNameKana(this.login.lastNameKana) !== true ||
-        checkMail(this.login.mail) !== true ||
-        checkMail(this.login.mail2) !== true ||
-        checkPhoneNumber(this.login.phoneNumber) !== true
+        checkName(this.user.firstName) !== true ||
+        checkName(this.user.lastName) !== true ||
+        checkNameKana(this.user.firstNameKana) !== true ||
+        checkNameKana(this.user.lastNameKana) !== true ||
+        checkMail(this.user.mail) !== true ||
+        checkMail(this.user.mail2) !== true ||
+        checkPhoneNumber(this.user.phoneNumber) !== true
       ) {
         return false
       }
       // 同一チェック
-      if (checkSame(this.login.mail, this.login.mail2) !== true) {
+      if (checkSame(this.user.mail, this.user.mail2) !== true) {
         return false
       }
       return true
     },
     ...mapState({
       registration: state => state.reservation.registration,
-      login: state => state.login
+      user: state => state.user
     })
   },
   methods: {

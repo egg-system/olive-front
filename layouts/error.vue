@@ -63,7 +63,7 @@ export default {
         !this.message || this.isIncludedObjectString || this.statusCode === 404
       )
     },
-    ...mapGetters('login', ['isLogin'])
+    ...mapGetters('user', ['isLogin'])
   },
   methods: {
     goHomePage() {

@@ -29,28 +29,28 @@ export default {
     canClick() {
       // 入力チェック
       if (
-        this.login.mail === '' ||
-        this.login.mail2 === '' ||
-        (this.shouldCheckPhone && this.login.phoneNumber === '')
+        this.user.mail === '' ||
+        this.user.mail2 === '' ||
+        (this.shouldCheckPhone && this.user.phoneNumber === '')
       ) {
         return false
       }
       // バリデーションチェック
       if (
-        checkMail(this.login.mail) !== true ||
-        checkMail(this.login.mail2) !== true ||
+        checkMail(this.user.mail) !== true ||
+        checkMail(this.user.mail2) !== true ||
         (this.shouldCheckPhone &&
-          checkPhoneNumber(this.login.phoneNumber) !== true)
+          checkPhoneNumber(this.user.phoneNumber) !== true)
       ) {
         return false
       }
       // 同一チェック
-      if (checkSame(this.login.mail, this.login.mail2) !== true) {
+      if (checkSame(this.user.mail, this.user.mail2) !== true) {
         return false
       }
       return true
     },
-    ...mapState({ login: state => state.login })
+    ...mapState({ user: state => state.user })
   },
   methods: {
     confirm() {

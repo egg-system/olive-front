@@ -65,7 +65,7 @@ export default {
   computed: {
     mail: {
       get() {
-        return this.$store.state.login.mail
+        return this.$store.state.user.mail
       },
       set(value) {
         this.setMail(value)
@@ -73,7 +73,7 @@ export default {
     },
     mail2: {
       get() {
-        return this.$store.state.login.mail2
+        return this.$store.state.user.mail2
       },
       set(value) {
         this.setMail2(value)
@@ -81,13 +81,13 @@ export default {
     },
     checkSame() {
       return checkSame(
-        this.$store.state.login.mail,
-        this.$store.state.login.mail2
+        this.$store.state.user.mail,
+        this.$store.state.user.mail2
       )
     }
   },
   methods: {
-    ...mapMutations('login', ['setMail', 'setMail2'])
+    ...mapMutations('user', ['setMail', 'setMail2'])
   }
 }
 </script>
