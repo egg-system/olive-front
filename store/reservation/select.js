@@ -63,6 +63,11 @@ export const mutations = {
   reset(state) {
     state.menus = [_.clone(RESERVATION_DETAIL)]
     state.dateTime = null
+  },
+  setMenus(state, { menus, storeId }) {
+    state.menus = menus
+    state.menuIndex = menus.length - 1
+    state.storeId = storeId
   }
 }
 
@@ -125,7 +130,7 @@ export const getters = {
     return state.menus[state.menuIndex].menu
   },
   selectedOptions(state) {
-    return state.menus[state.menuIndex].options
+    return state.menus[state.menuIndex].options || []
   },
   selectedOptionIds(state, getters) {
     return getters.selectedOptions.map(option => option.id)
@@ -145,5 +150,26 @@ export const getters = {
         option_ids: select.options.map(option => option.id)
       }
     })
+  },
+  // 選択したメニューの情報のquery
+  selectedMenuParamsQuery(state) {
+    const selectedStoreId =
+      state.menus[state.menuIndex].storeId || state.storeId
+    const selectedMenus = state.menus.filter(_menu => _menu).map(_menu => {
+      const menuId = _menu.menu.id || undefined
+      let optionIds
+      if (Array.isArray(_menu.options) && _menu.options.length > 0) {
+        optionIds = _menu.options
+          .filter(option => option.id)
+          .map(option => option.id)
+          .join(',')
+      }
+      const mimitsuboCount = _menu.mimitsuboCount || undefined
+      return { menuId, optionIds, mimitsuboCount }
+    })
+    return {
+      storeId: selectedStoreId,
+      menus: JSON.stringify(selectedMenus)
+    }
   }
 }

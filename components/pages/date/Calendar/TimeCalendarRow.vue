@@ -70,14 +70,17 @@ export default {
       return this.dateTimeSlot.clone().add(this.timeSlotIncrement, 'hours')
     },
     ...mapGetters('login', ['isLogin']),
-    ...mapGetters('reservation/date', ['timeSlotIncrement', 'getDateSlot'])
+    ...mapGetters('reservation/date', ['timeSlotIncrement', 'getDateSlot']),
+    ...mapGetters('reservation/select', ['selectedMenuParamsQuery'])
   },
   methods: {
     setDataTimeSlot() {
-      this.setSelectedDateTime(this.dateTimeSlot)
-      this.$router.push({ name: this.nextRoute })
-    },
-    ...mapMutations('reservation/select', ['setSelectedDateTime'])
+      const dateTime = this.dateTimeSlot.format('YYYY-MM-DDTHH:mm:ss')
+      const dateTimeQuery = encodeURIComponent(dateTime)
+      const menuQuery = this.selectedMenuParamsQuery
+      const query = { ...menuQuery, dateTime: dateTimeQuery }
+      this.$router.push({ path: `/${this.nextRoute}`, query })
+    }
   }
 }
 </script>
