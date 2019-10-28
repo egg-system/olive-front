@@ -83,21 +83,23 @@ export default {
         .endOf('day')
     },
     menusForDisplay() {
-      const doShowOnlyFirstMenu = 
+      const doShowOnlyFirstMenu =
         this.menus.length > 0 &&
         (this.ifShowOnlyFirstMenu || !this.isTwoMenusSelected)
       const menus = doShowOnlyFirstMenu ? [this.menus[0]] : this.menus
 
-      const menusForDisplay = menus.map((_menu, index) => {
-        const { menu } = _menu
-        return {
-          name: this.isTwoMenusSelected
-            ? `${(index + 1).toString()}時間目 - ${menu.name}`
-            : menu.name,
-          price: menu.price,
-          minutes: menu.minutes
-        }
-      })
+      const menusForDisplay =
+        menus &&
+        menus.map((_menu, index) => {
+          const { menu } = _menu
+          return {
+            name: this.isTwoMenusSelected
+              ? `${(index + 1).toString()}時間目 - ${menu.name}`
+              : menu.name,
+            price: menu.price,
+            minutes: menu.minutes
+          }
+        })
       const menuOptionsForDisplay = this.getMenuOptionsForDisplay(menus)
 
       const additionalMenus = []
