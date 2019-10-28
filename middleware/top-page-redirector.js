@@ -1,5 +1,5 @@
-export default function({ redirect }) {
-  if (process.env.NODE_ENV === 'development') {
+export default function({ env, redirect }) {
+  if (!env.isProd) {
     return
   }
 

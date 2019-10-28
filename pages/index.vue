@@ -1,6 +1,11 @@
 <template>
   <section class="container">
-    <div v-if="isDev">
+    <v-progress-circular
+      v-if="isProd"
+      indeterminate
+      size="100"
+    />
+    <div v-else>
       <logo/>
       <h1 class="mainTitle">olive salon</h1>
       <div class="text-xs-center">
@@ -38,11 +43,6 @@
         </v-chip>
       </div>
     </div>
-    <v-progress-circular
-      v-else
-      indeterminate
-      size="100"
-    />
   </section>
 </template>
 
@@ -55,8 +55,8 @@ export default {
     Logo
   },
   computed: {
-    isDev() {
-      return process.env.NODE_ENV === 'development'
+    isProd() {
+      return this.$root.context.env.isProd
     }
   }
 }
