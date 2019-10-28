@@ -57,6 +57,7 @@
 import { mapGetters, mapState } from 'vuex'
 import _ from 'lodash'
 import moment from 'moment'
+
 export default {
   props: {
     isConfirm: {
@@ -82,11 +83,10 @@ export default {
         .endOf('day')
     },
     menusForDisplay() {
-      let menus =
-        0 < this.menus.length &&
-        (this.ifShowOnlyFirstMenu || !this.isTwoMenusSelected)
-          ? [this.menus[0]]
-          : this.menus
+      const doShowSecondMenu =
+        (this.ifShowOnlyFirstMenu || !this.isTwoMenusSelected) &&
+        this.menus.length > 0
+      let menus = doShowSecondMenu ? [this.menus[0]] : this.menus
 
       //表示用に加工した配列にする
       menus = menus
@@ -94,17 +94,15 @@ export default {
           let forDisplay = []
           let menu = _.clone(menuOfHour.menu)
           if (this.isTwoMenusSelected) {
-            menu.name = (index + 1).toString() + '時間目 - ' + menu.name
+            menu.name = `${(index + 1).toString()}時間目 - ${menu.name}`
           }
           forDisplay.push(menu)
           menuOfHour.options.forEach(optionOriginal => {
             let option = _.clone(optionOriginal)
-            if (option.is_mimitsubo_jewelry) {
-              option.name =
-                option.name +
-                ' × ' +
-                menuOfHour.mimitsuboCount.toString() +
-                '粒'
+            if (option.is_mimitsubo_jewelry && menuOfHour.mimitsuboCount) {
+              option.name = `${
+                option.name
+              } × ${menuOfHour.mimitsuboCount.toString()}粒`
             }
             forDisplay.push(option)
           })
@@ -144,19 +142,14 @@ export default {
         return
       }
 
-      return (
-        this.dateTime.format('YYYY年MM月DD日 (') +
-        this.$root.$options.filters.dayFormat(
-          this.dateTime.format('YYYYMMDD')
-        ) +
-        ') ' +
-        this.dateTime.format('HH:mm') +
-        ' ～ ' +
-        this.dateTime
-          .clone()
-          .add(this.allServiceMinutes, 'minutes')
-          .format('HH:mm')
-      )
+      return `${this.dateTime.format(
+        'YYYY年MM月DD日'
+      )} (${this.$root.$options.filters.dayFormat(
+        this.dateTime.format('YYYYMMDD')
+      )}) ${this.dateTime.format('HH:mm')} ～ ${this.dateTime
+        .clone()
+        .add(this.allServiceMinutes, 'minutes')
+        .format('HH:mm')}`
     },
     ...mapState('reservation/registration', ['coupons', 'isFirst']),
     ...mapState('reservation/select', ['dateTime', 'menus']),
