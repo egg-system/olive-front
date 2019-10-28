@@ -30,11 +30,11 @@ export default {
     canClick() {
       // ログイン済みの場合、okのみチェック
       if (this.isLogin) {
-        return this.registration.isOk
+        return this.reservation.isOk
       }
 
       // 入力チェック
-      if (this.isEmptyRequiredInput || this.registration.isOk === null) {
+      if (this.isEmptyRequiredInput || this.reservation.isOk === null) {
         return false
       }
 
@@ -78,7 +78,7 @@ export default {
       )
     },
     ...mapState({
-      registration: state => state.reservation.registration,
+      reservation: state => state.reservation,
       user: state => state.user
     }),
     ...mapGetters('user', ['isLogin'])
@@ -88,7 +88,7 @@ export default {
       this.$router.push('/confirm')
     },
     back() {
-      this.resetRegistration()
+      this.resetReservation()
       if (this.isLogin) {
         this.$router.push({ name: 'date' })
       } else {
@@ -97,7 +97,7 @@ export default {
       }
     },
     ...mapMutations('user', { resetLogin: 'reset' }),
-    ...mapMutations('reservation/registration', { resetRegistration: 'reset' })
+    ...mapMutations('reservation', { resetReservation: 'reset' })
   }
 }
 </script>

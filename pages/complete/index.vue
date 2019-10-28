@@ -37,9 +37,6 @@ export default {
     'init-shop-id'
   ],
   computed: {
-    registration() {
-      return this.$store.state.reservation.registration
-    },
     user() {
       return this.$store.state.user
     }
@@ -47,18 +44,18 @@ export default {
   async fetch({ store, error }) {
     try {
       const result = await store.dispatch(
-        'reservation/registration/registerCustomerWithReserve'
+        'reservation/registerCustomerWithReserve'
       )
     } catch (e) {
       error({ statusCode: (e.response && e.response.status) || 500 })
     }
 
-    const { registration } = store.state.reservation
-    if (registration.isError) {
+    const { reservation } = store.state
+    if (reservation.isError) {
       error({
         statusCode: 500,
         message: `${
-          registration.errorMessage
+          reservation.errorMessage
         }<br>お手数ですが、再度ご予約の操作をお願いいたします。`
       })
     }
@@ -74,7 +71,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('reservation/registration', ['resetAllInputed'])
+    ...mapActions('reservation', ['resetAllInputed'])
   }
 }
 </script>

@@ -52,7 +52,7 @@ export default {
   computed: {
     isOk: {
       get() {
-        return this.$store.state.reservation.registration.isOk
+        return this.$store.state.reservation.isOk
       },
       set(value) {
         this.setIsOk(value)
@@ -60,7 +60,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('reservation/registration', ['setIsOk'])
+    ...mapMutations('reservation', ['setIsOk'])
   }
 }
 </script>

@@ -59,10 +59,7 @@ export default {
       }
       return true
     },
-    ...mapState({
-      registration: state => state.reservation.registration,
-      user: state => state.user
-    })
+    ...mapState({ user: state => state.user })
   },
   methods: {
     confirm() {

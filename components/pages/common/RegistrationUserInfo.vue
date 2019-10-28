@@ -139,7 +139,7 @@ export default {
     })
   },
   methods: {
-    ...mapMutations('reservation/registration', ['setPregnantStateId']),
+    ...mapMutations('reservation', ['setPregnantStateId']),
     ...mapMutations('user', [
       'setIsLoading',
       'setCoupons',
