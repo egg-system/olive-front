@@ -83,11 +83,10 @@ export default {
         .endOf('day')
     },
     menusForDisplay() {
-      const menus =
-        0 < this.menus.length &&
+      const doShowOnlyFirstMenu = 
+        this.menus.length > 0 &&
         (this.ifShowOnlyFirstMenu || !this.isTwoMenusSelected)
-          ? [this.menus[0]]
-          : this.menus
+      const menus = doShowOnlyFirstMenu ? [this.menus[0]] : this.menus
 
       const menusForDisplay = menus.map((_menu, index) => {
         const { menu } = _menu
