@@ -105,7 +105,8 @@ export default {
     ...mapGetters('reservation/select', [
       'storeMenu',
       'isMenuSelected',
-      'selectedOptions'
+      'selectedOptions',
+      'selectedMenuParamsQuery'
     ])
   },
   methods: {
@@ -113,7 +114,8 @@ export default {
       this.$refs[shopId.toString()][0].scrollIntoView(true)
     },
     selectDate() {
-      this.$router.push({ name: 'date' })
+      const query = this.selectedMenuParamsQuery
+      this.$router.push({ path: '/date', query })
     },
     nextHour() {
       const nextPageId = this.currentPageId + 1
