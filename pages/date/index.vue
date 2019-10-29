@@ -14,14 +14,14 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState, mapMutations, mapGetters } from 'vuex'
 import RegistrationMenu from '~/components/pages/common/RegistrationMenu.vue'
 import Calendar from '~/components/pages/date/Calendar.vue'
 import BackBtn from '~/components/pages/date/BackBtn.vue'
 import Loading from '~/components/layouts/Loading.vue'
 
 export default {
-  middleware: ['menu-selected', 'init-shop-id'],
+  middleware: ['init-shop-id', 'fetch-menus-from-query'],
   components: {
     RegistrationMenu,
     Calendar,
@@ -31,8 +31,9 @@ export default {
   computed: {
     ...mapGetters('reservation/date', ['isLoading'])
   },
-  async fetch({ store, error }) {
+  async fetch({ store, error, route, redirect }) {
     try {
+      // カレンダーを取得
       await store.dispatch('reservation/date/getCalendar')
     } catch (e) {
       error({ statusCode: (e.response && e.response.status) || 500 })

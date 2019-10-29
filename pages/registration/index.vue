@@ -27,7 +27,11 @@ import RegistrationRequest from '~/components/pages/common/RegistrationRequest.v
 import CustomerMustUpdateError from '~/components/pages/common/CustomerMustUpdateError.vue'
 
 export default {
-  middleware: ['menu-selected', 'date-time-selected', 'init-shop-id'],
+  middleware: [
+    'init-shop-id',
+    'fetch-menus-from-query',
+    'set-date-time-from-query'
+  ],
   components: {
     LoginInfo,
     ConfirmBtn,

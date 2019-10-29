@@ -1,6 +1,11 @@
 <template>
   <section class="container">
-    <div>
+    <v-progress-circular
+      v-if="isProd"
+      indeterminate
+      size="100"
+    />
+    <div v-else>
       <logo/>
       <h1 class="mainTitle">olive salon</h1>
       <div class="text-xs-center">
@@ -48,6 +53,11 @@ export default {
   middleware: ['top-page-redirector'],
   components: {
     Logo
+  },
+  computed: {
+    isProd() {
+      return this.$root.context.env.isProd
+    }
   }
 }
 </script>
