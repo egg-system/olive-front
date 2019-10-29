@@ -30,7 +30,7 @@ export default {
       // 入力チェック
       if (
         this.user.mail === '' ||
-        this.user.mail2 === '' ||
+        this.user.mailConfirm === '' ||
         (this.shouldCheckPhone && this.user.phoneNumber === '')
       ) {
         return false
@@ -38,14 +38,14 @@ export default {
       // バリデーションチェック
       if (
         checkMail(this.user.mail) !== true ||
-        checkMail(this.user.mail2) !== true ||
+        checkMail(this.user.mailConfirm) !== true ||
         (this.shouldCheckPhone &&
           checkPhoneNumber(this.user.phoneNumber) !== true)
       ) {
         return false
       }
       // 同一チェック
-      if (checkSame(this.user.mail, this.user.mail2) !== true) {
+      if (checkSame(this.user.mail, this.user.mailConfirm) !== true) {
         return false
       }
       return true

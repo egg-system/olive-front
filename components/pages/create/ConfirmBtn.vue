@@ -36,7 +36,7 @@ export default {
         this.user.firstNameKana === '' ||
         this.user.lastNameKana === '' ||
         this.user.mail === '' ||
-        this.user.mail2 === '' ||
+        this.user.mailConfirm === '' ||
         this.user.phoneNumber === '' ||
         this.user.password === '' ||
         this.user.password2 === ''
@@ -50,7 +50,7 @@ export default {
         checkNameKana(this.user.firstNameKana) !== true ||
         checkNameKana(this.user.lastNameKana) !== true ||
         checkMail(this.user.mail) !== true ||
-        checkMail(this.user.mail2) !== true ||
+        checkMail(this.user.mailConfirm) !== true ||
         checkPhoneNumber(this.user.phoneNumber) !== true ||
         checkPassword(this.user.password) !== true ||
         checkPassword(this.user.password2) !== true
@@ -59,7 +59,7 @@ export default {
       }
       // 同一チェック
       if (
-        checkSame(this.user.mail, this.user.mail2) !== true ||
+        checkSame(this.user.mail, this.user.mailConfirm) !== true ||
         checkSame(this.user.password, this.user.password2) !== true
       ) {
         return false

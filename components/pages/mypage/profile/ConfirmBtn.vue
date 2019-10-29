@@ -36,7 +36,7 @@ export default {
         this.user.firstNameKana === '' ||
         this.user.lastNameKana === '' ||
         this.user.mail === '' ||
-        this.user.mail2 === '' ||
+        this.user.mailConfirm === '' ||
         this.user.phoneNumber === ''
       ) {
         return false
@@ -48,13 +48,13 @@ export default {
         checkNameKana(this.user.firstNameKana) !== true ||
         checkNameKana(this.user.lastNameKana) !== true ||
         checkMail(this.user.mail) !== true ||
-        checkMail(this.user.mail2) !== true ||
+        checkMail(this.user.mailConfirm) !== true ||
         checkPhoneNumber(this.user.phoneNumber) !== true
       ) {
         return false
       }
       // 同一チェック
-      if (checkSame(this.user.mail, this.user.mail2) !== true) {
+      if (checkSame(this.user.mail, this.user.mailConfirm) !== true) {
         return false
       }
       return true

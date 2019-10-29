@@ -6,7 +6,7 @@ export default ({ store, query, redirect }) => {
     !store.state.user.firstNameKana ||
     !store.state.user.lastNameKana ||
     !store.state.user.mail ||
-    !store.state.user.mail2 ||
+    !store.state.user.mailConfirm ||
     !store.state.user.phoneNumber
   ) {
     // 登録画面にリダイレクトさせる

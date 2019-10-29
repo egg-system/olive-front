@@ -57,14 +57,14 @@ export default {
         checkNameKana(this.user.firstNameKana) !== true ||
         checkNameKana(this.user.lastNameKana) !== true ||
         checkMail(this.user.mail) !== true ||
-        checkMail(this.user.mail2) !== true ||
+        checkMail(this.user.mailConfirm) !== true ||
         checkPhoneNumber(this.user.phoneNumber) !== true
       ) {
         return false
       }
 
       // 同一チェック
-      return checkSame(this.user.mail, this.user.mail2)
+      return checkSame(this.user.mail, this.user.mailConfirm)
     },
     isEmptyRequiredInput() {
       return (
@@ -73,7 +73,7 @@ export default {
         this.user.firstNameKana === '' ||
         this.user.lastNameKana === '' ||
         this.user.mail === '' ||
-        this.user.mail2 === '' ||
+        this.user.mailConfirm === '' ||
         this.user.phoneNumber === ''
       )
     },

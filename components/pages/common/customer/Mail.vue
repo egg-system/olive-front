@@ -22,7 +22,7 @@
         <v-flex v-if="!isConfirm">確認のため、再度メールアドレスを入力してください</v-flex>
         <v-flex v-if="!isConfirm">
           <v-text-field
-            v-model="mail2"
+            v-model="mailConfirm"
             :rules="mailRules"
             clearable
             type="text"
@@ -71,23 +71,23 @@ export default {
         this.setMail(value)
       }
     },
-    mail2: {
+    mailConfirm: {
       get() {
-        return this.$store.state.user.mail2
+        return this.$store.state.user.mailConfirm
       },
       set(value) {
-        this.setMail2(value)
+        this.setMailConfirm(value)
       }
     },
     checkSame() {
       return checkSame(
         this.$store.state.user.mail,
-        this.$store.state.user.mail2
+        this.$store.state.user.mailConfirm
       )
     }
   },
   methods: {
-    ...mapMutations('user', ['setMail', 'setMail2'])
+    ...mapMutations('user', ['setMail', 'setMailConfirm'])
   }
 }
 </script>

@@ -13,7 +13,7 @@ const initialState = {
   firstNameKana: '',
   lastNameKana: '',
   mail: '',
-  mail2: '',
+  mailConfirm: '',
   phoneNumber: '',
   password: '',
   password2: '',
@@ -115,8 +115,8 @@ export const mutations = {
   setMail(state, mail) {
     state.mail = mail
   },
-  setMail2(state, mail) {
-    state.mail2 = mail
+  setMailConfirm(state, mail) {
+    state.mailConfirm = mail
   },
   setPhoneNumber(state, phoneNumber) {
     state.phoneNumber = phoneNumber
@@ -177,7 +177,7 @@ export const actions = {
     commit('setFirstNameKana', customer.first_kana)
     commit('setLastNameKana', customer.last_kana)
     commit('setMail', customer.email)
-    commit('setMail2', customer.email)
+    commit('setMailConfirm', customer.email)
     commit('setPhoneNumber', customer.tel)
     commit('setPostalCode', customer.zip_code)
     commit('setPrefecture', customer.prefecture)
