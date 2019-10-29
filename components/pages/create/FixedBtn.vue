@@ -19,7 +19,10 @@
 export default {
   methods: {
     fix() {
-      this.$router.push('/create/complete')
+      this.$router.push({
+        path: '/create/complete',
+        query: this.$root.context.query
+      })
     },
     back() {
       // ブラウザバック
