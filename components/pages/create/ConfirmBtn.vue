@@ -14,61 +14,14 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-
-import {
-  checkMail,
-  checkPassword,
-  checkName,
-  checkNameKana,
-  checkPhoneNumber,
-  checkSame
-} from '~/lib/validation'
+import { mapGetters } from 'vuex'
 
 export default {
   computed: {
-    // TODO:registration/ConfirmBtnと共通化する
     canClick() {
-      // 入力チェック
-      if (
-        this.user.firstName === '' ||
-        this.user.lastName === '' ||
-        this.user.firstNameKana === '' ||
-        this.user.lastNameKana === '' ||
-        this.user.mail === '' ||
-        this.user.mailConfirm === '' ||
-        this.user.phoneNumber === '' ||
-        this.user.password === '' ||
-        this.user.passwordConfirm === ''
-      ) {
-        return false
-      }
-      // バリデーションチェック
-      if (
-        checkName(this.user.firstName) !== true ||
-        checkName(this.user.lastName) !== true ||
-        checkNameKana(this.user.firstNameKana) !== true ||
-        checkNameKana(this.user.lastNameKana) !== true ||
-        checkMail(this.user.mail) !== true ||
-        checkMail(this.user.mailConfirm) !== true ||
-        checkPhoneNumber(this.user.phoneNumber) !== true ||
-        checkPassword(this.user.password) !== true ||
-        checkPassword(this.user.passwordConfirm) !== true
-      ) {
-        return false
-      }
-      // 同一チェック
-      if (
-        checkSame(this.user.mail, this.user.mailConfirm) !== true ||
-        checkSame(this.user.password, this.user.passwordConfirm) !== true
-      ) {
-        return false
-      }
-      return true
+      return this.validCreateInput
     },
-    ...mapState({
-      user: state => state.user
-    })
+    ...mapGetters('user', ['validCreateInput'])
   },
   methods: {
     confirm() {

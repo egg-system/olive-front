@@ -16,15 +16,6 @@
 <script>
 import { mapState, mapGetters, mapMutations } from 'vuex'
 
-import {
-  checkMail,
-  checkPassword,
-  checkName,
-  checkNameKana,
-  checkPhoneNumber,
-  checkSame
-} from '~/lib/validation'
-
 export default {
   computed: {
     canClick() {
@@ -33,55 +24,26 @@ export default {
         return this.reservation.isOk
       }
 
-      // 入力チェック
-      if (this.isEmptyRequiredInput || this.reservation.isOk === null) {
+      if (this.reservation.isOk === null) {
         return false
       }
 
       // 新規会員登録の場合
-      if (this.user.isCreate) {
-        // パスワードは必須入力
-        if (this.user.password === '' || this.user.passwordConfirm === '') {
-          return false
-        }
-        // 同一チェック
-        if (checkSame(this.user.password, this.user.passwordConfirm) !== true) {
-          return false
-        }
-      }
-
-      // バリデーションチェック
-      if (
-        checkName(this.user.firstName) !== true ||
-        checkName(this.user.lastName) !== true ||
-        checkNameKana(this.user.firstNameKana) !== true ||
-        checkNameKana(this.user.lastNameKana) !== true ||
-        checkMail(this.user.mail) !== true ||
-        checkMail(this.user.mailConfirm) !== true ||
-        checkPhoneNumber(this.user.phoneNumber) !== true
-      ) {
+      if (this.user.isCreate && !this.validCreateInput) {
         return false
       }
 
-      // 同一チェック
-      return checkSame(this.user.mail, this.user.mailConfirm)
-    },
-    isEmptyRequiredInput() {
-      return (
-        this.user.firstName === '' ||
-        this.user.lastName === '' ||
-        this.user.firstNameKana === '' ||
-        this.user.lastNameKana === '' ||
-        this.user.mail === '' ||
-        this.user.mailConfirm === '' ||
-        this.user.phoneNumber === ''
-      )
+      return this.validRegistrationInput
     },
     ...mapState({
       reservation: state => state.reservation,
       user: state => state.user
     }),
-    ...mapGetters('user', ['isLogin'])
+    ...mapGetters('user', [
+      'isLogin',
+      'validRegistrationInput',
+      'validCreateInput'
+    ])
   },
   methods: {
     confirm() {

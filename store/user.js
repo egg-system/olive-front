@@ -1,5 +1,13 @@
 import axios from 'axios'
 import get from 'lodash/get'
+import {
+  checkMail,
+  checkPassword,
+  checkName,
+  checkNameKana,
+  checkPhoneNumber,
+  checkSame
+} from '~/lib/validation'
 
 /* state */
 const initialState = {
@@ -86,6 +94,39 @@ export const getters = {
     }
 
     return state.isFirst
+  },
+  validRegistrationInput(state) {
+    // バリデーションチェック
+    if (
+      checkName(state.firstName) !== true ||
+      checkName(state.lastName) !== true ||
+      checkNameKana(state.firstNameKana) !== true ||
+      checkNameKana(state.lastNameKana) !== true ||
+      checkMail(state.mail) !== true ||
+      checkMail(state.mailConfirm) !== true ||
+      checkPhoneNumber(state.phoneNumber) !== true
+    ) {
+      return false
+    }
+    // 同一チェック
+    if (checkSame(state.mail, state.mailConfirm) !== true) {
+      return false
+    }
+    return true
+  },
+  validCreateInput(state, getters) {
+    if (!getters.validRegistrationInput) {
+      return false
+    }
+    // 新規登録ではpasswordのチェックも必要
+    if (
+      checkPassword(state.password) !== true ||
+      checkPassword(state.passwordConfirm) !== true ||
+      checkSame(state.password, state.passwordConfirm) !== true
+    ) {
+      return false
+    }
+    return true
   }
 }
 
