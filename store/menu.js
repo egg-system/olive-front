@@ -33,7 +33,9 @@ export const getters = {
   },
   getMenu(state, getters) {
     return menuId => {
-      return getters.allMenus.find(menu => menu.id === menuId)
+      return (
+        getters.allMenus && getters.allMenus.find(menu => menu.id === menuId)
+      )
     }
   },
   getOption(state, getters) {
