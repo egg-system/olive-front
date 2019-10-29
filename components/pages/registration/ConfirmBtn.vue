@@ -41,11 +41,11 @@ export default {
       // 新規会員登録の場合
       if (this.user.isCreate) {
         // パスワードは必須入力
-        if (this.user.password === '' || this.user.password2 === '') {
+        if (this.user.password === '' || this.user.passwordConfirm === '') {
           return false
         }
         // 同一チェック
-        if (checkSame(this.user.password, this.user.password2) !== true) {
+        if (checkSame(this.user.password, this.user.passwordConfirm) !== true) {
           return false
         }
       }

@@ -19,18 +19,18 @@ export default {
     // TODO:registration/ConfirmBtnと共通化する
     canClick() {
       // 入力チェック
-      if (this.user.password === '' || this.user.password2 === '') {
+      if (this.user.password === '' || this.user.passwordConfirm === '') {
         return false
       }
       // バリデーションチェック
       if (
         checkPassword(this.user.password) !== true ||
-        checkPassword(this.user.password2) !== true
+        checkPassword(this.user.passwordConfirm) !== true
       ) {
         return false
       }
       // 同一チェック
-      if (checkSame(this.user.password, this.user.password2) !== true) {
+      if (checkSame(this.user.password, this.user.passwordConfirm) !== true) {
         return false
       }
       return true

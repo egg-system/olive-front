@@ -39,7 +39,7 @@ export default {
         this.user.mailConfirm === '' ||
         this.user.phoneNumber === '' ||
         this.user.password === '' ||
-        this.user.password2 === ''
+        this.user.passwordConfirm === ''
       ) {
         return false
       }
@@ -53,14 +53,14 @@ export default {
         checkMail(this.user.mailConfirm) !== true ||
         checkPhoneNumber(this.user.phoneNumber) !== true ||
         checkPassword(this.user.password) !== true ||
-        checkPassword(this.user.password2) !== true
+        checkPassword(this.user.passwordConfirm) !== true
       ) {
         return false
       }
       // 同一チェック
       if (
         checkSame(this.user.mail, this.user.mailConfirm) !== true ||
-        checkSame(this.user.password, this.user.password2) !== true
+        checkSame(this.user.password, this.user.passwordConfirm) !== true
       ) {
         return false
       }

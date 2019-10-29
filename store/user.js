@@ -16,7 +16,7 @@ const initialState = {
   mailConfirm: '',
   phoneNumber: '',
   password: '',
-  password2: '',
+  passwordConfirm: '',
   postalCode: '',
   prefecture: '',
   city: '',
@@ -124,8 +124,8 @@ export const mutations = {
   setPassword(state, password) {
     state.password = password
   },
-  setPassword2(state, password2) {
-    state.password2 = password2
+  setPasswordConfirm(state, passwordConfirm) {
+    state.passwordConfirm = passwordConfirm
   },
   setPostalCode(state, postalCode) {
     state.postalCode = postalCode
@@ -255,7 +255,7 @@ export const actions = {
   async updatePassword({ state, getters, commit }) {
     const parameters = new FormData()
     parameters.append('password', state.password)
-    parameters.append('password_confirmation', state.password2)
+    parameters.append('password_confirmation', state.passwordConfirm)
 
     await getters.authenticatedApi.patch(
       process.env.api.customerReset,
