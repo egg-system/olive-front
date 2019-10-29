@@ -8,7 +8,6 @@ const initialState = {
   message: 'yes',
   isOk: null,
   request: '',
-  isError: false,
   errorMessage: ''
 }
 export const state = () => initialState
@@ -41,11 +40,10 @@ export const mutations = {
   setRequest(state, request) {
     state.request = request
   },
-  setError(state, errorMessage) {
+  setErrorMessage(state, errorMessage) {
     // stateを初期化
     state = Object.assign(state, initialState)
     // エラー情報だけセットする
-    state.isError = true
     state.errorMessage = errorMessage
   },
   reset(state) {
@@ -84,6 +82,9 @@ export const getters = {
       reservation_details_attributes:
         rootGetters['reservation/select/reservationDetailsParameters']
     }
+  },
+  isError(state) {
+    return !!state.errorMessage
   }
 }
 
@@ -130,7 +131,7 @@ export const actions = {
     rootGetters
   }) {
     if (!getters.isValidRegistration) {
-      commit('setError', 'パラメータが不正です。')
+      commit('setErrorMessage', 'パラメータが不正です。')
       return false
     }
 
@@ -158,7 +159,7 @@ export const actions = {
     } catch (error) {
       console.log(error)
       commit(
-        'setError',
+        'setErrorMessage',
         '選択された日時が既に予約されてしまった可能性がございます。'
       )
       return false

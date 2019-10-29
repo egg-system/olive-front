@@ -12,7 +12,6 @@ import {
 /* state */
 const initialState = {
   isCreate: false,
-  isError: false,
   errorMessage: '',
   isLoading: false,
   customerId: null,
@@ -114,19 +113,31 @@ export const getters = {
     }
     return true
   },
+  validPasswordInput(state) {
+    // バリデーションチェック
+    if (
+      checkPassword(state.password) !== true ||
+      checkPassword(state.passwordConfirm) !== true
+    ) {
+      return false
+    }
+    // 同一チェック
+    if (checkSame(state.password, state.passwordConfirm) !== true) {
+      return false
+    }
+    return true
+  },
   validCreateInput(state, getters) {
     if (!getters.validRegistrationInput) {
       return false
     }
-    // 新規登録ではpasswordのチェックも必要
-    if (
-      checkPassword(state.password) !== true ||
-      checkPassword(state.passwordConfirm) !== true ||
-      checkSame(state.password, state.passwordConfirm) !== true
-    ) {
+    if (!getters.validPasswordInput) {
       return false
     }
     return true
+  },
+  isError(state) {
+    return !!state.errorMessage
   }
 }
 
@@ -177,11 +188,10 @@ export const mutations = {
   setCity(state, city) {
     state.city = city
   },
-  setError(state, errorMessage = '') {
+  setErrorMessage(state, errorMessage = '') {
     // stateを初期化
     state = Object.assign(state, initialState)
     // エラー情報だけセットする
-    state.isError = true
     state.errorMessage = errorMessage
   },
   reset(state) {
@@ -244,7 +254,7 @@ export const actions = {
       return true
     } catch (error) {
       console.log(error)
-      commit('setError')
+      commit('setErrorMessage', 'ログインに失敗しました。')
     } finally {
       commit('setIsLoading', false)
     }
@@ -267,7 +277,7 @@ export const actions = {
         get(error, 'response.status') === 422
           ? '登録済みのメールアドレスです。'
           : 'ユーザー作成に失敗しました。'
-      commit('setError', errorMessage)
+      commit('setErrorMessage', errorMessage)
       return false
     }
   },
@@ -282,7 +292,7 @@ export const actions = {
       return true
     } catch (error) {
       console.log(error)
-      commit('setError', 'プロフィール更新に失敗しました。')
+      commit('setErrorMessage', 'プロフィール更新に失敗しました。')
       return false
     }
   },

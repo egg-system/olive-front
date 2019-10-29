@@ -50,23 +50,21 @@ export default {
       error({ statusCode: (e.response && e.response.status) || 500 })
     }
 
-    const { reservation } = store.state
-    if (reservation.isError) {
+    const { errorMessage: reservationErrorMessage } = store.state.reservation
+    const isReservationError = store.getters['reservation/isError']
+    if (isReservationError) {
       error({
         statusCode: 500,
-        message: `${
-          reservation.errorMessage
-        }<br>お手数ですが、再度ご予約の操作をお願いいたします。`
+        message: `${reservationErrorMessage}<br>お手数ですが、再度ご予約の操作をお願いいたします。`
       })
     }
 
-    const { user } = store.state
-    if (user.isError) {
+    const { errorMessage: userErrorMessage } = store.state.user
+    const isUserError = store.getters['user/isError']
+    if (isUserError) {
       error({
         statusCode: 401,
-        message: `${
-          user.errorMessage
-        }<br>お手数ですが最初からやり直してください。`
+        message: `${userErrorMessage}<br>お手数ですが最初からやり直してください。`
       })
     }
   },

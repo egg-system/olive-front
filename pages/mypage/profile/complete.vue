@@ -23,11 +23,10 @@ export default {
       error({ statusCode: (e.response && e.response.status) || 500 })
     }
 
-    const { user } = store.state
-    if (user.isError) {
-      const message = `${
-        user.errorMessage
-      }<br>お手数ですが最初からやり直してください。`
+    const { errorMessage } = store.state.user
+    const isError = store.getters['user/isError']
+    if (isError) {
+      const message = `${errorMessage}<br>お手数ですが最初からやり直してください。`
       store.commit('user/reset')
       error({ statusCode: 400, message })
     }
