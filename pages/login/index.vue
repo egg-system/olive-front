@@ -50,7 +50,7 @@ export default {
   asyncData({ query }) {
     return {
       link: '/registration',
-      query: { shopId: query.shopId }
+      query: query
     }
   },
   computed: {
@@ -62,12 +62,12 @@ export default {
     resisterBtn() {
       // 会員登録あり
       this.setIsCreate(true)
-      this.$router.push('/registration')
+      this.$router.push({ path: '/registration', query: this.query })
     },
     skipBtn() {
       // 会員登録なし
       this.setIsCreate(false)
-      this.$router.push('/registration')
+      this.$router.push({ path: '/registration', query: this.query })
     },
     ...mapMutations('login', ['setIsCreate'])
   }

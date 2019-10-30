@@ -33,12 +33,12 @@ function _parseMenusQuery(menusQuery) {
 
 function _createMenu(menu, menusQueryArr) {
   const _menu = menusQueryArr.find(
-    qMenu => parseInt(menu.id) === parseInt(qMenu.menuId)
+    queryMenu => parseInt(menu.id) === parseInt(queryMenu.menuId)
   )
   if (!_menu) return null
 
   const _optionIds = _menu.optionIds ? _menu.optionIds.split(',') : null
-  let options = null
+  let options = []
   if (Array.isArray(menu.options) && menu.options.length > 0 && _optionIds) {
     options = menu.options.filter(option =>
       _optionIds.includes(String(option.id))
