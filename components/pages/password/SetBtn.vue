@@ -12,7 +12,6 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { checkPassword, checkSame } from '~/lib/validation'
 
 export default {
   computed: {

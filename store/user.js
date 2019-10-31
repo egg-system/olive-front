@@ -136,6 +136,20 @@ export const getters = {
     }
     return true
   },
+  validMailInput(state) {
+    // バリデーションチェック
+    if (
+      checkMail(state.mail) !== true ||
+      checkMail(state.mailConfirm) !== true
+    ) {
+      return false
+    }
+    // 同一チェック
+    if (checkSame(state.mail, state.mailConfirm) !== true) {
+      return false
+    }
+    return true
+  },
   isError(state) {
     return !!state.errorMessage
   }

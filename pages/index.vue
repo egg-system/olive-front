@@ -56,7 +56,7 @@ export default {
   },
   computed: {
     isProd() {
-      return this.$root.context.env.isProd
+      return process.env.isProd
     }
   }
 }
