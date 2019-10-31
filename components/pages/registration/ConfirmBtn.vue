@@ -47,12 +47,12 @@ export default {
   },
   methods: {
     confirm() {
-      this.$router.push('/confirm')
+      this.$router.push({ path: '/confirm', query: this.$root.context.query })
     },
     back() {
       this.resetReservation()
       if (this.isLogin) {
-        this.$router.push({ name: 'date' })
+        this.$router.push({ path: '/date', query: this.$root.context.query })
       } else {
         this.resetLogin()
         this.$router.go(-1)
