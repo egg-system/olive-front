@@ -7,7 +7,9 @@ export default async function({ store, error, redirect, query }) {
 
   try {
     // queryの情報を使ってメニューを取得
-    await store.dispatch('menu/getMenus', { shopId })
+    if (!store.getters['menu/hasSubShops']) {
+      await store.dispatch('menu/getMenus', { shopId })
+    }
   } catch (e) {
     error({ statusCode: (e.response && e.response.status) || 500 })
   }
