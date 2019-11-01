@@ -66,7 +66,7 @@ export const mutations = {
   },
   setMenus(state, { menus, storeId }) {
     state.menus = menus
-    state.menuIndex = menus.length - 1
+    state.menuIndex = menus.length === 0 ? 0 : menus.length - 1
     state.storeId = storeId
   }
 }

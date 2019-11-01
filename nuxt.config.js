@@ -109,8 +109,8 @@ module.exports = {
   router: {
     middleware: [
       'validate-autenticates',
-      'mantenance-redirector',
-      'add-trailing-slash'
+      'add-trailing-slash',
+      'maintenance-redirector',
     ]
   }
 }

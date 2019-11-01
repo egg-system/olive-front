@@ -30,12 +30,7 @@ export default {
   components: {
     NextBtn
   },
-  middleware: [
-    'menu-selected',
-    'date-time-selected',
-    'is-registered',
-    'init-shop-id'
-  ],
+  middleware: ['clear-selected-query', 'init-shop-id', 'is-registered'],
   computed: {
     registration() {
       return this.$store.state.reservation.registration

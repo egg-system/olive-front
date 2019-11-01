@@ -15,7 +15,6 @@ export const mutations = {
 
 /* actions */
 export const actions = {
-  // ログインチェック
   async getMenus({ commit }, { shopId }) {
     const getShopMenuRoute = route(process.env.api.menu, { id: shopId })
     const response = await axios.get(getShopMenuRoute)
