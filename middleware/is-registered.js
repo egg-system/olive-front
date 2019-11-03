@@ -7,9 +7,10 @@ export default ({ store, query, redirect }) => {
     !store.state.user.lastNameKana ||
     !store.state.user.mail ||
     !store.state.user.mailConfirm ||
-    !store.state.user.phoneNumber
+    !store.state.user.phoneNumber ||
+    !store.state.reservation.isOk
   ) {
     // 登録画面にリダイレクトさせる
-    return redirect('/registration/', { shopId: query.shopId })
+    return redirect('/registration/', { ...query })
   }
 }
