@@ -1,6 +1,6 @@
 export default async function({ store, error, redirect, query }) {
   const { shopId, storeId, menus: menusQuery } = query
-  const menusQueryArr = _parseQuery(menusQuery)
+  const menusQueryArr = _parseMenusQuery(menusQuery)
   if (!storeId || !Array.isArray(menusQueryArr) || !menusQueryArr.length) {
     return redirect('/menus/', { shopId })
   }
@@ -21,7 +21,7 @@ export default async function({ store, error, redirect, query }) {
   })
 }
 
-function _parseQuery(menusQuery) {
+function _parseMenusQuery(menusQuery) {
   try {
     return JSON.parse(menusQuery)
   } catch (e) {
