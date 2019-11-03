@@ -1,6 +1,7 @@
 export default async function({ store, error, redirect, query }) {
   const { shopId, storeId, menus: menusQuery } = query
-  const menusQueryArr = _parseMenusQuery(menusQuery)
+  const menusQueryArr = _parseQuery(menusQuery)
+  console.dir(menusQueryArr)
   if (!storeId || !Array.isArray(menusQueryArr) || !menusQueryArr.length) {
     redirect('/menus/')
   }
@@ -22,7 +23,7 @@ export default async function({ store, error, redirect, query }) {
   })
 }
 
-function _parseMenusQuery(menusQuery) {
+function _parseQuery(menusQuery) {
   let result
   try {
     result = JSON.parse(menusQuery)
