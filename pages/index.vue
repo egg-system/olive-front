@@ -47,7 +47,6 @@
 </template>
 
 <script>
-import _ from 'lodash'
 import Logo from '~/components/layouts/Logo.vue'
 
 export default {
