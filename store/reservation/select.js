@@ -87,14 +87,14 @@ export const mutations = {
 
     const _optionsList = []
     const _mimitsuboCountList = []
-    const _menus = menus.map(menu => {
-      const _options = Array.isArray(menu.options) ? menu.options : []
+    const _menus = menus.map(_menu => {
+      const _options = Array.isArray(_menu.options) ? _menu.options : []
       _optionsList.push(_options)
       const _mimitsuboCount =
-        typeof menu.mimitsuboCount === 'number' ? menu.mimitsuboCount : 0
+        typeof _menu.mimitsuboCount === 'number' ? _menu.mimitsuboCount : 0
       _mimitsuboCountList.push(_mimitsuboCount)
 
-      return { menu, storeId }
+      return { menu: _menu.menu, storeId }
     })
     state.menus = _menus
     state.menuIndex = menus.length - 1
