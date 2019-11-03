@@ -38,7 +38,7 @@ export default {
   computed: {
     phoneNumber: {
       get() {
-        return this.$store.state.login.phoneNumber
+        return this.$store.state.user.phoneNumber
       },
       set(value) {
         this.setPhoneNumber(value)
@@ -46,7 +46,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('login', ['setPhoneNumber'])
+    ...mapMutations('user', ['setPhoneNumber'])
   }
 }
 </script>

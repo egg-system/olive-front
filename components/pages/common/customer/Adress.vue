@@ -75,7 +75,7 @@ export default {
   computed: {
     postalCode: {
       get() {
-        return this.$store.state.login.postalCode
+        return this.$store.state.user.postalCode
       },
       set(value) {
         this.setPostalCode(value)
@@ -83,7 +83,7 @@ export default {
     },
     prefecture: {
       get() {
-        return this.$store.state.login.prefecture
+        return this.$store.state.user.prefecture
       },
       set(value) {
         this.setPrefecture(value)
@@ -91,7 +91,7 @@ export default {
     },
     city: {
       get() {
-        return this.$store.state.login.city
+        return this.$store.state.user.city
       },
       set(value) {
         this.setCity(value)
@@ -99,7 +99,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('login', ['setPostalCode', 'setPrefecture', 'setCity'])
+    ...mapMutations('user', ['setPostalCode', 'setPrefecture', 'setCity'])
   }
 }
 </script>

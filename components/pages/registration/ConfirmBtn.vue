@@ -16,79 +16,41 @@
 <script>
 import { mapState, mapGetters, mapMutations } from 'vuex'
 
-import {
-  checkMail,
-  checkPassword,
-  checkName,
-  checkNameKana,
-  checkPhoneNumber,
-  checkSame
-} from '~/lib/validation'
-
 export default {
   computed: {
     canClick() {
       // ログイン済みの場合、okのみチェック
       if (this.isLogin) {
-        return this.registration.isOk
+        return this.reservation.isOk
       }
 
-      // 入力チェック
-      if (this.isEmptyRequiredInput || this.registration.isOk === null) {
+      if (this.reservation.isOk === null) {
         return false
       }
 
       // 新規会員登録の場合
-      if (this.login.isCreate) {
-        // パスワードは必須入力
-        if (this.login.password === '' || this.login.password2 === '') {
-          return false
-        }
-        // 同一チェック
-        if (checkSame(this.login.password, this.login.password2) !== true) {
-          return false
-        }
-      }
-
-      // バリデーションチェック
-      if (
-        checkName(this.login.firstName) !== true ||
-        checkName(this.login.lastName) !== true ||
-        checkNameKana(this.login.firstNameKana) !== true ||
-        checkNameKana(this.login.lastNameKana) !== true ||
-        checkMail(this.login.mail) !== true ||
-        checkMail(this.login.mail2) !== true ||
-        checkPhoneNumber(this.login.phoneNumber) !== true
-      ) {
+      if (this.user.isCreate && !this.validCreateInput) {
         return false
       }
 
-      // 同一チェック
-      return checkSame(this.login.mail, this.login.mail2)
-    },
-    isEmptyRequiredInput() {
-      return (
-        this.login.firstName === '' ||
-        this.login.lastName === '' ||
-        this.login.firstNameKana === '' ||
-        this.login.lastNameKana === '' ||
-        this.login.mail === '' ||
-        this.login.mail2 === '' ||
-        this.login.phoneNumber === ''
-      )
+      return this.validRegistrationInput
     },
     ...mapState({
-      registration: state => state.reservation.registration,
-      login: state => state.login
+      reservation: state => state.reservation,
+      user: state => state.user
     }),
-    ...mapGetters('login', ['isLogin'])
+    ...mapGetters('user', [
+      'isLogin',
+      'validRegistrationInput',
+      'validCreateInput'
+    ])
   },
   methods: {
     confirm() {
       this.$router.push({ path: '/confirm', query: this.$root.context.query })
     },
     back() {
-      this.resetRegistration()
+      this.resetReservation()
       if (this.isLogin) {
         this.$router.push({ path: '/date', query: this.$root.context.query })
       } else {
@@ -96,8 +58,8 @@ export default {
         this.$router.go(-1)
       }
     },
-    ...mapMutations('login', { resetLogin: 'reset' }),
-    ...mapMutations('reservation/registration', { resetRegistration: 'reset' })
+    ...mapMutations('user', { resetLogin: 'reset' }),
+    ...mapMutations('reservation', { resetReservation: 'reset' })
   }
 }
 </script>

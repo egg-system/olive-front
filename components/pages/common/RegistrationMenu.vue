@@ -144,7 +144,7 @@ export default {
 
       return `${date} (${dayOfTheWeek}) ${timeFrom} ～ ${timeTo}`
     },
-    ...mapState('reservation/registration', ['coupons', 'isFirst']),
+    ...mapState('user', ['coupons', 'isFirst']),
     ...mapState('reservation/select', ['dateTime', 'menus']),
     ...mapGetters('reservation/select', ['isTwoMenusSelected'])
   },

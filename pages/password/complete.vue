@@ -16,7 +16,7 @@ export default {
   layout: 'password',
   async fetch({ store, error }) {
     try {
-      await store.dispatch('login/updatePassword')
+      await store.dispatch('user/updatePassword')
     } catch (e) {
       error({ statusCode: (e.response && e.response.status) || 500 })
     }

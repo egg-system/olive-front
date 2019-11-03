@@ -1,10 +1,17 @@
 import axios from 'axios'
 import get from 'lodash/get'
+import {
+  checkMail,
+  checkPassword,
+  checkName,
+  checkNameKana,
+  checkPhoneNumber,
+  checkSame
+} from '~/lib/validation'
 
 /* state */
 const initialState = {
   isCreate: false,
-  isError: false,
   errorMessage: '',
   isLoading: false,
   customerId: null,
@@ -13,23 +20,25 @@ const initialState = {
   firstNameKana: '',
   lastNameKana: '',
   mail: '',
-  mail2: '',
+  mailConfirm: '',
   phoneNumber: '',
   password: '',
-  password2: '',
+  passwordConfirm: '',
   postalCode: '',
   prefecture: '',
-  city: ''
+  city: '',
+  coupons: [],
+  childrenCount: 0,
+  isFirst: null
 }
-export const state = () =>
-  Object.assign(
-    {
-      accessToken: null,
-      client: null,
-      uid: null
-    },
-    initialState
-  )
+export const state = () => {
+  return {
+    accessToken: null,
+    client: null,
+    uid: null,
+    ...initialState
+  }
+}
 
 /* getters */
 export const getters = {
@@ -56,7 +65,7 @@ export const getters = {
       first_kana: state.firstNameKana,
       last_kana: state.lastNameKana,
       tel: state.phoneNumber,
-      can_receive_mail: rootGetters['reservation/registration/canReceiveMail'],
+      can_receive_mail: rootGetters['reservation/canReceiveMail'],
       zip_code: state.postalCode,
       prefecture: state.prefecture,
       city: state.city
@@ -77,6 +86,72 @@ export const getters = {
       getters.isLogin &&
       (!state.firstNameKana || !state.lastNameKana || !state.phoneNumber)
     )
+  },
+  isFirstValue(state, getters) {
+    if (state.isFirst === null) {
+      return !getters.isLogin
+    }
+
+    return state.isFirst
+  },
+  validRegistrationInput(state) {
+    // バリデーションチェック
+    if (
+      checkName(state.firstName) !== true ||
+      checkName(state.lastName) !== true ||
+      checkNameKana(state.firstNameKana) !== true ||
+      checkNameKana(state.lastNameKana) !== true ||
+      checkMail(state.mail) !== true ||
+      checkMail(state.mailConfirm) !== true ||
+      checkPhoneNumber(state.phoneNumber) !== true
+    ) {
+      return false
+    }
+    // 同一チェック
+    if (checkSame(state.mail, state.mailConfirm) !== true) {
+      return false
+    }
+    return true
+  },
+  validPasswordInput(state) {
+    // バリデーションチェック
+    if (
+      checkPassword(state.password) !== true ||
+      checkPassword(state.passwordConfirm) !== true
+    ) {
+      return false
+    }
+    // 同一チェック
+    if (checkSame(state.password, state.passwordConfirm) !== true) {
+      return false
+    }
+    return true
+  },
+  validCreateInput(state, getters) {
+    if (!getters.validRegistrationInput) {
+      return false
+    }
+    if (!getters.validPasswordInput) {
+      return false
+    }
+    return true
+  },
+  validMailInput(state) {
+    // バリデーションチェック
+    if (
+      checkMail(state.mail) !== true ||
+      checkMail(state.mailConfirm) !== true
+    ) {
+      return false
+    }
+    // 同一チェック
+    if (checkSame(state.mail, state.mailConfirm) !== true) {
+      return false
+    }
+    return true
+  },
+  isError(state) {
+    return !!state.errorMessage
   }
 }
 
@@ -106,8 +181,8 @@ export const mutations = {
   setMail(state, mail) {
     state.mail = mail
   },
-  setMail2(state, mail) {
-    state.mail2 = mail
+  setMailConfirm(state, mail) {
+    state.mailConfirm = mail
   },
   setPhoneNumber(state, phoneNumber) {
     state.phoneNumber = phoneNumber
@@ -115,8 +190,8 @@ export const mutations = {
   setPassword(state, password) {
     state.password = password
   },
-  setPassword2(state, password2) {
-    state.password2 = password2
+  setPasswordConfirm(state, passwordConfirm) {
+    state.passwordConfirm = passwordConfirm
   },
   setPostalCode(state, postalCode) {
     state.postalCode = postalCode
@@ -127,11 +202,10 @@ export const mutations = {
   setCity(state, city) {
     state.city = city
   },
-  setError(state, errorMessage = '') {
+  setErrorMessage(state, errorMessage = '') {
     // stateを初期化
     state = Object.assign(state, initialState)
     // エラー情報だけセットする
-    state.isError = true
     state.errorMessage = errorMessage
   },
   reset(state) {
@@ -147,6 +221,15 @@ export const mutations = {
     state.client = null
     state.uid = null
     state = Object.assign(state, initialState)
+  },
+  setCoupons(state, coupons) {
+    state.coupons = coupons
+  },
+  setChildrenCount(state, childrenCount) {
+    state.childrenCount = childrenCount
+  },
+  setIsFirst(state, isFirst) {
+    state.isFirst = isFirst
   }
 }
 
@@ -159,7 +242,7 @@ export const actions = {
     commit('setFirstNameKana', customer.first_kana)
     commit('setLastNameKana', customer.last_kana)
     commit('setMail', customer.email)
-    commit('setMail2', customer.email)
+    commit('setMailConfirm', customer.email)
     commit('setPhoneNumber', customer.tel)
     commit('setPostalCode', customer.zip_code)
     commit('setPrefecture', customer.prefecture)
@@ -185,7 +268,7 @@ export const actions = {
       return true
     } catch (error) {
       console.log(error)
-      commit('setError')
+      commit('setErrorMessage', 'ログインに失敗しました。')
     } finally {
       commit('setIsLoading', false)
     }
@@ -208,7 +291,7 @@ export const actions = {
         get(error, 'response.status') === 422
           ? '登録済みのメールアドレスです。'
           : 'ユーザー作成に失敗しました。'
-      commit('setError', errorMessage)
+      commit('setErrorMessage', errorMessage)
       return false
     }
   },
@@ -223,7 +306,7 @@ export const actions = {
       return true
     } catch (error) {
       console.log(error)
-      commit('setError', 'プロフィール更新に失敗しました。')
+      commit('setErrorMessage', 'プロフィール更新に失敗しました。')
       return false
     }
   },
@@ -237,7 +320,7 @@ export const actions = {
   async updatePassword({ state, getters, commit }) {
     const parameters = new FormData()
     parameters.append('password', state.password)
-    parameters.append('password_confirmation', state.password2)
+    parameters.append('password_confirmation', state.passwordConfirm)
 
     await getters.authenticatedApi.patch(
       process.env.api.customerReset,

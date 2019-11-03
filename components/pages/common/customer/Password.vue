@@ -20,7 +20,7 @@
         <v-flex>確認のため、再度パスワードを入力してください</v-flex>
         <v-flex>
           <v-text-field
-            v-model="password2"
+            v-model="passwordConfirm"
             :rules="passwordRules"
             :append-icon="show2 ? 'visibility_off' : 'visibility'"
             :type="show2 ? 'text' : 'password'"
@@ -63,30 +63,30 @@ export default {
   }),
   computed: {
     checkSame() {
-      return checkSame(this.password, this.password2)
+      return checkSame(this.password, this.passwordConfirm)
     },
     password: {
       get() {
-        return this.login.password
+        return this.user.password
       },
       set(value) {
         this.setPassword(value)
       }
     },
-    password2: {
+    passwordConfirm: {
       get() {
-        return this.login.password2
+        return this.user.passwordConfirm
       },
       set(value) {
-        this.setPassword2(value)
+        this.setPasswordConfirm(value)
       }
     },
     ...mapState({
-      login: state => state.login
+      user: state => state.user
     })
   },
   methods: {
-    ...mapMutations('login', ['setPassword', 'setPassword2'])
+    ...mapMutations('user', ['setPassword', 'setPasswordConfirm'])
   }
 }
 </script>

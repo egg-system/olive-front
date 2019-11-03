@@ -31,7 +31,7 @@ export default {
   },
   computed: {
     isProd() {
-      return process.env.isProd
+      return this.$root.context.env.isProd
     },
     isShownNavBtn() {
       return this.isShownNavbar !== null

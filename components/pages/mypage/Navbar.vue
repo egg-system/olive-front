@@ -121,7 +121,7 @@ export default {
     resetPassword() {
       this.$router.push('/password/reset')
     },
-    ...mapMutations('login', ['logout'])
+    ...mapMutations('user', ['logout'])
   }
 }
 </script>

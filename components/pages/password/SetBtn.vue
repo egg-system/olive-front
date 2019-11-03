@@ -11,31 +11,14 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import { checkPassword, checkSame } from '~/lib/validation'
+import { mapGetters } from 'vuex'
 
 export default {
   computed: {
-    // TODO:registration/ConfirmBtnと共通化する
     canClick() {
-      // 入力チェック
-      if (this.login.password === '' || this.login.password2 === '') {
-        return false
-      }
-      // バリデーションチェック
-      if (
-        checkPassword(this.login.password) !== true ||
-        checkPassword(this.login.password2) !== true
-      ) {
-        return false
-      }
-      // 同一チェック
-      if (checkSame(this.login.password, this.login.password2) !== true) {
-        return false
-      }
-      return true
+      return this.validPasswordInput
     },
-    ...mapState({ login: state => state.login })
+    ...mapGetters('user', ['validPasswordInput'])
   },
   methods: {
     set() {

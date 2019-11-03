@@ -1,5 +1,5 @@
 export default ({ store, redirect, route }) => {
-  const isLoggedIn = store.getters['login/isLogin']
+  const isLoggedIn = store.getters['user/isLogin']
   switch (route.name) {
     case 'mypage-login':
       if (isLoggedIn) {

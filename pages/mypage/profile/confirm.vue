@@ -42,7 +42,7 @@ export default {
   data: () => ({}),
   computed: {
     ...mapState({
-      login: state => state.login
+      user: state => state.user
     })
   }
 }

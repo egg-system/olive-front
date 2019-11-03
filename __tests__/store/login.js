@@ -1,9 +1,9 @@
 import Vuex from 'vuex'
-import { state, getters, mutations, actions } from '~/store/login.js'
+import { state, getters, mutations, actions } from '~/store/user.js'
 import { createLocalVue } from '@vue/test-utils'
 import config from '~/config/constant.dev.js'
 
-describe('store/login.js', () => {
+describe('store/user.js', () => {
   let store
 
   beforeAll(() => {

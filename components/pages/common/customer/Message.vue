@@ -26,7 +26,7 @@ export default {
   computed: {
     message: {
       get() {
-        return this.$store.state.reservation.registration.message
+        return this.$store.state.reservation.message
       },
       set(value) {
         this.setMessage(value)
@@ -34,7 +34,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('reservation/registration', ['setMessage'])
+    ...mapMutations('reservation', ['setMessage'])
   }
 }
 </script>
