@@ -1,4 +1,3 @@
-const pkg = require('./package')
 const environment = process.env.NODE_ENV || 'dev'
 const envSet = require(`./config/constant.${environment}.js`)
 
@@ -98,7 +97,8 @@ module.exports = {
           exclude: /(node_modules)/
         })
       }
-    }
+    },
+    hardSource: true
   },
 
   /*
