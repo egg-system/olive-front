@@ -47,6 +47,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 import Logo from '~/components/layouts/Logo.vue'
 
 export default {
@@ -56,7 +57,7 @@ export default {
   },
   computed: {
     isProd() {
-      return process.env.isProd
+      return !!_.get(this, '$root.context.env.isProd')
     }
   }
 }
