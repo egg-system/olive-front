@@ -1,21 +1,21 @@
 export default function({ store }) {
-  if (!store.getters['login/isLogin']) {
+  if (!store.getters['user/isLogin']) {
     return
   }
 
-  if (store.state.login.customerId) {
+  if (store.state.user.customerId) {
     return
   }
 
   // undefinedのチェックをする
   if (
-    store.state.login.accessToken === undefined ||
-    store.state.login.client === undefined ||
-    store.state.login.uid === undefined
+    store.state.user.accessToken === undefined ||
+    store.state.user.client === undefined ||
+    store.state.user.uid === undefined
   ) {
     store.commit('logout')
     return
   }
 
-  return store.dispatch('login/validateToken')
+  return store.dispatch('user/validateToken')
 }

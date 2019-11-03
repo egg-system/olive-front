@@ -8,10 +8,9 @@ import Vuex from 'vuex'
 import Vuetify from 'vuetify'
 import Login from '~/pages/login/index.vue'
 import Form from '~/components/pages/login/Form.vue'
-import { state } from '~/store/login.js'
+import { state } from '~/store/user.js'
 
 describe('Login', () => {
-  let actions
   let store
   let wrapper
 
@@ -21,7 +20,7 @@ describe('Login', () => {
     localVue.use(Vuetify)
     store = new Vuex.Store({
       modules: {
-        login: {
+        user: {
           state
         }
       }

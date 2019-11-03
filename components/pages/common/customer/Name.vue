@@ -71,7 +71,7 @@ export default {
   computed: {
     firstName: {
       get() {
-        return this.$store.state.login.firstName
+        return this.$store.state.user.firstName
       },
       set(value) {
         this.setFirstName(value)
@@ -79,7 +79,7 @@ export default {
     },
     lastName: {
       get() {
-        return this.$store.state.login.lastName
+        return this.$store.state.user.lastName
       },
       set(value) {
         this.setLastName(value)
@@ -87,7 +87,7 @@ export default {
     },
     firstNameKana: {
       get() {
-        return this.$store.state.login.firstNameKana
+        return this.$store.state.user.firstNameKana
       },
       set(value) {
         this.setFirstNameKana(value)
@@ -95,7 +95,7 @@ export default {
     },
     lastNameKana: {
       get() {
-        return this.$store.state.login.lastNameKana
+        return this.$store.state.user.lastNameKana
       },
       set(value) {
         this.setLastNameKana(value)
@@ -103,7 +103,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('login', [
+    ...mapMutations('user', [
       'setFirstName',
       'setLastName',
       'setFirstNameKana',

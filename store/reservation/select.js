@@ -97,7 +97,7 @@ export const mutations = {
       return { menu: _menu.menu, storeId }
     })
     state.menus = _menus
-    state.menuIndex = menus.length - 1
+    state.menuIndex = menus.length === 0 ? 0 : menus.length - 1
     state.storeId = storeId
     state.optionsList =
       _optionsList.length > 0 ? _optionsList : DEFAULT_OPTIONS_LIST

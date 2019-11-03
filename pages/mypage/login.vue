@@ -1,6 +1,6 @@
 <template>
   <section class="container">
-    <loading v-if="login.isLoading" class="loading"/>
+    <loading v-if="user.isLoading" class="loading"/>
     <v-layout column>
       <v-flex>
         <v-card dark color="red lighten-2" class="head">
@@ -9,7 +9,7 @@
       </v-flex>
 
       <v-flex>
-        <div :class="{ hidden: login.isLoading }" class="main" >
+        <div :class="{ hidden: user.isLoading }" class="main" >
           <div>
             <h2 class="subtitle">会員の方はこちら</h2>
             <login-form :link="link" />
@@ -54,7 +54,7 @@ export default {
   }),
   computed: {
     ...mapState({
-      login: state => state.login
+      user: state => state.user
     })
   },
   methods: {
@@ -62,7 +62,7 @@ export default {
       // this.setIsCreate(true)
       this.$router.push('/create')
     },
-    ...mapMutations('login', ['setIsCreate'])
+    ...mapMutations('user', ['setIsCreate'])
   }
 }
 </script>

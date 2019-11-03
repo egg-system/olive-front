@@ -64,7 +64,7 @@ export default {
         checkMail(this.mail) === true && checkPassword(this.password) === true
       )
     },
-    ...mapState({ data: 'login' })
+    ...mapState({ data: 'user' })
   },
   methods: {
     // ログインボタンを押した時の動き
@@ -80,7 +80,7 @@ export default {
       })
     },
     ...mapActions({
-      checkLogin: 'login/checkLogin'
+      checkLogin: 'user/checkLogin'
     })
   }
 }

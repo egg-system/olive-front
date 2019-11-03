@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import { checkMail, checkPhoneNumber, checkSame } from '~/lib/validation'
+import { mapState, mapGetters } from 'vuex'
+import { checkPhoneNumber } from '~/lib/validation'
 
 export default {
   props: {
@@ -25,32 +25,20 @@ export default {
     }
   },
   computed: {
-    // TODO:registration/ConfirmBtnと共通化する
     canClick() {
-      // 入力チェック
-      if (
-        this.login.mail === '' ||
-        this.login.mail2 === '' ||
-        (this.shouldCheckPhone && this.login.phoneNumber === '')
-      ) {
+      if (!this.validMailInput) {
         return false
       }
-      // バリデーションチェック
       if (
-        checkMail(this.login.mail) !== true ||
-        checkMail(this.login.mail2) !== true ||
-        (this.shouldCheckPhone &&
-          checkPhoneNumber(this.login.phoneNumber) !== true)
+        this.shouldCheckPhone &&
+        checkPhoneNumber(this.phoneNumber) !== true
       ) {
-        return false
-      }
-      // 同一チェック
-      if (checkSame(this.login.mail, this.login.mail2) !== true) {
         return false
       }
       return true
     },
-    ...mapState({ login: state => state.login })
+    ...mapState('user', ['phoneNumber']),
+    ...mapGetters('user', ['validMailInput'])
   },
   methods: {
     confirm() {

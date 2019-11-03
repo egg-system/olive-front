@@ -1,15 +1,16 @@
 export default ({ store, query, redirect }) => {
   // ユーザー情報が設定されていない場合
   if (
-    !store.state.login.firstName ||
-    !store.state.login.lastName ||
-    !store.state.login.firstNameKana ||
-    !store.state.login.lastNameKana ||
-    !store.state.login.mail ||
-    !store.state.login.mail2 ||
-    !store.state.login.phoneNumber
+    !store.state.user.firstName ||
+    !store.state.user.lastName ||
+    !store.state.user.firstNameKana ||
+    !store.state.user.lastNameKana ||
+    !store.state.user.mail ||
+    !store.state.user.mailConfirm ||
+    !store.state.user.phoneNumber ||
+    !store.state.reservation.isOk
   ) {
     // 登録画面にリダイレクトさせる
-    return redirect('/registration/', { shopId: query.shopId })
+    return redirect('/registration/', { ...query })
   }
 }

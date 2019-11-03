@@ -29,10 +29,10 @@ import FixedBtn from '~/components/pages/confirm/FixedBtn.vue'
 
 export default {
   middleware: [
-    'menu-selected',
-    'date-time-selected',
-    'is-registered',
-    'init-shop-id'
+    'init-shop-id',
+    'fetch-menus-from-query',
+    'set-date-time-from-query',
+    'is-registered'
   ],
   components: {
     RegistrationUserInfo,

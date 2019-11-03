@@ -18,17 +18,16 @@ export default {
   layout: 'mypage',
   async fetch({ store, error }) {
     try {
-      await store.dispatch('login/updateCustomer')
+      await store.dispatch('user/updateCustomer')
     } catch (e) {
       error({ statusCode: (e.response && e.response.status) || 500 })
     }
 
-    const { login } = store.state
-    if (login.isError) {
-      const message = `${
-        login.errorMessage
-      }<br>お手数ですが最初からやり直してください。`
-      store.commit('login/reset')
+    const { errorMessage } = store.state.user
+    const isError = store.getters['user/isError']
+    if (isError) {
+      const message = `${errorMessage}<br>お手数ですが最初からやり直してください。`
+      store.commit('user/reset')
       error({ statusCode: 400, message })
     }
   },
