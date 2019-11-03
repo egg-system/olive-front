@@ -131,13 +131,16 @@ export default {
       return this.optionsList
         .map((options, index) => {
           const optionsForDisplay = options.map(option => {
+            const mimitsuboCount = this.mimitsuboCountList[index]
+            const name = option.is_mimitsubo_jewelry
+              ? `${option.name} × ${mimitsuboCount.toString()}粒`
+              : option.name
+            const price = option.is_mimitsubo_jewelry
+              ? parseInt(option.price, 10) * parseInt(mimitsuboCount, 10)
+              : option.price
             return {
-              name: option.is_mimitsubo_jewelry
-                ? `${option.name} × ${this.mimitsuboCountList[
-                    index
-                  ].toString()}粒`
-                : option.name,
-              price: option.price,
+              name,
+              price,
               minutes: option.minutes
             }
           })
