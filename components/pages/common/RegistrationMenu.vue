@@ -100,6 +100,8 @@ export default {
             minutes: menu.minutes
           }
         })
+      const menuOptionsForDisplay = this.getMenuOptionsForDisplay(menus)
+
       const additionalMenus = []
       // 初めての場合は確認ページで初診料を追加
       if (this.isFirst && this.isConfirm) {
@@ -111,7 +113,7 @@ export default {
       }
 
       const resultsMenus = menusForDisplay.concat(
-        this.menuOptionsForDisplay,
+        menuOptionsForDisplay,
         additionalMenus
       )
 
@@ -126,27 +128,6 @@ export default {
         })
       }
       return resultsMenus.map((menu, index) => ({ ...menu, index }))
-    },
-    menuOptionsForDisplay() {
-      return this.optionsList
-        .map((options, index) => {
-          const optionsForDisplay = options.map(option => {
-            const mimitsuboCount = this.mimitsuboCountList[index]
-            const name = option.is_mimitsubo_jewelry
-              ? `${option.name} × ${mimitsuboCount.toString()}粒`
-              : option.name
-            const price = option.is_mimitsubo_jewelry
-              ? parseInt(option.price, 10) * parseInt(mimitsuboCount, 10)
-              : option.price
-            return {
-              name,
-              price,
-              minutes: option.minutes
-            }
-          })
-          return optionsForDisplay
-        })
-        .flat()
     },
     time() {
       if (!this.dateTime || !this.dateTime.isValid()) return null
@@ -164,13 +145,28 @@ export default {
       return `${date} (${dayOfTheWeek}) ${timeFrom} ～ ${timeTo}`
     },
     ...mapState('user', ['coupons', 'isFirst']),
-    ...mapState('reservation/select', [
-      'dateTime',
-      'menus',
-      'optionsList',
-      'mimitsuboCountList'
-    ]),
-    ...mapGetters('reservation/select', ['isTwoMenusSelected'])
+    ...mapState('reservation/select', ['dateTime']),
+    ...mapGetters('reservation/select', ['isTwoMenusSelected', 'menus'])
+  },
+  methods: {
+    getMenuOptionsForDisplay(menus) {
+      if (!Array.isArray(menus) || !menus.length) return []
+      return menus
+        .filter(menu => Array.isArray(menu.options) && menu.options.length > 0)
+        .map(menu => {
+          const { options, mimitsuboCount } = menu
+          return options.map(option => {
+            const name = option.is_mimitsubo_jewelry
+              ? `${option.name} × ${mimitsuboCount.toString()}粒`
+              : option.name
+            const price = option.is_mimitsubo_jewelry
+              ? parseInt(option.price, 10) * parseInt(mimitsuboCount, 10)
+              : option.price
+            return { name, price, minutes: option.minutes }
+          })
+        })
+        .flat()
+    }
   }
 }
 </script>
