@@ -49,7 +49,7 @@ export const mutations = {
   setMenuIndex(state, menuPageId) {
     let menuList = _.cloneDeep(state.menuList)
     while (menuList.length < menuPageId) {
-      menuList.push(DEFAULT_MENU)
+      menuList.push(null)
     }
     let optionsList = _.cloneDeep(state.optionsList)
     while (optionsList.length < menuPageId) {
