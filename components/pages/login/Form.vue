@@ -16,7 +16,7 @@
         label="パスワード"
         @click:append="show = !show"
       />
-      <v-alert v-if="data.isError"
+      <v-alert v-if="errorMessage"
                :value="true"
                color="error"
                icon="warning"
@@ -52,7 +52,6 @@ export default {
   },
   data: () => ({
     show: false,
-    isError: false,
     mail: '',
     password: '',
     mailRules: [mail => checkMail(mail)],
@@ -64,7 +63,7 @@ export default {
         checkMail(this.mail) === true && checkPassword(this.password) === true
       )
     },
-    ...mapState({ data: 'user' })
+    ...mapState('user', ['errorMessage'])
   },
   methods: {
     // ログインボタンを押した時の動き

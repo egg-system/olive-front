@@ -267,7 +267,6 @@ export const actions = {
 
       return true
     } catch (error) {
-      console.log(error)
       commit('setErrorMessage', 'ログインに失敗しました。')
     } finally {
       commit('setIsLoading', false)
