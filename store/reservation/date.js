@@ -2,10 +2,6 @@ import axios from 'axios'
 import moment from 'moment'
 import { route } from '../../lib/route'
 
-const START_AT = '10:00'
-const BREAK_FROM = '13:00'
-const BREAK_TO = '16:00'
-const END_AT = '20:00'
 const TIME_SLOT_FORMAT = 'HH:mm'
 
 /* state */
@@ -64,15 +60,17 @@ export const getters = {
   },
   timeSlots(state, getters, rootState, rootGetters) {
     const timeSlots = []
-    let timeSlot = moment(START_AT, TIME_SLOT_FORMAT)
+    let timeSlot = moment(rootState.shop.open_at, TIME_SLOT_FORMAT)
 
-    while (timeSlot.isBefore(moment(END_AT, TIME_SLOT_FORMAT))) {
-      const breakFrom = moment(BREAK_FROM, TIME_SLOT_FORMAT)
-      const breakTo = moment(BREAK_TO, TIME_SLOT_FORMAT)
+    while (
+      timeSlot.isBefore(moment(rootState.shop.close_at, TIME_SLOT_FORMAT))
+    ) {
+      const breakFrom = moment(rootGetters['shop/breakFrom'], TIME_SLOT_FORMAT)
+      const breakTo = moment(rootGetters['shop/breakTo'], TIME_SLOT_FORMAT)
 
-      const isSameOrBefore = timeSlot.isSameOrBefore(breakFrom)
+      const isBefore = timeSlot.isBefore(breakFrom)
       const isSameOrAfter = timeSlot.isSameOrAfter(breakTo)
-      if (isSameOrBefore || isSameOrAfter) {
+      if (!rootGetters['shop/hasBreakTime'] || (isBefore || isSameOrAfter)) {
         timeSlots.push(timeSlot)
       }
 
