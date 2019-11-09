@@ -22,7 +22,8 @@
                icon="warning"
                outline
       >
-        メールアドレスもしくはパスワードが違います。
+        メールアドレスもしくはパスワードが違います。<br>
+        <nuxt-link to="/password/reset">パスワードを忘れた方はこちら</nuxt-link>
       </v-alert>
       <v-btn
         :disabled="!canLogin"
