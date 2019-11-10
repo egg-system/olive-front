@@ -3,15 +3,8 @@ import _ from 'lodash'
 const FIRST_MENU_INDEX = 0
 const SECOND_MENU_INDEX = 1
 const MIMITSUBO_OPTION_ID = 7
-
-const RESERVATION_DETAIL = {
-  // 店舗をまたぐ予約を可能にさせていた名残。現状不可なので、不要なキー
-  // 削除する際は、ラジオボタンにチェックが入るか確認する
-  storeId: null,
-  menu: null,
-  options: [],
-  mimitsuboCount: 0
-}
+const DEFAULT_OPTIONS = []
+const DEFAULT_MIMITSUBO_COUNT = 0
 
 /* state */
 export const state = () => ({
@@ -19,8 +12,14 @@ export const state = () => ({
   dateTime: null,
   storeId: null,
   // 二つのメニュー選択可能にするための実装
-  menus: [_.clone(RESERVATION_DETAIL)],
-  menuIndex: FIRST_MENU_INDEX
+  menuList: [null],
+  menuIndex: FIRST_MENU_INDEX,
+  // menuごとのoptions
+  // optionsList[menuIndex][index] === option
+  optionsList: [DEFAULT_OPTIONS],
+  // menuごとのmimitsuboCount
+  // mimitsuboCountList[menuIndex] === mimitsuboCount
+  mimitsuboCountList: [DEFAULT_MIMITSUBO_COUNT]
 })
 
 /* mutations */
@@ -29,84 +28,118 @@ export const mutations = {
     state.dateTime = dateTime
   },
   setStoreMenu(state, selectedStoreMenu) {
-    const menus = Object.assign([], state.menus)
-    menus[state.menuIndex].menu = selectedStoreMenu.menu
-    menus[state.menuIndex].storeId = selectedStoreMenu.storeId
+    const menuList = _.cloneDeep(state.menuList)
+    menuList[state.menuIndex] = selectedStoreMenu.menu
+    state.menuList = menuList
+    state.storeId = selectedStoreMenu.storeId
 
     // 耳つぼジュエリの個数、オプションの選択を初期化する
-    menus[state.menuIndex].options = []
-    menus[state.menuIndex].mimitsuboCount = 0
-
-    state.menus = menus
-    state.storeId = selectedStoreMenu.storeId
+    const optionsList = _.cloneDeep(state.optionsList)
+    optionsList[state.menuIndex] = DEFAULT_OPTIONS
+    const mimitsuboCountList = _.cloneDeep(state.mimitsuboCountList)
+    mimitsuboCountList[state.menuIndex] = DEFAULT_MIMITSUBO_COUNT
+    state.optionsList = optionsList
+    state.mimitsuboCountList = mimitsuboCountList
   },
   setSelectedOptions(state, options) {
-    const menus = _.cloneDeep(state.menus)
-    menus[state.menuIndex].options = options
-    state.menus = menus
+    const optionsList = _.cloneDeep(state.optionsList)
+    optionsList[state.menuIndex] = options
+    state.optionsList = optionsList
   },
   setMenuIndex(state, menuPageId) {
-    let menus = _.cloneDeep(state.menus)
-    while (menus.length < menuPageId) {
-      menus.push(_.clone(RESERVATION_DETAIL))
+    let menuList = _.cloneDeep(state.menuList)
+    while (menuList.length < menuPageId) {
+      menuList.push(null)
+    }
+    let optionsList = _.cloneDeep(state.optionsList)
+    while (optionsList.length < menuPageId) {
+      optionsList.push(DEFAULT_OPTIONS)
+    }
+    let mimitsuboCountList = _.cloneDeep(state.mimitsuboCountList)
+    while (mimitsuboCountList.length < menuPageId) {
+      mimitsuboCountList.push(DEFAULT_MIMITSUBO_COUNT)
     }
 
-    const menuIndex = menuPageId - 1
-    state.menus = menus.filter((select, index) => index <= menuIndex)
-    state.menuIndex = menuIndex
+    state.menuList = menuList.slice(0, menuPageId)
+    state.optionsList = optionsList.slice(0, menuPageId)
+    state.mimitsuboCountList = mimitsuboCountList.slice(0, menuPageId)
+    state.menuIndex = menuPageId - 1
   },
   setMimitsuboCount(state, count) {
-    const menus = _.cloneDeep(state.menus)
-    menus[state.menuIndex].mimitsuboCount = count
-    state.menus = menus
+    const mimitsuboCountList = _.cloneDeep(state.mimitsuboCountList)
+    mimitsuboCountList[state.menuIndex] = count
+    state.mimitsuboCountList = mimitsuboCountList
   },
   reset(state) {
-    state.menus = [_.clone(RESERVATION_DETAIL)]
+    state.menuList = [null]
+    state.optionsList = [DEFAULT_OPTIONS]
+    state.mimitsuboCountList = [DEFAULT_MIMITSUBO_COUNT]
     state.dateTime = null
   },
   setMenus(state, { menus, storeId }) {
-    state.menus = menus
+    if (!Array.isArray(menus)) return
+
+    const _optionsList = []
+    const _mimitsuboCountList = []
+    const _menuList = menus.map(_menu => {
+      const _options = Array.isArray(_menu.options)
+        ? _menu.options
+        : DEFAULT_OPTIONS
+      _optionsList.push(_options)
+      const _mimitsuboCount =
+        typeof _menu.mimitsuboCount === 'number'
+          ? _menu.mimitsuboCount
+          : DEFAULT_MIMITSUBO_COUNT
+      _mimitsuboCountList.push(_mimitsuboCount)
+
+      return _menu.menu
+    })
+    state.menuList = _menuList
     state.menuIndex = menus.length === 0 ? 0 : menus.length - 1
     state.storeId = storeId
+    state.optionsList =
+      _optionsList.length > 0 ? _optionsList : [DEFAULT_OPTIONS]
+    state.mimitsuboCountList =
+      _mimitsuboCountList.length > 0
+        ? _mimitsuboCountList
+        : [DEFAULT_MIMITSUBO_COUNT]
   }
 }
 
 export const getters = {
   storeMenu(state) {
     return {
-      storeId: state.menus[state.menuIndex].storeId,
-      menu: state.menus[state.menuIndex].menu
+      storeId: state.storeId,
+      menu: state.menuList[state.menuIndex]
     }
   },
   allSelectedMenuIds(state) {
-    return state.menus
-      .filter(select => select.menu && 'id' in select.menu)
-      .map(select => select.menu.id)
+    return state.menuList
+      .filter(menu => menu && 'id' in menu)
+      .map(menu => menu.id)
   },
   allSelectedOptionIds(state) {
-    return state.menus.flatMap(select => {
-      if (!select.options) {
+    return state.optionsList.flatMap(options => {
+      if (!Array.isArray(options)) {
         return []
       }
 
-      return select.options
-        .filter(option => 'id' in option)
-        .map(option => option.id)
+      return options.filter(option => 'id' in option).map(option => option.id)
     })
   },
   isTwoMenusSelected(state) {
-    if (state.menus.length === 1) {
+    if (state.menuList.length === 1) {
       return false
     }
 
-    return state.menus[SECOND_MENU_INDEX].menu !== null
+    return state.menuList[SECOND_MENU_INDEX] !== null
   },
   isTwoHour(state, getters) {
     if (!getters.isMenuSelected) {
       return false
     }
 
-    const firstMenuMinute = state.menus[FIRST_MENU_INDEX].menu.minutes
+    const firstMenuMinute = state.menuList[FIRST_MENU_INDEX].minutes
     if (firstMenuMinute >= 120) {
       return true
     }
@@ -118,7 +151,7 @@ export const getters = {
       return getters.mimitsuboCount > 0
     }
 
-    return state.menus[FIRST_MENU_INDEX].menu !== null
+    return state.menuList[FIRST_MENU_INDEX] !== null
   },
   isMimitsuboOptionSelected(state, getters) {
     return getters.selectedOptionIds.includes(MIMITSUBO_OPTION_ID)
@@ -127,49 +160,65 @@ export const getters = {
     return state.dateTime != null
   },
   selectedMenu(state) {
-    return state.menus[state.menuIndex].menu
+    return state.menuList[state.menuIndex]
   },
   selectedOptions(state) {
-    return state.menus[state.menuIndex].options || []
+    return state.optionsList[state.menuIndex] || DEFAULT_OPTIONS
   },
   selectedOptionIds(state, getters) {
     return getters.selectedOptions.map(option => option.id)
   },
   maxMenuIndex(state) {
-    return state.menus.length
+    return state.menuList.length
   },
   mimitsuboCount(state) {
-    return state.menus[state.menuIndex].mimitsuboCount
+    return state.mimitsuboCountList[state.menuIndex]
   },
   reservationDetailsParameters(state) {
-    const selectedMenus = state.menus.filter(select => select.menu)
-    return selectedMenus.map(select => {
+    const selectedMenus = state.menuList.filter(menu => menu)
+    const optionsList = state.optionsList
+    return selectedMenus.map((menu, index) => {
+      let optionIds = []
+      if (Array.isArray(optionsList[index])) {
+        optionIds = optionsList[index].map(option => option.id)
+      }
       return {
-        menu_id: select.menu.id,
-        mimitsubo_count: select.mimitsuboCount,
-        option_ids: select.options.map(option => option.id)
+        menu_id: menu.id,
+        mimitsubo_count: state.mimitsuboCountList[index] || 0,
+        option_ids: optionIds
       }
     })
   },
   // 選択したメニューの情報のquery
   selectedMenuParamsQuery(state) {
-    const selectedStoreId =
-      state.menus[state.menuIndex].storeId || state.storeId
-    const selectedMenus = state.menus.filter(_menu => _menu).map(_menu => {
-      const menuId = _menu.menu.id || undefined
-      let optionIds
-      if (Array.isArray(_menu.options) && _menu.options.length > 0) {
-        optionIds = _menu.options
+    const storeId = state.storeId
+    const menus = state.menuList.map((_menu, index) => {
+      const menuId = _menu.id
+
+      const _options = state.optionsList[index]
+      let optionIds = []
+      if (Array.isArray(_options) && _options.length > 0) {
+        optionIds = _options
           .filter(option => option.id)
           .map(option => option.id)
           .join(',')
       }
-      const mimitsuboCount = _menu.mimitsuboCount || undefined
+
+      const mimitsuboCount = state.mimitsuboCountList[index] || 0
+
       return { menuId, optionIds, mimitsuboCount }
     })
     return {
-      storeId: selectedStoreId,
-      menus: JSON.stringify(selectedMenus)
+      storeId,
+      menus: JSON.stringify(menus)
     }
+  },
+  menus(state) {
+    return state.menuList.map((menu, index) => {
+      const storeId = state.storeId
+      const options = state.optionsList[index]
+      const mimitsuboCount = state.mimitsuboCountList[index]
+      return { menu, storeId, options, mimitsuboCount }
+    })
   }
 }
