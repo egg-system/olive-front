@@ -162,7 +162,8 @@ export default {
             const price = option.is_mimitsubo_jewelry
               ? parseInt(option.price, 10) * parseInt(mimitsuboCount, 10)
               : option.price
-            return { name, price, minutes: option.minutes }
+            // オプションにminutesは存在しないが、メニューと併記する都合上、0にする
+            return { name, price, minutes: 0 }
           })
         })
         .flat()

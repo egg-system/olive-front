@@ -1,6 +1,9 @@
 import axios from 'axios'
 import { route } from '../lib/route'
 
+const BREAK_FROM = '13:00'
+const BREAK_TO = '16:00'
+
 /* state */
 export const state = () => ({
   id: null,
@@ -20,6 +23,18 @@ export const mutations = {
     state.close_at = shop.close_at
     state.break_from = shop.break_from
     state.break_to = shop.break_to
+  }
+}
+
+export const getters = {
+  breakFrom(state) {
+    return state.break_from
+  },
+  breakTo(state) {
+    return state.break_to
+  },
+  hasBreakTime(state, getters) {
+    return Boolean(getters.breakFrom && getters.breakTo)
   }
 }
 
