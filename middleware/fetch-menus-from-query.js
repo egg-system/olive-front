@@ -6,7 +6,10 @@ export default async function({ store, error, redirect, query }) {
   }
 
   if (!store.getters['menu/hasSubShops']) {
-    await _dispatchGetMenus(store, shopId, error)
+    await Promise.all([
+      _dispatchGetMenus(store, shopId, error),
+      _dispatchGetStore(store, shopId, error)
+    ])
   }
 
   const allMenus = store.getters['menu/allMenus']
@@ -26,6 +29,15 @@ function _parseMenusQuery(menusQuery) {
     return JSON.parse(menusQuery)
   } catch (e) {
     return null
+  }
+}
+
+async function _dispatchGetStore(store, shopId, error) {
+  try {
+    // queryの情報を使ってメニューを取得
+    await store.dispatch('shop/getShop', { id: shopId })
+  } catch (e) {
+    error({ statusCode: (e.response && e.response.status) || 500 })
   }
 }
 

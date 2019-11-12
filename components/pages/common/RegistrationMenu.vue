@@ -161,7 +161,8 @@ export default {
                 ? `${option.name} × ${mimitsuboCount.toString()}粒`
                 : option.name,
               price: option.price,
-              minutes: option.minutes
+              // オプションにminutesは存在しないが、メニューと併記する都合上、0にする
+              minutes: 0
             }
           })
           return optionsForDisplay
