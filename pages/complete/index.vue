@@ -59,7 +59,7 @@ export default {
     if (isUserError) {
       error({
         statusCode: 401,
-        message: `${userErrorMessage}<br>お手数ですが最初からやり直してください。<br>※ 会員登録をせずに<a href="https://olivebodycare.healthcare/about/contact/">こちら</a>からご予約いただくことも可能です。`
+        message: `${userErrorMessage}<br>お手数ですが最初からやり直してください。`
       })
     }
   },
