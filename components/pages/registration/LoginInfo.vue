@@ -3,7 +3,7 @@
     <v-layout column wrap>
       <v-flex>
         <v-card dark color="red lighten-2">
-          <v-card-text><h3>会員ログイン情報</h3></v-card-text>
+          <v-card-text><h3>ログイン情報</h3></v-card-text>
         </v-card>
       </v-flex>
     </v-layout>

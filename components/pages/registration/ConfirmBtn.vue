@@ -28,7 +28,7 @@ export default {
         return false
       }
 
-      // 新規会員登録の場合
+      // 新規登録の場合
       if (this.user.isCreate && !this.validCreateInput) {
         return false
       }

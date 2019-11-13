@@ -5,7 +5,7 @@
         <v-layout row>
           <v-flex>
             <v-card-text class="complete">
-              <template v-if="user.isCreate">会員登録、および予約が確定しました。</template>
+              <template v-if="user.isCreate">情報登録、および予約が確定しました。</template>
               <template v-else>予約が確定しました。</template>
               <br>予約確定メールをお送りしましたので、ご確認ください。
             </v-card-text>
@@ -59,7 +59,7 @@ export default {
     if (isUserError) {
       error({
         statusCode: 401,
-        message: `${userErrorMessage}<br>お手数ですが最初からやり直してください。<br>※ 会員登録をせずに<a href="https://olivebodycare.healthcare/about/contact/">こちら</a>からご予約いただくことも可能です。`
+        message: `${userErrorMessage}<br>お手数ですが最初からやり直してください。<br>※ 新規登録をせずに<a href="https://olivebodycare.healthcare/about/contact/">こちら</a>からご予約いただくことも可能です。`
       })
     }
   },
