@@ -45,6 +45,10 @@ export const getters = {
         .find(option => option.id === optionId)
     }
   },
+  getStore(state) {
+    return storeId =>
+      state.subShops.find(store => store.id === parseInt(storeId))
+  },
   isLoading(state) {
     return state.subShops.length == 0
   },

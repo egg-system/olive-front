@@ -10,16 +10,25 @@
       </v-flex>
     </v-layout>
 
-    <v-layout v-if="time" row>
-      <v-flex>
+    <v-layout v-if="store" row xs12>
+      <v-flex xs4>
+        <v-card-text>予約店舗</v-card-text>
+      </v-flex>
+      <v-flex xs8>
+        <v-card-text>{{ store.name }}</v-card-text>
+      </v-flex>
+    </v-layout>
+
+    <v-layout v-if="time" row xs12>
+      <v-flex xs4>
         <v-card-text>予約日時</v-card-text>
       </v-flex>
-      <v-flex>
+      <v-flex xs8>
         <v-card-text>{{ time }}</v-card-text>
       </v-flex>
     </v-layout>
 
-    <v-layout v-if="menusForDisplay" row>
+    <v-layout v-if="menusForDisplay" row xs12>
       <v-flex>
         <v-data-table
           :items="menusForDisplay"
@@ -144,9 +153,12 @@ export default {
 
       return `${date} (${dayOfTheWeek}) ${timeFrom} ～ ${timeTo}`
     },
+    store() {
+      return this.selectedStore
+    },
     ...mapState('user', ['coupons', 'isFirst']),
     ...mapState('reservation/select', ['dateTime', 'menus']),
-    ...mapGetters('reservation/select', ['isTwoMenusSelected'])
+    ...mapGetters('reservation/select', ['isTwoMenusSelected', 'selectedStore'])
   },
   methods: {
     getMenuOptionsForDisplay(menus) {

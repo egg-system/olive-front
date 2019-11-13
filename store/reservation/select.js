@@ -135,6 +135,9 @@ export const getters = {
   selectedOptionIds(state, getters) {
     return getters.selectedOptions.map(option => option.id)
   },
+  selectedStore(state, getters, rootState, rootGetters) {
+    return rootGetters['menu/getStore'](state.storeId) || null
+  },
   maxMenuIndex(state) {
     return state.menus.length
   },
