@@ -267,6 +267,7 @@ export const actions = {
 
       return true
     } catch (error) {
+      console.log(error)
       commit('setErrorMessage', 'ログインに失敗しました。')
     } finally {
       commit('setIsLoading', false)
@@ -285,9 +286,10 @@ export const actions = {
       dispatch('setLoginCustomer', result.data.data)
       return true
     } catch (error) {
+      console.log(error)
       const errorMessage =
         get(error, 'response.status') === 422
-          ? 'すでにご登録済みのメールアドレスです。'
+          ? '登録済みのメールアドレスです。'
           : 'ユーザー作成に失敗しました。'
       commit('setErrorMessage', errorMessage)
       return false
