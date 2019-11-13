@@ -13,16 +13,15 @@
           <div>
             <h2 class="subtitle">会員の方はこちら</h2>
             <login-form :link="link" :query="query" />
-            <nuxt-link to="/password/reset">
+            <nuxt-link v-if="!user.errorMessage" to="/password/reset">
               パスワードを忘れた方はこちら
             </nuxt-link>
           </div>
 
           <div class="not">
-            <h2 class="subtitle">会員でない方はこちら</h2>
+            <h2 class="subtitle">はじめましての方はこちら</h2>
             <div>
               <v-btn color="warning" @click="resisterBtn">新規会員登録をして予約する</v-btn>
-              <v-btn color="warning" @click="skipBtn">会員登録せずに予約へ進む</v-btn>
             </div>
             <div class="free">
               ※会員登録は無料です。<br>
@@ -60,13 +59,7 @@ export default {
   },
   methods: {
     resisterBtn() {
-      // 会員登録あり
       this.setIsCreate(true)
-      this.$router.push({ path: '/registration', query: this.query })
-    },
-    skipBtn() {
-      // 会員登録なし
-      this.setIsCreate(false)
       this.$router.push({ path: '/registration', query: this.query })
     },
     ...mapMutations('user', ['setIsCreate'])

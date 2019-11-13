@@ -16,13 +16,14 @@
         label="パスワード"
         @click:append="show = !show"
       />
-      <v-alert v-if="data.isError"
+      <v-alert v-if="errorMessage"
                :value="true"
                color="error"
                icon="warning"
                outline
       >
-        メールアドレスもしくはパスワードが違います。
+        メールアドレスもしくはパスワードが違います。<br>
+        <nuxt-link to="/password/reset">パスワードを忘れた方はこちら</nuxt-link>
       </v-alert>
       <v-btn
         :disabled="!canLogin"
@@ -52,7 +53,6 @@ export default {
   },
   data: () => ({
     show: false,
-    isError: false,
     mail: '',
     password: '',
     mailRules: [mail => checkMail(mail)],
@@ -64,7 +64,7 @@ export default {
         checkMail(this.mail) === true && checkPassword(this.password) === true
       )
     },
-    ...mapState({ data: 'user' })
+    ...mapState('user', ['errorMessage'])
   },
   methods: {
     // ログインボタンを押した時の動き

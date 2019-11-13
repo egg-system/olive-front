@@ -36,7 +36,7 @@ export default {
     const { errorMessage } = store.state.user
     const isError = store.getters['user/isError']
     if (isError) {
-      const message = `${errorMessage}<br>お手数ですが最初からやり直してください。`
+      const message = `${errorMessage}<br>お手数ですが最初からやり直してください。<br>※ 会員登録をせずに<a href="https://olivebodycare.healthcare/about/contact/">こちら</a>からご予約いただくことも可能です。`
       store.commit('user/reset')
       error({ statusCode: 400, message })
     }

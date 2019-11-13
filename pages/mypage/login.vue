@@ -13,7 +13,7 @@
           <div>
             <h2 class="subtitle">会員の方はこちら</h2>
             <login-form :link="link" />
-            <nuxt-link to="/password/reset">
+            <nuxt-link v-if="!user.errorMessage" to="/password/reset">
               パスワードを忘れた方はこちら
             </nuxt-link>
           </div>
