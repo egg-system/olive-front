@@ -99,7 +99,7 @@ export default {
 
       const menusForDisplay =
         menus &&
-        menus.map((_menu, index) => {
+        menus.filter(_menu => _menu && _menu.menu).map((_menu, index) => {
           const { menu } = _menu
           return {
             name: this.isTwoMenusSelected
