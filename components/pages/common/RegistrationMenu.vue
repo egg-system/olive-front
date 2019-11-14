@@ -10,16 +10,25 @@
       </v-flex>
     </v-layout>
 
-    <v-layout v-if="time" row>
-      <v-flex>
+    <v-layout v-if="store" row xs12>
+      <v-flex xs4>
+        <v-card-text>予約店舗</v-card-text>
+      </v-flex>
+      <v-flex xs8>
+        <v-card-text>{{ store.name }}</v-card-text>
+      </v-flex>
+    </v-layout>
+
+    <v-layout v-if="time" row xs12>
+      <v-flex xs4>
         <v-card-text>予約日時</v-card-text>
       </v-flex>
-      <v-flex>
+      <v-flex xs8>
         <v-card-text>{{ time }}</v-card-text>
       </v-flex>
     </v-layout>
 
-    <v-layout v-if="menusForDisplay" row>
+    <v-layout v-if="menusForDisplay" row xs12>
       <v-flex>
         <v-data-table
           :items="menusForDisplay"
@@ -90,7 +99,7 @@ export default {
 
       const menusForDisplay =
         menus &&
-        menus.map((_menu, index) => {
+        menus.filter(_menu => _menu && _menu.menu).map((_menu, index) => {
           const { menu } = _menu
           return {
             name: this.isTwoMenusSelected
@@ -144,9 +153,12 @@ export default {
 
       return `${date} (${dayOfTheWeek}) ${timeFrom} ～ ${timeTo}`
     },
+    store() {
+      return this.selectedStore
+    },
     ...mapState('user', ['coupons', 'isFirst']),
     ...mapState('reservation/select', ['dateTime']),
-    ...mapGetters('reservation/select', ['isTwoMenusSelected', 'menus'])
+    ...mapGetters('reservation/select', ['isTwoMenusSelected', 'selectedStore', 'menus'])
   },
   methods: {
     getMenuOptionsForDisplay(menus) {
@@ -162,7 +174,8 @@ export default {
             const price = option.is_mimitsubo_jewelry
               ? parseInt(option.price, 10) * parseInt(mimitsuboCount, 10)
               : option.price
-            return { name, price, minutes: option.minutes }
+            // オプションにminutesは存在しないが、メニューと併記する都合上、0にする
+            return { name, price, minutes: 0 }
           })
         })
         .flat()

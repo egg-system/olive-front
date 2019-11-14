@@ -59,7 +59,6 @@ export default {
   },
   methods: {
     createBtn() {
-      // this.setIsCreate(true)
       this.$router.push('/create')
     },
     ...mapMutations('user', ['setIsCreate'])
