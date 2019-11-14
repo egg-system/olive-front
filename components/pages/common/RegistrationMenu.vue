@@ -158,7 +158,11 @@ export default {
     },
     ...mapState('user', ['coupons', 'isFirst']),
     ...mapState('reservation/select', ['dateTime']),
-    ...mapGetters('reservation/select', ['isTwoMenusSelected', 'selectedStore', 'menus'])
+    ...mapGetters('reservation/select', [
+      'isTwoMenusSelected',
+      'selectedStore',
+      'menus'
+    ])
   },
   methods: {
     getMenuOptionsForDisplay(menus) {

@@ -1,5 +1,6 @@
 import Vuex from 'vuex'
 import axios from 'axios'
+import * as _ from 'lodash'
 import { state, getters, mutations, actions } from '~/store/menu.js'
 import { createLocalVue } from '@vue/test-utils'
 import config from '~/config/constant.dev.js'
@@ -74,7 +75,7 @@ describe('store/menu.js', () => {
     })
 
     test('allMenus', () => {
-      const result = menusData.flatMap(subShop => subShop.menus)
+      const result = _.flatten(menusData.map(subShop => subShop.menus))
       expect(store.getters.allMenus).toEqual(result)
     })
 
