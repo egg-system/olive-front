@@ -30,9 +30,13 @@ export default {
   middleware: ['init-menu-index', 'init-shop-id'],
   watchQuery: ['shopId'],
   async fetch({ store, query, error }) {
+    if (store.state.shop.id && store.getters['menu/hasSubShops']) {
+      return
+    }
+
+    // shopIdがnullの場合は1をセットする
+    const shopId = query.shopId || 1
     try {
-      // shopIdがnullの場合は1をセットする
-      const shopId = query.shopId || 1
       await Promise.all([
         store.dispatch('shop/getShop', { id: shopId }),
         store.dispatch('menu/getMenus', { shopId })
