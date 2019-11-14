@@ -15,7 +15,8 @@
 export default {
   methods: {
     back() {
-      this.$router.go(-1)
+      this.$root.context.store.commit('reservation/select/reset')
+      this.$router.push('/menus/', { shopId: this.$root.context.query.shopId })
     }
   }
 }
