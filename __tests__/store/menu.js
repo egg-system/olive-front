@@ -3,7 +3,7 @@ import axios from 'axios'
 import * as _ from 'lodash'
 import { state, getters, mutations, actions } from '~/store/menu.js'
 import { createLocalVue } from '@vue/test-utils'
-import config from '~/config/constant.dev.js'
+import { initialize } from '~/__tests__/test-utils.js'
 import menusData from '~/__tests__/fixtures/menus.json'
 
 jest.mock('axios')
@@ -12,8 +12,7 @@ describe('store/menu.js', () => {
   let store, initialState
 
   beforeAll(() => {
-    // 設定ファイルはdevを使う
-    process.env = config
+    initialize()
   })
 
   beforeEach(() => {
