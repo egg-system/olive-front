@@ -460,6 +460,15 @@ describe('store/user.js', () => {
 
   // getters
   describe('getters', () => {
+    const modules = {
+      reservation: {
+        state: {
+          select: {
+            menus: [{ storeId: 'dummyStoreId' }]
+          }
+        }
+      }
+    }
     const dummyIsCreate = true
     const dummyPassword = 'test1234'
     const dummyToken = 'dummyToken'
@@ -469,6 +478,13 @@ describe('store/user.js', () => {
     const dummyIsFirst = true
 
     beforeEach(() => {
+      store = new Vuex.Store({
+        state,
+        mutations,
+        actions,
+        getters,
+        modules
+      })
       store.commit('setIsCreate', dummyIsCreate)
       store.commit('setCustomerId', userData.id)
       store.commit('setFirstName', userData.first_name)
@@ -526,23 +542,13 @@ describe('store/user.js', () => {
       })
     })
 
-    // なぜかrootStateにdummyを渡せない…
-    test.skip('createParams', () => {
-      const dummyRootState = {
-        reservation: {
-          select: {
-            menus: [{ storeId: 'dummyStoreId' }]
-          }
-        }
-      }
-      expect(
-        store.getters.createParams.call(null, state, getters, dummyRootState)
-      ).toEqual({
+    test('createParams', () => {
+      expect(store.getters.createParams).toEqual({
         email: userData.email,
-        password: userData.password,
+        password: dummyPassword,
         provider: 'email',
-        first_visit_store_id: undefined,
-        last_visit_store_id: undefined,
+        first_visit_store_id: modules.reservation.state.select.menus[0].storeId,
+        last_visit_store_id: modules.reservation.state.select.menus[0].storeId,
         first_name: userData.first_name,
         last_name: userData.last_name,
         first_kana: userData.first_kana,
