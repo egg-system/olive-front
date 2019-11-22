@@ -94,7 +94,7 @@ describe('store/reservation/date.js', () => {
 
     test('dateRoute', () => {
       expect(store.getters.dateRoute).toMatch(
-        /^https:\/\/api.myjson.com\/bins\/1hjqig/
+        /^http:\/\/localhost:8080\/api\/shops/
       )
     })
 

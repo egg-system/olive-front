@@ -1,0 +1,62 @@
+{
+  "total_pages": 1,
+  "data": [
+    {
+      "id": 1,
+      "state": "予約中",
+      "store": {
+        "id": 1,
+        "store_type": "owned",
+        "name": "女性専門の治療院オリーヴボディケア たまプラーザ店",
+        "address": "横浜市青葉区新石川3-15-16 メディカルモールたまプラーザ301",
+        "tel": "045-530-1688",
+        "mail": "info@olivebodycare.jp",
+        "url": "https://olivebodycare.healthcare/salon/tamaplaza",
+        "open_at": {
+          "hour": 10,
+          "minute": 0,
+          "second": 0,
+          "second_of_day": 36000
+        },
+        "close_at": {
+          "hour": 20,
+          "minute": 0,
+          "second": 0,
+          "second_of_day": 72000
+        },
+        "break_from": null,
+        "break_to": null,
+        "created_at": "2019-11-16T17:10:56.000+09:00",
+        "updated_at": "2019-11-16T17:10:56.000+09:00",
+        "zip_code": null
+      },
+      "start_at": "2019-11-30T10:00:00.000+09:00",
+      "end_at": "2019-11-30T11:00:00.000+09:00",
+      "details": [
+        {
+          "id": 1,
+          "menu": {
+            "id": 1,
+            "name": "通常整体コース",
+            "description": null,
+            "fee": 6000,
+            "service_minutes": 60,
+            "start_at": "2019-01-01",
+            "end_at": null,
+            "menu_category_id": 1,
+            "skill_id": 1,
+            "memo": null,
+            "created_at": "2019-11-16T17:10:55.000+09:00",
+            "updated_at": "2019-11-16T17:10:55.000+09:00"
+          },
+          "option_names": [
+            "足つぼ",
+            "小顔矯正"
+          ]
+        }
+      ],
+      "coupons": [],
+      "fee": 12000
+    }
+  ]
+}
