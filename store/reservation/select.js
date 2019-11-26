@@ -202,7 +202,7 @@ export const getters = {
       let optionIds = []
       if (Array.isArray(_options) && _options.length > 0) {
         optionIds = _options
-          .filter(option => option.id)
+          .filter(option => option && option.id)
           .map(option => option.id)
           .join(',')
       }
