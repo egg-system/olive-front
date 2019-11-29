@@ -1,14 +1,10 @@
-import Vuex from 'vuex'
-import axios from 'axios'
-import moment from 'moment'
 import {
   state,
   getters,
   mutations,
   actions
 } from '~/store/reservation/select.js'
-import { createLocalVue } from '@vue/test-utils'
-import { initialize } from '~/__tests__/test-utils.js'
+import { initialize, initializeStore } from '~/__tests__/test-utils.js'
 import selectedMenusData from '~/__tests__/fixtures/reservation/selectedMenus.json'
 
 jest.mock('axios')
@@ -16,8 +12,6 @@ jest.mock('axios')
 describe('store/reservation/select.js', () => {
   let store, initialState
   const FIRST_MENU_INDEX = 0
-  const SECOND_MENU_INDEX = 1
-  const MIMITSUBO_OPTION_ID = 7
   const DEFAULT_OPTIONS = []
   const DEFAULT_MIMITSUBO_COUNT = 0
 
@@ -26,9 +20,7 @@ describe('store/reservation/select.js', () => {
   })
 
   beforeEach(() => {
-    const localVue = createLocalVue()
-    localVue.use(Vuex)
-    store = new Vuex.Store({
+    store = initializeStore({
       state,
       mutations,
       actions,
@@ -159,7 +151,7 @@ describe('store/reservation/select.js', () => {
       }
     }
     beforeEach(() => {
-      store = new Vuex.Store({
+      store = initializeStore({
         state,
         mutations,
         actions,

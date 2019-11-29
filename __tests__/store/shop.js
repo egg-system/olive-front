@@ -1,8 +1,6 @@
-import Vuex from 'vuex'
 import axios from 'axios'
 import { state, getters, mutations, actions } from '~/store/shop.js'
-import { createLocalVue } from '@vue/test-utils'
-import { initialize } from '~/__tests__/test-utils.js'
+import { initialize, initializeStore } from '~/__tests__/test-utils.js'
 import shopData from '~/__tests__/fixtures/shop.json'
 
 jest.mock('axios')
@@ -15,9 +13,7 @@ describe('store/shop.js', () => {
   })
 
   beforeEach(() => {
-    const localVue = createLocalVue()
-    localVue.use(Vuex)
-    store = new Vuex.Store({ state, mutations, actions, getters })
+    store = initializeStore({ state, mutations, actions, getters })
 
     initialState = {
       id: null,

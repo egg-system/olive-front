@@ -1,9 +1,7 @@
-import Vuex from 'vuex'
 import axios from 'axios'
 import moment from 'moment'
 import { state, getters, mutations, actions } from '~/store/reservation/date.js'
-import { createLocalVue } from '@vue/test-utils'
-import { initialize } from '~/__tests__/test-utils.js'
+import { initialize, initializeStore } from '~/__tests__/test-utils.js'
 import reservationDateData from '~/__tests__/fixtures/reservation/date.json'
 
 jest.mock('axios')
@@ -16,9 +14,7 @@ describe('store/reservation/date.js', () => {
   })
 
   beforeEach(() => {
-    const localVue = createLocalVue()
-    localVue.use(Vuex)
-    store = new Vuex.Store({
+    store = initializeStore({
       state,
       mutations,
       actions,
@@ -82,7 +78,7 @@ describe('store/reservation/date.js', () => {
       }
     }
     beforeEach(() => {
-      store = new Vuex.Store({
+      store = initializeStore({
         state,
         mutations,
         actions,
