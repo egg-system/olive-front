@@ -119,13 +119,15 @@ export const getters = {
       .map(menu => menu.id)
   },
   allSelectedOptionIds(state) {
-    return state.optionsList.flatMap(options => {
-      if (!Array.isArray(options)) {
-        return []
-      }
+    return _.flatten(
+      state.optionsList.map(options => {
+        if (!Array.isArray(options)) {
+          return []
+        }
 
-      return options.filter(option => 'id' in option).map(option => option.id)
-    })
+        return options.filter(option => 'id' in option).map(option => option.id)
+      })
+    )
   },
   isTwoMenusSelected(state) {
     if (state.menuList.length === 1) {

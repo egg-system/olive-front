@@ -11,7 +11,7 @@ const initialState = {
   request: '',
   errorMessage: ''
 }
-export const state = () => initialState
+export const state = () => ({ ...initialState })
 
 /* mutations */
 export const mutations = {

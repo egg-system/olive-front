@@ -1,4 +1,5 @@
 import axios from 'axios'
+import * as _ from 'lodash'
 import { route } from '../lib/route'
 
 /* state */
@@ -28,7 +29,7 @@ export const getters = {
     return state.subShops.length > 1
   },
   allMenus(state) {
-    return state.subShops.flatMap(subShop => subShop.menus)
+    return _.flatten(state.subShops.map(subShop => subShop.menus))
   },
   getMenu(state, getters) {
     return menuId => {
@@ -39,10 +40,9 @@ export const getters = {
   },
   getOption(state, getters) {
     return optionId => {
-      return getters.allMenus
-        .filter(menu => menu.options)
-        .flatMap(menu => menu.options)
-        .find(option => option.id === optionId)
+      return _.flatten(
+        getters.allMenus.filter(menu => menu.options).map(menu => menu.options)
+      ).find(option => option.id === optionId)
     }
   },
   getStore(state) {

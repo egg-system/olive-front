@@ -1,59 +1,98 @@
-import Vuex from 'vuex'
+import axios from 'axios'
+import * as _ from 'lodash'
 import { state, getters, mutations, actions } from '~/store/menu.js'
-import { createLocalVue } from '@vue/test-utils'
-import config from '~/config/constant.dev.js'
+import { initialize, initializeStore } from '~/__tests__/test-utils.js'
+import menusData from '~/__tests__/fixtures/menus.json'
 
-// shopが選択されている前提のテストである必要があるため、一旦skip
-describe.skip('store/menu.js', () => {
-  let store
+jest.mock('axios')
+
+describe('store/menu.js', () => {
+  let store, initialState
 
   beforeAll(() => {
-    // 設定ファイルはdevを使う
-    process.env = config
+    initialize()
   })
 
   beforeEach(() => {
-    const localVue = createLocalVue()
-    localVue.use(Vuex)
-    store = new Vuex.Store({ state, mutations, actions, getters })
+    store = initializeStore({ state, mutations, actions, getters })
+
+    initialState = {
+      subShops: []
+    }
   })
 
+  /* state */
+  describe('state', () => {
+    test('initial state', () => {
+      expect(store.state).toEqual(initialState)
+    })
+  })
+
+  /* mutations */
+  describe('mutations', () => {
+    test('setMenus', () => {
+      const dummyData = 'dummyData'
+      store.commit('setMenus', dummyData)
+
+      expect(store.state).toEqual({
+        ...initialState,
+        subShops: dummyData
+      })
+    })
+  })
+
+  /* actions */
   describe('actions', () => {
-    test('getMenus success', async () => {
-      expect(store.state.subShops.length).toBe(0)
-      await store.dispatch('getMenus', { shopId: 1 })
-      expect(store.state.subShops.length).not.toBe(0)
+    let commit
+    beforeEach(() => {
+      commit = jest.fn()
+    })
+
+    test('getMenus', async () => {
+      const dummyParams = { shopId: 1 }
+      const dummyResponse = { data: 'dummyData' }
+      axios.get.mockResolvedValue(Promise.resolve(dummyResponse))
+      await actions.getMenus({ commit }, dummyParams)
+
+      expect(axios.get.mock.calls.length).toBe(1)
+      expect(commit).toHaveBeenCalledWith('setMenus', dummyResponse.data)
     })
   })
 
+  // getters
   describe('getters', () => {
-    test('getMenu target exist', async () => {
-      await store.dispatch('getMenus', { shopId: 1 })
-      let menu = store.getters.getMenu(1)
-      expect(menu.id).toBe(1)
+    beforeEach(() => {
+      store.commit('setMenus', menusData)
     })
 
-    test('getMenu target not exist ', async () => {
-      await store.dispatch('getMenus', { shopId: 1 })
-      let menu = store.getters.getMenu(10000)
-      expect(menu).toBeNull()
+    test('hasSubShops', () => {
+      expect(store.getters.hasSubShops).toBeTruthy()
     })
 
-    test('getOption target exist', async () => {
-      await store.dispatch('getMenus', { shopId: 1 })
-      let option = store.getters.getOption(20)
-      expect(option.id).toBe(20)
+    test('allMenus', () => {
+      const result = _.flatten(menusData.map(subShop => subShop.menus))
+      expect(store.getters.allMenus).toEqual(result)
     })
 
-    test('getOption target not exist ', async () => {
-      await store.dispatch('getMenus', { shopId: 1 })
-      let option = store.getters.getOption(10000)
-      expect(option).toBeNull()
+    test('getMenu', () => {
+      const menuId = 1
+      const result = menusData[0].menus[0]
+      expect(store.getters.getMenu(menuId)).toEqual(result)
     })
-    test('isLoading', async () => {
-      expect(store.getters.isLoading).toBe(true)
-      await store.dispatch('getMenus', { shopId: 1 })
-      expect(store.getters.isLoading).toBe(false)
+
+    test('getOption', () => {
+      const optionId = 1
+      const result = menusData[0].menus[0].options[0]
+      expect(store.getters.getOption(optionId)).toEqual(result)
+    })
+
+    test('isLoading', () => {
+      expect(store.getters.isLoading).toBeFalsy()
+    })
+
+    test('defaultMenu', () => {
+      const result = menusData[0].menus[0]
+      expect(store.getters.defaultMenu).toEqual(result)
     })
   })
 })
