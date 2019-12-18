@@ -16,7 +16,7 @@
               <tr>
                 <td>&nbsp;&nbsp;</td>
               </tr>
-              <tr v-for="time in timeSlotStrings" :key="time">
+              <tr v-for="time in timeSlots" :key="time.toString()">
                 <td>{{ time | hourFormat }}</td>
               </tr>
             </tbody>
@@ -69,9 +69,6 @@ export default {
     },
     hasTwoMonth() {
       return this.firstMonthCount !== this.weekData.length
-    },
-    timeSlotStrings() {
-      return this.timeSlots.map(timeSlot => timeSlot.toString())
     },
     ...mapGetters('reservation/date', ['timeSlots'])
   }
