@@ -3,21 +3,25 @@
     <v-flex class="mypage-top">
       <v-card dark color="red lighten-2">
         <v-card-text>
-          <h3 class="mypage-title">マイページトップ > 会員情報変更</h3>
+          <h3 class="mypage-title">
+            マイページトップ > 会員情報変更
+          </h3>
         </v-card-text>
       </v-card>
     </v-flex>
 
     <h3>
-      <p class="under">会員情報変更</p>
+      <p class="under">
+        会員情報変更
+      </p>
     </h3>
     <div class="pr">
-      <customer-mail :read-only="true"/>
-      <customer-name/>
-      <customer-phone-number/>
-      <customer-adress v-if="false"/>
-      <customer-message/>
-      <confirm-btn/>
+      <customer-mail :read-only="true" />
+      <customer-name />
+      <customer-phone-number />
+      <customer-adress v-if="false" />
+      <customer-message />
+      <confirm-btn />
     </div>
   </div>
 </template>

@@ -5,13 +5,17 @@
         <v-layout row>
           <v-flex>
             <v-card-text class="complete">
-              <template v-if="user.isCreate">会員登録、および予約が確定しました。</template>
-              <template v-else>予約が確定しました。</template>
+              <template v-if="user.isCreate">
+                会員登録、および予約が確定しました。
+              </template>
+              <template v-else>
+                予約が確定しました。
+              </template>
               <br>予約確定メールをお送りしましたので、ご確認ください。
             </v-card-text>
           </v-flex>
         </v-layout>
-        <next-btn/>
+        <next-btn />
       </v-layout>
     </v-container>
   </section>
@@ -31,11 +35,6 @@ export default {
     NextBtn
   },
   middleware: ['clear-selected-query', 'init-shop-id', 'is-registered'],
-  computed: {
-    user() {
-      return this.$store.state.user
-    }
-  },
   async fetch({ store, error }) {
     try {
       const result = await store.dispatch(
@@ -61,6 +60,11 @@ export default {
         statusCode: 401,
         message: `${userErrorMessage}<br>お手数ですが最初からやり直してください。`
       })
+    }
+  },
+  computed: {
+    user() {
+      return this.$store.state.user
     }
   },
   methods: {

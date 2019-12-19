@@ -5,19 +5,21 @@
         <v-flex class="create">
           <v-card dark color="red lighten-2">
             <v-card-text>
-              <h3 class="mypage-title">新規会員登録</h3>
+              <h3 class="mypage-title">
+                新規会員登録
+              </h3>
             </v-card-text>
           </v-card>
         </v-flex>
 
         <div class="input">
-          <customer-name/>
-          <customer-mail/>
-          <customer-phone-number/>
-          <customer-adress v-if="enableAddress"/>
-          <customer-message/>
-          <customer-password/>
-          <confirm-btn/>
+          <customer-name />
+          <customer-mail />
+          <customer-phone-number />
+          <customer-adress v-if="enableAddress" />
+          <customer-message />
+          <customer-password />
+          <confirm-btn />
         </div>
       </v-layout>
     </v-container>

@@ -1,9 +1,12 @@
 <template>
   <div>
-
     <v-flex class="mypage-top">
       <v-card dark color="red lighten-2">
-        <v-card-text><h3 class="mypage-title">マイページトップ > 予約一覧 > 予約キャンセル完了</h3></v-card-text>
+        <v-card-text>
+          <h3 class="mypage-title">
+            マイページトップ > 予約一覧 > 予約キャンセル完了
+          </h3>
+        </v-card-text>
       </v-card>
     </v-flex>
 
@@ -11,9 +14,10 @@
     <div>予約キャンセルメールをお送りしましたので、ご確認ください。</div>
 
     <v-flex>
-      <v-btn color="warning" @click="top">マイページトップへ</v-btn>
+      <v-btn color="warning" @click="top">
+        マイページトップへ
+      </v-btn>
     </v-flex>
-
   </div>
 </template>
 

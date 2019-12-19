@@ -8,7 +8,6 @@
       </v-flex>
     </v-layout>
   </div>
-
 </template>
 
 <script>

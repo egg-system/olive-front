@@ -9,7 +9,7 @@
     <v-list v-for="list in lists" :key="list.subHeader">
       <v-subheader class="sub-header">
         <v-icon>{{ list.icon }}</v-icon>
-        <span class="text-spacer"/>{{ list.subHeader }}
+        <span class="text-spacer" />{{ list.subHeader }}
       </v-subheader>
       <v-list-tile
         v-for="link in list.links"
@@ -22,7 +22,7 @@
           </v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
-      <v-divider/> 
+      <v-divider /> 
     </v-list>
   </v-navigation-drawer>
 </template>

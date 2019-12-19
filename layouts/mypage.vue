@@ -3,7 +3,7 @@
     <div>
       <app-header :is-shown-navbar.sync="isShownNabvar" />
       <div class="mypage-body">
-        <mypage-navbar :is-shown.sync="isShownNabvar"/>
+        <mypage-navbar :is-shown.sync="isShownNabvar" />
         <section class="container">
           <v-container grid-list-xl>
             <v-layout column>

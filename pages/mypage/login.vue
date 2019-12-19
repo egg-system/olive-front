@@ -1,6 +1,6 @@
 <template>
   <section class="container">
-    <loading v-if="user.isLoading" class="loading"/>
+    <loading v-if="user.isLoading" class="loading" />
     <v-layout column>
       <v-flex>
         <v-card dark color="red lighten-2" class="head">
@@ -9,9 +9,11 @@
       </v-flex>
 
       <v-flex>
-        <div :class="{ hidden: user.isLoading }" class="main" >
+        <div :class="{ hidden: user.isLoading }" class="main">
           <div>
-            <h2 class="subtitle">会員の方はこちら</h2>
+            <h2 class="subtitle">
+              会員の方はこちら
+            </h2>
             <login-form :link="link" />
             <nuxt-link to="/password/reset">
               パスワードを忘れた方はこちら
@@ -19,7 +21,9 @@
           </div>
 
           <div class="not">
-            <h2 class="subtitle">会員でない方はこちら</h2>
+            <h2 class="subtitle">
+              会員でない方はこちら
+            </h2>
             <div>
               <v-btn color="warning" @click="createBtn">
                 新規会員登録へ
@@ -29,11 +33,9 @@
               ※会員登録は無料です。<br>
               ※会員登録をしていただくと、マイページからご予約履歴をいつでも確認できて、キャンセル等の手続きも簡単に行えるようになります。
             </div>
-
           </div>
         </div>
       </v-flex>
-
     </v-layout>
   </section>
 </template>

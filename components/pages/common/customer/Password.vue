@@ -1,8 +1,9 @@
 <template>
   <div class="userinfo">
-
     <v-layout row>
-      <v-flex xs3>パスワード<span class="must">(必須)</span></v-flex>
+      <v-flex xs3>
+        パスワード<span class="must">(必須)</span>
+      </v-flex>
       <v-layout column>
         <v-flex>
           <v-text-field
@@ -42,7 +43,6 @@
       同じパスワードを入力してください
     </v-alert>
   </div>
-
 </template>
 
 <script>

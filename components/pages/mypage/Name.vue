@@ -1,6 +1,8 @@
 <template>
   <v-flex align-self-baseline>
-    <div class="txt_15em">{{ custmerFullName }} さん</div>
+    <div class="txt_15em">
+      {{ custmerFullName }} さん
+    </div>
   </v-flex>
 </template>
 

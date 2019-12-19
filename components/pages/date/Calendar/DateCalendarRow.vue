@@ -6,7 +6,9 @@
           <td>{{ dateData | dateFormat }}</td>
         </tr>
         <tr>
-          <td :class="dateData | dayClass">{{ dateData | dayFormat }}</td>
+          <td :class="dateData | dayClass">
+            {{ dateData | dayFormat }}
+          </td>
         </tr>
         <time-calendar-row
           v-for="dateTimeData in dateTimeSlots"

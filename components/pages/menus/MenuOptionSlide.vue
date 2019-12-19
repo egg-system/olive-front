@@ -1,6 +1,8 @@
 <template>
   <div class="option-area">
-    <div class="option-header">オプションをご希望の場合は選択してください</div>
+    <div class="option-header">
+      オプションをご希望の場合は選択してください
+    </div>
     <div v-for="option in options" :key="option.id">
       <v-checkbox v-if="true" v-model="checkedOptions" :value="option">
         <div slot="label" class="menu-info">
@@ -11,8 +13,8 @@
       </v-checkbox>
       <v-select
         v-if="isShownSelect(option)"
-        :items="mimitsuboJewelrySelectItems"
         v-model="selectedMimitsuboCount"
+        :items="mimitsuboJewelrySelectItems"
         placeholder="粒数を選択してください。"
       />
     </div>

@@ -5,7 +5,9 @@
         <v-flex class="create">
           <v-card dark color="red lighten-2">
             <v-card-text>
-              <h3 class="mypage-title">新規会員登録 > 完了</h3>
+              <h3 class="mypage-title">
+                新規会員登録 > 完了
+              </h3>
             </v-card-text>
           </v-card>
         </v-flex>
@@ -14,7 +16,9 @@
 
         <v-layout column>
           <v-flex xs6>
-            <v-btn @click="login">ログイン</v-btn>
+            <v-btn @click="login">
+              ログイン
+            </v-btn>
           </v-flex>
         </v-layout>
       </v-layout>

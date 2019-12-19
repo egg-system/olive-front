@@ -2,9 +2,15 @@
   <table class="outer-table">
     <tbody>
       <tr>
-        <th v-if="!hasTwoMonth" colspan="8">{{ firstDate | monthFormat }}</th>
-        <th v-if="hasTwoMonth" :colspan="firstMonthCount + 1">{{ firstDate | monthFormat }}</th>
-        <th v-if="hasTwoMonth" :colspan="7 - firstMonthCount">{{ lastDate | monthFormat }}</th>
+        <th v-if="!hasTwoMonth" colspan="8">
+          {{ firstDate | monthFormat }}
+        </th>
+        <th v-if="hasTwoMonth" :colspan="firstMonthCount + 1">
+          {{ firstDate | monthFormat }}
+        </th>
+        <th v-if="hasTwoMonth" :colspan="7 - firstMonthCount">
+          {{ lastDate | monthFormat }}
+        </th>
       </tr>
       <tr>
         <td class="col-data-wrapper">

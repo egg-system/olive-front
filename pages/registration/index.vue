@@ -2,14 +2,14 @@
   <section class="container">
     <v-container grid-list-xl>
       <v-layout column>
-        <customer-must-update-error v-if="customerMustUpdate"/>
+        <customer-must-update-error v-if="customerMustUpdate" />
         <template v-else>
-          <registration-menu/>
-          <registration-user-info/>
-          <login-info v-if="isShownLoginInfo"/>
-          <registration-confirm-info/>
-          <registration-request/>
-          <confirm-btn/>
+          <registration-menu />
+          <registration-user-info />
+          <login-info v-if="isShownLoginInfo" />
+          <registration-confirm-info />
+          <registration-request />
+          <confirm-btn />
         </template>
       </v-layout>
     </v-container>

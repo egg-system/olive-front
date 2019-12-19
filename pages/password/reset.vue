@@ -1,12 +1,14 @@
 <template>
   <div>
     <div class="input">
-      <h3 class="block">下記項目を入力して「次へ」でお進みください。</h3>
-      <customer-mail/>
-      <customer-phone-number v-if="sholdCheckPhone"/>
+      <h3 class="block">
+        下記項目を入力して「次へ」でお進みください。
+      </h3>
+      <customer-mail />
+      <customer-phone-number v-if="sholdCheckPhone" />
     </div>
     <v-flex>
-      <reset-btn :should-check-phone="sholdCheckPhone"/>
+      <reset-btn :should-check-phone="sholdCheckPhone" />
     </v-flex>
   </div>
 </template>
