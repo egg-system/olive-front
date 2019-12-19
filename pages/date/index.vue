@@ -1,12 +1,12 @@
 <template>
   <section class="container">
-    <loading v-if="isLoading" class="loading"/>
+    <loading v-if="isLoading" class="loading" />
     <div :class="{ hidden: isLoading }">
       <v-container grid-list-xl>
         <v-layout column wrap class="menu-contents">
-          <registration-menu :is-first="false"/>
-          <calendar/>
-          <back-btn/>
+          <registration-menu :is-first="false" />
+          <calendar />
+          <back-btn />
         </v-layout>
       </v-container>
     </div>
@@ -28,9 +28,6 @@ export default {
     BackBtn,
     Loading
   },
-  computed: {
-    ...mapGetters('reservation/date', ['isLoading'])
-  },
   async fetch({ store, error, route, redirect }) {
     try {
       // カレンダーを取得
@@ -38,6 +35,9 @@ export default {
     } catch (e) {
       error({ statusCode: (e.response && e.response.status) || 500 })
     }
+  },
+  computed: {
+    ...mapGetters('reservation/date', ['isLoading'])
   }
 }
 </script>

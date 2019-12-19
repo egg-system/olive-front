@@ -4,17 +4,21 @@
       <v-layout column wrap>
         <v-flex class="create">
           <v-card dark color="red lighten-2">
-            <v-card-text><h3 class="mypage-title">新規会員登録 > 確認</h3></v-card-text>
+            <v-card-text>
+              <h3 class="mypage-title">
+                新規会員登録 > 確認
+              </h3>
+            </v-card-text>
           </v-card>
         </v-flex>
 
         <div class="input">
-          <customer-name :is-confirm="true"/>
-          <customer-mail :is-confirm="true"/>
-          <customer-phone-number :is-confirm="true"/>
-          <customer-adress v-if="false" :is-confirm="true"/>
-          <customer-message :is-confirm="true"/>
-          <customer-password :is-confirm="true"/>
+          <customer-name :is-confirm="true" />
+          <customer-mail :is-confirm="true" />
+          <customer-phone-number :is-confirm="true" />
+          <customer-adress v-if="false" :is-confirm="true" />
+          <customer-message :is-confirm="true" />
+          <customer-password :is-confirm="true" />
           <fixed-btn />
         </div>
       </v-layout>

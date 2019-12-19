@@ -3,7 +3,9 @@
     <div>パスワードの更新が完了いたしました。</div>
     <v-layout column>
       <v-flex xs6>
-        <v-btn @click="login">ログイン</v-btn>
+        <v-btn @click="login">
+          ログイン
+        </v-btn>
       </v-flex>
     </v-layout>
   </div>

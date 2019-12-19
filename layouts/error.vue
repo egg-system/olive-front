@@ -4,18 +4,26 @@
       <v-layout column wrap>
         <v-layout row>
           <v-flex>
+            <!-- エラーメッセージは、システムで作成するため、XSSの危険性は低い -->
+            <!-- eslint-disable-next-line vue/no-v-html -->
             <v-card-text class="message" v-html="errorMessage" />
           </v-flex>
         </v-layout>
         <v-layout column>
           <v-flex xs6>
-            <v-btn color="warning" href="https://olivebodycare.healthcare/">店舗ホームページへ</v-btn>
+            <v-btn color="warning" href="https://olivebodycare.healthcare/">
+              店舗ホームページへ
+            </v-btn>
           </v-flex>
           <v-flex v-if="isLogin" xs6>
-            <v-btn color="warning" @click="goMyPage">マイページへ</v-btn>
+            <v-btn color="warning" @click="goMyPage">
+              マイページへ
+            </v-btn>
           </v-flex>
           <v-flex xs6>
-            <v-btn color="warning" @click="back">戻る</v-btn>
+            <v-btn color="warning" @click="back">
+              戻る
+            </v-btn>
           </v-flex>
         </v-layout>
       </v-layout>
@@ -30,11 +38,6 @@ export default {
     error: {
       type: Object,
       default: null
-    }
-  },
-  head() {
-    return {
-      title: 'エラー'
     }
   },
   computed: {
@@ -85,6 +88,11 @@ export default {
         return this.message
       }
       return 'エラーが発生しました。'
+    }
+  },
+  head() {
+    return {
+      title: 'エラー'
     }
   }
 }

@@ -16,11 +16,11 @@
     <v-radio-group v-model="selectedStoreMenu" column class="menu-list">
       <section
         v-for="subShop in displayShops"
-        :key="subShop.id"
         :id="subShop.id"
+        :key="subShop.id"
         class="content-section"
       >
-        <v-layout :ref="subShop.id.toString()" column wrap >
+        <v-layout :ref="subShop.id.toString()" column wrap>
           <v-flex>
             <v-card dark color="red lighten-2">
               <v-card-text>
@@ -32,11 +32,13 @@
             <v-card>
               <v-card-title primary-title>
                 ご希望のメニューを選択してください
-                <p class="taxLabel">※金額は全て税抜きです。</p>
+                <p class="taxLabel">
+                  ※金額は全て税抜きです。
+                </p>
               </v-card-title>
             </v-card>
             <div v-for="menu in subShop.menus" :key="menu.id">
-              <menu-row :store-id="subShop.id" :menu="menu"/>
+              <menu-row :store-id="subShop.id" :menu="menu" />
             </div>
           </v-flex>
         </v-layout>
@@ -45,9 +47,15 @@
 
     <v-layout column class="btn_fix">
       <v-flex xs6>
-        <v-btn v-if="currentPageId > 1" @click="backHour">戻る</v-btn>
-        <v-btn :disabled="!isMenuSelected" color="warning" @click="selectDate">空席確認・予約する</v-btn>
-        <v-btn v-if="isShownNextHourLink" color="warning" @click="nextHour">２時間予約する</v-btn>
+        <v-btn v-if="currentPageId > 1" @click="backHour">
+          戻る
+        </v-btn>
+        <v-btn :disabled="!isMenuSelected" color="warning" @click="selectDate">
+          空席確認・予約する
+        </v-btn>
+        <v-btn v-if="isShownNextHourLink" color="warning" @click="nextHour">
+          ２時間予約する
+        </v-btn>
       </v-flex>
     </v-layout>
   </div>

@@ -3,40 +3,56 @@
     <div class="card-main cancel">
       <v-layout row wrap>
         <v-flex xs5 class="text-menu">
-          <v-chip :color="reserveStateCss" label text-color="white" disabled>{{ data.state }}</v-chip>
+          <v-chip :color="reserveStateCss" label text-color="white" disabled>
+            {{ data.state }}
+          </v-chip>
         </v-flex>
-        <v-flex v-if="isShownCancelButton" xs6 >
+        <v-flex v-if="isShownCancelButton" xs6>
           <v-btn
             v-if="isShownCancelButton"
             :disabled="canNotCancel"
             class="cancel-btn d-inline-flex"
             color="warning"
             @click="cancelConfrim(data.id)"
-          >キャンセルする</v-btn>
+          >
+            キャンセルする
+          </v-btn>
         </v-flex>
       </v-layout>
       <v-layout row wrap>
         <v-flex xs5>
-          <div class="text-menu">予約店舗</div>
+          <div class="text-menu">
+            予約店舗
+          </div>
         </v-flex>
         <v-flex xs6>
-          <div class="text-value shop">{{ data.store.name }}</div>
+          <div class="text-value shop">
+            {{ data.store.name }}
+          </div>
         </v-flex>
       </v-layout>
       <v-layout row wrap>
         <v-flex xs5>
-          <div class="text-menu">予約日時</div>
+          <div class="text-menu">
+            予約日時
+          </div>
         </v-flex>
         <v-flex xs6>
-          <div class="text-value">{{ data.start_at | dateTimeAndDatFormat }}</div>
+          <div class="text-value">
+            {{ data.start_at | dateTimeAndDatFormat }}
+          </div>
         </v-flex>
       </v-layout>
       <v-layout row wrap>
         <v-flex xs5>
-          <div class="text-menu">予約ID</div>
+          <div class="text-menu">
+            予約ID
+          </div>
         </v-flex>
         <v-flex xs6>
-          <div class="text-value">{{ data.id }}</div>
+          <div class="text-value">
+            {{ data.id }}
+          </div>
         </v-flex>
       </v-layout>
       <template v-for="(detail, index) in data.details">
@@ -47,7 +63,9 @@
             </div>
           </v-flex>
           <v-flex xs6>
-            <div class="text-value">{{ detail.menu.name }}</div>
+            <div class="text-value">
+              {{ detail.menu.name }}
+            </div>
           </v-flex>
         </v-layout>
         <v-layout :key="index" row wrap>
@@ -58,28 +76,40 @@
           </v-flex>
           <v-flex xs6>
             <template v-if="detail.option_names.length === 0">
-              <div class="text-value">-</div>
+              <div class="text-value">
+                -
+              </div>
             </template>
             <template v-else>
-              <div class="text-value">{{ detail.option_names.join(' / ') }}</div>
+              <div class="text-value">
+                {{ detail.option_names.join(' / ') }}
+              </div>
             </template>
           </v-flex>
         </v-layout>
       </template>
       <v-layout row wrap>
         <v-flex xs5>
-          <div class="text-menu">回数券</div>
+          <div class="text-menu">
+            回数券
+          </div>
         </v-flex>
         <v-flex xs6>
-          <div class="text-value">{{ data.coupons.map(coupon => coupon.name).join(' / ') }}</div>
+          <div class="text-value">
+            {{ data.coupons.map(coupon => coupon.name).join(' / ') }}
+          </div>
         </v-flex>
       </v-layout>
       <v-layout row wrap>
         <v-flex xs5>
-          <div class="text-menu">合計金額</div>
+          <div class="text-menu">
+            合計金額
+          </div>
         </v-flex>
         <v-flex xs6>
-          <div class="text-value">{{ data.fee | priceFormat }}</div>
+          <div class="text-value">
+            {{ data.fee | priceFormat }}
+          </div>
         </v-flex>
       </v-layout>
     </div>

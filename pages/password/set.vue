@@ -1,11 +1,13 @@
 <template>
   <div>
     <div class="input">
-      <h3 class="block">新パスワードを入力して「次へ」でお進みください。</h3>
-      <customer-password/>
+      <h3 class="block">
+        新パスワードを入力して「次へ」でお進みください。
+      </h3>
+      <customer-password />
     </div>
     <v-flex>
-      <set-btn/>
+      <set-btn />
     </v-flex>
   </div>
 </template>

@@ -8,7 +8,9 @@
             <v-flex>
               <v-card dark color="red lighten-2">
                 <v-card-text>
-                  <h3 class="block">パスワードの再設定</h3>
+                  <h3 class="block">
+                    パスワードの再設定
+                  </h3>
                 </v-card-text>
               </v-card>
             </v-flex>

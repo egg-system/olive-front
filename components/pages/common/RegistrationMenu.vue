@@ -39,9 +39,15 @@
           item-key="index"
         >
           <template slot="items" slot-scope="props">
-            <td v-if="props.item">{{ props.item.name }}</td>
-            <td v-if="props.item">{{ props.item.price | priceFormat }}</td>
-            <td v-if="props.item">{{ props.item.minutes | timeFormat }}</td>
+            <td v-if="props.item">
+              {{ props.item.name }}
+            </td>
+            <td v-if="props.item">
+              {{ props.item.price | priceFormat }}
+            </td>
+            <td v-if="props.item">
+              {{ props.item.minutes | timeFormat }}
+            </td>
           </template>
         </v-data-table>
       </v-flex>
@@ -49,7 +55,9 @@
 
     <v-layout v-if="isConfirm" row class="cancel_term">
       <v-flex>
-        <v-card-text class="txt_12em">マイページからキャンセル可能期限</v-card-text>
+        <v-card-text class="txt_12em">
+          マイページからキャンセル可能期限
+        </v-card-text>
       </v-flex>
       <v-flex v-if="canCancel">
         <v-card-text>{{ cancelableDate | dateTimeAndDatFormat }}</v-card-text>
@@ -58,7 +66,9 @@
         <v-card-text>キャンセル不可</v-card-text>
       </v-flex>
     </v-layout>
-    <v-card-text v-if="isConfirm">※それ以降のキャンセルは直接サロンへご連絡ください。</v-card-text>
+    <v-card-text v-if="isConfirm">
+      ※それ以降のキャンセルは直接サロンへご連絡ください。
+    </v-card-text>
   </div>
 </template>
 

@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <v-layout column>
       <v-flex xs6>
         <v-btn :disabled="!canClick" color="warning" @click="confirm">
@@ -8,9 +7,7 @@
         </v-btn>
       </v-flex>
     </v-layout>
-
   </div>
-
 </template>
 
 <script>

@@ -6,40 +6,74 @@
       size="100"
     />
     <div v-else>
-      <logo/>
-      <h1 class="mainTitle">olive salon</h1>
+      <logo />
+      <h1 class="mainTitle">
+        olive salon
+      </h1>
       <div class="text-xs-center">
         <v-chip label text-color="white">
-          <v-icon left>link</v-icon>
-          <nuxt-link to="/mypage">/mypage</nuxt-link>
+          <v-icon left>
+            link
+          </v-icon>
+          <nuxt-link to="/mypage">
+            /mypage
+          </nuxt-link>
         </v-chip>
         <v-chip label text-color="white">
-          <v-icon left>link</v-icon>
-          <nuxt-link to="/registration">/registration</nuxt-link>
+          <v-icon left>
+            link
+          </v-icon>
+          <nuxt-link to="/registration">
+            /registration
+          </nuxt-link>
         </v-chip>
         <v-chip label text-color="white">
-          <v-icon left>link</v-icon>
-          <nuxt-link to="/option">/option</nuxt-link>
+          <v-icon left>
+            link
+          </v-icon>
+          <nuxt-link to="/option">
+            /option
+          </nuxt-link>
         </v-chip>
         <v-chip label text-color="white">
-          <v-icon left>link</v-icon>
-          <nuxt-link to="/menus">/menus</nuxt-link>
+          <v-icon left>
+            link
+          </v-icon>
+          <nuxt-link to="/menus">
+            /menus
+          </nuxt-link>
         </v-chip>
         <v-chip label text-color="white">
-          <v-icon left>link</v-icon>
-          <nuxt-link to="/login">/login</nuxt-link>
+          <v-icon left>
+            link
+          </v-icon>
+          <nuxt-link to="/login">
+            /login
+          </nuxt-link>
         </v-chip>
         <v-chip label text-color="white">
-          <v-icon left>link</v-icon>
-          <nuxt-link to="/date">/date</nuxt-link>
+          <v-icon left>
+            link
+          </v-icon>
+          <nuxt-link to="/date">
+            /date
+          </nuxt-link>
         </v-chip>
         <v-chip label text-color="white">
-          <v-icon left>link</v-icon>
-          <nuxt-link to="/confirm">/confirm</nuxt-link>
+          <v-icon left>
+            link
+          </v-icon>
+          <nuxt-link to="/confirm">
+            /confirm
+          </nuxt-link>
         </v-chip>
         <v-chip label text-color="white">
-          <v-icon left>link</v-icon>
-          <nuxt-link to="/complete">/complete</nuxt-link>
+          <v-icon left>
+            link
+          </v-icon>
+          <nuxt-link to="/complete">
+            /complete
+          </nuxt-link>
         </v-chip>
       </div>
     </div>

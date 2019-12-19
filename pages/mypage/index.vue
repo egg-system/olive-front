@@ -3,30 +3,38 @@
     <v-flex class="mypage-top">
       <v-card dark color="red lighten-2">
         <v-card-text>
-          <h3 class="mypage-title">マイページトップ</h3>
+          <h3 class="mypage-title">
+            マイページトップ
+          </h3>
         </v-card-text>
       </v-card>
     </v-flex>
 
     <template v-if="isCouponEnabled">
       <h3>
-        <p class="under">残りの回数券（回数券をお持ちの方のみ)</p>
+        <p class="under">
+          残りの回数券（回数券をお持ちの方のみ)
+        </p>
       </h3>
-      <mypage-coupon/>
+      <mypage-coupon />
     </template>
 
     <h3>
-      <p class="under">予約履歴</p>
+      <p class="under">
+        予約履歴
+      </p>
     </h3>
 
     <template v-if="hasReservations">
-      <mypage-reserve-history :limit="topPageReservationCount"/>
+      <mypage-reserve-history :limit="topPageReservationCount" />
       <mypage-more-btn v-if="isShownMoreButton" />
 
       <h3>
-        <p class="under">予約キャンセル</p>
+        <p class="under">
+          予約キャンセル
+        </p>
       </h3>
-      <mypage-cancel-btn/>
+      <mypage-cancel-btn />
     </template>
 
     <v-layout v-else justify-center column>

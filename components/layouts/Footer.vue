@@ -1,7 +1,8 @@
 <template>
   <v-footer class="footer">
     <v-flex
-      text-xs-center>
+      text-xs-center
+    >
       &copy;{{ date }} — <strong>olive</strong>
     </v-flex>
   </v-footer>
