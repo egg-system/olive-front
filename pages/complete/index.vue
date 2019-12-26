@@ -67,6 +67,12 @@ export default {
       return this.$store.state.user
     }
   },
+  created() {
+    const shopId = this.$route.query.shopId
+    this.$gtm.pushEvent({
+      event: `complete-reseravation-${shopId}`
+    })
+  },
   methods: {
     ...mapActions('reservation', ['resetAllInputed'])
   }
