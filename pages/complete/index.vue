@@ -5,8 +5,12 @@
         <v-layout row>
           <v-flex>
             <v-card-text class="complete">
-              <template v-if="user.isCreate">情報登録、および予約が確定しました。</template>
-              <template v-else>予約が確定しました。</template>
+              <template v-if="user.isCreate">
+                情報登録、および予約が確定しました。
+              </template>
+              <template v-else>
+                予約が確定しました。
+              </template>
               <br>予約確定メールをお送りしましたので、ご確認ください。
             </v-card-text>
           </v-flex>
