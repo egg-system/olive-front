@@ -11,7 +11,9 @@
       <v-flex>
         <div :class="{ hidden: user.isLoading }" class="main">
           <div>
-            <h2 class="subtitle">2回目以降の方はこちら</h2>
+            <h2 class="subtitle">
+              2回目以降の方はこちら
+            </h2>
             <login-form :link="link" />
             <nuxt-link to="/password/reset">
               パスワードを忘れた方はこちら
@@ -19,7 +21,9 @@
           </div>
 
           <div class="not">
-            <h2 class="subtitle">初めての方はこちら</h2>
+            <h2 class="subtitle">
+              初めての方はこちら
+            </h2>
             <div>
               <v-btn color="warning" @click="createBtn">
                 新規登録へ
