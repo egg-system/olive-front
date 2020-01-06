@@ -9,12 +9,12 @@
         </v-flex>
 
         <div class="input">
-          <customer-name :is-confirm="true"/>
-          <customer-mail :is-confirm="true"/>
-          <customer-phone-number :is-confirm="true"/>
-          <customer-adress v-if="false" :is-confirm="true"/>
-          <customer-message :is-confirm="true"/>
-          <customer-password :is-confirm="true"/>
+          <customer-name :is-confirm="true" />
+          <customer-mail :is-confirm="true" />
+          <customer-phone-number :is-confirm="true" />
+          <customer-adress v-if="false" :is-confirm="true" />
+          <customer-message :is-confirm="true" />
+          <customer-password :is-confirm="true" />
           <fixed-btn />
         </div>
       </v-layout>

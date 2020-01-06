@@ -11,7 +11,7 @@
             </v-card-text>
           </v-flex>
         </v-layout>
-        <next-btn/>
+        <next-btn />
       </v-layout>
     </v-container>
   </section>
@@ -31,11 +31,6 @@ export default {
     NextBtn
   },
   middleware: ['clear-selected-query', 'init-shop-id', 'is-registered'],
-  computed: {
-    user() {
-      return this.$store.state.user
-    }
-  },
   async fetch({ store, error }) {
     try {
       const result = await store.dispatch(
@@ -62,6 +57,17 @@ export default {
         message: `${userErrorMessage}<br>お手数ですが最初からやり直してください。<br>※ 新規登録をせずに<a href="https://olivebodycare.healthcare/about/contact/">こちら</a>からご予約いただくことも可能です。`
       })
     }
+  },
+  computed: {
+    user() {
+      return this.$store.state.user
+    }
+  },
+  created() {
+    const shopId = this.$route.query.shopId
+    this.$gtm.pushEvent({
+      event: `complete-reseravation-${shopId}`
+    })
   },
   methods: {
     ...mapActions('reservation', ['resetAllInputed'])

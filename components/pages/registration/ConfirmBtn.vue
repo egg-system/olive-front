@@ -2,7 +2,9 @@
   <div>
     <v-layout column>
       <v-flex xs6>
-        <v-btn :disabled="!canClick" color="warning" @click="confirm">予約内容を確認する</v-btn>
+        <v-btn :disabled="!canClick" color="warning" @click="confirm">
+          予約内容を確認する
+        </v-btn>
       </v-flex>
       <v-flex xs6>
         <v-btn @click="back">

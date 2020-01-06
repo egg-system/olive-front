@@ -6,11 +6,13 @@
           <span>{{ menu.name }}</span>
           <span class="menu-price">{{ menu.price | priceTaxExceptFormat }}</span>
           <span class="menu-duration">{{ menu.minutes | timeFormat }}</span>
-          <div class="description">{{ menu.description }}</div>
+          <div class="description">
+            {{ menu.description }}
+          </div>
         </div>
       </v-radio>
       <transition name="slide">
-        <menu-option-slide v-if="isShownOptionSlide" :options="options"/>
+        <menu-option-slide v-if="isShownOptionSlide" :options="options" />
       </transition>
     </v-card-title>
   </v-card>

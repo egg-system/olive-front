@@ -6,7 +6,9 @@
     </div>
     <v-layout column>
       <v-flex xs6>
-        <v-btn @click="top">マイページトップに戻る</v-btn>
+        <v-btn @click="top">
+          マイページトップに戻る
+        </v-btn>
       </v-flex>
     </v-layout>
   </div>

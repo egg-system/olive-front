@@ -1,10 +1,14 @@
 <template>
   <tr>
-    <td v-if="isPast" class="disabled">-</td>
+    <td v-if="isPast" class="disabled">
+      -
+    </td>
     <td v-else-if="canReserveTime" @click="setDataTimeSlot">
       <a>{{ remainCount | remainFormat }}</a>
     </td>
-    <td v-else class="disabled">×</td>
+    <td v-else class="disabled">
+      ×
+    </td>
   </tr>
 </template>
 

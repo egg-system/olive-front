@@ -1,8 +1,9 @@
 <template>
   <div class="userinfo">
-
     <v-layout row>
-      <v-flex xs3>電話番号<span class="must">(必須)</span></v-flex>
+      <v-flex xs3>
+        電話番号<span class="must">(必須)</span>
+      </v-flex>
       <v-layout column>
         <v-flex>
           <v-text-field
@@ -16,9 +17,7 @@
         </v-flex>
       </v-layout>
     </v-layout>
-
   </div>
-
 </template>
 
 <script>

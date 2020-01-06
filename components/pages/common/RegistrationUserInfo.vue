@@ -11,9 +11,9 @@
     </v-layout>
 
     <template>
-      <customer-name :is-confirm="isConfirm || isLogin"/>
-      <customer-mail :is-confirm="isConfirm || isLogin"/>
-      <customer-phone-number :is-confirm="isConfirm || isLogin"/>
+      <customer-name :is-confirm="isConfirm || isLogin" />
+      <customer-mail :is-confirm="isConfirm || isLogin" />
+      <customer-phone-number :is-confirm="isConfirm || isLogin" />
 
       <v-layout row>
         <v-flex xs3>
@@ -22,24 +22,26 @@
         </v-flex>
         <v-flex>
           <v-radio-group
-            :disabled="isConfirm"
             v-model="isFirst"
+            :disabled="isConfirm"
             :mandatory="true"
             class="inputTop"
           >
-            <v-radio :value="true" :label="isFirstLabel"/>
-            <v-radio :value="false" label="いいえ、2回目以降です"/>
+            <v-radio :value="true" :label="isFirstLabel" />
+            <v-radio :value="false" label="いいえ、2回目以降です" />
           </v-radio-group>
         </v-flex>
       </v-layout>
     </template>
 
     <v-layout row>
-      <v-flex xs3>回数券利用</v-flex>
+      <v-flex xs3>
+        回数券利用
+      </v-flex>
       <v-flex v-for="coupon in coupons" :key="coupon.id">
         <v-checkbox
-          :disabled="isConfirm"
           v-model="selectedCoupons"
+          :disabled="isConfirm"
           :value="coupon"
           :label="coupon.name"
           class="inputTop"
@@ -48,14 +50,18 @@
     </v-layout>
 
     <v-layout row>
-      <v-flex xs3>お子様連れ</v-flex>
-      <v-flex xs5>
-        <v-select :items="children" :disabled="isConfirm" v-model="childrenSelected"/>
+      <v-flex xs3>
+        お子様連れ
       </v-flex>
-      <v-flex v-if="!isConfirm" xs5>※お子様連れの方は人数をご選択ください</v-flex>
+      <v-flex xs5>
+        <v-select v-model="childrenSelected" :items="children" :disabled="isConfirm" />
+      </v-flex>
+      <v-flex v-if="!isConfirm" xs5>
+        ※お子様連れの方は人数をご選択ください
+      </v-flex>
     </v-layout>
 
-    <customer-message v-if="!isLogin" :is-confirm="isConfirm"/>
+    <customer-message v-if="!isLogin" :is-confirm="isConfirm" />
 
     <div class="pregnancy">
       ※ただ今当院では妊娠している方への治療は行っておりません。産後の骨盤矯正は行っております。ぜひ産後のケアはお任せください。

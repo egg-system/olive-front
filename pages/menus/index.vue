@@ -2,16 +2,16 @@
   <section class="container">
     <v-container grid-list-xl>
       <v-layout column wrap class="menu-contents">
-        <customer-must-update-error v-if="customerMustUpdate"/>
+        <customer-must-update-error v-if="customerMustUpdate" />
         <template v-else>
-          <loading v-if="isLoading" class="loading"/>
+          <loading v-if="isLoading" class="loading" />
           <div :class="{ hidden: isLoading }">
             <registration-menu
               v-if="menuIndex == 1"
               :if-show-only-first-menu="true"
               :is-first="false"
             />
-            <menu-list/>
+            <menu-list />
           </div>
         </template>
       </v-layout>
@@ -29,10 +29,20 @@ import CustomerMustUpdateError from '~/components/pages/common/CustomerMustUpdat
 export default {
   middleware: ['init-menu-index', 'init-shop-id'],
   watchQuery: ['shopId'],
+  components: {
+    MenuList,
+    Loading,
+    RegistrationMenu,
+    CustomerMustUpdateError
+  },
   async fetch({ store, query, error }) {
+    if (store.state.shop.id && store.getters['menu/hasSubShops']) {
+      return
+    }
+
+    // shopIdがnullの場合は1をセットする
+    const shopId = query.shopId || 1
     try {
-      // shopIdがnullの場合は1をセットする
-      const shopId = query.shopId || 1
       await Promise.all([
         store.dispatch('shop/getShop', { id: shopId }),
         store.dispatch('menu/getMenus', { shopId })
@@ -40,12 +50,6 @@ export default {
     } catch (e) {
       error({ statusCode: (e.response && e.response.status) || 500 })
     }
-  },
-  components: {
-    MenuList,
-    Loading,
-    RegistrationMenu,
-    CustomerMustUpdateError
   },
   computed: {
     ...mapState('reservation/select', ['menuIndex']),

@@ -1,16 +1,17 @@
 <template>
   <div class="userinfo">
     <v-layout row>
-      <v-flex xs3>サロンからのメッセージ受信設定</v-flex>
+      <v-flex xs3>
+        サロンからのメッセージ受信設定
+      </v-flex>
       <v-flex>
-        <v-radio-group :disabled="isConfirm" v-model="message" :mandatory="false" class="inputTop">
-          <v-radio label="受け取る" value="yes"/>
-          <v-radio label="受け取らない" value="no"/>
+        <v-radio-group v-model="message" :disabled="isConfirm" :mandatory="false" class="inputTop">
+          <v-radio label="受け取る" value="yes" />
+          <v-radio label="受け取らない" value="no" />
         </v-radio-group>
       </v-flex>
     </v-layout>
   </div>
-
 </template>
 
 <script>

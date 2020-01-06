@@ -1,6 +1,6 @@
 <template>
   <section class="container">
-    <loading v-if="user.isLoading" class="loading"/>
+    <loading v-if="user.isLoading" class="loading" />
     <v-layout column>
       <v-flex>
         <v-card dark color="red lighten-2" class="head">
@@ -9,7 +9,7 @@
       </v-flex>
 
       <v-flex>
-        <div :class="{ hidden: user.isLoading }" class="main" >
+        <div :class="{ hidden: user.isLoading }" class="main">
           <div>
             <h2 class="subtitle">2回目以降の方はこちら</h2>
             <login-form :link="link" />
@@ -32,7 +32,6 @@
           </div>
         </div>
       </v-flex>
-
     </v-layout>
   </section>
 </template>
@@ -58,7 +57,6 @@ export default {
   },
   methods: {
     createBtn() {
-      // this.setIsCreate(true)
       this.$router.push('/create')
     },
     ...mapMutations('user', ['setIsCreate'])

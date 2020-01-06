@@ -1,12 +1,14 @@
 <template>
   <div class="userinfo">
-
     <v-layout row>
-      <v-flex xs3>住所</v-flex>
+      <v-flex xs3>
+        住所
+      </v-flex>
       <v-layout column>
-
         <v-layout row>
-          <v-flex xs3 class="address-sub">郵便番号</v-flex>
+          <v-flex xs3 class="address-sub">
+            郵便番号
+          </v-flex>
           <v-layout column>
             <v-flex>
               <v-text-field
@@ -22,7 +24,9 @@
         </v-layout>
 
         <v-layout row>
-          <v-flex xs3 class="address-sub">都道府県</v-flex>
+          <v-flex xs3 class="address-sub">
+            都道府県
+          </v-flex>
           <v-layout column>
             <v-flex>
               <v-text-field
@@ -37,7 +41,9 @@
         </v-layout>
 
         <v-layout row>
-          <v-flex xs3 class="address-sub">市区町村以下</v-flex>
+          <v-flex xs3 class="address-sub">
+            市区町村以下
+          </v-flex>
           <v-layout column>
             <v-flex>
               <v-text-field
@@ -50,12 +56,9 @@
             </v-flex>
           </v-layout>
         </v-layout>
-
       </v-layout>
     </v-layout>
-
   </div>
-
 </template>
 
 <script>

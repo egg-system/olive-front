@@ -7,7 +7,9 @@
         </v-btn>
       </v-flex>
       <v-flex xs6 class="reset-back-btn-wrapper">
-        <v-btn @click="back">戻る</v-btn>
+        <v-btn @click="back">
+          戻る
+        </v-btn>
       </v-flex>
     </v-layout>
   </div>

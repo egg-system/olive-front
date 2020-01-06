@@ -1,8 +1,9 @@
 <template>
   <div class="userinfo">
-
     <v-layout row>
-      <v-flex xs3>氏名<span class="must">(必須)</span></v-flex>
+      <v-flex xs3>
+        氏名<span class="must">(必須)</span>
+      </v-flex>
       <v-flex>
         <v-text-field
           v-model="lastName"
@@ -26,7 +27,9 @@
     </v-layout>
 
     <v-layout row>
-      <v-flex xs3>氏名カナ<span class="must">(必須)</span></v-flex>
+      <v-flex xs3>
+        氏名カナ<span class="must">(必須)</span>
+      </v-flex>
       <v-flex>
         <v-text-field
           v-model="lastNameKana"
@@ -48,9 +51,7 @@
         />
       </v-flex>
     </v-layout>
-
   </div>
-
 </template>
 
 <script>

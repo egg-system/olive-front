@@ -1,6 +1,6 @@
 <template>
   <section id="login" class="container">
-    <loading v-if="user.isLoading" class="loading"/>
+    <loading v-if="user.isLoading" class="loading" />
     <v-layout column>
       <v-flex>
         <v-card dark color="red lighten-2" class="head">
@@ -19,7 +19,9 @@
           </div>
 
           <div class="not">
-            <h2 class="subtitle">会員でない方はこちら</h2>
+            <h2 class="subtitle">
+              会員でない方はこちら
+            </h2>
             <div>
               <v-btn color="warning" @click="resisterBtn">新規登録して、予約する</v-btn>
             </div>
@@ -29,7 +31,6 @@
           </div>
         </div>
       </v-flex>
-
     </v-layout>
   </section>
 </template>

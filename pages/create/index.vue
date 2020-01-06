@@ -11,13 +11,13 @@
         </v-flex>
 
         <div class="input">
-          <customer-name/>
-          <customer-mail/>
-          <customer-phone-number/>
-          <customer-adress v-if="enableAddress"/>
-          <customer-message/>
-          <customer-password/>
-          <confirm-btn/>
+          <customer-name />
+          <customer-mail />
+          <customer-phone-number />
+          <customer-adress v-if="enableAddress" />
+          <customer-message />
+          <customer-password />
+          <confirm-btn />
         </div>
       </v-layout>
     </v-container>

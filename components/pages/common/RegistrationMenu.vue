@@ -39,9 +39,15 @@
           item-key="index"
         >
           <template slot="items" slot-scope="props">
-            <td v-if="props.item">{{ props.item.name }}</td>
-            <td v-if="props.item">{{ props.item.price | priceFormat }}</td>
-            <td v-if="props.item">{{ props.item.minutes | timeFormat }}</td>
+            <td v-if="props.item">
+              {{ props.item.name }}
+            </td>
+            <td v-if="props.item">
+              {{ props.item.price | priceFormat }}
+            </td>
+            <td v-if="props.item">
+              {{ props.item.minutes | timeFormat }}
+            </td>
           </template>
         </v-data-table>
       </v-flex>
@@ -49,7 +55,9 @@
 
     <v-layout v-if="isConfirm" row class="cancel_term">
       <v-flex>
-        <v-card-text class="txt_12em">マイページからキャンセル可能期限</v-card-text>
+        <v-card-text class="txt_12em">
+          マイページからキャンセル可能期限
+        </v-card-text>
       </v-flex>
       <v-flex v-if="canCancel">
         <v-card-text>{{ cancelableDate | dateTimeAndDatFormat }}</v-card-text>
@@ -58,7 +66,9 @@
         <v-card-text>キャンセル不可</v-card-text>
       </v-flex>
     </v-layout>
-    <v-card-text v-if="isConfirm">※それ以降のキャンセルは直接サロンへご連絡ください。</v-card-text>
+    <v-card-text v-if="isConfirm">
+      ※それ以降のキャンセルは直接サロンへご連絡ください。
+    </v-card-text>
   </div>
 </template>
 
@@ -99,7 +109,7 @@ export default {
 
       const menusForDisplay =
         menus &&
-        menus.map((_menu, index) => {
+        menus.filter(_menu => _menu && _menu.menu).map((_menu, index) => {
           const { menu } = _menu
           return {
             name: this.isTwoMenusSelected
@@ -157,8 +167,12 @@ export default {
       return this.selectedStore
     },
     ...mapState('user', ['coupons', 'isFirst']),
-    ...mapState('reservation/select', ['dateTime', 'menus']),
-    ...mapGetters('reservation/select', ['isTwoMenusSelected', 'selectedStore'])
+    ...mapState('reservation/select', ['dateTime']),
+    ...mapGetters('reservation/select', [
+      'isTwoMenusSelected',
+      'selectedStore',
+      'menus'
+    ])
   },
   methods: {
     getMenuOptionsForDisplay(menus) {
@@ -167,17 +181,16 @@ export default {
         .filter(menu => Array.isArray(menu.options) && menu.options.length > 0)
         .map(menu => {
           const { options, mimitsuboCount } = menu
-          const optionsForDisplay = options.map(option => {
-            return {
-              name: option.is_mimitsubo_jewelry
-                ? `${option.name} × ${mimitsuboCount.toString()}粒`
-                : option.name,
-              price: option.price,
-              // オプションにminutesは存在しないが、メニューと併記する都合上、0にする
-              minutes: 0
-            }
+          return options.map(option => {
+            const name = option.is_mimitsubo_jewelry
+              ? `${option.name} × ${mimitsuboCount.toString()}粒`
+              : option.name
+            const price = option.is_mimitsubo_jewelry
+              ? parseInt(option.price, 10) * parseInt(mimitsuboCount, 10)
+              : option.price
+            // オプションにminutesは存在しないが、メニューと併記する都合上、0にする
+            return { name, price, minutes: 0 }
           })
-          return optionsForDisplay
         })
         .flat()
     }

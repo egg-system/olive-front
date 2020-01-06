@@ -1,13 +1,17 @@
 <template>
   <div class="userinfo">
     <v-layout v-if="readOnly" row>
-      <v-flex xs3>メールアドレス</v-flex>
+      <v-flex xs3>
+        メールアドレス
+      </v-flex>
       <v-flex>
         {{ mail }}
       </v-flex>
     </v-layout>
     <v-layout v-else row>
-      <v-flex xs3>メールアドレス<span class="must">(必須)</span></v-flex>
+      <v-flex xs3>
+        メールアドレス<span class="must">(必須)</span>
+      </v-flex>
       <v-layout column>
         <v-flex>
           <v-text-field
@@ -19,7 +23,9 @@
             label="メールアドレス"
           />
         </v-flex>
-        <v-flex v-if="!isConfirm">確認のため、再度メールアドレスを入力してください</v-flex>
+        <v-flex v-if="!isConfirm">
+          確認のため、再度メールアドレスを入力してください
+        </v-flex>
         <v-flex v-if="!isConfirm">
           <v-text-field
             v-model="mailConfirm"
@@ -39,9 +45,7 @@
     >
       同じメールアドレスを入力してください
     </v-alert>
-
   </div>
-
 </template>
 
 <script>

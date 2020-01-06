@@ -1,6 +1,5 @@
 <template>
   <div class="request">
-
     <v-layout column wrap>
       <v-flex>
         <v-card dark color="red lighten-2">
@@ -10,14 +9,14 @@
     </v-layout>
 
     <div class="attention">
-      ※インデプスをご希望の方は、下記欄にご記入ください。たたし、予約が重なっている場合、受けられない場合がございます。
+      ※インデプスをご希望の方は、下記欄にご記入ください。ただし、予約が重なっている場合、受けられない場合がございます。
     </div>
 
     <v-layout column>
       <v-flex xs6>
         <v-textarea
-          :disabled="isConfirm"
           v-model="request"
+          :disabled="isConfirm"
           outline
           name="input-7-4"
           label="ご要望・ご相談"
@@ -25,9 +24,7 @@
         />
       </v-flex>
     </v-layout>
-
   </div>
-
 </template>
 
 <script>

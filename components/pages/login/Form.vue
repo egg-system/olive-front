@@ -27,7 +27,8 @@
       <v-btn
         :disabled="!canLogin"
         color="success"
-        @click="login">
+        @click="login"
+      >
         ログイン
       </v-btn>
     </v-form>

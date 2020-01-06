@@ -1,0 +1,675 @@
+[
+  {
+    "id": 1,
+    "name": "女性専門の治療院オリーヴボディケア たまプラーザ店",
+    "menus": [
+      {
+        "id": 1,
+        "name": "通常整体コース",
+        "price": 6000,
+        "minutes": 60,
+        "description": null,
+        "department_id": 1,
+        "options": [
+          {
+            "id": 1,
+            "name": "足つぼ",
+            "description": null,
+            "price": 2000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 2,
+            "name": "小顔矯正",
+            "description": null,
+            "price": 4000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 3,
+            "name": "テーピング",
+            "description": null,
+            "price": 2000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 5,
+            "name": "本治療",
+            "description": "鍼のオプションのため、鍼につけることはできない",
+            "price": 2000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 6,
+            "name": "耳つぼ",
+            "description": null,
+            "price": 2000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 7,
+            "name": "耳つぼジュエリー",
+            "description": null,
+            "price": 500,
+            "is_mimitsubo_jewelry": true
+          },
+          {
+            "id": 8,
+            "name": "赤ちゃん鍼",
+            "description": null,
+            "price": 1000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 9,
+            "name": "置鍼",
+            "description": null,
+            "price": 300,
+            "is_mimitsubo_jewelry": false
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "name": "骨盤矯正",
+        "price": 6000,
+        "minutes": 60,
+        "description": null,
+        "department_id": 1,
+        "options": [
+          {
+            "id": 1,
+            "name": "足つぼ",
+            "description": null,
+            "price": 2000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 2,
+            "name": "小顔矯正",
+            "description": null,
+            "price": 4000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 3,
+            "name": "テーピング",
+            "description": null,
+            "price": 2000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 5,
+            "name": "本治療",
+            "description": "鍼のオプションのため、鍼につけることはできない",
+            "price": 2000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 6,
+            "name": "耳つぼ",
+            "description": null,
+            "price": 2000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 7,
+            "name": "耳つぼジュエリー",
+            "description": null,
+            "price": 500,
+            "is_mimitsubo_jewelry": true
+          },
+          {
+            "id": 8,
+            "name": "赤ちゃん鍼",
+            "description": null,
+            "price": 1000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 9,
+            "name": "置鍼",
+            "description": null,
+            "price": 300,
+            "is_mimitsubo_jewelry": false
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "name": "マッサージ",
+        "price": 6000,
+        "minutes": 60,
+        "description": null,
+        "department_id": 1,
+        "options": [
+          {
+            "id": 1,
+            "name": "足つぼ",
+            "description": null,
+            "price": 2000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 2,
+            "name": "小顔矯正",
+            "description": null,
+            "price": 4000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 3,
+            "name": "テーピング",
+            "description": null,
+            "price": 2000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 5,
+            "name": "本治療",
+            "description": "鍼のオプションのため、鍼につけることはできない",
+            "price": 2000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 6,
+            "name": "耳つぼ",
+            "description": null,
+            "price": 2000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 7,
+            "name": "耳つぼジュエリー",
+            "description": null,
+            "price": 500,
+            "is_mimitsubo_jewelry": true
+          },
+          {
+            "id": 8,
+            "name": "赤ちゃん鍼",
+            "description": null,
+            "price": 1000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 9,
+            "name": "置鍼",
+            "description": null,
+            "price": 300,
+            "is_mimitsubo_jewelry": false
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "name": "産後の骨盤矯正",
+        "price": 6000,
+        "minutes": 60,
+        "description": null,
+        "department_id": 1,
+        "options": [
+          {
+            "id": 1,
+            "name": "足つぼ",
+            "description": null,
+            "price": 2000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 2,
+            "name": "小顔矯正",
+            "description": null,
+            "price": 4000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 3,
+            "name": "テーピング",
+            "description": null,
+            "price": 2000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 5,
+            "name": "本治療",
+            "description": "鍼のオプションのため、鍼につけることはできない",
+            "price": 2000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 6,
+            "name": "耳つぼ",
+            "description": null,
+            "price": 2000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 7,
+            "name": "耳つぼジュエリー",
+            "description": null,
+            "price": 500,
+            "is_mimitsubo_jewelry": true
+          },
+          {
+            "id": 8,
+            "name": "赤ちゃん鍼",
+            "description": null,
+            "price": 1000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 9,
+            "name": "置鍼",
+            "description": null,
+            "price": 300,
+            "is_mimitsubo_jewelry": false
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "name": "通常鍼灸（マッサージ有）",
+        "price": 6000,
+        "minutes": 60,
+        "description": null,
+        "department_id": 1,
+        "options": [
+          {
+            "id": 1,
+            "name": "足つぼ",
+            "description": null,
+            "price": 2000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 2,
+            "name": "小顔矯正",
+            "description": null,
+            "price": 4000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 3,
+            "name": "テーピング",
+            "description": null,
+            "price": 2000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 6,
+            "name": "耳つぼ",
+            "description": null,
+            "price": 2000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 7,
+            "name": "耳つぼジュエリー",
+            "description": null,
+            "price": 500,
+            "is_mimitsubo_jewelry": true
+          },
+          {
+            "id": 8,
+            "name": "赤ちゃん鍼",
+            "description": null,
+            "price": 1000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 9,
+            "name": "置鍼",
+            "description": null,
+            "price": 300,
+            "is_mimitsubo_jewelry": false
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "name": "特別鍼灸（マッサージ無）",
+        "price": 6000,
+        "minutes": 60,
+        "description": null,
+        "department_id": 1,
+        "options": [
+          {
+            "id": 1,
+            "name": "足つぼ",
+            "description": null,
+            "price": 2000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 2,
+            "name": "小顔矯正",
+            "description": null,
+            "price": 4000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 3,
+            "name": "テーピング",
+            "description": null,
+            "price": 2000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 6,
+            "name": "耳つぼ",
+            "description": null,
+            "price": 2000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 7,
+            "name": "耳つぼジュエリー",
+            "description": null,
+            "price": 500,
+            "is_mimitsubo_jewelry": true
+          },
+          {
+            "id": 8,
+            "name": "赤ちゃん鍼",
+            "description": null,
+            "price": 1000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 9,
+            "name": "置鍼",
+            "description": null,
+            "price": 300,
+            "is_mimitsubo_jewelry": false
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "name": "交通事故治療",
+        "price": 0,
+        "minutes": 60,
+        "description": null,
+        "department_id": 1,
+        "options": [
+          {
+            "id": 1,
+            "name": "足つぼ",
+            "description": null,
+            "price": 2000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 2,
+            "name": "小顔矯正",
+            "description": null,
+            "price": 4000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 3,
+            "name": "テーピング",
+            "description": null,
+            "price": 2000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 5,
+            "name": "本治療",
+            "description": "鍼のオプションのため、鍼につけることはできない",
+            "price": 2000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 6,
+            "name": "耳つぼ",
+            "description": null,
+            "price": 2000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 7,
+            "name": "耳つぼジュエリー",
+            "description": null,
+            "price": 500,
+            "is_mimitsubo_jewelry": true
+          },
+          {
+            "id": 8,
+            "name": "赤ちゃん鍼",
+            "description": null,
+            "price": 1000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 9,
+            "name": "置鍼",
+            "description": null,
+            "price": 300,
+            "is_mimitsubo_jewelry": false
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "name": "不妊治療（整体）",
+        "price": 6000,
+        "minutes": 60,
+        "description": null,
+        "department_id": 1,
+        "options": [
+          {
+            "id": 1,
+            "name": "足つぼ",
+            "description": null,
+            "price": 2000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 2,
+            "name": "小顔矯正",
+            "description": null,
+            "price": 4000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 3,
+            "name": "テーピング",
+            "description": null,
+            "price": 2000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 5,
+            "name": "本治療",
+            "description": "鍼のオプションのため、鍼につけることはできない",
+            "price": 2000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 6,
+            "name": "耳つぼ",
+            "description": null,
+            "price": 2000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 7,
+            "name": "耳つぼジュエリー",
+            "description": null,
+            "price": 500,
+            "is_mimitsubo_jewelry": true
+          },
+          {
+            "id": 8,
+            "name": "赤ちゃん鍼",
+            "description": null,
+            "price": 1000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 9,
+            "name": "置鍼",
+            "description": null,
+            "price": 300,
+            "is_mimitsubo_jewelry": false
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "name": "不妊治療（鍼灸）",
+        "price": 6000,
+        "minutes": 60,
+        "description": null,
+        "department_id": 1,
+        "options": [
+          {
+            "id": 1,
+            "name": "足つぼ",
+            "description": null,
+            "price": 2000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 2,
+            "name": "小顔矯正",
+            "description": null,
+            "price": 4000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 3,
+            "name": "テーピング",
+            "description": null,
+            "price": 2000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 5,
+            "name": "本治療",
+            "description": "鍼のオプションのため、鍼につけることはできない",
+            "price": 2000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 6,
+            "name": "耳つぼ",
+            "description": null,
+            "price": 2000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 7,
+            "name": "耳つぼジュエリー",
+            "description": null,
+            "price": 500,
+            "is_mimitsubo_jewelry": true
+          },
+          {
+            "id": 8,
+            "name": "赤ちゃん鍼",
+            "description": null,
+            "price": 1000,
+            "is_mimitsubo_jewelry": false
+          },
+          {
+            "id": 9,
+            "name": "置鍼",
+            "description": null,
+            "price": 300,
+            "is_mimitsubo_jewelry": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Simpleste たまプラーザのエステ",
+    "menus": [
+      {
+        "id": 11,
+        "name": "上半身メインコース",
+        "price": 6000,
+        "minutes": 60,
+        "description": null,
+        "department_id": 2,
+        "options": []
+      },
+      {
+        "id": 12,
+        "name": "下半身メインコース",
+        "price": 6000,
+        "minutes": 60,
+        "description": null,
+        "department_id": 2,
+        "options": []
+      },
+      {
+        "id": 13,
+        "name": "全身コース",
+        "price": 6000,
+        "minutes": 60,
+        "description": null,
+        "department_id": 2,
+        "options": []
+      },
+      {
+        "id": 14,
+        "name": "フェイシャルメインコース",
+        "price": 6000,
+        "minutes": 60,
+        "description": null,
+        "department_id": 2,
+        "options": []
+      },
+      {
+        "id": 15,
+        "name": "ダブルメインコース",
+        "price": 12000,
+        "minutes": 120,
+        "description": null,
+        "department_id": 2,
+        "options": []
+      },
+      {
+        "id": 16,
+        "name": "シンプルプラン",
+        "price": 30000,
+        "minutes": 0,
+        "description": null,
+        "department_id": 2,
+        "options": []
+      },
+      {
+        "id": 17,
+        "name": "エレガントプラン",
+        "price": 60000,
+        "minutes": 0,
+        "description": null,
+        "department_id": 2,
+        "options": []
+      },
+      {
+        "id": 18,
+        "name": "デラックスプラン",
+        "price": 90000,
+        "minutes": 0,
+        "description": null,
+        "department_id": 2,
+        "options": []
+      },
+      {
+        "id": 19,
+        "name": "ラグジュアリープラン",
+        "price": 126000,
+        "minutes": 0,
+        "description": null,
+        "department_id": 2,
+        "options": []
+      }
+    ]
+  }
+]

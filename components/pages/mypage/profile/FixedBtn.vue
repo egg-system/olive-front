@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <v-layout column>
       <v-flex xs6>
         <v-btn color="warning" @click="fix">
@@ -13,9 +12,7 @@
         </v-btn>
       </v-flex>
     </v-layout>
-
   </div>
-
 </template>
 
 <script>

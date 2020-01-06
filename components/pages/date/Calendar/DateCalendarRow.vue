@@ -6,7 +6,9 @@
           <td>{{ dateData | dateFormat }}</td>
         </tr>
         <tr>
-          <td :class="dateData | dayClass">{{ dateData | dayFormat }}</td>
+          <td :class="dateData | dayClass">
+            {{ dateData | dayFormat }}
+          </td>
         </tr>
         <time-calendar-row
           v-for="dateTimeData in dateTimeSlots"
@@ -29,6 +31,7 @@ export default {
     dateFormat(value) {
       return moment(value).format('D')
     },
+    // 曜日ごとに別のクラスを付与する
     dayClass(value) {
       switch (moment(value).day()) {
         case 0:
