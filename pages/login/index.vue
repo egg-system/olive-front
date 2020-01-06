@@ -20,7 +20,7 @@
 
           <div class="not">
             <h2 class="subtitle">
-              会員でない方はこちら
+              初めての方はこちら
             </h2>
             <div>
               <v-btn color="warning" @click="resisterBtn">新規登録して、予約する</v-btn>
