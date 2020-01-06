@@ -4,11 +4,7 @@
       <v-layout column wrap>
         <v-flex class="create">
           <v-card dark color="red lighten-2">
-            <v-card-text>
-              <h3 class="mypage-title">
-                新規会員登録 > 確認
-              </h3>
-            </v-card-text>
+            <v-card-text><h3 class="mypage-title">新規登録 > 確認</h3></v-card-text>
           </v-card>
         </v-flex>
 

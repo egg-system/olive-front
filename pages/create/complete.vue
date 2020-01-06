@@ -5,14 +5,12 @@
         <v-flex class="create">
           <v-card dark color="red lighten-2">
             <v-card-text>
-              <h3 class="mypage-title">
-                新規会員登録 > 完了
-              </h3>
+              <h3 class="mypage-title">新規登録 > 完了</h3>
             </v-card-text>
           </v-card>
         </v-flex>
 
-        <div>会員登録が完了しました</div>
+        <div>登録が完了しました</div>
 
         <v-layout column>
           <v-flex xs6>
@@ -30,7 +28,7 @@
 export default {
   async fetch({ store, error }) {
     try {
-      // 会員登録させるため、isCreateをtrueにする
+      // 新規登録させるため、isCreateをtrueにする
       store.commit('user/setIsCreate', true)
       await store.dispatch('user/createCustomer')
     } catch (e) {
@@ -40,7 +38,7 @@ export default {
     const { errorMessage } = store.state.user
     const isError = store.getters['user/isError']
     if (isError) {
-      const message = `${errorMessage}<br>お手数ですが最初からやり直してください。`
+      const message = `${errorMessage}<br>お手数ですが最初からやり直してください。<br>※ 新規登録をせずに<a href="https://olivebodycare.healthcare/about/contact/">こちら</a>からご予約いただくことも可能です。`
       store.commit('user/reset')
       error({ statusCode: 400, message })
     }

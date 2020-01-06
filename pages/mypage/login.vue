@@ -11,9 +11,7 @@
       <v-flex>
         <div :class="{ hidden: user.isLoading }" class="main">
           <div>
-            <h2 class="subtitle">
-              会員の方はこちら
-            </h2>
+            <h2 class="subtitle">2回目以降の方はこちら</h2>
             <login-form :link="link" />
             <nuxt-link to="/password/reset">
               パスワードを忘れた方はこちら
@@ -21,18 +19,16 @@
           </div>
 
           <div class="not">
-            <h2 class="subtitle">
-              会員でない方はこちら
-            </h2>
+            <h2 class="subtitle">初めての方はこちら</h2>
             <div>
               <v-btn color="warning" @click="createBtn">
-                新規会員登録へ
+                新規登録へ
               </v-btn>
             </div>
-            <div class="free">
-              ※会員登録は無料です。<br>
-              ※会員登録をしていただくと、マイページからご予約履歴をいつでも確認できて、キャンセル等の手続きも簡単に行えるようになります。
-            </div>
+          </div>
+
+          <div class="free">
+            ※ 新規登録をせずに<a href="https://olivebodycare.healthcare/about/contact/">こちら</a>からご予約いただくことも可能です。
           </div>
         </div>
       </v-flex>
