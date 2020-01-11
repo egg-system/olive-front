@@ -31,8 +31,9 @@
             </div>
           </div>
           <div class="free">
-            ※ 新規登録をせずに<a href="https://olivebodycare.healthcare/about/contact/">メールフォーム</a>から
-            <br>ご予約いただくことも可能です。
+            ※会員登録は無料です。<br>	
+            ※会員登録をしていただくと、マイページからご予約履歴をいつでも確認できて、キャンセル等の手続きも簡単に行えるようになります。
+            ※ 新規登録をせずに<a href="https://olivebodycare.healthcare/about/contact/">メールフォーム</a>からご予約いただくことも可能です。
           </div>
         </div>
       </v-flex>
