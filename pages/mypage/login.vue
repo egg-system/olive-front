@@ -32,7 +32,11 @@
           </div>
 
           <div class="free">
-            ※ 新規登録をせずに<a href="https://olivebodycare.healthcare/about/contact/">こちら</a>からご予約いただくことも可能です。
+            ※ 新規登録をせずに
+            <a href="https://olivebodycare.healthcare/about/contact/">
+              メールフォーム
+            </a>
+            からご予約いただくことも可能です。
           </div>
         </div>
       </v-flex>

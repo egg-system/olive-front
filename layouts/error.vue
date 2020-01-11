@@ -58,8 +58,8 @@ export default {
 
       return `${_message}\
         <br>OSのバージョンアップをしていただくか、\
-        <a href="https://olivebodycare.healthcare/about/contact">こちら</a>\
-        のお問い合わせフォームからご予約をお願いいたします。`
+        <a href="https://olivebodycare.healthcare/about/contact">メールフォーム</a>\
+        からご予約をお願いいたします。`
     },
     isShownDefaultErrorMessage() {
       return (

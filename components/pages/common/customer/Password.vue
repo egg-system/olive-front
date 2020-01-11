@@ -13,7 +13,7 @@
             :type="show ? 'text' : 'password'"
             :disabled="isConfirm"
             :clearable="!isConfirm"
-            label="パスワード"
+            label="パスワード（英字/数字を含む8文字以上）"
             class="input-password"
             @click:append="show = !show"
           />
@@ -27,7 +27,7 @@
             :type="show2 ? 'text' : 'password'"
             :disabled="isConfirm"
             :clearable="!isConfirm"
-            label="パスワード"
+            label="パスワード（英字/数字を含む8文字以上）"
             class="input-password"
             @click:append="show2 = !show2"
           />

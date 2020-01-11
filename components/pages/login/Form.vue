@@ -16,7 +16,7 @@
         label="パスワード"
         @click:append="show = !show"
       />
-      <v-alert v-if="data.isError"
+      <v-alert v-if="isError"
                :value="true"
                color="error"
                icon="warning"
@@ -51,14 +51,16 @@ export default {
       default: () => {}
     }
   },
-  data: () => ({
-    show: false,
-    isError: false,
-    mail: '',
-    password: '',
-    mailRules: [mail => checkMail(mail)],
-    passwordRules: [password => checkPassword(password)]
-  }),
+  data() {
+    return {
+      show: false,
+      isError: false,
+      mail: '',
+      password: '',
+      mailRules: [mail => checkMail(mail)],
+      passwordRules: [password => checkPassword(password)]
+    }
+  },
   computed: {
     canLogin() {
       return (
@@ -77,6 +79,8 @@ export default {
       }).then(isLogin => {
         if (isLogin) {
           this.$router.push({ path: this.link, query: this.query })
+        } else {
+          this.isError = true
         }
       })
     },
