@@ -267,7 +267,6 @@ export const actions = {
 
       return true
     } catch (error) {
-      console.log(error)
       commit('setErrorMessage', 'ログインに失敗しました。')
     } finally {
       commit('setIsLoading', false)
@@ -276,7 +275,7 @@ export const actions = {
     return false
   },
   // ユーザー作成
-  async createCustomer({ commit, dispatch, getters }) {
+  async createCustomer({ commit, dispatch, getters, rootState }) {
     try {
       const result = await axios.post(
         process.env.api.customerCreate,
@@ -286,10 +285,15 @@ export const actions = {
       dispatch('setLoginCustomer', result.data.data)
       return true
     } catch (error) {
-      console.log(error)
       const errorMessage =
         get(error, 'response.status') === 422
-          ? '登録済みのメールアドレスです。'
+          ? `
+            メールドレスが既に登録されています。
+            <a href="/login/?shopId=${
+              rootState.reservation.select.storeId
+            }">こちら</a>からログインしてください。<br>
+            パスワードを忘れた場合は、<a href="/password/reset">こちら</a>から再発行できます。<br>
+          `
           : 'ユーザー作成に失敗しました。'
       commit('setErrorMessage', errorMessage)
       return false
