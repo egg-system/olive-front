@@ -62,10 +62,10 @@ export default {
           ${userErrorMessage}
           <br>お手数ですが最初からやり直してください。
           <br>※ 新規登録をせずに
-            <a href="https://olivebodycare.healthcare/about/contact/">
-              メールフォーム
-            </a>
-          <br>からご予約いただくことも可能です。
+          <a href="https://olivebodycare.healthcare/about/contact/">
+            メールフォーム
+          </a>
+          からご予約いただくことも可能です。
         `
       })
     }
