@@ -11,7 +11,7 @@ import {
 
 /* state */
 const initialState = {
-  isCreate: false,
+  isCreate: true,
   errorMessage: '',
   isLoading: false,
   customerId: null,
@@ -158,7 +158,9 @@ export const getters = {
 /* mutations */
 export const mutations = {
   setIsCreate(state, isCreate) {
-    state.isCreate = isCreate
+    // 非会員登録は廃止するため、基本的にtrueにする
+    //  ※ 本フィールドは削除してOK
+    state.isCreate = true
   },
   setIsLoading(state, isLoading) {
     state.isLoading = isLoading
