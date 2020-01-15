@@ -24,7 +24,7 @@ describe('store/user.js', () => {
       accessToken: null,
       client: null,
       uid: null,
-      isCreate: false,
+      isCreate: true,
       errorMessage: '',
       isLoading: false,
       customerId: null,
@@ -55,16 +55,6 @@ describe('store/user.js', () => {
 
   /* mutations */
   describe('mutations', () => {
-    test('setIsCreate', () => {
-      const dummyData = true
-      store.commit('setIsCreate', dummyData)
-
-      expect(store.state).toEqual({
-        ...initialState,
-        isCreate: true
-      })
-    })
-
     test('setIsLoading', () => {
       const dummyData = true
       store.commit('setIsLoading', dummyData)
