@@ -315,10 +315,18 @@ export const actions = {
     }
   },
   async sendPasswrodResetMail({ state, commit }) {
-    await axios.post(process.env.api.customerReset, {
-      email: state.mail,
-      redirect_url: `${window.location.origin}/password/set/`
-    })
+    await axios
+      .post(process.env.api.customerReset, {
+        email: state.mail,
+        redirect_url: `${window.location.origin}/password/set/`
+      })
+      .catch(e => {
+        const error = new Error(
+          '登録されていないメールアドレスが入力されました。<br>正しいメールアドレスを再度ご入力ください。'
+        )
+        error.statusCode = 500
+        throw error
+      })
     commit('reset')
   },
   async updatePassword({ state, getters, commit }) {
