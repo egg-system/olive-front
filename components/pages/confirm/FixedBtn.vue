@@ -35,7 +35,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .v-btn__content {
   font-size: 1em;
   font-weight: normal;

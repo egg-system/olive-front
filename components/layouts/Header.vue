@@ -53,7 +53,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 a.logo:link,
 a.logo:visited,
 a.logo:active,

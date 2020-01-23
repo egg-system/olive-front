@@ -16,7 +16,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .txt_15em {
   font-size: 1.5em;
 }

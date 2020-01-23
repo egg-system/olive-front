@@ -107,7 +107,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .userinfo {
   padding-top: 20px;
   text-align: left;

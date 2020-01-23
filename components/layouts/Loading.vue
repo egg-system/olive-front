@@ -8,7 +8,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 div {
   text-align: center;
 }

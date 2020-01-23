@@ -76,6 +76,6 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 @import '../../../assets/calendar.scss';
 </style>

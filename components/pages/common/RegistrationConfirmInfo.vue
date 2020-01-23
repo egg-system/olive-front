@@ -71,7 +71,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .confirmInfo {
   padding-top: 20px;
   text-align: left;

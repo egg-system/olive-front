@@ -54,7 +54,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .reset-btns-section {
   .reset-btn {
     .v-btn__content {

@@ -92,7 +92,7 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
 .loginInfo {
   padding-top: 20px;
   text-align: left;
