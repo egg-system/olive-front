@@ -201,6 +201,7 @@ export default {
 <style scoped>
 .menu {
   text-align: left;
+  margin-bottom: 30px;
 }
 table.v-table tbody td:first-child {
   padding: 0px 10px;
