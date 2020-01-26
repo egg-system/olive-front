@@ -74,3 +74,8 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+// .menu-infoを使い回せるようにするため、import
+@import '@/assets/menus/menu-info.scss';
+</style>

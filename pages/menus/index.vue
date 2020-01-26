@@ -63,8 +63,10 @@ export default {
 .menu-contents {
   text-align: left;
 }
+/* eslint-disable vue-scoped-css/no-unused-selector */
 .v-input--selection-controls .v-input__control,
 .v-input--selection-controls {
+  /* eslint-disable vue-scoped-css/no-unused-selector */
   width: 100%;
   margin-top: 0px;
   padding-top: 0px;
@@ -77,28 +79,9 @@ export default {
 .hidden {
   display: none;
 }
-.menu {
-  margin-bottom: 30px;
-}
 
+/* eslint-disable-next-line vue-scoped-css/no-unused-selector */
 nav.v-toolbar.theme--light {
   background-color: #fffde7;
-}
-.layout.column .flex.xs6 {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  left: 0;
-  background-color: rgb(255, 253, 231);
-}
-.warning {
-  width: 80%;
-}
-.layout.column .flex.xs6 button {
-  width: 80%;
-}
-.layout.column .flex.xs6 button .v-btn__content {
-  display: block;
-  width: 100%;
 }
 </style>

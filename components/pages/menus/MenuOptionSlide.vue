@@ -87,3 +87,18 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+// .menu-infoを使い回せるようにするため、import
+@import '@/assets/menus/menu-info.scss';
+
+.option-area {
+  width: 100%;
+  margin: 1em;
+
+  .option-header {
+    @extend .menu-info;
+    margin-bottom: 0.5em;
+  }
+}
+</style>

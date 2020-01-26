@@ -148,26 +148,6 @@ export default {
 }
 section.content-section {
   margin-bottom: 20px;
-  ul {
-    padding-left: 0px;
-  }
-  .menu-category {
-    display: inline-block;
-    width: 50%;
-    font-size: 18px;
-    border: solid 1px #000000;
-    padding: 10px 0;
-  }
-  .menu-name {
-    font-weight: bold;
-  }
-  .menu-info {
-    text-align: left;
-    span,
-    .description {
-      margin-left: 15px;
-    }
-  }
 
   p {
     margin-top: 10px;
@@ -181,17 +161,9 @@ section.content-section {
     text-align: right;
   }
 }
-.option-area {
-  width: 100%;
-  margin: 1em;
-
-  .option-header {
-    @extend .menu-info;
-    margin-bottom: 0.5em;
-  }
-}
 
 .btn_fix {
+  /* eslint-disable-next-line vue-scoped-css/no-unused-selector */
   .flex {
     &.xs6 {
       position: fixed;
@@ -202,7 +174,9 @@ section.content-section {
     }
   }
 }
+
 .linkBtn {
+  /* eslint-disable-next-line vue-scoped-css/no-unused-selector */
   .flex {
     display: inline-block;
     vertical-align: top;
@@ -213,6 +187,7 @@ section.content-section {
     &:hover {
       cursor: pointer;
     }
+    /* eslint-disable-next-line vue-scoped-css/no-unused-selector */
     .v-card {
       width: 22em;
       height: 5em;
@@ -226,6 +201,7 @@ section.content-section {
       }
     }
   }
+  /* eslint-disable-next-line vue-scoped-css/no-unused-selector */
   & + .v-input {
     justify-content: center;
     width: 50%;
@@ -233,9 +209,31 @@ section.content-section {
     @media screen and (max-width: 767px) {
       width: 95%;
     }
+    /* eslint-disable-next-line vue-scoped-css/no-unused-selector */
     .v-input__control {
       width: 100% !important;
     }
   }
+}
+
+.layout.column .flex.xs6 button {
+  width: 80%;
+}
+
+.layout.column .flex.xs6 button .v-btn__content {
+  display: block;
+  width: 100%;
+}
+
+.layout.column .flex.xs6 {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  background-color: rgb(255, 253, 231);
+}
+
+.warning {
+  width: 80%;
 }
 </style>

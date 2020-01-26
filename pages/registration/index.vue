@@ -56,6 +56,7 @@ export default {
 .v-card__text {
   padding: 7px;
 }
+
 .confirmInfo .layout.column.wrap + .layout.column div:nth-of-type(n + 2) {
   text-align: left !important;
 }
