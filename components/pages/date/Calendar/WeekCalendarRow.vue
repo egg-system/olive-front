@@ -16,13 +16,16 @@
         <td class="col-data-wrapper">
           <table class="inner-table">
             <tbody>
-              <tr>
+              <tr class="inner-table">
                 <td>&nbsp;&nbsp;</td>
               </tr>
-              <tr>
+              <tr class="inner-table">
                 <td>&nbsp;&nbsp;</td>
               </tr>
-              <tr v-for="time in timeSlots" :key="time.toString()">
+              <tr
+                v-for="time in timeSlots" :key="time.toString()"
+                class="inner-table"
+              >
                 <td>{{ time | hourFormat }}</td>
               </tr>
             </tbody>
@@ -80,3 +83,13 @@ export default {
   }
 }
 </script>
+
+<style lang='scss' scoped>
+@import '@/assets/date/variables.scss';
+@import '@/assets/date/date-column.scss';
+
+table.outer-table {
+  border-right: 1px $borderColor solid;
+  width: 100%;
+}
+</style>

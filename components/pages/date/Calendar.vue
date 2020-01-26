@@ -77,5 +77,31 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../../assets/calendar.scss';
+@import '@/assets/date/variables.scss';
+
+.component-wrapper {
+  margin-top: 40px;
+  .calendar {
+    text-align: center;
+  }
+  .calendar-explain {
+    margin-top: 2em;
+
+    dl div {
+      display: flex;
+      margin: 1em;
+
+      dt {
+        min-width: 5em;
+        text-align: center;
+      }
+    }
+  }
+
+  .table-wrapper {
+    margin: auto;
+    border-bottom: 1px $borderColor solid;
+    background-color: white;
+  }
+}
 </style>

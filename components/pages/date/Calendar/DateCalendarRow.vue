@@ -2,10 +2,10 @@
   <td class="col-data-wrapper">
     <table class="inner-table">
       <tbody>
-        <tr>
+        <tr class="inner-table">
           <td>{{ dateData | dateFormat }}</td>
         </tr>
-        <tr>
+        <tr class="inner-table">
           <td :class="dateData | dayClass">
             {{ dateData | dayFormat }}
           </td>
@@ -63,3 +63,17 @@ export default {
   }
 }
 </script>
+
+<style lang='scss' scoped>
+@import '@/assets/date/date-column.scss';
+
+/* eslint-disable-next-line vue-scoped-css/no-unused-selector */
+.holiday {
+  color: #ff4500;
+}
+
+/* eslint-disable-next-line vue-scoped-css/no-unused-selector */
+.saturday {
+  color: darkblue;
+}
+</style>

@@ -1,5 +1,5 @@
 <template>
-  <tr>
+  <tr class="inner-table">
     <td v-if="isPast" class="disabled">
       -
     </td>
@@ -88,3 +88,8 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+@import '@/assets/date/variables.scss';
+@import '@/assets/date/date-column.scss';
+</style>
