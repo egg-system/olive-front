@@ -54,13 +54,6 @@ export default {
 </script>
 
 <style scoped>
-a.logo:link,
-a.logo:visited,
-a.logo:active,
-a.logo:hover {
-  text-decoration: none;
-  color: black;
-}
 .header-logo {
   margin: 0 auto;
 }
