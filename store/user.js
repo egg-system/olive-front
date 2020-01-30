@@ -11,7 +11,7 @@ import {
 
 /* state */
 const initialState = {
-  isCreate: false,
+  isCreate: true,
   errorMessage: '',
   isLoading: false,
   customerId: null,
@@ -157,8 +157,9 @@ export const getters = {
 
 /* mutations */
 export const mutations = {
+  // TODO: #125 廃止する
   setIsCreate(state, isCreate) {
-    state.isCreate = isCreate
+    state.isCreate = true
   },
   setIsLoading(state, isLoading) {
     state.isLoading = isLoading
@@ -285,6 +286,7 @@ export const actions = {
       dispatch('setLoginCustomer', result.data.data)
       return true
     } catch (error) {
+      console.log(error)
       const errorMessage =
         get(error, 'response.status') === 422
           ? `
