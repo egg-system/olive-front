@@ -32,7 +32,8 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   props: {
     error: {
@@ -88,7 +89,11 @@ export default {
         return this.message
       }
       return 'エラーが発生しました。'
-    }
+    },
+    ...mapActions('reservation', ['resetAllInputed'])
+  },
+  created() {
+    this.resetAllInputed()
   },
   head() {
     return {
