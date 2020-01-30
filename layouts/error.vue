@@ -80,6 +80,9 @@ export default {
       // ブラウザバック
       this.$router.go(-1)
     },
+    created() {
+      this.resetAllInputed()
+    },
     getBaseErrorMessage() {
       const statusCode = this.statusCode
       if (statusCode === 404) {
@@ -91,9 +94,6 @@ export default {
       return 'エラーが発生しました。'
     },
     ...mapActions('reservation', ['resetAllInputed'])
-  },
-  created() {
-    this.resetAllInputed()
   },
   head() {
     return {
