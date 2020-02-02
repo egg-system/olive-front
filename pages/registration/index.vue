@@ -43,9 +43,8 @@ export default {
   },
   computed: {
     isShownLoginInfo() {
-      return !this.isLogin && this.isCreate
+      return !this.isLogin
     },
-    ...mapState('user', ['isCreate']),
     ...mapGetters('user', ['isLogin']),
     ...mapGetters('user', ['customerMustUpdate'])
   }

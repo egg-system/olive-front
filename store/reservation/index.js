@@ -121,6 +121,7 @@ export const actions = {
     return true
   },
   resetAllInputed({ commit }) {
+    // TODO: #124 エラーをとりまとめる
     commit('reset')
     commit('reservation/select/reset', null, { root: true })
     commit('user/reset', null, { root: true })

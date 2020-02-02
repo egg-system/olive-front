@@ -21,7 +21,10 @@ export default {
     try {
       await store.dispatch('user/sendPasswrodResetMail')
     } catch (e) {
-      error({ statusCode: (e.response && e.response.status) || 500 })
+      error({
+        statusCode: (e.response && e.response.status) || 500,
+        message: e.message || ''
+      })
     }
   },
   methods: {

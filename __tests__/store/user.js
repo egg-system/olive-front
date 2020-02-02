@@ -24,7 +24,7 @@ describe('store/user.js', () => {
       accessToken: null,
       client: null,
       uid: null,
-      isCreate: false,
+      isCreate: true,
       errorMessage: '',
       isLoading: false,
       customerId: null,
