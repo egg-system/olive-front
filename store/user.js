@@ -11,7 +11,7 @@ import {
 
 /* state */
 const initialState = {
-  isCreate: false,
+  isCreate: true,
   errorMessage: '',
   isLoading: false,
   customerId: null,
@@ -157,8 +157,9 @@ export const getters = {
 
 /* mutations */
 export const mutations = {
+  // TODO: #125 廃止する
   setIsCreate(state, isCreate) {
-    state.isCreate = isCreate
+    state.isCreate = true
   },
   setIsLoading(state, isLoading) {
     state.isLoading = isLoading
@@ -285,6 +286,7 @@ export const actions = {
       dispatch('setLoginCustomer', result.data.data)
       return true
     } catch (error) {
+      console.log(error)
       const errorMessage =
         get(error, 'response.status') === 422
           ? `
@@ -315,10 +317,18 @@ export const actions = {
     }
   },
   async sendPasswrodResetMail({ state, commit }) {
-    await axios.post(process.env.api.customerReset, {
-      email: state.mail,
-      redirect_url: `${window.location.origin}/password/set/`
-    })
+    await axios
+      .post(process.env.api.customerReset, {
+        email: state.mail,
+        redirect_url: `${window.location.origin}/password/set/`
+      })
+      .catch(e => {
+        const error = new Error(
+          '登録されていないメールアドレスが入力されました。<br>正しいメールアドレスを再度ご入力ください。'
+        )
+        error.statusCode = 500
+        throw error
+      })
     commit('reset')
   },
   async updatePassword({ state, getters, commit }) {
