@@ -1,27 +1,28 @@
 <template>
-  <div class="menu-content">
-    <div v-if="hasSubShops" class="linkBtn">
-      <v-flex
-        v-for="subShop in displayShops"
-        :key="subShop.id"
-      >
-        <v-card dark color="red lighten-2" @click="scrollShopSection(subShop.id)">
-          <v-card-text>
-            <h3>{{ subShop.name }}</h3>
-          </v-card-text>
-        </v-card>
-      </v-flex>
-    </div>
+  <div>
+    <v-layout justify-center>
+      <div v-if="hasSubShops">
+        <v-flex
+          v-for="subShop in displayShops"
+          :key="subShop.id"
+        >
+          <v-card dark color="green darken-3" @click="scrollShopSection(subShop.id)">
+            <v-card-text>
+              <h3>{{ subShop.name }}</h3>
+            </v-card-text>
+          </v-card>
+        </v-flex>
+      </div>
+    </v-layout>
 
-    <v-radio-group v-model="selectedStoreMenu" column class="menu-list">
+    <v-radio-group v-model="selectedStoreMenu" class="menu-list">
       <section
         v-for="subShop in displayShops"
         :id="subShop.id"
         :key="subShop.id"
-        class="content-section"
       >
         <v-layout :ref="subShop.id.toString()" column wrap>
-          <v-flex>
+          <v-flex class="mt-4">
             <v-card dark color="red lighten-2">
               <v-card-text>
                 <h3>{{ subShop.name }}</h3>
@@ -32,10 +33,10 @@
             <v-card>
               <v-card-title primary-title>
                 ご希望のメニューを選択してください
-                <p class="taxLabel">
-                  ※金額は全て税抜きです。
-                </p>
               </v-card-title>
+              <div class="text-xs-right caption pb-2">
+                ※金額は全て税抜きです。
+              </div>
             </v-card>
             <div v-for="menu in subShop.menus" :key="menu.id">
               <menu-row :store-id="subShop.id" :menu="menu" />
@@ -44,20 +45,28 @@
         </v-layout>
       </section>
     </v-radio-group>
-
-    <v-layout column class="btn_fix">
-      <v-flex xs6>
-        <v-btn v-if="currentPageId > 1" @click="backHour">
-          戻る
-        </v-btn>
-        <v-btn :disabled="!isMenuSelected" color="warning" @click="selectDate">
-          空席確認・予約する
-        </v-btn>
-        <v-btn v-if="isShownNextHourLink" color="warning" @click="nextHour">
-          ２時間予約する
-        </v-btn>
-      </v-flex>
-    </v-layout>
+    
+    <v-footer fixed height="auto" color="yellow lighten-5">
+      <v-layout>
+        <v-flex text-xs-center class="mb-2">
+          <v-btn v-if="currentPageId > 1" class="font-weight-bold" large @click="backHour">
+            戻る
+          </v-btn>
+          <v-btn :disabled="!isMenuSelected" color="warning" class="font-weight-bold"
+                 large
+                 @click="selectDate"
+          >
+            空席確認・予約する
+          </v-btn>
+          <v-btn v-if="isShownNextHourLink" color="warning" class="font-weight-bold"
+                 large
+                 @click="nextHour"
+          >
+            ２時間予約する
+          </v-btn>
+        </v-flex>
+      </v-layout>
+    </v-footer>
   </div>
 </template>
 
@@ -139,101 +148,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.menu-content {
-  display: flex;
-  flex-direction: column;
-}
 .menu-list {
   justify-content: center;
-}
-section.content-section {
-  margin-bottom: 20px;
-
-  p {
-    margin-top: 10px;
-    text-align: left;
-  }
-
-  p.taxLabel {
-    font-size: 0.8em;
-    margin: 0;
-    min-width: 100%;
-    text-align: right;
-  }
-}
-
-.btn_fix {
-  /* eslint-disable-next-line vue-scoped-css/no-unused-selector */
-  .flex {
-    &.xs6 {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      left: 0;
-      background-color: rgb(255, 253, 231);
-    }
-  }
-}
-
-.linkBtn {
-  /* eslint-disable-next-line vue-scoped-css/no-unused-selector */
-  .flex {
-    display: inline-block;
-    vertical-align: top;
-    @media screen and (max-width: 767px) {
-      width: 100%;
-      padding: 0.2em !important;
-    }
-    &:hover {
-      cursor: pointer;
-    }
-    /* eslint-disable-next-line vue-scoped-css/no-unused-selector */
-    .v-card {
-      width: 22em;
-      height: 5em;
-      display: flex;
-      align-items: center;
-      background-color: #689f38 !important;
-      @media screen and (max-width: 767px) {
-        width: 100%;
-        height: 6em;
-        margin: 0 0.2em;
-      }
-    }
-  }
-  /* eslint-disable-next-line vue-scoped-css/no-unused-selector */
-  & + .v-input {
-    justify-content: center;
-    width: 50%;
-    margin: 1em auto;
-    @media screen and (max-width: 767px) {
-      width: 95%;
-    }
-    /* eslint-disable-next-line vue-scoped-css/no-unused-selector */
-    .v-input__control {
-      width: 100% !important;
-    }
-  }
-}
-
-.layout.column .flex.xs6 button {
-  width: 80%;
-}
-
-.layout.column .flex.xs6 button .v-btn__content {
-  display: block;
-  width: 100%;
-}
-
-.layout.column .flex.xs6 {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  left: 0;
-  background-color: rgb(255, 253, 231);
-}
-
-.warning {
-  width: 80%;
 }
 </style>

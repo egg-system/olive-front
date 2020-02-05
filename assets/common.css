@@ -1,27 +1,27 @@
 /* default layout */
 .container {
   min-height: calc(100vh - 90px);
-  display: flex;
+  /* display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
+  text-align: center; */
 }
 
-.v-card__text {
+/* .v-card__text {
   padding: 7px;
-}
+} */
 
 /* マイページ、ログインページ用 */
 .not {
   padding-top: 50px;
 }
-.v-btn {
+/* .v-btn {
   width: 200px;
-}
-.container {
+} */
+/* .container {
   position: relative;
   z-index: 1;
-}
+} */
 .main {
   z-index: 2;
 }
@@ -33,10 +33,10 @@
   opacity: 0.3;
 }
 
-.v-btn__content {
+/* .v-btn__content {
   font-weight: bold;
   font-size: 1.2em;
-}
+} */
 
 .txt_red {
   color: #f00 !important;

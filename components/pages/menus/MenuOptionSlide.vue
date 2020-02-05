@@ -1,19 +1,20 @@
 <template>
   <div class="option-area">
-    <div class="option-header">
+    <div class="mt-3">
       オプションをご希望の場合は選択してください
     </div>
     <div v-for="option in options" :key="option.id">
-      <v-checkbox v-if="true" v-model="checkedOptions" :value="option">
-        <div slot="label" class="menu-info">
+      <v-checkbox v-if="true" v-model="checkedOptions" :value="option" class="ml-3">
+        <div slot="label" class="ml-2">
           <span>{{ option.name }}</span>
-          <span>{{ option.price | priceTaxExceptFormat }}</span>
+          <span class="ml-2">{{ option.price | priceTaxExceptFormat }}</span>
           <span v-if="option.is_mimitsubo_jewelry">/&nbsp; 粒</span>
         </div>
       </v-checkbox>
       <v-select
         v-if="isShownSelect(option)"
         v-model="selectedMimitsuboCount"
+        class="ml-3"
         :items="mimitsuboJewelrySelectItems"
         placeholder="粒数を選択してください。"
       />
@@ -89,16 +90,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// .menu-infoを使い回せるようにするため、import
-@import '@/assets/menus/menu-info.scss';
-
 .option-area {
   width: 100%;
-  margin: 1em;
-
-  .option-header {
-    @extend .menu-info;
-    margin-bottom: 0.5em;
-  }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <section class="container">
-    <v-container grid-list-xl>
+    <v-container grid-list-lg>
       <v-layout column wrap class="menu-contents">
         <customer-must-update-error v-if="customerMustUpdate" />
         <template v-else>
@@ -60,9 +60,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.menu-contents {
+/* .menu-contents {
   text-align: left;
-}
+} */
 /* eslint-disable vue-scoped-css/no-unused-selector */
 .v-input--selection-controls .v-input__control,
 .v-input--selection-controls {
