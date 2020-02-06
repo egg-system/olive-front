@@ -38,15 +38,17 @@
           item-key="index"
         >
           <template v-slot:item="{ item }">
-            <td v-if="item">
-              {{ item.name }}
-            </td>
-            <td v-if="item">
-              {{ item.price | priceFormat }}
-            </td>
-            <td v-if="item">
-              {{ item.minutes | timeFormat }}
-            </td>
+            <tr>
+              <td v-if="item">
+                {{ item.name }}
+              </td>
+              <td v-if="item">
+                {{ item.price | priceFormat }}
+              </td>
+              <td v-if="item">
+                {{ item.minutes | timeFormat }}
+              </td>
+            </tr>
           </template>
         </v-data-table>
       </v-flex>
