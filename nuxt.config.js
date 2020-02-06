@@ -80,18 +80,20 @@ module.exports = {
   */
   vuetify: {
     treeShake: true,
-    defaultAssets: { icons: 'md' }
-    /*
+    defaultAssets: { icons: 'md' },
     theme: {
-      primary: '#FFC0CB',
-      secondary: '#ffd7cb',
-      accent: '#2196F3',
-      error: '#b71c1c',
-      warning: '#ffeb3b',
-      info: '#00BCD4',
-      success: '#4caf50'
+      themes: {
+        light: {
+          primary: '#FFC0CB',
+          secondary: '#ffd7cb',
+          accent: '#2196F3',
+          error: '#b71c1c',
+          warning: '#ffeb3b',
+          info: '#00BCD4',
+          success: '#4caf50'
+        }
+      }
     }
-    */
   },
 
   /*
