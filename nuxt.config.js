@@ -49,7 +49,6 @@ module.exports = {
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
-    '@nuxtjs/vuetify',
     '@nuxtjs/sentry',
     [
       '@nuxtjs/google-tag-manager',
@@ -59,6 +58,9 @@ module.exports = {
         dev: environment !== 'prod'
       }
     ]
+  ],
+  buildModules: [
+    '@nuxtjs/vuetify',
   ],
   /*
   ** Axios module configuration
@@ -77,6 +79,8 @@ module.exports = {
   ** vuetify
   */
   vuetify: {
+    treeShake: true,
+    defaultAssets: { icons: 'md' }
     /*
     theme: {
       primary: '#FFC0CB',
