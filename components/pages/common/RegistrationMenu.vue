@@ -33,20 +33,19 @@
         <v-data-table
           :items="menusForDisplay"
           :class="{ 'reservation_confirm': isConfirm }"
-          hide-actions
-          hide-headers
+          hide-default-footer
           class="elevation-1"
           item-key="index"
         >
-          <template slot="items" slot-scope="props">
-            <td v-if="props.item">
-              {{ props.item.name }}
+          <template v-slot:item="{ item }">
+            <td v-if="item">
+              {{ item.name }}
             </td>
-            <td v-if="props.item">
-              {{ props.item.price | priceFormat }}
+            <td v-if="item">
+              {{ item.price | priceFormat }}
             </td>
-            <td v-if="props.item">
-              {{ props.item.minutes | timeFormat }}
+            <td v-if="item">
+              {{ item.minutes | timeFormat }}
             </td>
           </template>
         </v-data-table>
