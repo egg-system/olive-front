@@ -66,10 +66,12 @@ export default {
   },
   methods: {
     getShopMenuValue(menu) {
-      return {
+      // ラジオボックスにチェックがつかない現象を回避するため
+      //  チェックの判定に、===演算子を使っているので、objectは不可
+      return JSON.stringify({
         storeId: this.storeId,
         menu: menu
-      }
+      })
     }
   }
 }

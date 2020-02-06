@@ -44,7 +44,7 @@
                       ※金額は全て税抜きです。
                     </div>
                   </v-card>
-                  <div v-for="menu in subShop.menus" :key="menu.id">
+                  <div v-for="menu in subShop.menus" :key="`${subShop.id}-${menu.id}`">
                     <menu-row :store-id="subShop.id" :menu="menu" />
                   </div>
                 </v-flex>
@@ -102,11 +102,14 @@ export default {
       return false
     },
     selectedStoreMenu: {
+      // ラジオボックスにチェックがつかない現象を回避するため
+      //  チェックの判定に、===演算子を使っているので、objectは不可
       get() {
-        return this.storeMenu
+        return JSON.stringify(this.storeMenu)
       },
       set(storeMenu) {
-        this.setStoreMenu(storeMenu)
+        const parsedMenu = JSON.parse(storeMenu)
+        this.setStoreMenu(parsedMenu)
       }
     },
     isShownNextHourLink() {
