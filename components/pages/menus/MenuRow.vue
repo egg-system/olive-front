@@ -1,12 +1,12 @@
 <template>
   <v-card v-if="menuIndex == 0 || menu.minutes == 60">
-    <v-card-title primary-title>
+    <v-card-title>
       <v-radio :value="getShopMenuValue(menu)">
-        <div slot="label" class="menu-info">
+        <div slot="label" class="ml-2 my-2">
           <span>{{ menu.name }}</span>
-          <span class="menu-price">{{ menu.price | priceTaxExceptFormat }}</span>
-          <span class="menu-duration">{{ menu.minutes | timeFormat }}</span>
-          <div class="description">
+          <span class="ml-2">{{ menu.price | priceTaxExceptFormat }}</span>
+          <span class="ml-2">{{ menu.minutes | timeFormat }}</span>
+          <div class="ml-2">
             {{ menu.description }}
           </div>
         </div>
@@ -78,6 +78,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// .menu-infoを使い回せるようにするため、import
-@import '@/assets/menus/menu-info.scss';
 </style>
