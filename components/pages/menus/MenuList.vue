@@ -6,7 +6,7 @@
           v-for="subShop in displayShops"
           :key="subShop.id"
         >
-          <v-card color="green darken-3" @click="scrollShopSection(subShop.id)" class="mt-4">
+          <v-card color="green darken-3" class="mt-4" @click="scrollShopSection(subShop.id)">
             <v-card-text class="white--text">
               <h3>{{ subShop.name }}</h3>
             </v-card-text>

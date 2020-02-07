@@ -1,75 +1,82 @@
 <template>
-  <div class="menu">
-    <v-layout column wrap>
-      <v-flex>
+  <div>
+    <v-layout justify-center>
+      <v-flex xs12 sm8 md7
+              lg6
+              xl4
+      >
         <v-card dark color="red lighten-2">
-          <v-card-text>
+          <v-card-text class="white--text text-center">
             <h3>予約内容</h3>
           </v-card-text>
         </v-card>
-      </v-flex>
-    </v-layout>
 
-    <v-layout v-if="store" row xs12>
-      <v-flex xs4>
-        <v-card-text>予約店舗</v-card-text>
-      </v-flex>
-      <v-flex xs8>
-        <v-card-text>{{ store.name }}</v-card-text>
-      </v-flex>
-    </v-layout>
+        <v-layout v-if="store" class="mt-4">
+          <v-flex xs4>
+            <p class="text-center">
+              予約店舗
+            </p>
+          </v-flex>
+          <v-flex xs8>
+            <p>{{ store.name }}</p>
+          </v-flex>
+        </v-layout>
 
-    <v-layout v-if="time" row xs12>
-      <v-flex xs4>
-        <v-card-text>予約日時</v-card-text>
-      </v-flex>
-      <v-flex xs8>
-        <v-card-text>{{ time }}</v-card-text>
-      </v-flex>
-    </v-layout>
+        <v-layout v-if="time">
+          <v-flex xs4>
+            <p class="text-center">
+              予約日時
+            </p>
+          </v-flex>
+          <v-flex xs8>
+            <p>{{ time }}</p>
+          </v-flex>
+        </v-layout>
 
-    <v-layout v-if="menusForDisplay" row xs12>
-      <v-flex>
-        <v-data-table
-          :items="menusForDisplay"
-          :class="{ 'reservation_confirm': isConfirm }"
-          hide-default-footer
-          class="elevation-1"
-          item-key="index"
-        >
-          <template v-slot:item="{ item }">
-            <tr>
-              <td v-if="item">
-                {{ item.name }}
-              </td>
-              <td v-if="item">
-                {{ item.price | priceFormat }}
-              </td>
-              <td v-if="item">
-                {{ item.minutes | timeFormat }}
-              </td>
-            </tr>
-          </template>
-        </v-data-table>
-      </v-flex>
-    </v-layout>
+        <v-layout v-if="menusForDisplay">
+          <v-flex>
+            <v-data-table
+              :items="menusForDisplay"
+              :class="{ 'reservation_confirm': isConfirm }"
+              hide-default-footer
+              class="elevation-1"
+              item-key="index"
+            >
+              <template v-slot:item="{ item }">
+                <tr>
+                  <td v-if="item" class="text-center">
+                    {{ item.name }}
+                  </td>
+                  <td v-if="item">
+                    {{ item.price | priceFormat }}
+                  </td>
+                  <td v-if="item">
+                    {{ item.minutes | timeFormat }}
+                  </td>
+                </tr>
+              </template>
+            </v-data-table>
+          </v-flex>
+        </v-layout>
 
-    <v-layout v-if="isConfirm" row class="cancel_term">
-      <v-flex>
-        <v-card-text class="txt_12em">
-          マイページからキャンセル可能期限
-        </v-card-text>
-      </v-flex>
-      <v-flex v-if="canCancel">
-        <v-card-text>{{ cancelableDate | dateTimeAndDatFormat }}</v-card-text>
-      </v-flex>
-      <v-flex v-else>
-        <v-card-text>キャンセル不可</v-card-text>
+        <v-layout v-if="isConfirm" column>
+          <v-flex>
+            <p>
+              マイページからキャンセル可能期限
+            </p>
+          </v-flex>
+          <v-flex v-if="canCancel">
+            <p>{{ cancelableDate | dateTimeAndDatFormat }}</p>
+          </v-flex>
+          <v-flex v-else>
+            <p>キャンセル不可</p>
+          </v-flex>
+        </v-layout>
+        <p v-if="isConfirm">
+          ※それ以降のキャンセルは直接サロンへご連絡ください。
+        </p>
       </v-flex>
     </v-layout>
-    <v-card-text v-if="isConfirm">
-      ※それ以降のキャンセルは直接サロンへご連絡ください。
-    </v-card-text>
   </div>
 </template>
 
@@ -199,12 +206,12 @@ export default {
 }
 </script>
 
-<style scoped>
-.menu {
+<style scoped lang="scss">
+/* .menu {
   text-align: left;
   margin-bottom: 30px;
-}
-table.v-table tbody td:first-child {
+} */
+/* table.v-table tbody td:first-child {
   padding: 0px 10px;
 }
 .reservation_confirm table.v-table tr:last-of-type {
@@ -243,5 +250,5 @@ table.v-table tbody td:first-child,
 table.v-table thead th:first-child,
 table.v-table tbody th:first-child {
   padding: 0 0.2em !important;
-}
+} */
 </style>

@@ -1,8 +1,8 @@
 <template>
-  <div class="btn-area">
-    <v-layout column>
-      <v-flex xs6 class="back-btn-warapper">
-        <v-btn class="back-btn" @click="back">
+  <div>
+    <v-layout>
+      <v-flex class="text-center mt-6">
+        <v-btn class="font-weight-bold" large @click="back">
           もどる
         </v-btn>
       </v-flex>
@@ -21,8 +21,5 @@ export default {
 }
 </script>
 
-<style scoped>
-.btn-area {
-  text-align: center;
-}
+<style scoped lang="scss">
 </style>

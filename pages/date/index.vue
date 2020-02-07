@@ -2,13 +2,11 @@
   <section class="container">
     <loading v-if="isLoading" class="loading" />
     <div :class="{ hidden: isLoading }">
-      <v-container grid-list-xl>
-        <v-layout column wrap class="menu-contents">
-          <registration-menu :is-first="false" />
-          <calendar />
-          <back-btn />
-        </v-layout>
-      </v-container>
+      <v-layout column>
+        <registration-menu :is-first="false" />
+        <calendar />
+        <back-btn />
+      </v-layout>
     </div>
   </section>
 </template>
@@ -42,30 +40,30 @@ export default {
 }
 </script>
 
-<style scoped>
-.component-wrapper .calendar th,
-.component-wrapper
-  .calendar
-  .table-wrapper
-  table.outer-table
-  td.col-data-wrapper:nth-of-type(1),
-.component-wrapper
-  .calendar
-  .table-wrapper
-  table.outer-table
-  td.col-data-wrapper
-  table.inner-table
-  tr:nth-of-type(1),
-.component-wrapper
-  .calendar
-  .table-wrapper
-  table.outer-table
-  td.col-data-wrapper
-  table.inner-table
-  tr:nth-of-type(2) {
-  background-color: #f8f8f8;
-}
-.v-card__text dl dd {
+<style scoped lang="scss">
+// .component-wrapper .calendar th,
+// .component-wrapper
+//   .calendar
+//   .table-wrapper
+//   table.outer-table
+//   td.col-data-wrapper:nth-of-type(1),
+// .component-wrapper
+//   .calendar
+//   .table-wrapper
+//   table.outer-table
+//   td.col-data-wrapper
+//   table.inner-table
+//   tr:nth-of-type(1),
+// .component-wrapper
+//   .calendar
+//   .table-wrapper
+//   table.outer-table
+//   td.col-data-wrapper
+//   table.inner-table
+//   tr:nth-of-type(2) {
+//   background-color: #f8f8f8;
+// }
+/* .v-card__text dl dd {
   text-align: left !important;
-}
+} */
 </style>
