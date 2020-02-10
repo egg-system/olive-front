@@ -60,28 +60,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// .menu-contents {
-//   text-align: left;
-// }
-// /* eslint-disable vue-scoped-css/no-unused-selector */
-// .v-input--selection-controls .v-input__control,
-// .v-input--selection-controls {
-//   /* eslint-disable vue-scoped-css/no-unused-selector */
-//   width: 100%;
-//   margin-top: 0px;
-//   padding-top: 0px;
-// }
-// .slide-enter,
-// .slide-leave-to {
-//   transform: translateY(-100%);
-//   opacity: 0;
-// }
-// .hidden {
-//   display: none;
-// }
-
-// /* eslint-disable-next-line vue-scoped-css/no-unused-selector */
-// nav.v-toolbar.theme--light {
-//   background-color: #fffde7;
-// }
 </style>

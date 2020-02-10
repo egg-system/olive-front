@@ -1,6 +1,6 @@
 <template>
   <section class="container">
-    <v-container grid-list-xl>
+    <v-container>
       <v-layout column>
         <customer-must-update-error v-if="customerMustUpdate" />
         <template v-else>
@@ -51,12 +51,5 @@ export default {
 }
 </script>
 
-<style scoped>
-.v-card__text {
-  padding: 7px;
-}
-
-.confirmInfo .layout.column.wrap + .layout.column div:nth-of-type(n + 2) {
-  text-align: left !important;
-}
+<style scoped lang="scss">
 </style>

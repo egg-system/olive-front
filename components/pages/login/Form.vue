@@ -1,37 +1,41 @@
 <template>
-  <v-layout row wrap>
-    <v-form ref="form" class="inputText">
-      <v-text-field
-        v-model="mail"
-        :rules="mailRules"
-        type="text"
-        label="メールアドレス"
-        clearable
-      />
-      <v-text-field
-        v-model="password"
-        :rules="passwordRules"
-        :append-icon="show ? 'visibility_off' : 'visibility'"
-        :type="show ? 'text' : 'password'"
-        label="パスワード"
-        @click:append="show = !show"
-      />
-      <v-alert v-if="isError"
-               :value="true"
-               color="error"
-               icon="warning"
-               outline
-      >
-        メールアドレスもしくはパスワードが違います。
-      </v-alert>
-      <v-btn
-        :disabled="!canLogin"
-        color="success"
-        @click="login"
-      >
-        ログイン
-      </v-btn>
-    </v-form>
+  <v-layout justify-center>
+    <v-flex>
+      <v-form ref="form" class="text-center mt-4">
+        <v-text-field
+          v-model="mail"
+          :rules="mailRules"
+          type="text"
+          label="メールアドレス"
+          clearable
+        />
+        <v-text-field
+          v-model="password"
+          :rules="passwordRules"
+          :append-icon="show ? 'visibility_off' : 'visibility'"
+          :type="show ? 'text' : 'password'"
+          label="パスワード"
+          @click:append="show = !show"
+        />
+        <v-alert v-if="isError"
+                 :value="true"
+                 color="error"
+                 icon="warning"
+                 outlined
+        >
+          メールアドレスもしくはパスワードが違います。
+        </v-alert>
+        <v-btn
+          :disabled="!canLogin"
+          color="success"
+          large
+          class="font-weight-bold"
+          @click="login"
+        >
+          ログイン
+        </v-btn>
+      </v-form>
+    </v-flex>
   </v-layout>
 </template>
 
@@ -91,8 +95,5 @@ export default {
 }
 </script>
 
-<style scoped>
-.inputText {
-  width: 100%;
-}
+<style scoped lang="scss">
 </style>
