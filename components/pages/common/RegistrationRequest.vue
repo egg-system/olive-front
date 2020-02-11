@@ -1,25 +1,27 @@
 <template>
-  <div class="request">
-    <v-layout column wrap>
-      <v-flex>
+  <div>
+    <v-layout justify-center>
+      <v-flex xs12 sm10 md10
+              lg8
+              xl6
+      >
         <v-card dark color="red lighten-2">
-          <v-card-text><h3>ご要望・ご相談</h3></v-card-text>
+          <v-card-text class="white--text text-center mb-4">
+            <h3>ご要望・ご相談</h3>
+          </v-card-text>
         </v-card>
-      </v-flex>
-    </v-layout>
 
-    <div class="attention">
-      ※インデプスをご希望の方は、下記欄にご記入ください。ただし、予約が重なっている場合、受けられない場合がございます。
-    </div>
-
-    <v-layout column>
-      <v-flex xs6>
+        <p>
+          ※インデプスをご希望の方は、下記欄にご記入ください。ただし、予約が重なっている場合、受けられない場合がございます。
+        </p>
         <v-textarea
           v-model="request"
           :disabled="isConfirm"
           outline
           name="input-7-4"
+          solo
           label="ご要望・ご相談"
+          placeholder="ご要望・ご相談"
           value=""
         />
       </v-flex>
@@ -56,18 +58,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.request {
-  text-align: left;
-}
-@media screen and (max-width: 767px) {
-  .request {
-    width: 100%;
-    margin: initial;
-  }
-}
-.attention {
-  text-align: left;
-}
-</style>

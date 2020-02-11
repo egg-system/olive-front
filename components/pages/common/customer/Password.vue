@@ -1,44 +1,57 @@
 <template>
-  <div class="userinfo">
-    <v-layout row>
-      <v-flex xs3>
-        パスワード<span class="must">(必須)</span>
+  <div>
+    <v-layout>
+      <v-flex>
+        パスワード
+        <span>
+          <v-chip label x-small color="error">必須</v-chip>
+        </span>
       </v-flex>
-      <v-layout column>
-        <v-flex>
-          <v-text-field
-            v-model="password"
-            :rules="passwordRules"
-            :append-icon="show ? 'visibility_off' : 'visibility'"
-            :type="show ? 'text' : 'password'"
-            :disabled="isConfirm"
-            :clearable="!isConfirm"
-            label="パスワード（英字/数字を含む8文字以上）"
-            class="input-password"
-            @click:append="show = !show"
-          />
-        </v-flex>
-        <v-flex>確認のため、再度パスワードを入力してください</v-flex>
-        <v-flex>
-          <v-text-field
-            v-model="passwordConfirm"
-            :rules="passwordRules"
-            :append-icon="show2 ? 'visibility_off' : 'visibility'"
-            :type="show2 ? 'text' : 'password'"
-            :disabled="isConfirm"
-            :clearable="!isConfirm"
-            label="パスワード（英字/数字を含む8文字以上）"
-            class="input-password"
-            @click:append="show2 = !show2"
-          />
-        </v-flex>
-      </v-layout>
+    </v-layout>
+    <v-layout justify-center>
+      <v-flex xs10 class="mt-2">
+        <v-text-field
+          v-model="password"
+          :rules="passwordRules"
+          :append-icon="show ? 'visibility_off' : 'visibility'"
+          :type="show ? 'text' : 'password'"
+          :disabled="isConfirm"
+          :clearable="!isConfirm"
+          solo
+          counter
+          label="パスワード（英字/数字を含む8文字以上）"
+          placeholder="英字/数字を含む8文字以上"
+          @click:append="show = !show"
+        />
+      </v-flex>
+    </v-layout>
+    <v-layout justify-center>
+      <v-flex class="body-2 mb-4" text-center>
+        ＜確認の為再度パスワードを入力してください＞
+      </v-flex>
+    </v-layout>
+    <v-layout justify-center>
+      <v-flex xs10>
+        <v-text-field
+          v-model="passwordConfirm"
+          :rules="passwordRules"
+          :append-icon="show2 ? 'visibility_off' : 'visibility'"
+          :type="show2 ? 'text' : 'password'"
+          :disabled="isConfirm"
+          :clearable="!isConfirm"
+          solo
+          counter
+          label="パスワード（英字/数字を含む8文字以上）"
+          placeholder="英字/数字を含む8文字以上"
+          @click:append="show2 = !show2"
+        />
+      </v-flex>
     </v-layout>
     <v-alert v-if="!checkSame"
              :value="true"
              color="error"
              icon="warning"
-             outline
+             outlined
     >
       同じパスワードを入力してください
     </v-alert>
@@ -90,14 +103,3 @@ export default {
   }
 }
 </script>
-
-
-<style scoped>
-.loginInfo {
-  padding-top: 20px;
-  text-align: left;
-}
-.input-password {
-  width: 95%;
-}
-</style>

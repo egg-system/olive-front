@@ -1,9 +1,9 @@
 <template>
   <div>
     <v-layout justify-center>
-      <v-flex xs12 sm8 md7
-              lg6
-              xl4
+      <v-flex xs12 sm10 md10
+              lg8
+              xl6
       >
         <v-card dark color="red lighten-2">
           <v-card-text class="white--text text-center">
@@ -205,50 +205,3 @@ export default {
   }
 }
 </script>
-
-<style scoped lang="scss">
-/* .menu {
-  text-align: left;
-  margin-bottom: 30px;
-} */
-/* table.v-table tbody td:first-child {
-  padding: 0px 10px;
-}
-.reservation_confirm table.v-table tr:last-of-type {
-  border-top: 2px solid;
-}
-
-.cancel_term {
-  display: block;
-}
-.cancel_term .flex {
-  padding: 0 !important;
-  margin-left: 1em;
-}
-.cancel_term .flex .v-card__text {
-  text-align: left;
-}
-.cancel_term .flex + .flex .v-card__text {
-  margin-left: 1em;
-}
-.cancel_term + .v-card__text {
-  text-align: left;
-  margin-left: 1em;
-}
-.txt_12em {
-  font-size: 1.2em;
-}
-.v-btn__content {
-  font-size: 1em;
-}
-table.v-table thead td:not(:nth-child(1)),
-table.v-table tbody td:not(:nth-child(1)),
-table.v-table thead th:not(:nth-child(1)),
-table.v-table tbody th:not(:nth-child(1)),
-table.v-table thead td:first-child,
-table.v-table tbody td:first-child,
-table.v-table thead th:first-child,
-table.v-table tbody th:first-child {
-  padding: 0 0.2em !important;
-} */
-</style>

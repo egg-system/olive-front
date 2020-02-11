@@ -1,71 +1,77 @@
 <template>
-  <div class="userinfo">
-    <v-layout column wrap>
-      <v-flex>
-        <v-card dark color="red lighten-2">
-          <v-card-text>
-            <h3>お客様情報</h3>
+  <div>
+    <v-layout justify-center>
+      <v-flex xs12 sm10 md10
+              lg8
+              xl6
+      >
+        <v-card color="red lighten-2">
+          <v-card-text class="white--text text-center my-4">
+            <h3>お客様情報の入力</h3>
           </v-card-text>
         </v-card>
-      </v-flex>
-    </v-layout>
 
-    <template>
-      <customer-name :is-confirm="isConfirm || isLogin" />
-      <customer-mail :is-confirm="isConfirm || isLogin" />
-      <customer-phone-number :is-confirm="isConfirm || isLogin" />
+        <customer-name :is-confirm="isConfirm || isLogin" />
+        <customer-mail :is-confirm="isConfirm || isLogin" />
+        <customer-phone-number :is-confirm="isConfirm || isLogin" />
 
-      <v-layout row>
-        <v-flex xs3>
+        <div class="mt-4">
           初めてのご利用ですか？
-          <span class="must">(必須)</span>
-        </v-flex>
-        <v-flex>
+          <span>
+            <v-chip label x-small color="error">必須</v-chip>
+          </span>
+        </div>
+        <div class="first-use">
           <v-radio-group
             v-model="isFirst"
             :disabled="isConfirm"
             :mandatory="true"
-            class="inputTop"
           >
             <v-radio :value="true" :label="isFirstLabel" />
             <v-radio :value="false" label="いいえ、2回目以降です" />
           </v-radio-group>
-        </v-flex>
-      </v-layout>
-    </template>
+        </div>
 
-    <v-layout row>
-      <v-flex xs3>
-        回数券利用
-      </v-flex>
-      <v-flex v-for="coupon in coupons" :key="coupon.id">
-        <v-checkbox
-          v-model="selectedCoupons"
-          :disabled="isConfirm"
-          :value="coupon"
-          :label="coupon.name"
-          class="inputTop"
-        />
+        <v-layout>
+          <v-flex class="mt-5">
+            回数券利用
+          </v-flex>
+          <v-flex v-for="coupon in coupons" :key="coupon.id" xs8>
+            <v-checkbox
+              v-model="selectedCoupons"
+              :disabled="isConfirm"
+              :value="coupon"
+              :label="coupon.name"
+            />
+          </v-flex>
+        </v-layout>
+
+        <v-layout>
+          <v-flex class="mt-4">
+            お子様連れ
+            <span v-if="!isConfirm" class="body-2" xs5>
+              （お子様連れの方は人数をご選択ください）
+            </span>
+          </v-flex>
+        </v-layout>
+        <v-layout justify-center>
+          <v-flex class="mt-2" xs10>
+            <v-select v-model="childrenSelected" solo :items="children" :disabled="isConfirm" />
+          </v-flex>
+        </v-layout>
+
+        <customer-message v-if="!isLogin" :is-confirm="isConfirm" />
+
+        <v-alert
+          dense
+          outlined
+          type="error"
+          class="mt-4 body-2"
+        >
+          当院では現在、妊娠している方への治療は行っておりません。産後の骨盤矯正は行っております。ぜひ産後のケアはお任せください。
+        </v-alert>
       </v-flex>
     </v-layout>
-
-    <v-layout row>
-      <v-flex xs3>
-        お子様連れ
-      </v-flex>
-      <v-flex xs5>
-        <v-select v-model="childrenSelected" :items="children" :disabled="isConfirm" />
-      </v-flex>
-      <v-flex v-if="!isConfirm" xs5>
-        ※お子様連れの方は人数をご選択ください
-      </v-flex>
-    </v-layout>
-
-    <customer-message v-if="!isLogin" :is-confirm="isConfirm" />
-
-    <div class="pregnancy">
-      ※ただ今当院では妊娠している方への治療は行っておりません。産後の骨盤矯正は行っております。ぜひ産後のケアはお任せください。
-    </div>
   </div>
 </template>
 
@@ -156,19 +162,9 @@ export default {
 }
 </script>
 
-<style scoped>
-.userinfo {
-  padding-top: 20px;
-  text-align: left;
-}
-.must {
-  color: red;
-}
-.inputTop {
-  margin-top: 1px;
-}
-.pregnancy {
-  margin-top: 20px;
-  text-align: left;
+<style lang="scss" scoped>
+.first-use {
+  display: flex;
+  justify-content: center;
 }
 </style>

@@ -1,18 +1,16 @@
 <template>
   <section class="container">
-    <v-container>
-      <v-layout column>
-        <customer-must-update-error v-if="customerMustUpdate" />
-        <template v-else>
-          <registration-menu />
-          <registration-user-info />
-          <login-info v-if="isShownLoginInfo" />
-          <registration-confirm-info />
-          <registration-request />
-          <confirm-btn />
-        </template>
-      </v-layout>
-    </v-container>
+    <v-layout column>
+      <customer-must-update-error v-if="customerMustUpdate" />
+      <template v-else>
+        <registration-menu />
+        <registration-user-info />
+        <login-info v-if="isShownLoginInfo" />
+        <registration-confirm-info />
+        <registration-request />
+        <confirm-btn />
+      </template>
+    </v-layout>
   </section>
 </template>
 
@@ -50,6 +48,3 @@ export default {
   }
 }
 </script>
-
-<style scoped lang="scss">
-</style>

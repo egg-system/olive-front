@@ -1,22 +1,25 @@
 <template>
-  <div class="userinfo">
-    <v-layout row>
-      <v-flex xs3>
-        電話番号<span class="must">(必須)</span>
-      </v-flex>
-      <v-layout column>
-        <v-flex>
+  <div>
+    <div>
+      電話番号
+      <span>
+        <v-chip label x-small color="error">必須</v-chip>
+      </span>
+      <v-layout justify-center>
+        <v-flex class="mt-2" xs10>
           <v-text-field
             v-model="phoneNumber"
             :rules="phoneNumberRules"
             :disabled="isConfirm"
             :clearable="!isConfirm"
             type="text"
+            solo
             label="電話番号"
+            placeholder="例）09012345678"
           />
         </v-flex>
       </v-layout>
-    </v-layout>
+    </div>
   </div>
 </template>
 
@@ -49,16 +52,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.userinfo {
-  padding-top: 20px;
-  text-align: left;
-}
-.must {
-  color: red;
-}
-.inputTop {
-  margin-top: 1px;
-}
-</style>
