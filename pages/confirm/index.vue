@@ -8,6 +8,7 @@
             dense
             outlined
             color="deep-orange"
+            icon="warning"
             class="body-2"
           >
             まだ予約は完了していません。<br>

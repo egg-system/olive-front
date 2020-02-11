@@ -1,19 +1,19 @@
 <template>
   <div>
     <v-layout column>
-      <v-flex xs6>
-        <v-btn color="warning" href="https://olivebodycare.healthcare/">
-          店舗ホームページへ
+      <v-flex class="text-center mt-8">
+        <v-btn class="font-weight-bold" color="warning" href="https://olivebodycare.healthcare/">
+          店舗ホームページはこちら
         </v-btn>
       </v-flex>
-      <v-flex xs6>
-        <v-btn color="warning" @click="goReserve">
-          続けて予約する方へ
+      <v-flex class="text-center mt-8">
+        <v-btn class="font-weight-bold" color="warning" @click="goReserve">
+          続けて予約する方はこちら
         </v-btn>
       </v-flex>
-      <v-flex xs6>
-        <v-btn color="warning" @click="goMyPage">
-          マイページへ
+      <v-flex class="text-center mt-8">
+        <v-btn class="font-weight-bold" color="warning" @click="goMyPage">
+          マイページはこちら
         </v-btn>
       </v-flex>
     </v-layout>
