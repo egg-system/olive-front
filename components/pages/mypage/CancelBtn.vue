@@ -1,9 +1,9 @@
 <template>
-  <v-layout column>
-    <v-flex xs6>
-      <div>キャンセルをご希望の方はこちらから</div>
-      <v-btn color="error" @click="cancel">
-        予約キャンセルへ
+  <v-layout>
+    <v-flex class="text-center">
+      <p>キャンセルをご希望の方はこちらから</p>
+      <v-btn large class="font-weight-bold" color="error" @click="cancel">
+        予約キャンセルはこちら
       </v-btn>
     </v-flex>
   </v-layout>

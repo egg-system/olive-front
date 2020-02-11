@@ -5,7 +5,7 @@
               lg8
               xl6
       >
-        <v-card dark color="red lighten-2">
+        <v-card color="red lighten-2">
           <v-card-text class="white--text text-center">
             <h3>予約内容</h3>
           </v-card-text>

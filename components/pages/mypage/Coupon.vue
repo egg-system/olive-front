@@ -32,7 +32,7 @@
 </template>
 
 <style scoped>
-.v-card__title,
+/* .v-card__title,
 .v-card__text {
   color: black;
 }
@@ -46,5 +46,5 @@
 .coupon-main {
   width: 90%;
   margin: 12px auto;
-}
+} */
 </style>

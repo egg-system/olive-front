@@ -71,7 +71,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-@import '~/assets/login.css';
-</style>

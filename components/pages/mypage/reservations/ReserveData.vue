@@ -1,9 +1,9 @@
 <template>
-  <v-card color="white pa-3">
-    <div class="card-main cancel">
-      <v-layout row wrap>
-        <v-flex xs5 class="text-menu">
-          <v-chip :color="reserveStateCss" label text-color="white" disabled>
+  <v-card class="pa-3">
+    <div>
+      <v-layout>
+        <v-flex xs5 class="text-center">
+          <v-chip :color="reserveStateCss" label text-color="white">
             {{ data.state }}
           </v-chip>
         </v-flex>
@@ -11,7 +11,6 @@
           <v-btn
             v-if="isShownCancelButton"
             :disabled="canNotCancel"
-            class="cancel-btn d-inline-flex"
             color="warning"
             @click="cancelConfrim(data.id)"
           >
@@ -19,69 +18,69 @@
           </v-btn>
         </v-flex>
       </v-layout>
-      <v-layout row wrap>
-        <v-flex xs5>
-          <div class="text-menu">
+      <v-layout>
+        <v-flex xs4>
+          <div class="text-center">
             予約店舗
           </div>
         </v-flex>
-        <v-flex xs6>
-          <div class="text-value shop">
+        <v-flex xs8>
+          <div>
             {{ data.store.name }}
           </div>
         </v-flex>
       </v-layout>
       <v-layout row wrap>
-        <v-flex xs5>
-          <div class="text-menu">
+        <v-flex xs4>
+          <div class="text-center">
             予約日時
           </div>
         </v-flex>
-        <v-flex xs6>
-          <div class="text-value">
+        <v-flex xs8>
+          <div>
             {{ data.start_at | dateTimeAndDatFormat }}
           </div>
         </v-flex>
       </v-layout>
       <v-layout row wrap>
-        <v-flex xs5>
-          <div class="text-menu">
+        <v-flex xs4>
+          <div class="text-center">
             予約ID
           </div>
         </v-flex>
-        <v-flex xs6>
-          <div class="text-value">
+        <v-flex xs8>
+          <div>
             {{ data.id }}
           </div>
         </v-flex>
       </v-layout>
       <template v-for="(detail, index) in data.details">
         <v-layout :key="detail.id" row wrap>
-          <v-flex xs5>
-            <div class="text-menu">
+          <v-flex xs4>
+            <div class="text-center">
               メニュー<span v-if="isMultiReserved">({{ (index + 1) }}時間目)</span>
             </div>
           </v-flex>
-          <v-flex xs6>
-            <div class="text-value">
+          <v-flex xs8>
+            <div>
               {{ detail.menu.name }}
             </div>
           </v-flex>
         </v-layout>
         <v-layout :key="index" row wrap>
-          <v-flex xs5>
-            <div class="text-menu">
+          <v-flex xs4>
+            <div class="text-center">
               オプション<span v-if="isMultiReserved">({{ (index + 1) }}時間目)</span>
             </div>
           </v-flex>
-          <v-flex xs6>
+          <v-flex xs8>
             <template v-if="detail.option_names.length === 0">
-              <div class="text-value">
+              <div>
                 -
               </div>
             </template>
             <template v-else>
-              <div class="text-value">
+              <div>
                 {{ detail.option_names.join(' / ') }}
               </div>
             </template>
@@ -89,25 +88,25 @@
         </v-layout>
       </template>
       <v-layout row wrap>
-        <v-flex xs5>
-          <div class="text-menu">
+        <v-flex xs4>
+          <div class="text-center">
             回数券
           </div>
         </v-flex>
-        <v-flex xs6>
-          <div class="text-value">
+        <v-flex xs8>
+          <div>
             {{ data.coupons.map(coupon => coupon.name).join(' / ') }}
           </div>
         </v-flex>
       </v-layout>
       <v-layout row wrap>
-        <v-flex xs5>
-          <div class="text-menu">
+        <v-flex xs4>
+          <div class="text-center">
             合計金額
           </div>
         </v-flex>
-        <v-flex xs6>
-          <div class="text-value">
+        <v-flex xs8>
+          <div>
             {{ data.fee | priceFormat }}
           </div>
         </v-flex>
@@ -171,12 +170,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.cancel-btn {
-  width: 90%;
-  min-width: 8rem;
-  max-width: 10rem;
-  font-size: smaller;
-}
-</style>
