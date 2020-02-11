@@ -11,7 +11,7 @@
       </v-flex>
     </v-layout>
     <v-layout>
-      <v-flex class="text-center mt-4">
+      <v-flex class="text-center mt-6">
         <v-btn class="font-weight-bold" @click="back">
           もどる
         </v-btn>

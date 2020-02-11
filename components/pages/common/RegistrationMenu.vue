@@ -61,7 +61,7 @@
 
         <v-layout v-if="isConfirm" column>
           <v-flex>
-            <p>
+            <p class="mt-4">
               マイページからキャンセル可能期限
             </p>
           </v-flex>

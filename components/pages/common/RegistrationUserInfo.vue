@@ -7,7 +7,7 @@
       >
         <v-card color="red lighten-2">
           <v-card-text class="white--text text-center my-4">
-            <h3>お客様情報の入力</h3>
+            <h3>お客様情報</h3>
           </v-card-text>
         </v-card>
 
