@@ -11,35 +11,22 @@
             <h3>ログイン</h3>
           </v-card-text>
         </v-card>
-      </v-flex>
-    </v-layout>
-
     
-    <div :class="{ hidden: user.isLoading }">
-      <v-layout justify-center>
-        <v-flex xs12 sm9 md8
-                lg7
-                xl5
-        >
-          <h2 class="text-center mt-6 mb-2">
-            2回目以降の方はこちら
-          </h2>
-          <hr color="#ef9a9a">
-          <login-form :link="link" :query="query" />
-          <nuxt-link to="/password/reset">
-            <p class="text-center mt-2">
-              パスワードを忘れた方はこちら
-            </p>
-          </nuxt-link>
-        </v-flex>
-      </v-layout>
-
-      <v-layout justify-center>
-        <v-flex xs12 sm9 md8
-                lg7
-                xl5 class="text-center"
-        >
+        <div :class="{ hidden: user.isLoading }">
           <div>
+            <h2 class="text-center mt-6 mb-2">
+              2回目以降の方はこちら
+            </h2>
+            <hr color="#ef9a9a">
+            <login-form :link="link" :query="query" />
+            <nuxt-link to="/password/reset">
+              <p class="text-center mt-2">
+                パスワードを忘れた方はこちら
+              </p>
+            </nuxt-link>
+          </div>
+
+          <div class="text-center">
             <h2 class="mt-8 mb-2">
               初めての方はこちら
             </h2>
@@ -50,14 +37,14 @@
               </v-btn>
             </div>
           </div>
-          <div class="mt-6">
+          <div class="mt-6 text-center">
             <p>※ 登録は無料です。</p>
             <p>※ 登録をしていただくと、マイページからご予約履歴をいつでも確認できて、キャンセル等の手続きも簡単に行えるようになります。</p>
             <p>※ 新規登録をせずに<a href="https://olivebodycare.healthcare/about/contact/">メールフォーム</a>からご予約いただくことも可能です。</p>
           </div>
-        </v-flex>
-      </v-layout>
-    </div>
+        </div>
+      </v-flex>
+    </v-layout>
   </section>
 </template>
 

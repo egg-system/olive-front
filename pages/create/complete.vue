@@ -1,28 +1,31 @@
 <template>
   <section class="container">
-    <v-container grid-list-xl>
-      <v-layout column wrap>
-        <v-flex class="create">
-          <v-card dark color="red lighten-2">
-            <v-card-text>
-              <h3 class="mypage-title">
-                新規登録 > 完了
-              </h3>
-            </v-card-text>
-          </v-card>
-        </v-flex>
+    <v-layout justify-center>
+      <v-flex xs12 sm10 md10
+              lg8
+              xl6
+      >
+        <v-card color="red lighten-2">
+          <v-card-text class="white--text text-center">
+            <h3>
+              新規登録 > 完了
+            </h3>
+          </v-card-text>
+        </v-card>
+      </v-flex>
+    </v-layout>
 
-        <div>登録が完了しました</div>
+    <p class="text-center mt-8">
+      登録が完了しました。
+    </p>
 
-        <v-layout column>
-          <v-flex xs6>
-            <v-btn @click="login">
-              ログイン
-            </v-btn>
-          </v-flex>
-        </v-layout>
-      </v-layout>
-    </v-container>
+    <v-layout>
+      <v-flex class="text-center mt-4">
+        <v-btn large class="font-weight-bold" @click="login">
+          ログインはこちら
+        </v-btn>
+      </v-flex>
+    </v-layout>
   </section>
 </template>
 
@@ -60,9 +63,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.create {
-  text-align: left;
-}
-</style>

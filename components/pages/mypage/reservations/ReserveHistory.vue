@@ -3,7 +3,6 @@
     <template v-for="data in reserveData">
       <v-flex
         :key="data.id"
-        mad4
       >
         <reserve-data :data="data" :force-hide-cancel="forceHideCancel" />
       </v-flex>

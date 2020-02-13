@@ -1,42 +1,47 @@
 <template>
   <section class="container">
     <loading v-if="user.isLoading" class="loading" />
-    <v-layout column>
-      <v-flex>
-        <v-card dark color="red lighten-2" class="head">
-          <v-card-text><h3>ログイン</h3></v-card-text>
+    <v-layout justify-center>
+      <v-flex xs12 sm8 md7
+              lg6
+              xl4
+      >
+        <v-card color="red lighten-2">
+          <v-card-text class="white--text text-center mt-6">
+            <h3>ログイン</h3>
+          </v-card-text>
         </v-card>
-      </v-flex>
-
-      <v-flex>
-        <div :class="{ hidden: user.isLoading }" class="main">
+      
+        <div :class="{ hidden: user.isLoading }">
           <div>
-            <h2 class="subtitle">
+            <h2 class="text-center mt-6 mb-2">
               2回目以降の方はこちら
             </h2>
+            <hr color="#ef9a9a">
             <login-form :link="link" />
             <nuxt-link to="/password/reset">
-              パスワードを忘れた方はこちら
+              <p class="text-center mt-2">
+                パスワードを忘れた方はこちら
+              </p>
             </nuxt-link>
           </div>
 
-          <div class="not">
-            <h2 class="subtitle">
+          <div class="text-center">
+            <h2 class="mt-8 mb-2">
               初めての方はこちら
             </h2>
-            <div>
-              <v-btn color="warning" @click="createBtn">
+            <hr color="#ef9a9a">
+            <div class="mt-6">
+              <v-btn class="font-weight-bold" large color="warning" @click="createBtn">
                 新規登録へ
               </v-btn>
             </div>
           </div>
 
-          <div class="free">
-            ※ 新規登録をせずに
-            <a href="https://olivebodycare.healthcare/about/contact/">
-              メールフォーム
-            </a>
-            からご予約いただくことも可能です。
+          <div class="mt-6 text-center">
+            <p>※ 登録は無料です。</p>
+            <p>※ 登録をしていただくと、マイページからご予約履歴をいつでも確認できて、キャンセル等の手続きも簡単に行えるようになります。</p>
+            <p>※ 新規登録をせずに<a href="https://olivebodycare.healthcare/about/contact/">メールフォーム</a>からご予約いただくことも可能です。</p>
           </div>
         </div>
       </v-flex>

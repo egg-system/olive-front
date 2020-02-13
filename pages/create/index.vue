@@ -1,28 +1,27 @@
 <template>
   <section class="container">
-    <v-container grid-list-xl>
-      <v-layout column wrap>
-        <v-flex class="create">
-          <v-card dark color="red lighten-2">
-            <v-card-text>
-              <h3 class="mypage-title">
-                新規登録
-              </h3>
-            </v-card-text>
-          </v-card>
-        </v-flex>
+    <v-layout justify-center>
+      <v-flex xs12 sm10 md10
+              lg8
+              xl6
+      >
+        <v-card color="red lighten-2">
+          <v-card-text class="white--text text-center mt-4">
+            <h3>
+              新規登録
+            </h3>
+          </v-card-text>
+        </v-card>
 
-        <div class="input">
-          <customer-name />
-          <customer-mail />
-          <customer-phone-number />
-          <customer-adress v-if="enableAddress" />
-          <customer-message />
-          <customer-password />
-          <confirm-btn />
-        </div>
-      </v-layout>
-    </v-container>
+        <customer-name />
+        <customer-mail />
+        <customer-phone-number />
+        <customer-adress v-if="enableAddress" />
+        <customer-message />
+        <customer-password />
+        <confirm-btn />
+      </v-flex>
+    </v-layout>
   </section>
 </template>
 
@@ -52,13 +51,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.create {
-  text-align: left;
-}
-.input {
-  width: 90%;
-  margin: 0 auto;
-}
-</style>
