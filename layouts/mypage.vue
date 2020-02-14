@@ -2,17 +2,9 @@
   <v-app>
     <div>
       <app-header :is-shown-navbar.sync="isShownNabvar" />
-      <div class="mypage-body">
-        <mypage-navbar :is-shown.sync="isShownNabvar" />
-        <section class="container">
-          <v-container grid-list-xl>
-            <v-layout column>
-              <mypage-name />
-              <nuxt />
-            </v-layout>
-          </v-container>
-        </section>
-      </div>
+      <mypage-navbar :is-shown.sync="isShownNabvar" />
+      <mypage-name />
+      <nuxt />
       <app-footer />
     </div>
   </v-app>
@@ -39,7 +31,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-@import '~/assets/mypage.css';
-</style>

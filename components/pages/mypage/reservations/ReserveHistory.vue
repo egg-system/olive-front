@@ -1,13 +1,15 @@
 <template>
-  <v-layout justify-center column>
-    <template v-for="data in reserveData">
-      <v-flex
-        :key="data.id"
-      >
-        <reserve-data :data="data" :force-hide-cancel="forceHideCancel" />
-      </v-flex>
-    </template>
-  </v-layout>
+  <v-container>
+    <v-layout justify-center column>
+      <template v-for="data in reserveData">
+        <v-flex
+          :key="data.id"
+        >
+          <reserve-data :data="data" :force-hide-cancel="forceHideCancel" />
+        </v-flex>
+      </template>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>

@@ -1,8 +1,11 @@
 <template>
   <div>
-    <v-layout column>
-      <v-flex xs6>
-        <v-btn :disabled="!canClick" color="warning" @click="confirm">
+    <v-layout>
+      <v-flex class="text-center">
+        <v-btn large class="font-weight-bold my-4" :disabled="!canClick" 
+               color="warning" 
+               @click="confirm"
+        >
           確認画面へ
         </v-btn>
       </v-flex>
