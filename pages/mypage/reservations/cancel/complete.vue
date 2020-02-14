@@ -1,24 +1,28 @@
 <template>
-  <div>
-    <v-flex class="mypage-top">
-      <v-card dark color="red lighten-2">
-        <v-card-text>
-          <h3 class="mypage-title">
-            マイページトップ > 予約一覧 > 予約キャンセル完了
-          </h3>
-        </v-card-text>
-      </v-card>
-    </v-flex>
+  <v-container class="min-height" grid-list-lg>
+    <v-layout justify-center>
+      <v-flex xs12 sm10 md10
+              lg8
+              xl6
+      >
+        <v-card color="red lighten-2">
+          <v-card-text class="white--text text-center mb-4">
+            <h3>
+              マイページトップ > 予約一覧 > 予約キャンセル完了
+            </h3>
+          </v-card-text>
+        </v-card>
 
-    <div>予約をキャンセルしました。</div>
-    <div>予約キャンセルメールをお送りしましたので、ご確認ください。</div>
-
-    <v-flex>
-      <v-btn color="warning" @click="top">
-        マイページトップへ
-      </v-btn>
-    </v-flex>
-  </div>
+        <div class="text-center">
+          <p>予約をキャンセルしました。</p>
+          <p>予約キャンセルメールをお送りしましたので、ご確認ください。</p>
+          <v-btn class="font-weight-bold" color="warning" @click="top">
+            マイページトップへ
+          </v-btn>
+        </div>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <v-container grid-list-lg>
+  <v-container grid-list-lg class="min-height">
     <v-layout justify-center>
       <v-flex xs12 sm10 md10
               lg8

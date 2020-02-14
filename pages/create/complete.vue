@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <v-container class="min-height">
     <v-layout justify-center>
       <v-flex xs12 sm10 md10
               lg8
@@ -26,7 +26,7 @@
         </v-btn>
       </v-flex>
     </v-layout>
-  </section>
+  </v-container>
 </template>
 
 <script>

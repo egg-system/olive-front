@@ -1,33 +1,31 @@
 <template>
-  <div>
-    <v-container>
-      <v-layout justify-center>
-        <v-flex xs12 sm10 md10
-                lg8
-                xl6
-        >
-          <v-card dark color="red lighten-2">
-            <v-card-text class="white--text text-center mb-4">
-              <h3>
-                マイページトップ > 登録情報変更確認
-              </h3>
-            </v-card-text>
-          </v-card>
+  <v-container class="min-height">
+    <v-layout justify-center>
+      <v-flex xs12 sm10 md10
+              lg8
+              xl6
+      >
+        <v-card dark color="red lighten-2">
+          <v-card-text class="white--text text-center mb-4">
+            <h3>
+              マイページトップ > 登録情報変更確認
+            </h3>
+          </v-card-text>
+        </v-card>
 
-          <h3>
-            登録情報変更
-          </h3>
-          <hr color="#ef9a9a" class="mb-4">
-          <customer-mail :read-only="true" />
-          <customer-name :is-confirm="true" />
-          <customer-phone-number :is-confirm="true" />
-          <customer-adress v-if="false" :is-confirm="true" />
-          <customer-message :is-confirm="true" />
-          <fixed-btn />
-        </v-flex>
-      </v-layout>
-    </v-container>
-  </div>
+        <h3>
+          登録情報変更
+        </h3>
+        <hr color="#ef9a9a" class="mb-4">
+        <customer-mail :read-only="true" />
+        <customer-name :is-confirm="true" />
+        <customer-phone-number :is-confirm="true" />
+        <customer-adress v-if="false" :is-confirm="true" />
+        <customer-message :is-confirm="true" />
+        <fixed-btn />
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>

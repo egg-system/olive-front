@@ -1,31 +1,29 @@
 <template>
-  <div>
-    <v-container>
-      <v-layout justify-center>
-        <v-flex xs12 sm10 md10
-                lg8
-                xl6
-        >
-          <v-card dark color="red lighten-2">
-            <v-card-text class="white--text text-center my-6">
-              <h3>
-                マイページトップ > 登録情報変更完了
-              </h3>
-            </v-card-text>
-          </v-card>
+  <v-container class="min-height">
+    <v-layout justify-center>
+      <v-flex xs12 sm10 md10
+              lg8
+              xl6
+      >
+        <v-card color="red lighten-2">
+          <v-card-text class="white--text text-center mb-4">
+            <h3>
+              マイページトップ > 登録情報変更完了
+            </h3>
+          </v-card-text>
+        </v-card>
 
-          <p class="text-center mt-6">
-            登録情報の変更が完了しました。
-          </p>
-          <div class="text-center">
-            <v-btn class="font-weight-bold" color="warning" @click="goMypageTop">
-              マイページトップへ
-            </v-btn>
-          </div>
-        </v-flex>
-      </v-layout>
-    </v-container>
-  </div>
+        <p class="text-center mt-6">
+          登録情報の変更が完了しました。
+        </p>
+        <div class="text-center">
+          <v-btn class="font-weight-bold" color="warning" @click="goMypageTop">
+            マイページトップへ
+          </v-btn>
+        </div>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>

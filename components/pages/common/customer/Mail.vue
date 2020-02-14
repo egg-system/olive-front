@@ -8,46 +8,48 @@
         {{ mail }}
       </v-flex>
     </v-layout>
-    <v-layout v-else>
-      <v-flex>
-        メールアドレス
-        <span>
-          <v-chip label x-small color="error">必須</v-chip>
-        </span>
-      </v-flex>
-    </v-layout>
-    <v-layout justify-center>
-      <v-flex class="mt-2" xs10>
-        <v-text-field
-          v-model="mail"
-          :rules="mailRules"
-          :disabled="isConfirm"
-          :clearable="!isConfirm"
-          type="text"
-          solo
-          label="メールアドレス"
-          placeholder="例）info@olivebodycare.jp"
-        />
-      </v-flex>
-    </v-layout>
-    <v-layout>
-      <v-flex v-if="!isConfirm" class="text-center body-2 mb-4">
-        ＜確認の為再度メールアドレスを入力してください＞
-      </v-flex>
-    </v-layout>
-    <v-layout justify-center>
-      <v-flex v-if="!isConfirm" xs10>
-        <v-text-field
-          v-model="mailConfirm"
-          :rules="mailRules"
-          clearable
-          type="text"
-          solo
-          label="メールアドレス"
-          placeholder="例）info@olivebodycare.jp"
-        />
-      </v-flex>
-    </v-layout>
+    <div v-else>
+      <v-layout>
+        <v-flex>
+          メールアドレス
+          <span>
+            <v-chip label x-small color="error">必須</v-chip>
+          </span>
+        </v-flex>
+      </v-layout>
+      <v-layout justify-center>
+        <v-flex class="mt-2" xs10>
+          <v-text-field
+            v-model="mail"
+            :rules="mailRules"
+            :disabled="isConfirm"
+            :clearable="!isConfirm"
+            type="text"
+            solo
+            label="メールアドレス"
+            placeholder="例）info@olivebodycare.jp"
+          />
+        </v-flex>
+      </v-layout>
+      <v-layout>
+        <v-flex v-if="!isConfirm" class="text-center body-2 mb-4">
+          ＜確認の為再度メールアドレスを入力してください＞
+        </v-flex>
+      </v-layout>
+      <v-layout justify-center>
+        <v-flex v-if="!isConfirm" xs10>
+          <v-text-field
+            v-model="mailConfirm"
+            :rules="mailRules"
+            clearable
+            type="text"
+            solo
+            label="メールアドレス"
+            placeholder="例）info@olivebodycare.jp"
+          />
+        </v-flex>
+      </v-layout>
+    </div>
     <v-alert v-if="!checkSame"
              :value="true"
              color="error"

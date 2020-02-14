@@ -1,34 +1,33 @@
 <template>
-  <section class="container">
-    <v-container grid-list-xl>
-      <v-layout column wrap>
-        <v-layout row>
-          <v-flex>
-            <!-- エラーメッセージは、システムで作成するため、XSSの危険性は低い -->
-            <!-- eslint-disable-next-line vue/no-v-html -->
-            <v-card-text class="message" v-html="errorMessage" />
-          </v-flex>
-        </v-layout>
-        <v-layout column>
-          <v-flex xs6>
-            <v-btn color="warning" href="https://olivebodycare.healthcare/">
-              店舗ホームページへ
-            </v-btn>
-          </v-flex>
-          <v-flex v-if="isLogin" xs6>
-            <v-btn color="warning" @click="goMyPage">
-              マイページへ
-            </v-btn>
-          </v-flex>
-          <v-flex xs6>
-            <v-btn color="warning" @click="back">
-              戻る
-            </v-btn>
-          </v-flex>
-        </v-layout>
-      </v-layout>
-    </v-container>
-  </section>
+  <v-container grid-list-xl class="min-height">
+    <v-layout justify-center>
+      <v-flex xs12 sm10 md10
+              lg8
+              xl6
+      >
+        <!-- エラーメッセージは、システムで作成するため、XSSの危険性は低い -->
+        <!-- eslint-disable-next-line vue/no-v-html -->
+        <p class="text-center red--text font-weight-bold" v-html="errorMessage" />
+      </v-flex>
+    </v-layout>
+    <v-layout column>
+      <v-flex class="text-center">
+        <v-btn color="warning" href="https://olivebodycare.healthcare/">
+          店舗ホームページへ
+        </v-btn>
+      </v-flex>
+      <v-flex v-if="isLogin" class="text-center">
+        <v-btn color="warning" @click="goMyPage">
+          マイページへ
+        </v-btn>
+      </v-flex>
+      <v-flex class="text-center">
+        <v-btn color="warning" @click="back">
+          戻る
+        </v-btn>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -102,10 +101,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.message {
-  color: red;
-  font-weight: bolder;
-}
-</style>

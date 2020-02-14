@@ -1,5 +1,5 @@
 <template>
-  <v-container grid-list-lg>
+  <v-container grid-list-lg class="min-height">
     <v-layout justify-center>
       <v-flex xs12 sm10 md10
               lg8
@@ -15,6 +15,7 @@
 
         <h3>
           予約一覧
+          <hr color="#ef9a9a">
         </h3>
         <mypage-reserve-history />
         <mypage-list-pagination />

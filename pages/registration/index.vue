@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <v-container>
     <v-layout column>
       <customer-must-update-error v-if="customerMustUpdate" />
       <template v-else>
@@ -11,7 +11,7 @@
         <confirm-btn />
       </template>
     </v-layout>
-  </section>
+  </v-container>
 </template>
 
 <script>

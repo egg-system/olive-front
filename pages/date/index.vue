@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <v-container>
     <loading v-if="isLoading" class="loading" />
     <div :class="{ hidden: isLoading }">
       <v-layout column>
@@ -8,7 +8,7 @@
         <back-btn />
       </v-layout>
     </div>
-  </section>
+  </v-container>
 </template>
 
 <script>

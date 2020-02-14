@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <v-container class="min-height">
     <loading v-if="user.isLoading" class="loading" />
     <v-layout justify-center>
       <v-flex xs12 sm8 md7
@@ -46,7 +46,7 @@
         </div>
       </v-flex>
     </v-layout>
-  </section>
+  </v-container>
 </template>
 
 <script>

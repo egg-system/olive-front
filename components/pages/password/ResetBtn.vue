@@ -1,12 +1,12 @@
 <template>
   <div>
-    <v-layout column class="reset-btns-section">
-      <v-flex xs6>
-        <v-btn :disabled="!canClick" color="warning" class="reset-btn" @click="confirm">
+    <v-layout column>
+      <v-flex class="text-center">
+        <v-btn :disabled="!canClick" color="warning" class="font-weight-bold" @click="confirm">
           パスワードをリセットする
         </v-btn>
       </v-flex>
-      <v-flex xs6 class="reset-back-btn-wrapper">
+      <v-flex class="text-center mt-6">
         <v-btn @click="back">
           戻る
         </v-btn>
@@ -53,13 +53,3 @@ export default {
   }
 }
 </script>
-
-<style scoped lang="scss">
-.reset-btns-section {
-  .reset-btn {
-    .v-btn__content {
-      font-size: 1em;
-    }
-  }
-}
-</style>

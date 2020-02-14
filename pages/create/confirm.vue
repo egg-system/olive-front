@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <v-container>
     <v-layout justify-center>
       <v-flex xs12 sm10 md10
               lg8
@@ -22,7 +22,7 @@
         <fixed-btn />
       </v-flex>
     </v-layout>
-  </section>
+  </v-container>
 </template>
 
 <script>

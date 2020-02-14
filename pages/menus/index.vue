@@ -1,22 +1,20 @@
 <template>
-  <section class="container">
-    <v-container>
-      <v-layout column>
-        <customer-must-update-error v-if="customerMustUpdate" />
-        <template v-else>
-          <loading v-if="isLoading" class="loading" />
-          <div :class="{ hidden: isLoading }">
-            <registration-menu
-              v-if="menuIndex == 1"
-              :if-show-only-first-menu="true"
-              :is-first="false"
-            />
-            <menu-list />
-          </div>
-        </template>
-      </v-layout>
-    </v-container>
-  </section>
+  <v-container>
+    <v-layout column>
+      <customer-must-update-error v-if="customerMustUpdate" />
+      <template v-else>
+        <loading v-if="isLoading" class="loading" />
+        <div :class="{ hidden: isLoading }">
+          <registration-menu
+            v-if="menuIndex == 1"
+            :if-show-only-first-menu="true"
+            :is-first="false"
+          />
+          <menu-list />
+        </div>
+      </template>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <v-container>
     <v-layout column>
       <v-layout justify-center>
         <v-flex xs10>
@@ -22,7 +22,7 @@
       <registration-request :is-confirm="true" />
       <fixed-btn />
     </v-layout>
-  </section>
+  </v-container>
 </template>
 
 <script>

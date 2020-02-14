@@ -65,7 +65,7 @@
         <v-alert
           dense
           outlined
-          type="error"
+          type="warning"
           class="mt-4 body-2"
         >
           当院では現在、妊娠している方への治療は行っておりません。産後の骨盤矯正は行っております。ぜひ産後のケアはお任せください。
