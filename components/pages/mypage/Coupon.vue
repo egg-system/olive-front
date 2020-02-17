@@ -30,21 +30,3 @@
     </v-layout>
   </div>
 </template>
-
-<style scoped>
-/* .v-card__title,
-.v-card__text {
-  color: black;
-}
-.card-title {
-  font-size: 15px;
-}
-.number {
-  display: inline;
-  font-size: 30px;
-}
-.coupon-main {
-  width: 90%;
-  margin: 12px auto;
-} */
-</style>
