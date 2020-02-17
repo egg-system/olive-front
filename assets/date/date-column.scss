@@ -1,3 +1,8 @@
+/**
+  scopedでimportすることを想定
+  グローバルでは参照しないこと
+  TODO: #130 tableなどのプロパティにクラス名をつける
+**/
 @import './variables.scss';
 
 table {
