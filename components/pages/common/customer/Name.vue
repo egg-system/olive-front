@@ -15,6 +15,7 @@
           solo
           label="性"
           placeholder="例）青葉"
+          class="font-weight-bold"
         />
       </v-flex>
       <v-flex xs5>
@@ -27,6 +28,7 @@
           solo
           label="名"
           placeholder="例）花子"
+          class="font-weight-bold"
         />
       </v-flex>
     </v-layout>
@@ -50,6 +52,7 @@
           solo
           label="セイ"
           placeholder="例）アオバ"
+          class="font-weight-bold"
         />
       </v-flex>
       <v-flex xs5>
@@ -62,6 +65,7 @@
           solo
           label="メイ"
           placeholder="例）ハナコ"
+          class="font-weight-bold"
         />
       </v-flex>
     </v-layout>

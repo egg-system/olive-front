@@ -16,6 +16,7 @@
             solo
             label="電話番号"
             placeholder="例）09012345678"
+            class="font-weight-bold"
           />
         </v-flex>
       </v-layout>

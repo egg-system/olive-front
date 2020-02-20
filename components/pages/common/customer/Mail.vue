@@ -28,6 +28,7 @@
             solo
             label="メールアドレス"
             placeholder="例）info@olivebodycare.jp"
+            class="font-weight-bold"
           />
         </v-flex>
       </v-layout>
@@ -46,6 +47,7 @@
             solo
             label="メールアドレス"
             placeholder="例）info@olivebodycare.jp"
+            class="font-weight-bold"
           />
         </v-flex>
       </v-layout>
