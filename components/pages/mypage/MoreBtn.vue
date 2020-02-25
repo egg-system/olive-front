@@ -1,8 +1,8 @@
 <template>
-  <v-layout column>
-    <v-flex xs6>
-      <v-btn color="warning" @click="more">
-        もっと見る
+  <v-layout>
+    <v-flex class="text-center">
+      <v-btn large class="font-weight-bold" color="warning" @click="more">
+        履歴をもっと見る
       </v-btn>
     </v-flex>
   </v-layout>

@@ -1,16 +1,14 @@
 <template>
-  <div class="userinfo">
-    <v-layout row>
-      <v-flex xs3>
-        サロンからのメッセージ受信設定
-      </v-flex>
-      <v-flex>
-        <v-radio-group v-model="message" :disabled="isConfirm" :mandatory="false" class="inputTop">
-          <v-radio label="受け取る" value="yes" />
-          <v-radio label="受け取らない" value="no" />
-        </v-radio-group>
-      </v-flex>
-    </v-layout>
+  <div>
+    <div class="mt-2">
+      サロンからのメッセージ受信設定
+    </div>
+    <div class="receive">
+      <v-radio-group v-model="message" :disabled="isConfirm" :mandatory="false" row>
+        <v-radio label="受け取る" value="yes" />
+        <v-radio label="受け取らない" value="no" />
+      </v-radio-group>
+    </div>
   </div>
 </template>
 
@@ -40,15 +38,9 @@ export default {
 }
 </script>
 
-<style>
-.userinfo {
-  padding-top: 20px;
-  text-align: left;
-}
-.must {
-  color: red;
-}
-.inputTop {
-  margin-top: 1px;
+<style lang="scss" scoped>
+.receive {
+  display: flex;
+  justify-content: center;
 }
 </style>

@@ -1,12 +1,8 @@
 <template>
-  <div>
-    <v-layout column>
-      <v-flex xs6>
-        <v-btn :disabled="!canClick" color="warning" @click="set">
-          パスワードを登録する
-        </v-btn>
-      </v-flex>
-    </v-layout>
+  <div class="text-center">
+    <v-btn class="font-weight-bold" :disabled="!canClick" color="warning" @click="set">
+      パスワードを登録する
+    </v-btn>
   </div>
 </template>
 

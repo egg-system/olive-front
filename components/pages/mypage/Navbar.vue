@@ -2,27 +2,36 @@
   <v-navigation-drawer
     v-model="drawer"
     fixed
+    width="280"
     temporary
     app
-    class="nav-menus"
+    class="yellow lighten-5"
   >
-    <v-list v-for="list in lists" :key="list.subHeader">
-      <v-subheader class="sub-header">
-        <v-icon>{{ list.icon }}</v-icon>
-        <span class="text-spacer" />{{ list.subHeader }}
-      </v-subheader>
-      <v-list-tile
-        v-for="link in list.links"
-        :key="link.title"
-        @click="link.function"
+    <v-list>
+      <v-list-group 
+        v-for="list in lists" 
+        :key="list.subHeader"
+        v-model="list.active"
+        :prepend-icon="list.icon"
+        no-action
       >
-        <v-list-tile-content>
-          <v-list-tile-title>
-            {{ link.title }}
-          </v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
-      <v-divider /> 
+        <template slot="activator">
+          <v-list-item-title>
+            {{ list.subHeader }}
+          </v-list-item-title>
+        </template>
+        <v-list-item
+          v-for="link in list.links"
+          :key="link.title"
+          @click="link.function"
+        >
+          <v-list-item-content>
+            <v-list-item-title>
+              {{ link.title }}
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list-group>
     </v-list>
   </v-navigation-drawer>
 </template>
@@ -51,13 +60,14 @@ export default {
         {
           subHeader: 'ホーム',
           icon: 'home',
+          active: true,
           links: [
             {
-              title: 'トップ',
+              title: 'マイページトップ',
               function: this.top
             },
             {
-              title: 'オリーヴボディケア店舗情報',
+              title: '店舗ホームページ',
               function: () => {
                 window.location = 'https://olivebodycare.healthcare/'
               }
@@ -67,6 +77,7 @@ export default {
         {
           subHeader: 'ユーザー',
           icon: 'person',
+          active: true,
           links: [
             {
               title: '登録情報変更',
@@ -83,8 +94,9 @@ export default {
           ]
         },
         {
-          subHeader: '予約',
+          subHeader: '24時間Web予約',
           icon: 'schedule',
+          active: true,
           links: [
             {
               title: 'たまプラーザ本店',
@@ -125,51 +137,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.text-spacer {
-  width: 0.5em;
-}
-
-.sub-header {
-  font-size: 1.2em;
-}
-
-.nav-menus {
-  background-color: #fffde7;
-}
-
-.headMenu {
-  display: block;
-  width: 75%;
-  margin: 1em auto 0;
-  text-align: center;
-  @media screen and (max-width: 767px) {
-    width: 100%;
-  }
-  .mybtn {
-    background-color: #689f38 !important;
-    text-align: center;
-    &.bg_gray {
-      background-color: #ccc !important;
-      cursor: initial;
-    }
-    &.v-btn {
-      width: 30%;
-      height: 3em;
-      @media screen and (max-width: 767px) {
-        width: 45%;
-        margin: 0.3em 0.2em;
-      }
-    }
-    .v-btn__content {
-      font-weight: normal;
-      font-size: 1em;
-      line-height: 1.2;
-      @media screen and (max-width: 767px) {
-        font-size: 0.9em;
-      }
-    }
-  }
-}
-</style>

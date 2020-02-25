@@ -33,7 +33,7 @@ module.exports = {
   /*
   ** Global CSS
   */
-  css: ['~/assets/common.css'],
+  css: ['~/assets/common.scss'],
 
   /*
   ** Plugins to load before mounting the App
@@ -49,7 +49,6 @@ module.exports = {
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
-    '@nuxtjs/vuetify',
     '@nuxtjs/sentry',
     [
       '@nuxtjs/google-tag-manager',
@@ -60,6 +59,7 @@ module.exports = {
       }
     ]
   ],
+  buildModules: ['@nuxtjs/vuetify'],
   /*
   ** Axios module configuration
   */
@@ -77,17 +77,21 @@ module.exports = {
   ** vuetify
   */
   vuetify: {
-    /*
+    treeShake: true,
+    defaultAssets: { icons: 'md' },
     theme: {
-      primary: '#FFC0CB',
-      secondary: '#ffd7cb',
-      accent: '#2196F3',
-      error: '#b71c1c',
-      warning: '#ffeb3b',
-      info: '#00BCD4',
-      success: '#4caf50'
+      themes: {
+        light: {
+          primary: '#4169e1',
+          secondary: '#ffc0cb',
+          accent: '#e50000',
+          error: '#FF1744',
+          warning: '#FF8F00',
+          info: '#fff0f5',
+          success: '#4caf50'
+        }
+      }
     }
-    */
   },
 
   /*

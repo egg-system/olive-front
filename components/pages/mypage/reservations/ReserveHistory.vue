@@ -1,17 +1,15 @@
 <template>
-  <v-layout justify-center column>
-    <template v-for="data in reserveData">
-      <v-flex
-        :key="data.id"
-        d-flex
-        xs12
-        mad4
-        class="card-width"
-      >
-        <reserve-data :data="data" :force-hide-cancel="forceHideCancel" />
-      </v-flex>
-    </template>
-  </v-layout>
+  <v-container>
+    <v-layout justify-center column>
+      <template v-for="data in reserveData">
+        <v-flex
+          :key="data.id"
+        >
+          <reserve-data :data="data" :force-hide-cancel="forceHideCancel" />
+        </v-flex>
+      </template>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -46,43 +44,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.v-card__title,
-.v-card__text {
-  color: black;
-}
-.number {
-  display: inline;
-  font-size: 30px;
-}
-.card-width {
-  width: 80%;
-  margin: 0 auto;
-}
-@media screen and (max-width: 767px) {
-  .card-width {
-    width: 90%;
-  }
-}
-.shop {
-  margin-top: 12px;
-}
-.text-menu {
-  text-align: right;
-}
-.text-value {
-  text-align: left;
-}
-.card-main {
-  margin-top: 12px;
-  margin-bottom: 12px;
-}
-.cancel-btn {
-  width: 10px;
-}
-.v-btn__content {
-  font-size: 1em;
-  font-weight: normal;
-}
-</style>

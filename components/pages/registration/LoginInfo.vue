@@ -1,13 +1,18 @@
 <template>
-  <div class="loginInfo">
-    <v-layout column wrap>
-      <v-flex>
-        <v-card dark color="red lighten-2">
-          <v-card-text><h3>ログイン情報</h3></v-card-text>
+  <div>
+    <v-layout justify-center>
+      <v-flex xs12 sm10 md10
+              lg8
+              xl6
+      >
+        <v-card color="red lighten-2">
+          <v-card-text class="white--text text-center mb-4">
+            <h3>ログイン情報</h3>
+          </v-card-text>
         </v-card>
+        <customer-password />
       </v-flex>
     </v-layout>
-    <customer-password />
   </div>
 </template>
 
@@ -20,10 +25,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.loginInfo {
-  padding-top: 20px;
-  text-align: left;
-}
-</style>

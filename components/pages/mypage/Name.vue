@@ -1,9 +1,16 @@
 <template>
-  <v-flex align-self-baseline>
-    <div class="txt_15em">
-      {{ custmerFullName }} さん
-    </div>
-  </v-flex>
+  <v-container>
+    <v-layout justify-center>
+      <v-flex xs12 sm10 md10
+              lg8
+              xl6
+      >
+        <p class="headline">
+          {{ custmerFullName }} さん
+        </p>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -15,9 +22,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.txt_15em {
-  font-size: 1.5em;
-}
-</style>

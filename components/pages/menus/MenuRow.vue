@@ -1,12 +1,12 @@
 <template>
   <v-card v-if="menuIndex == 0 || menu.minutes == 60">
-    <v-card-title primary-title>
+    <v-card-title>
       <v-radio :value="getShopMenuValue(menu)">
-        <div slot="label" class="menu-info">
+        <div slot="label" class="ml-2 my-2">
           <span>{{ menu.name }}</span>
-          <span class="menu-price">{{ menu.price | priceTaxExceptFormat }}</span>
-          <span class="menu-duration">{{ menu.minutes | timeFormat }}</span>
-          <div class="description">
+          <span class="ml-2">{{ menu.price | priceTaxExceptFormat }}</span>
+          <span class="ml-2">{{ menu.minutes | timeFormat }}</span>
+          <div class="ml-2">
             {{ menu.description }}
           </div>
         </div>
@@ -66,11 +66,16 @@ export default {
   },
   methods: {
     getShopMenuValue(menu) {
-      return {
+      // ラジオボックスにチェックがつかない現象を回避するため
+      //  チェックの判定に、===演算子を使っているので、objectは不可
+      return JSON.stringify({
         storeId: this.storeId,
         menu: menu
-      }
+      })
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+</style>

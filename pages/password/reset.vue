@@ -1,16 +1,27 @@
 <template>
-  <div>
-    <div class="input">
-      <h3 class="block">
-        下記項目を入力して「次へ」でお進みください。
-      </h3>
-      <customer-mail />
-      <customer-phone-number v-if="sholdCheckPhone" />
-    </div>
-    <v-flex>
-      <reset-btn :should-check-phone="sholdCheckPhone" />
-    </v-flex>
-  </div>
+  <v-container class="min-height">
+    <v-layout justify-center>
+      <v-flex xs12 sm10 md10
+              lg8
+              xl6
+      >
+        <v-card color="red lighten-2">
+          <v-card-text class="white--text text-center mb-4">
+            <h3>
+              パスワードの再設定
+            </h3>
+          </v-card-text>
+        </v-card>
+
+        <h3 class="mb-4">
+          メールアドレスを入力して「パスワードをリセットする」でお進みください。
+        </h3>
+        <customer-mail />
+        <customer-phone-number v-if="sholdCheckPhone" />
+        <reset-btn :should-check-phone="sholdCheckPhone" />
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -19,7 +30,6 @@ import CustomerPhoneNumber from '~/components/pages/common/customer/PhoneNumber.
 import ResetBtn from '~/components/pages/password/ResetBtn.vue'
 
 export default {
-  layout: 'password',
   components: {
     CustomerMail,
     CustomerPhoneNumber,
@@ -33,18 +43,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.input {
-  width: 90%;
-  margin: 0 auto;
-}
-.container {
-  min-height: auto !important;
-}
-.reset-btn {
-  .v-btn__content {
-    font-size: 1em;
-  }
-}
-</style>

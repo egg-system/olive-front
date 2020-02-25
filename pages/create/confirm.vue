@@ -1,29 +1,28 @@
 <template>
-  <section class="container">
-    <v-container grid-list-xl>
-      <v-layout column wrap>
-        <v-flex class="create">
-          <v-card dark color="red lighten-2">
-            <v-card-text>
-              <h3 class="mypage-title">
-                新規登録 > 確認
-              </h3>
-            </v-card-text>
-          </v-card>
-        </v-flex>
+  <v-container>
+    <v-layout justify-center>
+      <v-flex xs12 sm10 md10
+              lg8
+              xl6
+      >
+        <v-card color="red lighten-2">
+          <v-card-text class="white--text text-center mt-4">
+            <h3>
+              新規登録 > 確認
+            </h3>
+          </v-card-text>
+        </v-card>
 
-        <div class="input">
-          <customer-name :is-confirm="true" />
-          <customer-mail :is-confirm="true" />
-          <customer-phone-number :is-confirm="true" />
-          <customer-adress v-if="false" :is-confirm="true" />
-          <customer-message :is-confirm="true" />
-          <customer-password :is-confirm="true" />
-          <fixed-btn />
-        </div>
-      </v-layout>
-    </v-container>
-  </section>
+        <customer-name :is-confirm="true" />
+        <customer-mail :is-confirm="true" />
+        <customer-phone-number :is-confirm="true" />
+        <customer-adress v-if="false" :is-confirm="true" />
+        <customer-message :is-confirm="true" />
+        <customer-password :is-confirm="true" />
+        <fixed-btn />
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -47,13 +46,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.create {
-  text-align: left;
-}
-.input {
-  width: 90%;
-  margin: 0 auto;
-}
-</style>

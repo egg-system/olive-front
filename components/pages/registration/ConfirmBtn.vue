@@ -1,13 +1,18 @@
 <template>
   <div>
-    <v-layout column>
-      <v-flex xs6>
-        <v-btn :disabled="!canClick" color="warning" @click="confirm">
+    <v-layout>
+      <v-flex class="text-center">
+        <v-btn large class="font-weight-bold" :disabled="!canClick"
+               color="warning"
+               @click="confirm"
+        >
           予約内容を確認する
         </v-btn>
       </v-flex>
-      <v-flex xs6>
-        <v-btn @click="back">
+    </v-layout>
+    <v-layout>
+      <v-flex class="text-center mt-6">
+        <v-btn class="font-weight-bold" @click="back">
           もどる
         </v-btn>
       </v-flex>
@@ -65,6 +70,3 @@ export default {
   }
 }
 </script>
-
-<style>
-</style>

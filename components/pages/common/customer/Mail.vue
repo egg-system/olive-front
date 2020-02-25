@@ -1,47 +1,62 @@
 <template>
-  <div class="userinfo">
-    <v-layout v-if="readOnly" row>
-      <v-flex xs3>
+  <div>
+    <v-layout v-if="readOnly">
+      <v-flex>
         メールアドレス
       </v-flex>
       <v-flex>
         {{ mail }}
       </v-flex>
     </v-layout>
-    <v-layout v-else row>
-      <v-flex xs3>
-        メールアドレス<span class="must">(必須)</span>
-      </v-flex>
-      <v-layout column>
+    <div v-else>
+      <v-layout>
         <v-flex>
+          メールアドレス
+          <span>
+            <v-chip label x-small color="error">必須</v-chip>
+          </span>
+        </v-flex>
+      </v-layout>
+      <v-layout justify-center>
+        <v-flex class="mt-2" xs10>
           <v-text-field
             v-model="mail"
             :rules="mailRules"
             :disabled="isConfirm"
             :clearable="!isConfirm"
             type="text"
+            solo
             label="メールアドレス"
+            placeholder="例）info@olivebodycare.jp"
+            class="font-weight-bold"
           />
         </v-flex>
-        <v-flex v-if="!isConfirm">
-          確認のため、再度メールアドレスを入力してください
+      </v-layout>
+      <v-layout>
+        <v-flex v-if="!isConfirm" class="text-center body-2 mb-4">
+          ＜確認の為再度メールアドレスを入力してください＞
         </v-flex>
-        <v-flex v-if="!isConfirm">
+      </v-layout>
+      <v-layout justify-center>
+        <v-flex v-if="!isConfirm" xs10>
           <v-text-field
             v-model="mailConfirm"
             :rules="mailRules"
             clearable
             type="text"
+            solo
             label="メールアドレス"
+            placeholder="例）info@olivebodycare.jp"
+            class="font-weight-bold"
           />
         </v-flex>
       </v-layout>
-    </v-layout>
+    </div>
     <v-alert v-if="!checkSame"
              :value="true"
              color="error"
              icon="warning"
-             outline
+             outlined
     >
       同じメールアドレスを入力してください
     </v-alert>
@@ -95,16 +110,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.userinfo {
-  padding-top: 20px;
-  text-align: left;
-}
-.must {
-  color: red;
-}
-.inputTop {
-  margin-top: 1px;
-}
-</style>

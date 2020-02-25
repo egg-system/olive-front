@@ -1,0 +1,41 @@
+/**
+  scopedでimportすることを想定
+  グローバルでは参照しないこと
+  TODO: #130 tableなどのプロパティにクラス名をつける
+**/
+@import './variables.scss';
+
+table {
+  border-spacing: 0px;
+}
+
+td,
+th {
+	border: 1px $borderColor solid;
+	border-spacing: 0px;
+	border-right: none;
+	border-bottom: none;
+}
+
+th {
+	padding: 5px 0;
+}
+
+td.col-data-wrapper {
+  border-left: none;
+  border-top: none;
+}
+
+table.inner-table {
+  width: 100%;
+}
+
+tr.inner-table {
+  td {
+    padding: 5px 0;
+  }
+  
+  td.disabled {
+    background-color: $disabledColor;
+  }  
+}

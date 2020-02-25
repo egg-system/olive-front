@@ -107,16 +107,10 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .userinfo {
   padding-top: 20px;
   text-align: left;
-}
-.must {
-  color: red;
-}
-.inputTop {
-  margin-top: 1px;
 }
 .address-sub {
   margin-top: 20px;

@@ -1,13 +1,15 @@
 <template>
   <div>
-    <v-layout column>
-      <v-flex xs6>
-        <v-btn color="warning" @click="fix">
+    <v-layout>
+      <v-flex class="text-center">
+        <v-btn large class="font-weight-bold my-6" color="warning" @click="fix">
           入力内容を確定する
         </v-btn>
       </v-flex>
-      <v-flex xs6>
-        <v-btn @click="back">
+    </v-layout>
+    <v-layout>
+      <v-flex class="text-center">
+        <v-btn class="font-weight-bold" @click="back">
           入力内容を変更する
         </v-btn>
       </v-flex>
@@ -28,6 +30,3 @@ export default {
   }
 }
 </script>
-
-<style>
-</style>

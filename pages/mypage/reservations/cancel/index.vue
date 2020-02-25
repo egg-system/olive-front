@@ -1,29 +1,41 @@
 <template>
-  <div>
-    <v-flex class="mypage-top">
-      <v-card dark color="red lighten-2">
-        <v-card-text>
-          <h3 class="mypage-title">
-            マイページトップ > 予約一覧 > 予約キャンセル確認
-          </h3>
-        </v-card-text>
-      </v-card>
-    </v-flex>
+  <v-container class="min-height" grid-list-lg>
+    <v-layout justify-center>
+      <v-flex xs12 sm10 md10
+              lg8
+              xl6
+      >
+        <v-card color="red lighten-2">
+          <v-card-text class="white--text text-center mb-4">
+            <h3>
+              マイページトップ > 予約一覧 > 予約キャンセル確認
+            </h3>
+          </v-card-text>
+        </v-card>
 
-    <mypage-reserve-history　:force-hide-cancel="true" />
+        <mypage-reserve-history　:force-hide-cancel="true" />
+        
+        <p class="text-center my-4">
+          上記の予約をキャンセルします。よろしいですか？
+        </p>
+      </v-flex>
+    </v-layout>
 
-    <div class="message">
-      予約をキャンセルします。よろしいですか？
-    </div>
-    <v-flex>
-      <v-btn @click="back">
-        戻る
-      </v-btn>
-      <v-btn color="warning" @click="complete">
-        確定する
-      </v-btn>
-    </v-flex>
-  </div>
+    <v-layout justify-center>
+      <v-flex class="text-center">
+        <v-btn class="font-weight-bold" @click="back">
+          戻る
+        </v-btn>
+      </v-flex>
+    </v-layout>
+    <v-layout justify-center>
+      <v-flex class="text-center">
+        <v-btn class="font-weight-bold" color="warning" @click="complete">
+          確定する
+        </v-btn>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -70,9 +82,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.message {
-  margin-top: 15px;
-}
-</style>

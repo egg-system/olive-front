@@ -1,13 +1,14 @@
 <template>
-  <div>
-    <v-layout column>
-      <v-flex xs6>
-        <v-btn :disabled="!canClick" color="warning" @click="confirm">
-          確認画面へ
-        </v-btn>
-      </v-flex>
-    </v-layout>
-  </div>
+  <v-layout>
+    <v-flex class="text-center">
+      <v-btn arge class="font-weight-bold mb-6" :disabled="!canClick"
+             color="warning"
+             @click="confirm"
+      >
+        確認画面へ
+      </v-btn>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
@@ -27,6 +28,3 @@ export default {
   }
 }
 </script>
-
-<style>
-</style>

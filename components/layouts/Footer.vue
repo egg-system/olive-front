@@ -1,10 +1,10 @@
 <template>
-  <v-footer class="footer">
-    <v-flex
-      text-xs-center
-    >
-      &copy;{{ date }} — <strong>olive</strong>
-    </v-flex>
+  <v-footer>
+    <v-layout>
+      <v-flex text-center>
+        &copy;{{ date }} — <strong>olivebodycare</strong>
+      </v-flex>
+    </v-layout>
   </v-footer>
 </template>
 
@@ -16,9 +16,5 @@ export default {
 }
 </script>
 
-<style>
-.footer {
-  position: absolute;
-  width: 100%;
-}
+<style scoped lang="scss">
 </style>

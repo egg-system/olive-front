@@ -1,53 +1,71 @@
 <template>
-  <div class="userinfo">
-    <v-layout row>
-      <v-flex xs3>
-        氏名<span class="must">(必須)</span>
-      </v-flex>
-      <v-flex>
+  <div class="mt-4">
+    氏名
+    <span>
+      <v-chip label x-small color="error">必須</v-chip>
+    </span>
+    <v-layout justify-center class="mt-2">
+      <v-flex xs5 class="mr-1">
         <v-text-field
           v-model="lastName"
           :rules="nameRules"
           :disabled="isConfirm"
           :clearable="!isConfirm"
           type="text"
-          label="姓"
+          solo
+          label="性"
+          placeholder="例）青葉"
+          class="font-weight-bold"
         />
       </v-flex>
-      <v-flex>
+      <v-flex xs5>
         <v-text-field
           v-model="firstName"
           :rules="nameRules"
           :disabled="isConfirm"
           :clearable="!isConfirm"
           type="text"
+          solo
           label="名"
+          placeholder="例）花子"
+          class="font-weight-bold"
         />
       </v-flex>
     </v-layout>
 
-    <v-layout row>
-      <v-flex xs3>
-        氏名カナ<span class="must">(必須)</span>
-      </v-flex>
+    <v-layout>
       <v-flex>
+        氏名カナ
+        <span>
+          <v-chip label x-small color="error">必須</v-chip>
+        </span>
+      </v-flex>
+    </v-layout>
+    <v-layout justify-center class="mt-2">
+      <v-flex xs5 class="mr-1">
         <v-text-field
           v-model="lastNameKana"
           :rules="nameKanaRules"
           :disabled="isConfirm"
           :clearable="!isConfirm"
           type="text"
+          solo
           label="セイ"
+          placeholder="例）アオバ"
+          class="font-weight-bold"
         />
       </v-flex>
-      <v-flex>
+      <v-flex xs5>
         <v-text-field
           v-model="firstNameKana"
           :rules="nameKanaRules"
           :disabled="isConfirm"
           :clearable="!isConfirm"
           type="text"
+          solo
           label="メイ"
+          placeholder="例）ハナコ"
+          class="font-weight-bold"
         />
       </v-flex>
     </v-layout>
@@ -113,16 +131,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.userinfo {
-  padding-top: 20px;
-  text-align: left;
-}
-.must {
-  color: red;
-}
-.inputTop {
-  margin-top: 1px;
-}
-</style>

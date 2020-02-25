@@ -1,29 +1,31 @@
 <template>
-  <div>
-    <v-flex class="mypage-top">
-      <v-card dark color="red lighten-2">
-        <v-card-text>
-          <h3 class="mypage-title">
-            マイページトップ > 登録情報変更
-          </h3>
-        </v-card-text>
-      </v-card>
-    </v-flex>
+  <v-container class="min-height">
+    <v-layout justify-center>
+      <v-flex xs12 sm10 md10
+              lg8
+              xl6
+      >
+        <v-card color="red lighten-2">
+          <v-card-text class="white--text text-center mb-4">
+            <h3>
+              マイページトップ > 登録情報変更
+            </h3>
+          </v-card-text>
+        </v-card>
 
-    <h3>
-      <p class="under">
-        登録情報変更
-      </p>
-    </h3>
-    <div class="pr">
-      <customer-mail :read-only="true" />
-      <customer-name />
-      <customer-phone-number />
-      <customer-adress v-if="false" />
-      <customer-message />
-      <confirm-btn />
-    </div>
-  </div>
+        <h3>
+          登録情報変更
+        </h3>
+        <hr color="#ef9a9a" class="mb-4">
+        <customer-mail :read-only="true" />
+        <customer-name />
+        <customer-phone-number />
+        <customer-adress v-if="false" />
+        <customer-message />
+        <confirm-btn />
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -53,10 +55,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.pr {
-  width: 90%;
-  margin: 0 auto;
-}
-</style>

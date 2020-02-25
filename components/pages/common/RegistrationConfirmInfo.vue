@@ -1,41 +1,46 @@
 <template>
-  <div class="confirmInfo">
-    <v-layout column wrap>
-      <v-flex>
-        <v-card dark color="red lighten-2">
-          <v-card-text>
+  <div>
+    <v-layout justify-center>
+      <v-flex xs12 sm10 md10
+              lg8
+              xl6
+      >
+        <v-card color="red lighten-2">
+          <v-card-text class="white--text text-center mb-4">
             <h3>サロンからお客様への確認事項</h3>
           </v-card-text>
         </v-card>
-      </v-flex>
-    </v-layout>
-
-    <v-layout column>
-      <v-flex xs3 class="txt_left">
-        ご来店に際しての注意事項
-        <span class="must">(必須)</span>
-      </v-flex>
-      <v-flex xs3 class="txt_left">
-        ・ご予約確定後の前日・当日キャンセル・無断キャンセルについては、キャンセル料金を頂戴いたします（前日3,240円、当日6,480円）。予めご了承ください。
-      </v-flex>
-      <v-flex xs3 class="txt_left">
-        ・ご予約のご変更、キャンセルをご希望の際はご予約日２日前までにマイページからキャンセル処理をするか当院にご連絡ください。
-      </v-flex>
-      <v-flex xs3 class="txt_left">
-        ・当院は法令およびプライバシーポリシーを厳守しております。しつこい営業や勧誘のメールをお届けすることは一切ありません。
-      </v-flex>
-      <v-flex xs3 class="txt_left">
-        ・
-        <a href="https://olivebodycare.jp/web-reservation/agreement/">ご予約に関する規約がございます。</a>確認の上、予約処理を実行して下さい。
-      </v-flex>
-      <v-flex>
-        <v-checkbox
-          v-model="isOk"
-          :disabled="isConfirm"
-          class="okBtn"
-          label="確認し、同意します"
-          value="ok"
-        />
+        <v-layout>
+          <v-flex>
+            ご来店に際しての注意事項
+            <p class="mt-3">
+              ・ご予約確定後の前日・当日キャンセル・無断キャンセルについては、キャンセル料金を頂戴いたします（前日3,240円、当日6,480円）。予めご了承ください。
+            </p>
+            <p>
+              ・ご予約のご変更、キャンセルをご希望の際はご予約日２日前までにマイページからキャンセル処理をするか当院にご連絡ください。
+            </p>
+            <p>
+              ・当院は法令およびプライバシーポリシーを厳守しております。しつこい営業や勧誘のメールをお届けすることは一切ありません。
+            </p>
+            <p>
+              ・
+              <a href="https://olivebodycare.jp/web-reservation/agreement/">ご予約に関する規約がございます。</a>確認の上、予約処理を実行して下さい。
+            </p>
+          </v-flex>
+        </v-layout>
+        <v-layout>
+          <v-flex class="okBtn">
+            <span>
+              <v-chip label x-small class="mt-6 error">必須</v-chip>
+            </span>
+            <v-checkbox
+              v-model="isOk"
+              :disabled="isConfirm"
+              label="確認し、同意します。"
+              value="ok"
+            />
+          </v-flex>
+        </v-layout>
       </v-flex>
     </v-layout>
   </div>
@@ -71,21 +76,9 @@ export default {
 }
 </script>
 
-<style>
-.confirmInfo {
-  padding-top: 20px;
-  text-align: left;
-}
-@media screen and (max-width: 767px) {
-  .confirmInfo {
-    width: 100%;
-    margin: initial;
-  }
-}
+<style lang="scss" scoped>
 .okBtn {
+  display: flex;
   justify-content: center;
-}
-.txt_left {
-  text-align: left;
 }
 </style>

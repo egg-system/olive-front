@@ -1,24 +1,22 @@
 <template>
-  <section class="container">
-    <v-container grid-list-xl>
-      <v-layout column wrap>
-        <v-layout row>
-          <v-flex>
-            <v-card-text class="complete">
-              <template v-if="user.isCreate">
-                情報登録、および予約が確定しました。
-              </template>
-              <template v-else>
-                予約が確定しました。
-              </template>
-              <br>予約確定メールをお送りしましたので、ご確認ください。
-            </v-card-text>
-          </v-flex>
-        </v-layout>
-        <next-btn />
+  <v-container class="min-height">
+    <v-layout column>
+      <v-layout justify-center>
+        <v-flex class="text-center">
+          <div class="red--text font-weight-bold mt-8">
+            <template v-if="user.isCreate">
+              情報登録、および予約が確定しました。
+            </template>
+            <template v-else>
+              予約が確定しました。
+            </template>
+            <p>予約確定メールをお送りしましたので、ご確認ください。</p>
+          </div>
+        </v-flex>
       </v-layout>
-    </v-container>
-  </section>
+      <next-btn />
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -86,10 +84,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.complete {
-  color: red;
-  font-weight: bolder;
-}
-</style>

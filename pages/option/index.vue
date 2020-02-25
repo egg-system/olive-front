@@ -1,12 +1,12 @@
 <template>
-  <section class="container">
+  <v-container>
     <div>
       <h1>option</h1>
-      <div class="text-xs-center">
+      <div class="text-center">
         <nuxt-link to="/date">
           日時
         </nuxt-link>
       </div>
     </div>
-  </section>
+  </v-container>
 </template>

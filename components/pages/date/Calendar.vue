@@ -1,51 +1,67 @@
 <template>
-  <div class="component-wrapper">
-    <v-layout column wrap>
-      <v-flex>
-        <v-card dark color="red lighten-2">
-          <v-card-text>
+  <div class="mt-8">
+    <v-layout justify-center>
+      <v-flex xs12 sm8 md7
+              lg6
+              xl4
+      >
+        <v-card color="red lighten-2">
+          <v-card-text class="text-center white--text">
             <h3>日時を選択してください</h3>
           </v-card-text>
         </v-card>
+
+        <section class="text-center">
+          <div class="elevation-1">
+            <week-calendar-row
+              v-for="(weekData, index) in calendarWeeks"
+              :key="index"
+              :week-data="weekData"
+            />
+          </div>
+        </section>
+        
+        <section>
+          <v-card class="mt-8">
+            <v-card-title>
+              予約表の表記について
+            </v-card-title>
+            <v-layout>
+              <v-flex xs3>
+                <p class="text-center">
+                  ー
+                </p>
+              </v-flex>
+              <v-flex xs9>
+                <p>：ご予約できません。</p>
+              </v-flex>
+            </v-layout>
+            <v-layout>
+              <v-flex xs3>
+                <p class="text-center">
+                  ○・数字
+                </p>
+              </v-flex>
+              <v-flex xs9>
+                <p>：ご予約できます。予約可能な残数を示しています。</p>
+              </v-flex>
+            </v-layout> 
+            <v-layout>
+              <v-flex xs3>
+                <p class="text-center">
+                  ×
+                </p>
+              </v-flex>
+              <v-flex xs9>
+                <p>
+                  ：ご予約が埋まっておりお取りする事が出来ません。キャンセルなどで空きが出来しだい数字に変わります。
+                </p>
+              </v-flex>
+            </v-layout>
+          </v-card>
+        </section>
       </v-flex>
     </v-layout>
-    <section class="calendar">
-      <div class="table-wrapper">
-        <div class="elevation-1">
-          <week-calendar-row
-            v-for="(weekData, index) in calendarWeeks"
-            :key="index"
-            :week-data="weekData"
-          />
-        </div>
-      </div>
-    </section>
-    <section>
-      <div class="calendar-explain">
-        <v-card>
-          <v-card-title>予約表の表記について</v-card-title>
-          <v-card-text>
-            <dl>
-              <div>
-                <dt>-</dt>：
-                <dd>ご予約できません。</dd>
-              </div>
-              <div>
-                <dt>○・数字</dt>：
-                <dd>ご予約できます。予約可能な残数を示しています。</dd>
-              </div>
-              <div>
-                <dt>×</dt>：
-                <dd>
-                  ご予約が埋まっておりお取りする事が出来ません。
-                  <br>キャンセルなどで空きが出来しだい数字に変わります。
-                </dd>
-              </div>
-            </dl>
-          </v-card-text>
-        </v-card>
-      </div>
-    </section>
   </div>
 </template>
 
@@ -76,6 +92,6 @@ export default {
 }
 </script>
 
-<style lang="scss">
-@import '../../../assets/calendar.scss';
+<style scoped lang="scss">
+@import '@/assets/date/variables.scss';
 </style>
