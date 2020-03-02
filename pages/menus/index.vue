@@ -34,7 +34,11 @@ export default {
     CustomerMustUpdateError
   },
   async fetch({ store, query, error }) {
-    if (store.state.shop.id && store.getters['menu/hasSubShops']) {
+    if (
+      store.state.shop.id &&
+      store.getters['menu/hasSubShops'] &&
+      store.state.shop.id === query.shopId
+    ) {
       return
     }
 
