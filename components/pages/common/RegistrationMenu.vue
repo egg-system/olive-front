@@ -185,7 +185,7 @@ export default {
   methods: {
     getMenuOptionsForDisplay(menus) {
       if (!Array.isArray(menus) || !menus.length) return []
-      return menus
+      return _(menus)
         .filter(menu => Array.isArray(menu.options) && menu.options.length > 0)
         .map(menu => {
           const { options, mimitsuboCount } = menu
@@ -200,7 +200,8 @@ export default {
             return { name, price, minutes: 0 }
           })
         })
-        .flat()
+        .flatten()
+        .value()
     }
   }
 }
