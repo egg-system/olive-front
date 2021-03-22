@@ -109,6 +109,14 @@ export default {
             {
               title: '札幌円山店',
               function: () => this.reserve(4)
+            },
+            {
+              title: '川崎宮崎台店',
+              function: () => this.reserve(5)
+            },
+            {
+              title: '横浜美しが丘店',
+              function: () => this.reserve(6)
             }
           ]
         }
