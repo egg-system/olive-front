@@ -15,6 +15,7 @@ module.exports = {
     shop: 'https://dashboard-stage.olivebodycare.healthcare/api/shops/:id',
     menu:
       'https://dashboard-stage.olivebodycare.healthcare/api/shops/:id/menus',
+    tax: `https://dashboard-stage.olivebodycare.healthcare/api/taxes`,
     date: 'https://dashboard-stage.olivebodycare.healthcare/api/shops/:id/dates'
   },
   isProd: false,

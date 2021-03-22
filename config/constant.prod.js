@@ -13,6 +13,7 @@ module.exports = {
       'https://dashboard.olivebodycare.healthcare/api/reservations/:id',
     shop: 'https://dashboard.olivebodycare.healthcare/api/shops/:id',
     menu: 'https://dashboard.olivebodycare.healthcare/api/shops/:id/menus',
+    tax: `https://dashboard.olivebodycare.healthcare/api/taxes`,
     date: 'https://dashboard.olivebodycare.healthcare/api/shops/:id/dates'
   },
   isProd: true,

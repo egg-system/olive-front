@@ -7,6 +7,7 @@ module.exports = {
     reserveCommit: 'http://localhost:8080/api/reservations',
     reservation: 'http://localhost:8080/api/reservations/:id',
     menu: `http://localhost:8080/api/shops/:id/menus`,
+    tax: `http://localhost:8080/api/taxes`,
     shop: `http://localhost:8080/api/shops/:id`,
     date: `http://localhost:8080/api/shops/:id/dates`
   },

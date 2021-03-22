@@ -29,7 +29,10 @@ export default {
   async fetch({ store, error, route, redirect }) {
     try {
       // カレンダーを取得
-      await store.dispatch('reservation/date/getCalendar')
+      await Promise.all([
+        store.dispatch('reservation/date/getCalendar'),
+        store.dispatch('tax/getTax', {})
+      ])
     } catch (e) {
       error({ statusCode: (e.response && e.response.status) || 500 })
     }

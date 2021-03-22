@@ -15,6 +15,10 @@ Vue.filter('priceTaxExceptFormat', val => {
   return isNaN(val) ? '' : '¥' + val.toLocaleString()
 })
 
+Vue.filter('priceTaxIncludeFormat', (val, rate) => {
+  return isNaN(val) ? '' : '¥' + (val * rate).toLocaleString()
+})
+
 Vue.filter('timeFormat', val => {
   return val ? val + '分' : ''
 })
