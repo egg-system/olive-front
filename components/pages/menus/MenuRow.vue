@@ -4,7 +4,12 @@
       <v-radio :value="getShopMenuValue(menu)">
         <div slot="label" class="ml-2 my-2">
           <span>{{ menu.name }}</span>
-          <span class="ml-2">{{ menu.price | priceTaxExceptFormat }}</span>
+          <span v-if="isDisplayTax">
+            <span class="ml-2">{{ menu.price | priceTaxIncludeFormat(getRate) }}</span>
+          </span>
+          <span v-else>
+            <span class="ml-2">{{ menu.price | priceTaxExceptFormat }}</span>
+          </span>
           <span class="ml-2">{{ menu.minutes | timeFormat }}</span>
           <div class="ml-2">
             {{ menu.description }}
@@ -57,7 +62,8 @@ export default {
       const isSelectedMenu = this.selectedMenu.id === this.menu.id
       return isSelectedMenu && this.hasOption
     },
-    ...mapGetters('reservation/select', ['selectedMenu'])
+    ...mapGetters('reservation/select', ['selectedMenu']),
+    ...mapGetters('tax', ['isDisplayTax', 'getRate'])
   },
   updated() {
     // domの再利用により、optionが全チェックされてしまう

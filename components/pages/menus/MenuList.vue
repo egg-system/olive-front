@@ -40,11 +40,16 @@
                     ご希望のメニューを選択してください
                   </v-card-title>
                   <div class="text-right body-2 pb-2">
-                    ※金額は全て税抜きです。
+                    <div v-if="isDisplayTax">
+                      ※金額は全て税込です。
+                    </div>
+                    <div v-else>
+                      ※金額は全て税抜きです。
+                    </div>
                   </div>
                 </v-card>
                 <div v-for="menu in subShop.menus" :key="`${subShop.id}-${menu.id}`">
-                  <menu-row :store-id="subShop.id" :menu="menu" />
+                  <menu-row :store-id="subShop.id" :menu="menu" :is-display-tax="isDisplayTax" />
                 </div>
               </v-flex>
             </v-layout>
@@ -134,7 +139,8 @@ export default {
       'isMenuSelected',
       'selectedOptions',
       'selectedMenuParamsQuery'
-    ])
+    ]),
+    ...mapGetters('tax', ['isDisplayTax'])
   },
   methods: {
     scrollShopSection(shopId) {

@@ -48,7 +48,12 @@
                     {{ item.name }}
                   </td>
                   <td v-if="item">
-                    {{ item.price | priceFormat }}
+                    <span v-if="isDisplayTax">
+                      {{ item.price | priceTaxIncludeFormat(getRate) }}
+                    </span>
+                    <span v-else>
+                      {{ item.price | priceFormat }}
+                    </span>
                   </td>
                   <td v-if="item">
                     {{ item.minutes | timeFormat }}
@@ -180,7 +185,8 @@ export default {
       'isTwoMenusSelected',
       'selectedStore',
       'menus'
-    ])
+    ]),
+    ...mapGetters('tax', ['isDisplayTax', 'getRate'])
   },
   methods: {
     getMenuOptionsForDisplay(menus) {

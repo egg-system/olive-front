@@ -47,7 +47,8 @@ export default {
     try {
       await Promise.all([
         store.dispatch('shop/getShop', { id: shopId }),
-        store.dispatch('menu/getMenus', { shopId })
+        store.dispatch('menu/getMenus', { shopId }),
+        store.dispatch('tax/getTax', {})
       ])
     } catch (e) {
       error({ statusCode: (e.response && e.response.status) || 500 })
@@ -56,7 +57,8 @@ export default {
   computed: {
     ...mapState('reservation/select', ['menuIndex']),
     ...mapGetters('menu', ['isLoading', 'hasSubShops']),
-    ...mapGetters('user', ['customerMustUpdate'])
+    ...mapGetters('user', ['customerMustUpdate']),
+    ...mapGetters('tax', ['isDisplayTax'])
   }
 }
 </script>
