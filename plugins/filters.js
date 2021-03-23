@@ -19,6 +19,10 @@ Vue.filter('priceTaxIncludeFormat', (val, rate) => {
   return isNaN(val) ? '' : '¥' + (val * rate).toLocaleString()
 })
 
+Vue.filter('priceTaxIncludeFormatWithZeikomi', (val, rate) => {
+  return isNaN(val) ? '' : '¥' + (val * rate).toLocaleString() + '(税込)'
+})
+
 Vue.filter('timeFormat', val => {
   return val ? val + '分' : ''
 })

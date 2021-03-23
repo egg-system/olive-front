@@ -49,7 +49,7 @@
                   </td>
                   <td v-if="item">
                     <span v-if="isDisplayTax">
-                      {{ item.price | priceTaxIncludeFormat(getRate) }}
+                      {{ item.price | priceTaxIncludeFormatWithZeikomi(getRate) }}
                     </span>
                     <span v-else>
                       {{ item.price | priceFormat }}
