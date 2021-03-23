@@ -133,13 +133,23 @@ export default {
       }
     },
     isFirstLabel() {
-      return _.get(this, 'menus[0].menu.department_id') === 1
-        ? '初めてです(初診料 ¥1,000)'
-        : '初めてです(初回カウンセリング料 ¥1,000)'
+      var price = 1000
+      if (this.isDisplayTax) {
+        price = Math.floor(price * this.getRate).toLocaleString()
+        return _.get(this, 'menus[0].menu.department_id') === 1
+          ? '初めてです(初診料 ¥' + price + '(税込))'
+          : '初めてです(初回カウンセリング料 ¥' + price + '(税込))'
+      } else {
+        price = price.toLocaleString()
+        return _.get(this, 'menus[0].menu.department_id') === 1
+          ? '初めてです(初診料 ¥' + price + '(税抜))'
+          : '初めてです(初回カウンセリング料 ¥' + price + '(税抜))'
+      }
     },
     ...mapGetters('user', ['isLogin', 'isFirstValue']),
     ...mapState('user', ['childrenCount']),
-    ...mapState('reservation/select', ['menus'])
+    ...mapState('reservation/select', ['menus']),
+    ...mapGetters('tax', ['isDisplayTax', 'getRate'])
   },
   beforeMount() {
     // ローディングを解除
