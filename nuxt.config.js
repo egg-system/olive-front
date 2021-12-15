@@ -8,6 +8,9 @@ module.exports = {
   ** Headers of the page
   */
   head: {
+    htmlAttrs:{
+      lang: 'ja'
+    },
     title: '整体・骨盤矯正の女性専門の治療院オリーヴボディケア',
     meta: [
       { charset: 'utf-8' },
