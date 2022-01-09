@@ -7,14 +7,17 @@
 $ npm install
 
 # serve with hot reload at localhost:3000
-$ npm run dev
+$ npm run local # 開発環境用
 
 # build for production and launch server
-$ npm run build
+$ npm run build:local # 開発環境用
+$ npm run build:stg # ステージング環境用
+$ npm run build:prod # 本番環境用
 $ npm start
 
 # generate static project
-$ npm run generate
+$ npm run generate:stg # ステージング環境用
+$ npm run generate:prod # 本番環境用
 ```
 
 ## 静的ページ確認
