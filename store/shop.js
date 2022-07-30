@@ -11,7 +11,8 @@ export const state = () => ({
   open_at: null,
   close_at: null,
   break_from: null,
-  break_to: null
+  break_to: null,
+  near_stores: []
 })
 
 /* mutations */
@@ -23,6 +24,7 @@ export const mutations = {
     state.close_at = shop.close_at
     state.break_from = shop.break_from
     state.break_to = shop.break_to
+    state.near_stores = shop.near_stores
   }
 }
 

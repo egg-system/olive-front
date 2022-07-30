@@ -4,7 +4,9 @@
     <div :class="{ hidden: isLoading }">
       <v-layout column>
         <registration-menu :is-first="false" />
+        <anchor-to-other-shop-list v-if="$store.state.shop.near_stores.length > 0" />
         <calendar />
+        <other-shop-list v-if="$store.state.shop.near_stores.length > 0" />
         <back-btn />
       </v-layout>
     </div>
@@ -14,6 +16,8 @@
 <script>
 import { mapState, mapMutations, mapGetters } from 'vuex'
 import RegistrationMenu from '~/components/pages/common/RegistrationMenu.vue'
+import AnchorToOtherShopList from '~/components/pages/date/AnchorToOtherShopList.vue'
+import OtherShopList from '~/components/pages/date/OtherShopList.vue'
 import Calendar from '~/components/pages/date/Calendar.vue'
 import BackBtn from '~/components/pages/date/BackBtn.vue'
 import Loading from '~/components/layouts/Loading.vue'
@@ -22,6 +26,8 @@ export default {
   middleware: ['init-shop-id', 'clear-selected-date', 'fetch-menus-from-query'],
   components: {
     RegistrationMenu,
+    AnchorToOtherShopList,
+    OtherShopList,
     Calendar,
     BackBtn,
     Loading
