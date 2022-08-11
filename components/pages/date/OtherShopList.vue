@@ -21,10 +21,12 @@
                   class="col"
                   cols="12"
                   sm="6"
-                  md="3"
+                  md="4"
                 >
                   <v-btn
-                    class="text-capitalize"
+                    outlined
+                    elevation="2"
+                    color="blue darken-4"
                     block
                     :href="`/menus/?menuIndex=1&shopId=${near_store.near_store_id}`"
                   >
@@ -44,7 +46,4 @@
 </script>
 
 <style scoped lang="scss">
-.col {
-  text-align: center;
-}
 </style>

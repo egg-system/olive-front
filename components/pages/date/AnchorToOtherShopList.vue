@@ -1,18 +1,23 @@
 <template>
   <div class="mt-8">
     <v-layout justify-center>
-      <v-flex xs12 sm10 md10
-              lg8
-              xl6
+      <v-flex xs12 sm8 md7
+              lg6
+              xl4
+              class="text-center"
       >
-        <v-card color="blue lighten-4">
-          <v-card-text class="text-center white--text">
-            <a href="#other-shop-list">近くの院を見てみる（メニュー選択）</a>
-          </v-card-text>
-        </v-card>
-        <p class="text-center">
-          ご希望の日時が無い場合はぜひ近隣の院もご覧ください。
-        </p>
+        <div class="body-2">
+          以下のカレンダーでご希望の日時が無い場合は<br>
+          ぜひ近くの分院もご覧ください。
+        </div>
+        <v-btn
+          outlined
+          elevation="2"
+          color="blue darken-4"
+          href="#other-shop-list"
+        >
+          近くの分院を見てみる（メニュー選択）
+        </v-btn>
       </v-flex>
     </v-layout>
   </div>
