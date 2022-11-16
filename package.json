@@ -37,7 +37,7 @@
     "lodash": "^4.17.15",
     "lodash.template": ">=4.5.0",
     "moment": "^2.24.0",
-    "nuxt": "^2.11.0",
+    "nuxt": "^2.15.8",
     "vuex-persistedstate": "^2.7.0"
   },
   "devDependencies": {
