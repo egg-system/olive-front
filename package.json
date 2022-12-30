@@ -37,14 +37,14 @@
     "lodash": "^4.17.15",
     "lodash.template": ">=4.5.0",
     "moment": "^2.24.0",
-    "nuxt": "^2.11.0",
+    "nuxt": "^3.0.0",
     "vuex-persistedstate": "^2.7.0"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",
     "@babel/plugin-transform-object-super": "^7.7.4",
     "@babel/preset-env": "^7.7.7",
-    "@nuxtjs/vuetify": "^1.10.2",
+    "@nuxtjs/vuetify": "^1.12.3",
     "@vue/babel-preset-app": "^4.1.2",
     "@vue/test-utils": "^1.0.0-beta.30",
     "babel-core": "^7.0.0-bridge.0",
@@ -53,7 +53,7 @@
     "core-js": "^2.6.11",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.9.0",
-    "eslint-loader": "^2.2.1",
+    "eslint-loader": "^4.0.2",
     "eslint-plugin-prettier": "3.1.2",
     "eslint-plugin-vue": "^6.1.2",
     "eslint-plugin-vue-scoped-css": "^0.3.3",
@@ -62,7 +62,7 @@
     "mem": "^6.0.1",
     "nodemon": "^1.19.4",
     "prettier": "1.14.3",
-    "vue-jest": "^3.0.5"
+    "vue-jest": "^4.0.1"
   },
   "jest": {
     "transform": {
