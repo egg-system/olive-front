@@ -2,9 +2,7 @@ import _ from 'lodash'
 
 const FIRST_MENU_INDEX = 0
 const SECOND_MENU_INDEX = 1
-const MIMITSUBO_OPTION_ID = 7
 const DEFAULT_OPTIONS = []
-const DEFAULT_MIMITSUBO_COUNT = 0
 
 /* state */
 export const state = () => ({
@@ -16,10 +14,7 @@ export const state = () => ({
   menuIndex: FIRST_MENU_INDEX,
   // menuごとのoptions
   // optionsList[menuIndex][index] === option
-  optionsList: [DEFAULT_OPTIONS],
-  // menuごとのmimitsuboCount
-  // mimitsuboCountList[menuIndex] === mimitsuboCount
-  mimitsuboCountList: [DEFAULT_MIMITSUBO_COUNT]
+  optionsList: [DEFAULT_OPTIONS]
 })
 
 /* mutations */
@@ -36,10 +31,7 @@ export const mutations = {
     // 耳つぼジュエリの個数、オプションの選択を初期化する
     const optionsList = _.cloneDeep(state.optionsList)
     optionsList[state.menuIndex] = DEFAULT_OPTIONS
-    const mimitsuboCountList = _.cloneDeep(state.mimitsuboCountList)
-    mimitsuboCountList[state.menuIndex] = DEFAULT_MIMITSUBO_COUNT
     state.optionsList = optionsList
-    state.mimitsuboCountList = mimitsuboCountList
   },
   setSelectedOptions(state, options) {
     const optionsList = _.cloneDeep(state.optionsList)
@@ -55,42 +47,24 @@ export const mutations = {
     while (optionsList.length < menuPageId) {
       optionsList.push(DEFAULT_OPTIONS)
     }
-    let mimitsuboCountList = _.cloneDeep(state.mimitsuboCountList)
-    while (mimitsuboCountList.length < menuPageId) {
-      mimitsuboCountList.push(DEFAULT_MIMITSUBO_COUNT)
-    }
 
     state.menuList = menuList.slice(0, menuPageId)
     state.optionsList = optionsList.slice(0, menuPageId)
-    state.mimitsuboCountList = mimitsuboCountList.slice(0, menuPageId)
     state.menuIndex = menuPageId - 1
   },
-  setMimitsuboCount(state, count) {
-    const mimitsuboCountList = _.cloneDeep(state.mimitsuboCountList)
-    mimitsuboCountList[state.menuIndex] = count
-    state.mimitsuboCountList = mimitsuboCountList
-  },
   reset(state) {
-    state.menuList = [null]
     state.optionsList = [DEFAULT_OPTIONS]
-    state.mimitsuboCountList = [DEFAULT_MIMITSUBO_COUNT]
     state.dateTime = null
   },
   setMenus(state, { menus, storeId }) {
     if (!Array.isArray(menus)) return
 
     const _optionsList = []
-    const _mimitsuboCountList = []
     const _menuList = menus.map(_menu => {
       const _options = Array.isArray(_menu.options)
         ? _menu.options
         : DEFAULT_OPTIONS
       _optionsList.push(_options)
-      const _mimitsuboCount =
-        typeof _menu.mimitsuboCount === 'number'
-          ? _menu.mimitsuboCount
-          : DEFAULT_MIMITSUBO_COUNT
-      _mimitsuboCountList.push(_mimitsuboCount)
 
       return _menu.menu
     })
@@ -99,10 +73,6 @@ export const mutations = {
     state.storeId = storeId
     state.optionsList =
       _optionsList.length > 0 ? _optionsList : [DEFAULT_OPTIONS]
-    state.mimitsuboCountList =
-      _mimitsuboCountList.length > 0
-        ? _mimitsuboCountList
-        : [DEFAULT_MIMITSUBO_COUNT]
   }
 }
 
@@ -149,14 +119,7 @@ export const getters = {
     return getters.isTwoMenusSelected
   },
   isMenuSelected(state, getters) {
-    if (getters.isMimitsuboOptionSelected) {
-      return getters.mimitsuboCount > 0
-    }
-
     return state.menuList[FIRST_MENU_INDEX] !== null
-  },
-  isMimitsuboOptionSelected(state, getters) {
-    return getters.selectedOptionIds.includes(MIMITSUBO_OPTION_ID)
   },
   isDateTimeSelected(state) {
     return state.dateTime != null
@@ -176,9 +139,6 @@ export const getters = {
   maxMenuIndex(state) {
     return state.menuList.length
   },
-  mimitsuboCount(state) {
-    return state.mimitsuboCountList[state.menuIndex]
-  },
   reservationDetailsParameters(state) {
     const selectedMenus = state.menuList.filter(menu => menu)
     const optionsList = state.optionsList
@@ -189,7 +149,6 @@ export const getters = {
       }
       return {
         menu_id: menu.id,
-        mimitsubo_count: state.mimitsuboCountList[index] || 0,
         option_ids: optionIds
       }
     })
@@ -209,9 +168,7 @@ export const getters = {
           .join(',')
       }
 
-      const mimitsuboCount = state.mimitsuboCountList[index] || 0
-
-      return { menuId, optionIds, mimitsuboCount }
+      return { menuId, optionIds }
     })
     return {
       storeId,
@@ -222,8 +179,7 @@ export const getters = {
     return state.menuList.map((menu, index) => {
       const storeId = state.storeId
       const options = state.optionsList[index]
-      const mimitsuboCount = state.mimitsuboCountList[index]
-      return { menu, storeId, options, mimitsuboCount }
+      return { menu, storeId, options }
     })
   }
 }

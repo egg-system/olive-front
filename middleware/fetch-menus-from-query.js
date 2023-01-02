@@ -59,19 +59,17 @@ function _createMenu(menu, menusQueryArr) {
     return null
   }
 
-  const hasSlectedOption = _menu.optionIds && _menu.optionIds.length
-  const _optionIds = hasSlectedOption ? _menu.optionIds.split(',') : null
+  const hasSelectedOption = _menu.optionIds && _menu.optionIds.length
+  const _optionIds = hasSelectedOption ? _menu.optionIds.split(',') : null
   let options = []
   if (Array.isArray(menu.options) && menu.options.length > 0 && _optionIds) {
     options = menu.options.filter(option =>
       _optionIds.includes(String(option.id))
     )
   }
-  const mimitsuboCount = _menu.mimitsuboCount || 0
 
   return {
     menu,
-    options,
-    mimitsuboCount
+    options
   }
 }

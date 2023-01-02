@@ -194,16 +194,10 @@ export default {
       return _(menus)
         .filter(menu => Array.isArray(menu.options) && menu.options.length > 0)
         .map(menu => {
-          const { options, mimitsuboCount } = menu
+          const { options } = menu
           return options.map(option => {
-            const name = option.is_mimitsubo_jewelry
-              ? `${option.name} × ${mimitsuboCount.toString()}粒`
-              : option.name
-            const price = option.is_mimitsubo_jewelry
-              ? parseInt(option.price, 10) * parseInt(mimitsuboCount, 10)
-              : option.price
             // オプションにminutesは存在しないが、メニューと併記する都合上、0にする
-            return { name, price, minutes: 0 }
+            return { name: option.name, price: option.price, minutes: 0 }
           })
         })
         .flatten()
