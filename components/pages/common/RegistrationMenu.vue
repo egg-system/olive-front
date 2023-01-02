@@ -140,9 +140,9 @@ export default {
         additionalMenus.push({ name: '初診料', price: 1000, minutes: 0 })
       }
       // 回数券は減算処理
-      if (this.coupons.length && this.isConfirm) {
-        additionalMenus.push({ name: '回数券', price: -6000, minutes: 0 })
-      }
+      // if (this.coupons.length && this.isConfirm) {
+      //   additionalMenus.push({ name: '回数券', price: -6000, minutes: 0 })
+      // }
 
       const resultsMenus = menusForDisplay.concat(
         menuOptionsForDisplay,

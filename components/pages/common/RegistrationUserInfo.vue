@@ -32,7 +32,7 @@
           </v-radio-group>
         </div>
 
-        <v-layout>
+        <!-- <v-layout>
           <v-flex class="mt-5">
             回数券利用
           </v-flex>
@@ -44,7 +44,7 @@
               :label="coupon.name"
             />
           </v-flex>
-        </v-layout>
+        </v-layout> -->
 
         <v-layout>
           <v-flex class="mt-4">
