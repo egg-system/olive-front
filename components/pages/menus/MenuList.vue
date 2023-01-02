@@ -64,15 +64,20 @@
           <v-btn v-if="currentPageId > 1" class="font-weight-bold" large @click="backHour">
             戻る
           </v-btn>
-          <v-btn class="font-weight-bold" large :disabled="!isMenuSelected"
-                 color="warning"
-                 @click="selectDate"
+          <v-btn
+            class="font-weight-bold"
+            large
+            :disabled="!isMenuSelected"
+            color="warning"
+            @click="selectDate"
           >
             空席確認・予約する
           </v-btn>
-          <v-btn v-if="isShownNextHourLink" class="font-weight-bold" large
-                 color="warning"
-                 @click="nextHour"
+          <v-btn
+            v-if="isShownNextHourLink" class="font-weight-bold"
+            large
+            color="warning"
+            @click="nextHour"
           >
             ２時間予約する
           </v-btn>

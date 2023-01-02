@@ -67,11 +67,9 @@ function _createMenu(menu, menusQueryArr) {
       _optionIds.includes(String(option.id))
     )
   }
-  const mimitsuboCount = _menu.mimitsuboCount || 0
 
   return {
     menu,
-    options,
-    mimitsuboCount
+    options
   }
 }
