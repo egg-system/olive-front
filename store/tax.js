@@ -21,7 +21,6 @@ export const actions = {
     const response = await axios.get(getTaxRoute)
 
     commit('setTax', response.data)
-    console.log(response.data)
   }
 }
 
